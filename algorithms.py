@@ -1,75 +1,10 @@
-import pygame
-from queue import PriorityQueue
+from algorithms.AStar import a_star
+from algorithms.RandomWalk import rand_walk
 
-
-def heuristic(point1, point2):
-    x1, y1 = point1
-    x2, y2 = point2
-    return abs(x1 - x2) + abs(y1 - y2)
-
-
-def reconstruct_path(came_from, current, draw):
-    while current in came_from:
-        if not came_from[current].is_start():
-            current = came_from[current]
-            current.make_path()
-            draw()
-        else:
-            break
-
-
-def a_star(draw, grid, start, end):
-    count = 0
-    open_set = PriorityQueue()
-    open_set.put((0, count, start))
-    came_from = {}
-
-    g_score = {node: float("inf") for row in grid for node in row}
-    g_score[start] = 0
-
-    f_score = {node: float("inf") for row in grid for node in row}
-    f_score[start] = heuristic(start.get_pos(), end.get_pos())
-
-    open_set_hash = {start}
-
-    while not open_set.empty():
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-
-        current = open_set.get()[2]
-        open_set_hash.remove(current)
-
-        if current == end:
-            reconstruct_path(came_from, end, draw)
-            end.make_end()
-            return True
-
-        for neighbor in current.neighbors:
-            temp_g_score = g_score[current] + 1
-
-            if temp_g_score < g_score[neighbor]:
-                came_from[neighbor] = current
-                g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + heuristic(
-                    neighbor.get_pos(), end.get_pos()
-                )
-
-                if neighbor not in open_set_hash:
-                    count += 1
-                    open_set.put((f_score[neighbor], count, neighbor))
-                    open_set_hash.add(neighbor)
-                    neighbor.uncheck()
-
-        draw()
-
-        if current != start:
-            current.check()
-
-    return False
-
+ALGORITHMS = ["astar", "bfs", "dfs", "dijkstra", "rand", "yen"]
 
 # Wrapper class to access all the pathfinding algorithms
+# Default is A* pathfinding
 class Algorithms:
     def __init__(self, *argv):
         self.draw = argv[0]
@@ -79,7 +14,9 @@ class Algorithms:
 
     def algorithm(self, algorithm):
         match algorithm:
-            case "a*":
+            case "astar":
                 a_star(self.draw, self.grid, self.start, self.end)
+            case "rand":
+                rand_walk(self.draw, self.grid, self.start, self.end)
             case _:
                 a_star(self.draw, self.grid, self.start, self.end)

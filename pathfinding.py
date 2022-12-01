@@ -2,7 +2,8 @@ import pygame
 import sys
 from colors import COLORS
 from node import Node
-from algorithms import Algorithms
+from Algorithms import Algorithms
+from Algorithms import ALGORITHMS
 
 
 def make_grid(rows, width):
@@ -71,10 +72,20 @@ def get_clicked_pos(pos, rows, width):
 
 
 def main(argv):
+    if len(argv) > 3:
+        raise ValueError(
+            "Too many arguments. arg-1: width, arg-2: # rows, alg-3: algorithm type"
+        )
+    if len(argv) == 3 and not argv[2] in ALGORITHMS:
+        raise ValueError(
+            "Invalid algorithm: please choose from the following: \n"
+            + " ".join(ALGORITHMS),
+        )
+    else:
+        func = argv[2]
+        argv.remove(func)
     if not all(x.isdigit() for x in argv):
         raise TypeError("All arguments must be integers")
-    if len(argv) > 2:
-        raise ValueError("Too many arguments. arg-1: width, arg-2: # rows")
     if len(argv) > 1 and int(argv[0]) < 2:
         raise ValueError("Width too small. width >= 2")
     if len(argv) == 2 and int(argv[1]) < 2:
@@ -113,7 +124,7 @@ def main(argv):
 
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
-                print(col)
+
                 # Handling for non-square window dimensions
                 if row > ROWS - 1 or col > ROWS - 1:
                     continue
@@ -167,8 +178,11 @@ def main(argv):
                             node.update_neighbors(grid)
 
                     Algorithms(
-                        lambda: draw(win, grid, ROWS, width), grid, start, end,
-                    ).algorithm("a*")
+                        lambda: draw(win, grid, ROWS, width),
+                        grid,
+                        start,
+                        end,
+                    ).algorithm(func)
                     ran = True
 
                 # Reset grid when the "C" key is pressed
