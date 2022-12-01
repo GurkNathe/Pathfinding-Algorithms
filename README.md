@@ -7,12 +7,12 @@ The graph used is an undirected, unweighted, strongly connected graph.
 Currently implemented algorithms:
 
 - A\*
+- Random Walk
 
 Planned algorithms:
 
 - Dijkstra's algorithm
 - Yen's k-Shortest Paths\*
-- Random Walk
 - Breadth First Search (BFS)
 - Depth First Search (DFS)
 
@@ -35,5 +35,9 @@ algorithm = astar, bfs, dfs, dijkstra, rand, yen
 ## A\* pathfinding algorithm:
 
 The A\* algorithm was created and shown [here](https://www.youtube.com/watch?v=JtiK0DOeI4A) by Tech With Tim.
+
+--- Add explanation ---
+
+## Random Walk pathfinding algorithm:
 
 --- Add explanation ---
