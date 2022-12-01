@@ -32,6 +32,19 @@ algorithm = astar, bfs, dfs, dijkstra, rand, yen
 ./pathfinding.py <width> <# rows> <algorithm type>
 ```
 
+## Keydown Events
+
+While an algorithm isn't running:
+
+- Press "Q" to exit
+- Press "C" to clear grid
+- Left click to place Start, then End, then Obstacles
+- Right click to remove Start, End, or Obstacles
+
+After an algorithm has run:
+
+- Left or Right click to clear the Algorithm Mark-up
+
 ## A\* pathfinding algorithm:
 
 The A\* algorithm was created and shown [here](https://www.youtube.com/watch?v=JtiK0DOeI4A) by Tech With Tim.
@@ -39,5 +52,7 @@ The A\* algorithm was created and shown [here](https://www.youtube.com/watch?v=J
 --- Add explanation ---
 
 ## Random Walk pathfinding algorithm:
+
+To stop algorithm while it is running press the "S" key.
 
 --- Add explanation ---
