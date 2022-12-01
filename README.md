@@ -4,11 +4,11 @@ This is a Python implementation and visualization of various pathfinding algorit
 
 Currently only the A\* path finding algorithm is implemented.
 
-The visualization is implemented using PyGame. Credits to [Tech With Tim](https://www.youtube.com/watch?v=JtiK0DOeI4A).
+The visualization is implemented using PyGame. Credits to <a href="https://www.youtube.com/watch?v=JtiK0DOeI4A" target="_blank">Tech With Tim</a>
 
 ## A\* pathfinding algorithm:
 
-The A\* algorithm was created and show [here](https://www.youtube.com/watch?v=JtiK0DOeI4A) by Tech With Tim.
+The A\* algorithm was created and show <a href="https://www.youtube.com/watch?v=JtiK0DOeI4A" target="_blank">here</a> by Tech With Tim.
 
 ## Command line arguments
 
