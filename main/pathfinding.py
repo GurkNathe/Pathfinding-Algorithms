@@ -72,6 +72,7 @@ def get_clicked_pos(pos, rows, width):
 
 
 def main(argv):
+    func = None
     if len(argv) > 3:
         raise ValueError(
             "Too many arguments. arg-1: width, arg-2: # rows, alg-3: algorithm type"
@@ -81,7 +82,7 @@ def main(argv):
             "Invalid algorithm: please choose from the following: \n"
             + " ".join(ALGORITHMS),
         )
-    else:
+    elif len(argv) == 3:
         func = argv[2]
         argv.remove(func)
     if not all(x.isdigit() for x in argv):
