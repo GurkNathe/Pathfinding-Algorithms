@@ -26,7 +26,7 @@ def merge_dicts(d1, d2):
     return {} if any(d1[k] != d2[k] for k in d1.keys() & d2) else {**d1, **d2}
 
 
-# TODO: Look at implementing dynamic programming
+# TODO: Look at implementing better dynamic programming
 def get_unvisited_nodes(current):
     unvisited = {}
     if current is not None:
@@ -56,8 +56,8 @@ def reconstruct_path(came_from, current, draw):
 
 def dijkstra(draw, grid, start, end):
     unvisited_nodes = get_unvisited_nodes(start)
-    shortest_path = {node: float("inf") for row in grid for node in row}
-    shortest_path[start] = 0
+    distance = {node: float("inf") for row in grid for node in row}
+    distance[start] = 0
 
     previous = {}
 
@@ -66,20 +66,22 @@ def dijkstra(draw, grid, start, end):
             if event.type == pygame.QUIT:
                 pygame.quit()
 
+        # Choose node with smallest distance
         current_min = None
         for node in unvisited_nodes:
             if current_min == None:
                 current_min = node
-            elif shortest_path[node] < shortest_path[current_min]:
+            elif distance[node] < distance[current_min]:
                 current_min = node
 
         for neighbor in current_min.neighbors:
-            # edges between vertecies are not weighted (using constant weight)
             if not neighbor.is_start() and not neighbor.is_end():
                 neighbor.check()
-            temp_value = shortest_path[current_min] + 1
-            if temp_value < shortest_path[neighbor]:
-                shortest_path[neighbor] = temp_value
+            # edges between vertecies are not weighted 
+            # (using constant weight of 1)
+            temp_value = distance[current_min] + 1
+            if temp_value < distance[neighbor]:
+                distance[neighbor] = temp_value
                 previous[neighbor] = current_min
 
             draw()
