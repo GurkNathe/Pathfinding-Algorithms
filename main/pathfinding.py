@@ -183,7 +183,7 @@ def main(argv):
                         grid,
                         start,
                         end,
-                    ).algorithm(func)
+                    ).algorithm("dijkstra")#func)
                     ran = True
 
                 # Reset grid when the "C" key is pressed

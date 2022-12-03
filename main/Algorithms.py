@@ -1,5 +1,6 @@
 from algorithms.AStar import a_star
 from algorithms.RandomWalk import rand_walk
+from algorithms.Dijkstra import dijkstra
 
 ALGORITHMS = ["astar", "bfs", "dfs", "dijkstra", "rand", "yen"]
 
@@ -18,5 +19,7 @@ class Algorithms:
                 a_star(self.draw, self.grid, self.start, self.end)
             case "rand":
                 rand_walk(self.draw, self.grid, self.start, self.end)
+            case "dijkstra":
+                dijkstra(self.draw, self.grid, self.start, self.end)
             case _:
                 a_star(self.draw, self.grid, self.start, self.end)

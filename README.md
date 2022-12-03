@@ -8,10 +8,10 @@ Currently implemented algorithms:
 
 - A\*
 - Random Walk
+- Dijkstra's Algorithms
 
 Planned algorithms:
 
-- Dijkstra's algorithm
 - Yen's k-Shortest Paths\*
 - Breadth First Search (BFS)
 - Depth First Search (DFS)
@@ -54,5 +54,9 @@ The A\* algorithm was created and shown [here](https://www.youtube.com/watch?v=J
 ## Random Walk pathfinding algorithm:
 
 To stop algorithm while it is running press the "S" key.
+
+--- Add explanation ---
+
+## Dijkstra's pathfinding algorithm:
 
 --- Add explanation ---
