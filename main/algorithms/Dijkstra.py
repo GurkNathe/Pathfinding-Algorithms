@@ -26,6 +26,7 @@ def merge_dicts(d1, d2):
     return {} if any(d1[k] != d2[k] for k in d1.keys() & d2) else {**d1, **d2}
 
 
+# TODO: Look at implementing dynamic programming
 def get_unvisited_nodes(current):
     unvisited = {}
     if current is not None:
@@ -39,6 +40,11 @@ def get_unvisited_nodes(current):
 
 
 def reconstruct_path(came_from, current, draw):
+    """
+    came_from : dictionary of nodes traversed in the algorithm
+    current : end node
+    draw : pygame draw function
+    """
     while current in came_from:
         if not came_from[current].is_start():
             current = came_from[current]
@@ -49,7 +55,6 @@ def reconstruct_path(came_from, current, draw):
 
 
 def dijkstra(draw, grid, start, end):
-    # TODO: Find a way to optimize this function, so it works in non-enclosed spaces
     unvisited_nodes = get_unvisited_nodes(start)
     shortest_path = {node: float("inf") for row in grid for node in row}
     shortest_path[start] = 0
