@@ -15,6 +15,9 @@ def rand_walk(draw, grid, start, end):
     came_from = []
     current = start
     run = True
+    
+    # Added for debugging purposes
+    make_path = False
 
     while run:
         for event in pygame.event.get():
@@ -27,7 +30,7 @@ def rand_walk(draw, grid, start, end):
         came_from.append(current)
         current = current.neighbors[neighbor]
 
-        if current == end:
+        if current == end and make_path:
             reconstruct_path(came_from, end, draw)
             end.make_end()
             return True
