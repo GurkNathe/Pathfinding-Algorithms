@@ -20,6 +20,6 @@ class Algorithms:
             case "rand":
                 rand_walk(self.draw, self.grid, self.start, self.end)
             case "dijkstra":
-                dijkstra(self.draw, self.grid, self.start, self.end)
+                dijkstra(self.draw, self.start, self.end)
             case _:
                 a_star(self.draw, self.grid, self.start, self.end)

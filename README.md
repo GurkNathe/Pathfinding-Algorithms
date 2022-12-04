@@ -43,7 +43,7 @@ While an algorithm isn't running:
 
 After an algorithm has run:
 
-- Left or Right click to clear the Algorithm Mark-up
+- "W", Left, or Right click to clear the Algorithm Mark-up
 
 ## A\* pathfinding algorithm:
 
@@ -58,5 +58,7 @@ To stop algorithm while it is running press the "S" key.
 --- Add explanation ---
 
 ## Dijkstra's pathfinding algorithm:
+
+To stop algorithm while it is running press the "S" key.
 
 --- Add explanation ---

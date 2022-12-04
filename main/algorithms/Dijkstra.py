@@ -6,8 +6,7 @@ Algorithm
 
 for each vertex in graph:
     distance[vertex] = inf
-    previous[vertex] = null
-    if vertex != start, and veertex to Priority Queue
+    if vertex != start, add vertex to Priority Queue
 distance[start] = 0
 
 while the queue is not empty:
@@ -18,25 +17,22 @@ while the queue is not empty:
             distance[vertex] = tempDistance
             previous[vertex] = U
 
-return distance[], previous[]
 """
 
+# Traverse the grid and find all nodes connected to the start
+def get_unvisited_nodes(start):
+    Q = PriorityQueue()
+    Q_hash = {start}
+    Q.put(start)
 
-def merge_dicts(d1, d2):
-    return {} if any(d1[k] != d2[k] for k in d1.keys() & d2) else {**d1, **d2}
+    while not Q.empty():
+        current = Q.get()
 
-
-# TODO: Look at implementing better dynamic programming
-def get_unvisited_nodes(current):
-    unvisited = {}
-    if current is not None:
-        unvisited[current] = current
         for neighbor in current.neighbors:
-            if not neighbor.been_checked:
-                unvisited[neighbor] = neighbor
-                neighbor.been_checked = True
-                unvisited = merge_dicts(unvisited, get_unvisited_nodes(neighbor))
-    return unvisited
+            if neighbor not in Q_hash:
+                Q.put(neighbor)
+                Q_hash.add(neighbor)
+    return Q_hash
 
 
 def reconstruct_path(came_from, current, draw):
@@ -54,38 +50,46 @@ def reconstruct_path(came_from, current, draw):
             break
 
 
-def dijkstra(draw, grid, start, end):
+def dijkstra(draw, start, end):
+    # Stores all nodes connected to start
     unvisited_nodes = get_unvisited_nodes(start)
-    distance = {node: float("inf") for row in grid for node in row}
+
+    # Set up the node values
+    distance = {node: float("inf") for node in unvisited_nodes}
     distance[start] = 0
 
+    # Holds the path from start to end
     previous = {}
+    
+    run = True
 
-    while unvisited_nodes:
+    while unvisited_nodes and run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
+                run = False
 
         # Choose node with smallest distance
-        current_min = None
-        for node in unvisited_nodes:
-            if current_min == None:
-                current_min = node
-            elif distance[node] < distance[current_min]:
-                current_min = node
+        current_min = min(unvisited_nodes, key=distance.get)
 
         for neighbor in current_min.neighbors:
-            if not neighbor.is_start() and not neighbor.is_end():
-                neighbor.check()
-            # edges between vertecies are not weighted 
-            # (using constant weight of 1)
-            temp_value = distance[current_min] + 1
-            if temp_value < distance[neighbor]:
-                distance[neighbor] = temp_value
-                previous[neighbor] = current_min
+            # Don't recheck for performance
+            if not neighbor.is_checked():
+                if not neighbor.is_start() and not neighbor.is_end():
+                    neighbor.uncheck()
+                # edges between vertecies are not weighted
+                # (using constant weight of 1)
+                temp_value = distance[current_min] + 1
+                if temp_value < distance[neighbor]:
+                    distance[neighbor] = temp_value
+                    previous[neighbor] = current_min
 
-            draw()
+                draw()
+                
+                if not neighbor.is_start() and not neighbor.is_end():
+                    neighbor.check()
 
-        del unvisited_nodes[current_min]
+        unvisited_nodes.remove(current_min)
 
     reconstruct_path(previous, end, draw)

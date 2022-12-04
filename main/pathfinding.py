@@ -114,6 +114,9 @@ def main(argv):
                 event.type == pygame.KEYDOWN and event.key == pygame.K_q
             ):
                 run = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_w:
+                    ran = False
+                    grid = clear_grid(grid, ROWS, width)
 
             # Left mouse click
             # Add start, end, and obstacle nodes
@@ -183,7 +186,7 @@ def main(argv):
                         grid,
                         start,
                         end,
-                    ).algorithm(func)
+                    ).algorithm("dijkstra")#func)
                     ran = True
 
                 # Reset grid when the "C" key is pressed

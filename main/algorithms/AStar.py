@@ -30,7 +30,7 @@ def a_star(draw, grid, start, end):
     f_score = {node: float("inf") for row in grid for node in row}
     f_score[start] = heuristic(start.get_pos(), end.get_pos())
 
-    open_set_hash = {start}
+    open_set_hash = { start }
 
     while not open_set.empty():
         for event in pygame.event.get():
