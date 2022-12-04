@@ -72,6 +72,11 @@ def dijkstra(draw, start, end):
 
         # Choose node with smallest distance
         current_min = min(unvisited_nodes, key=distance.get)
+        
+        # Ends the search once the end is reached
+        # May add a toggle for this
+        if current_min == end:
+            break
 
         for neighbor in current_min.neighbors:
             # Don't recheck for performance
