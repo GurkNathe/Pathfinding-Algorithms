@@ -6,7 +6,7 @@ Algorithm
 
 for each vertex in graph:
     distance[vertex] = inf
-    if vertex != start, add vertex to Priority Queue
+    if vertex != start, add vertex to Priority Queue (unvisited nodes)
 distance[start] = 0
 
 while the queue is not empty:
