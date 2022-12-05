@@ -1,5 +1,5 @@
 import pygame
-from queue import PriorityQueue
+from queue import PriorityQueue, Queue
 from .RP import reconstruct_path
 
 """
@@ -22,7 +22,7 @@ while the queue is not empty:
 
 # Traverse the grid and find all nodes connected to the start
 def get_unvisited_nodes(start):
-    Q = PriorityQueue()
+    Q = Queue()
     Q_hash = {start}
     Q.put(start)
 
@@ -35,7 +35,8 @@ def get_unvisited_nodes(start):
                 Q_hash.add(neighbor)
     return Q_hash
 
-
+# TODO: Refactor using a priority queue
+# Make distance a priority queue (node, inf)
 def dijkstra(draw, start, end):
     # Stores all nodes connected to start
     unvisited_nodes = get_unvisited_nodes(start)

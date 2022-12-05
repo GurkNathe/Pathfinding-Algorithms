@@ -1,4 +1,4 @@
-# Pathfinding Algorithms
+# Pathfinding/Graph Search Algorithms
 
 This is a Python (3.10+) implementation and visualization of various pathfinding algorithms.
 
@@ -12,19 +12,46 @@ Currently implemented algorithms:
 - Breadth First Search (BFS)
 - Depth First Search (DFS)
 
+Currently looking at:
+
+- Best First Search
+
 Planned algorithms (Going to look at them):
 
-- Yen's k-Shortest Paths\*
-- Jump Point Search (JPS)
-- Concurrent Dijkstra\*
-- Fast Marching Method
-- Fast Iterative Method
-- Fast Sweeping Method
-- SUB
+- α–β pruning
+
+- B\*
 - Basic Theta\*
-- Best First Search
+- Beam Search
 - Bellman Ford's Algorithm
+- Bidirectional search
+- Branch & bound
+
+- Concurrent Dijkstra
+
+- D\*
+
+- Fast Iterative Method
+- Fast Marching Method
+- Fast Sweeping Method
 - Floyd-Warshall's algorithm
+- Fringe search
+
+- Iterative Deepening (IDA\*)
+- Iterative Deepening DFS (IDDFS)
+
+- Johnson's
+- Jump Point Search (JPS)
+
+- Kruskal's
+
+- Lexicographic BFS
+- Lifelong Planning A* (LPA*)
+
+- SMA\*
+- SUB
+
+- Yen's k-Shortest Paths
 
 The visualization is implemented using PyGame. Credits to [Tech With Tim](https://www.youtube.com/watch?v=JtiK0DOeI4A).
 
@@ -87,4 +114,3 @@ To stop algorithm while it is running press the "S" key.
 To stop algorithm while it is running press the "S" key.
 
 --- Add explanation ---
-

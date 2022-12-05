@@ -2,7 +2,7 @@ import pygame
 from queue import PriorityQueue
 from .RP import reconstruct_path
 
-
+# Manhattan distance
 def heuristic(point1, point2):
     x1, y1 = point1
     x2, y2 = point2
@@ -27,6 +27,8 @@ def a_star(draw, grid, start, end):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
+                run = False
 
         current = open_set.get()[2]
         open_set_hash.remove(current)
