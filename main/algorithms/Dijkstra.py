@@ -1,5 +1,6 @@
 import pygame
 from queue import PriorityQueue
+from .RP import reconstruct_path
 
 """
 Algorithm
@@ -35,21 +36,6 @@ def get_unvisited_nodes(start):
     return Q_hash
 
 
-def reconstruct_path(came_from, current, draw):
-    """
-    came_from : dictionary of nodes traversed in the algorithm
-    current : end node
-    draw : pygame draw function
-    """
-    while current in came_from:
-        if not came_from[current].is_start():
-            current = came_from[current]
-            current.make_path()
-            draw()
-        else:
-            break
-
-
 def dijkstra(draw, start, end):
     # Stores all nodes connected to start
     unvisited_nodes = get_unvisited_nodes(start)
@@ -60,7 +46,7 @@ def dijkstra(draw, start, end):
 
     # Holds the path from start to end
     previous = {}
-    
+
     run = True
 
     while unvisited_nodes and run:
@@ -72,7 +58,7 @@ def dijkstra(draw, start, end):
 
         # Choose node with smallest distance
         current_min = min(unvisited_nodes, key=distance.get)
-        
+
         # Ends the search once the end is reached
         # May add a toggle for this
         if current_min == end:
@@ -91,7 +77,7 @@ def dijkstra(draw, start, end):
                     previous[neighbor] = current_min
 
                 draw()
-                
+
                 if not neighbor.is_start() and not neighbor.is_end():
                     neighbor.check()
 

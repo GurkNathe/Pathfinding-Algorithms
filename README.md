@@ -9,12 +9,22 @@ Currently implemented algorithms:
 - A\*
 - Random Walk
 - Dijkstra's Algorithms
-
-Planned algorithms:
-
-- Yen's k-Shortest Paths\*
 - Breadth First Search (BFS)
 - Depth First Search (DFS)
+
+Planned algorithms (Going to look at them):
+
+- Yen's k-Shortest Paths\*
+- Jump Point Search (JPS)
+- Concurrent Dijkstra\*
+- Fast Marching Method
+- Fast Iterative Method
+- Fast Sweeping Method
+- SUB
+- Basic Theta\*
+- Best First Search
+- Bellman Ford's Algorithm
+- Floyd-Warshall's algorithm
 
 The visualization is implemented using PyGame. Credits to [Tech With Tim](https://www.youtube.com/watch?v=JtiK0DOeI4A).
 
@@ -55,6 +65,21 @@ The A\* algorithm was created and shown [here](https://www.youtube.com/watch?v=J
 
 To stop algorithm while it is running press the "S" key.
 
+From the starting node choose a random neighbor node to check.
+If the node is the end, stop; if the node isn't the end, choose a random neighbor of it and repeat until the end is reached.
+
+This algorithm is literally randomly guessing a route from start to end, it is by no means ment to be taken serious and was just something fun to look at.
+
+## Breadth First Search (BFS) pathfinding algorithm:
+
+To stop algorithm while it is running press the "S" key.
+
+--- Add explanation ---
+
+## Depth First Search (DFS) pathfinding algorithm:
+
+To stop algorithm while it is running press the "S" key.
+
 --- Add explanation ---
 
 ## Dijkstra's pathfinding algorithm:
@@ -62,3 +87,4 @@ To stop algorithm while it is running press the "S" key.
 To stop algorithm while it is running press the "S" key.
 
 --- Add explanation ---
+

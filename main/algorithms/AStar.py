@@ -1,21 +1,12 @@
 import pygame
 from queue import PriorityQueue
+from .RP import reconstruct_path
 
 
 def heuristic(point1, point2):
     x1, y1 = point1
     x2, y2 = point2
     return abs(x1 - x2) + abs(y1 - y2)
-
-
-def reconstruct_path(came_from, current, draw):
-    while current in came_from:
-        if not came_from[current].is_start():
-            current = came_from[current]
-            current.make_path()
-            draw()
-        else:
-            break
 
 
 def a_star(draw, grid, start, end):
@@ -30,7 +21,7 @@ def a_star(draw, grid, start, end):
     f_score = {node: float("inf") for row in grid for node in row}
     f_score[start] = heuristic(start.get_pos(), end.get_pos())
 
-    open_set_hash = { start }
+    open_set_hash = {start}
 
     while not open_set.empty():
         for event in pygame.event.get():

@@ -11,13 +11,13 @@ def reconstruct_path(came_from, current, draw):
             draw()
 
 
-def rand_walk(draw, grid, start, end):
+def rand_walk(draw, start, end):
     came_from = []
     current = start
     run = True
-    
+
     # Added for debugging purposes
-    make_path = False
+    make_path = True
 
     while run:
         for event in pygame.event.get():
