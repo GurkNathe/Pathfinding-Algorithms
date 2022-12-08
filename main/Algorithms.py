@@ -1,11 +1,12 @@
 from algorithms.AStar import a_star
-from algorithms.RandomWalk import rand_walk
+from algorithms.ThetaStar import theta_star
 from algorithms.Dijkstra import dijkstra
-from algorithms.DFS import dfs
+from algorithms.RandomWalk import rand_walk
 from algorithms.BFS import bfs
+from algorithms.DFS import dfs
 from algorithms.GFS import gfs
 
-ALGORITHMS = ["astar", "bfs", "dfs", "dijkstra", "gfs", "rand"]
+ALGORITHMS = ["astar", "bfs", "dfs", "dijkstra", "gfs", "rand", "theta"]
 
 
 # Wrapper class to access all the pathfinding algorithms
@@ -31,5 +32,7 @@ class Algorithms:
                 bfs(self.draw, self.start, self.end)
             case "gfs":
                 gfs(self.draw, self.start, self.end)
+            case "theta":
+                theta_star(self.draw, self.start, self.end)
             case _:
                 a_star(self.draw, self.grid, self.start, self.end)

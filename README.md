@@ -4,7 +4,7 @@ This is a Python (3.10+) implementation and visualization of various pathfinding
 
 The graph used is an undirected, unweighted, strongly connected graph.
 
-Currently implemented algorithms (6/31):
+Currently implemented algorithms (6/32):
 
 - A\*
 - Breadth First Search (BFS)
@@ -15,14 +15,13 @@ Currently implemented algorithms (6/31):
 
 Currently looking at:
 
-- None
+- Theta\*
 
 Planned algorithms (Going to look at them):
 
 - α–β pruning
 
 - B\*
-- Basic Theta\*
 - Beam Search
 - Bellman Ford's Algorithm
 - Bidirectional search
@@ -52,6 +51,7 @@ Planned algorithms (Going to look at them):
 - Lifelong Planning A* (LPA*)
 
 - SMA\*
+- SSS\*
 - SUB
 
 - Yen's k-Shortest Paths

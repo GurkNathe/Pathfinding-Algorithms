@@ -186,7 +186,7 @@ def main(argv):
                         grid,
                         start,
                         end,
-                    ).algorithm(func)
+                    ).algorithm("theta")#func)
                     ran = True
 
                 # Reset grid when the "C" key is pressed
