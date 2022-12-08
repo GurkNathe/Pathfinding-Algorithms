@@ -3,7 +3,7 @@ from algorithms.RandomWalk import rand_walk
 from algorithms.Dijkstra import dijkstra
 from algorithms.DFS import dfs
 from algorithms.BFS import bfs
-from algorithms.BFirstS import b_first_s
+from algorithms.GreedyBFirstS import greedy_b_first_s
 
 ALGORITHMS = ["astar", "bfs", "bfirst", "dfs", "dijkstra", "rand"]
 
@@ -30,6 +30,6 @@ class Algorithms:
             case "bfs":
                 bfs(self.draw, self.start, self.end)
             case "bfirst":
-                b_first_s(self.draw, self.start, self.end)
+                greedy_b_first_s(self.draw, self.start, self.end)
             case _:
                 a_star(self.draw, self.grid, self.start, self.end)

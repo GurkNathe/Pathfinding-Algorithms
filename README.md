@@ -7,14 +7,15 @@ The graph used is an undirected, unweighted, strongly connected graph.
 Currently implemented algorithms:
 
 - A\*
-- Random Walk
-- Dijkstra's Algorithms
 - Breadth First Search (BFS)
 - Depth First Search (DFS)
+- Dijkstra's Algorithms
+- Greedy Best First Search
+- Random Walk
 
 Currently looking at:
 
-- Best First Search
+- None
 
 Planned algorithms (Going to look at them):
 
@@ -36,6 +37,8 @@ Planned algorithms (Going to look at them):
 - Fast Sweeping Method
 - Floyd-Warshall's algorithm
 - Fringe search
+
+- Greedy Best Line Search
 
 - Iterative Deepening (IDA\*)
 - Iterative Deepening DFS (IDDFS)
@@ -88,15 +91,6 @@ The A\* algorithm was created and shown [here](https://www.youtube.com/watch?v=J
 
 --- Add explanation ---
 
-## Random Walk pathfinding algorithm:
-
-To stop algorithm while it is running press the "S" key.
-
-From the starting node choose a random neighbor node to check.
-If the node is the end, stop; if the node isn't the end, choose a random neighbor of it and repeat until the end is reached.
-
-This algorithm is literally randomly guessing a route from start to end, it is by no means ment to be taken serious and was just something fun to look at.
-
 ## Breadth First Search (BFS) pathfinding algorithm:
 
 To stop algorithm while it is running press the "S" key.
@@ -114,3 +108,18 @@ To stop algorithm while it is running press the "S" key.
 To stop algorithm while it is running press the "S" key.
 
 --- Add explanation ---
+
+## Greedy Best First Search (GFS) pathfinding algorithm:
+
+To stop algorithm while it is running press the "S" key.
+
+--- Add explanation ---
+
+## Random Walk pathfinding algorithm:
+
+To stop algorithm while it is running press the "S" key.
+
+From the starting node choose a random neighbor node to check.
+If the node is the end, stop; if the node isn't the end, choose a random neighbor of it and repeat until the end is reached.
+
+This algorithm is literally randomly guessing a route from start to end, it is by no means ment to be taken serious and was just something fun to look at.
