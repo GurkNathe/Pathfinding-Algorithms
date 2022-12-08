@@ -3,9 +3,9 @@ from algorithms.RandomWalk import rand_walk
 from algorithms.Dijkstra import dijkstra
 from algorithms.DFS import dfs
 from algorithms.BFS import bfs
-from algorithms.GreedyBFirstS import greedy_b_first_s
+from algorithms.GFS import gfs
 
-ALGORITHMS = ["astar", "bfs", "bfirst", "dfs", "dijkstra", "rand"]
+ALGORITHMS = ["astar", "bfs", "dfs", "dijkstra", "gfs", "rand"]
 
 
 # Wrapper class to access all the pathfinding algorithms
@@ -29,7 +29,7 @@ class Algorithms:
                 dfs(self.draw, self.start, self.end)
             case "bfs":
                 bfs(self.draw, self.start, self.end)
-            case "bfirst":
-                greedy_b_first_s(self.draw, self.start, self.end)
+            case "gfs":
+                gfs(self.draw, self.start, self.end)
             case _:
                 a_star(self.draw, self.grid, self.start, self.end)

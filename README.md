@@ -4,7 +4,7 @@ This is a Python (3.10+) implementation and visualization of various pathfinding
 
 The graph used is an undirected, unweighted, strongly connected graph.
 
-Currently implemented algorithms:
+Currently implemented algorithms (6/31):
 
 - A\*
 - Breadth First Search (BFS)
@@ -65,7 +65,7 @@ There are three optional command line arguments: width, # rows, algorithm type.
 ```
 width >= 2
 rows >= 2
-algorithm = astar, bfs, dfs, dijkstra, rand, yen
+algorithm = astar, bfs, dfs, dijkstra, rand, yen [See line 8 of Algorithms.py for full list]
 ```
 
 ```

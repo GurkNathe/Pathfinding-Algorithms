@@ -23,7 +23,7 @@ def heuristic(point1, point2):
     x2, y2 = point2
     return abs(x1 - x2) + abs(y1 - y2)
 
-def greedy_b_first_s(draw, start, end):
+def gfs(draw, start, end):
     Q = PriorityQueue()
     Q.put((heuristic(start.get_pos(), end.get_pos()), 0, start))
     
