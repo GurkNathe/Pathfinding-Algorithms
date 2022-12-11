@@ -33,6 +33,6 @@ class Algorithms:
             case "gfs":
                 gfs(self.draw, self.start, self.end)
             case "theta":
-                theta_star(self.draw, self.start, self.end)
+                theta_star(self.draw, self.start, self.end, self.grid)
             case _:
                 a_star(self.draw, self.grid, self.start, self.end)

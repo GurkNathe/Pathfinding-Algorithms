@@ -12,10 +12,11 @@ Currently implemented algorithms (6/32):
 - Dijkstra's Algorithms
 - Greedy Best First Search
 - Random Walk
+- Theta\*
 
 Currently looking at:
 
-- Theta\*
+- None
 
 Planned algorithms (Going to look at them):
 

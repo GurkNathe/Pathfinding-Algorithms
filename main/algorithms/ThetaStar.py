@@ -3,70 +3,6 @@ import math
 from queue import PriorityQueue
 from .RP import reconstruct_path
 
-"""
-function theta*(start, goal)
-    // This main loop is the same as A*
-    gScore(start) := 0
-    parent(start) := start
-    // Initializing open and closed sets. The open set is initialized 
-    // with the start node and an initial cost
-    open := {}
-    open.insert(start, gScore(start) + heuristic(start))
-    // gScore(node) is the current shortest distance from the start node to node
-    // heuristic(node) is the estimated distance of node from the goal node
-    // there are many options for the heuristic such as Euclidean or Manhattan 
-    closed := {}
-    while open is not empty
-        s := open.pop()
-        if s = goal
-            return reconstruct_path(s)
-        closed.push(s)
-        for each neighbor of s
-        // Loop through each immediate neighbor of s
-            if neighbor not in closed
-                if neighbor not in open
-                    // Initialize values for neighbor if it is 
-                    // not already in the open list
-                    gScore(neighbor) := infinity
-                    parent(neighbor) := Null
-                update_vertex(s, neighbor)
-    return Null
-            
-    
-function update_vertex(s, neighbor)
-    // This part of the algorithm is the main difference between A* and Theta*
-    if line_of_sight(parent(s), neighbor)
-        // If there is line-of-sight between parent(s) and neighbor
-        // then ignore s and use the path from parent(s) to neighbor 
-        if gScore(parent(s)) + c(parent(s), neighbor) < gScore(neighbor)
-            // c(s, neighbor) is the Euclidean distance from s to neighbor
-            gScore(neighbor) := gScore(parent(s)) + c(parent(s), neighbor)
-            parent(neighbor) := parent(s)
-            if neighbor in open
-                open.remove(neighbor)
-            open.insert(neighbor, gScore(neighbor) + heuristic(neighbor))
-    else
-        // If the length of the path from start to s and from s to 
-        // neighbor is shorter than the shortest currently known distance
-        // from start to neighbor, then update node with the new distance
-        if gScore(s) + c(s, neighbor) < gScore(neighbor)
-            gScore(neighbor) := gScore(s) + c(s, neighbor)
-            parent(neighbor) := s
-            if neighbor in open
-                open.remove(neighbor)
-            open.insert(neighbor, gScore(neighbor) + heuristic(neighbor))
-
-function reconstruct_path(s)
-    total_path = {s}
-    // This will recursively reconstruct the path from the goal node 
-    // until the start node is reached
-    if parent(s) != s
-        total_path.push(reconstruct_path(parent(s)))
-    else
-        return total_path
-"""
-
-
 def euclidean(node1, node2):
     x1, y1 = node1.get_pos()
     x2, y2 = node2.get_pos()
@@ -74,16 +10,31 @@ def euclidean(node1, node2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
 
-# Returns true if there is a direct line of sight between two nodes
-def line_of_sight(node1, node2):
-    # Check if node1 is from the same index as node2
-    # If so, return true
-    pass
+def line_of_sight(node1, node2, grid):
+    x1, y1 = node1.get_pos()
+    x2, y2 = node2.get_pos()
+
+    if x1 == x2:
+        # Check if there are no obstacles in between
+        min_y, max_y = min(y1, y2), max(y1, y2)
+        for y in range(min_y + 1, max_y):
+            if grid[x1][y].is_obstacle():
+                return False
+    elif y1 == y2:
+        # Check if there are no obstacles in between
+        min_x, max_x = min(x1, x2), max(x1, x2)
+        for x in range(min_x + 1, max_x):
+            if grid[x][y1].is_obstacle():
+                return False
+    else:
+        return False
+
+    return True
 
 
 def remove_add(open_set_hash, open_set, distance, counter, neighbor):
-    if neighbor in open_set_hash:
-        open_set_hash.remove(neighbor)
+    if neighbor in open_set_hash and neighbor in open_set.queue:
+        open_set_hash.pop(neighbor)
         open_set.queue.remove(neighbor)
     open_set.put(
         (
@@ -96,10 +47,10 @@ def remove_add(open_set_hash, open_set, distance, counter, neighbor):
 
 
 def update_vertex(
-    current, neighbor, parent, g_score, open_set, open_set_hash, end, counter
+    current, neighbor, parent, g_score, open_set, open_set_hash, end, counter, grid
 ):
     h = heuristic(neighbor.get_pos(), end.get_pos())
-    if line_of_sight(parent[current], neighbor):
+    if line_of_sight(parent[current], neighbor, grid):
         g_p_curr = g_score[parent[current]] + euclidean(parent[current], neighbor)
         if g_p_curr < g_score[neighbor]:
             g_score[neighbor] = g_p_curr
@@ -124,18 +75,17 @@ def heuristic(point1, point2):
     return abs(x1 - x2) + abs(y1 - y2)
 
 
-def theta_star(draw, start, end):
+def theta_star(draw, start, end, grid):
     g_score = {}
     g_score[start] = 0
-
-    previous = {}
 
     counter = 0
     open_set = PriorityQueue()
     open_set.put(
         (g_score[start] + heuristic(start.get_pos(), end.get_pos()), counter, start)
     )
-    open_set_hash = {start}
+    open_set_hash = {}
+    open_set_hash[start] = start
 
     parent = {}
     parent[start] = start
@@ -143,23 +93,25 @@ def theta_star(draw, start, end):
     while open_set:
         current = open_set.get()
 
-        if current.is_end():
-            reconstruct_path(previous, end, draw)
+        if current[2].is_end():
+            reconstruct_path(parent, end, draw)
             break
 
-        if not current.is_start():
-            current.check()
+        if not current[2].is_start():
+            current[2].check()
         else:
-            current.been_checked = True
+            current[2].been_checked = True
+        
+        draw()
 
-        for neighbor in current.neighbors:
+        for neighbor in current[2].neighbors:
             if not neighbor.been_checked:
                 if not neighbor in open_set_hash:
                     g_score[neighbor] = float("inf")
                     parent[neighbor] = None
 
                 update_vertex(
-                    current,
+                    current[2],
                     neighbor,
                     parent,
                     g_score,
@@ -167,4 +119,5 @@ def theta_star(draw, start, end):
                     open_set_hash,
                     end,
                     counter,
+                    grid
                 )
