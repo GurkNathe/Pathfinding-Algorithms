@@ -4,7 +4,7 @@ This is a Python (3.10+) implementation and visualization of various pathfinding
 
 The graph used is an undirected, unweighted, strongly connected graph.
 
-Currently implemented algorithms (7/32):
+Currently implemented algorithms (8/32):
 
 - A\*
 - Bellman Ford's Algorithm
