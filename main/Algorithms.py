@@ -2,9 +2,9 @@ from algorithms.AStar import a_star
 from algorithms.ThetaStar import theta_star
 from algorithms.Dijkstra import dijkstra
 from algorithms.RandomWalk import rand_walk
+from algorithms.GBFS import gbfs
 from algorithms.BFS import bfs
 from algorithms.DFS import dfs
-from algorithms.GFS import gfs
 
 ALGORITHMS = ["astar", "bfs", "dfs", "dijkstra", "gfs", "rand", "theta"]
 
@@ -30,8 +30,8 @@ class Algorithms:
                 dfs(self.draw, self.start, self.end)
             case "bfs":
                 bfs(self.draw, self.start, self.end)
-            case "gfs":
-                gfs(self.draw, self.start, self.end)
+            case "gbfs":
+                gbfs(self.draw, self.start, self.end)
             case "theta":
                 theta_star(self.draw, self.start, self.end, self.grid)
             case _:

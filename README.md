@@ -4,13 +4,13 @@ This is a Python (3.10+) implementation and visualization of various pathfinding
 
 The graph used is an undirected, unweighted, strongly connected graph.
 
-Currently implemented algorithms (6/32):
+Currently implemented algorithms (7/32):
 
 - A\*
 - Breadth First Search (BFS)
 - Depth First Search (DFS)
 - Dijkstra's Algorithms
-- Greedy Best First Search
+- Greedy Best First Search (GBFS)
 - Random Walk
 - Theta\*
 
@@ -86,41 +86,53 @@ After an algorithm has run:
 
 - "W", Left, or Right click to clear the Algorithm Mark-up
 
+While an algorithm is running:
+- Press "S" key to stop the algorithm
+
 ## A\* pathfinding algorithm:
 
 The A\* algorithm was created and shown [here](https://www.youtube.com/watch?v=JtiK0DOeI4A) by Tech With Tim.
 
---- Add explanation ---
+The A\* algorithm is a type of best-first search algorithm that uses a combination of a heuristic function and the cost of each path to determine the most efficient path to take. 
+
+The algorithm works by starting at the start point and exploring possible paths in a way that prioritizes paths that are likely to lead to the end point. It does this by using a heuristic function to estimate the cost of each path, and then selecting the path with the lowest estimated cost. 
+
+As the algorithm continues to explore paths, it updates the estimated cost of each path based on the actual cost of the path and the heuristic function. This allows the algorithm to continually refine its search and find the shortest path to the end point.
 
 ## Breadth First Search (BFS) pathfinding algorithm:
 
-To stop algorithm while it is running press the "S" key.
 
---- Add explanation ---
+BFS works by starting at a given vertex and exploring all of its neighbors before moving on to any of their neighbors. This means that the algorithm will visit all of the vertices in a given layer of the graph before moving on to the next layer. This continues until all vertices in the graph have been visited or the desired vertex has been found.
+
+To implement BFS, a queue is typically used to store the vertices that are yet to be visited. We start by adding the starting vertex to the queue, and then we repeatedly take the next vertex from the queue, visit it, and add all of its unvisited neighbors to the queue. This process continues until the queue is empty, at which point all vertices in the graph have been visited.
 
 ## Depth First Search (DFS) pathfinding algorithm:
 
-To stop algorithm while it is running press the "S" key.
 
---- Add explanation ---
+DFS works by starting at a given vertex and exploring as far as possible along each branch before backtracking. This means that the algorithm will visit all of the vertices in a given branch of the graph before moving on to the next branch. This continues until all vertices in the graph have been visited or the desired vertex has been found.
+
+To implement DFS, a stack is typically used to store the vertices that are yet to be visited. We start by adding the starting vertex to the stack, and then we repeatedly take the next vertex from the stack, visit it, and add all of its unvisited neighbors to the stack. This process continues until the stack is empty, at which point all vertices in the graph have been visited.
 
 ## Dijkstra's pathfinding algorithm:
 
-To stop algorithm while it is running press the "S" key.
 
---- Add explanation ---
+Dijkstra's pathfinding algorithm is a type of best-first search algorithm that uses a priority queue to store the vertices that are yet to be visited. The algorithm works by starting at the starting vertex and exploring all of its neighbors, updating the cost of each path based on the actual cost of the path and the current estimated cost of the path. As the algorithm continues to explore paths, it updates the estimated cost of each path and selects the path with the lowest estimated cost. This allows the algorithm to continually refine its search and find the shortest path to the end point.
 
-## Greedy Best First Search (GFS) pathfinding algorithm:
+To implement Dijkstra's algorithm, we first initialize a priority queue and add the starting vertex to it. We then repeatedly take the next vertex from the priority queue, visit it, and add all of its unvisited neighbors to the priority queue. When adding a vertex to the priority queue, we update the estimated cost of the path to that vertex based on the actual cost of the path and the current estimated cost of the path. This process continues until the end vertex is reached or all vertices in the graph have been visited.
 
-To stop algorithm while it is running press the "S" key.
+## Greedy Best First Search (GBFS) pathfinding algorithm:
 
---- Add explanation ---
+
+The greedy best-first search (GBFS) algorithm is a type of best-first search algorithm that uses a heuristic function to prioritize the exploration of paths that are likely to lead to the end point. It works by starting at the start point and exploring possible paths in a way that prioritizes paths with the lowest estimated cost. This means that the algorithm will always choose the path with the lowest estimated cost, regardless of whether that path actually leads to the end point.
+
+To implement GBFS, we first initialize a priority queue and add the starting vertex to it. We then repeatedly take the next vertex from the priority queue, visit it, and add all of its unvisited neighbors to the priority queue. When adding a vertex to the priority queue, we update the estimated cost of the path to that vertex based on the heuristic function. This process continues until the end vertex is reached or all vertices in the graph have been visited.
 
 ## Random Walk pathfinding algorithm:
 
-To stop algorithm while it is running press the "S" key.
+The random walk algorithm is a type of pathfinding algorithm that uses a random exploration strategy to find a path between two points. It works by starting at the start point and randomly selecting one of the available neighbors to explore. This process is repeated until the end point is reached or all possible paths have been explored.
 
-From the starting node choose a random neighbor node to check.
-If the node is the end, stop; if the node isn't the end, choose a random neighbor of it and repeat until the end is reached.
+## Theta\* pathfinding algorithm:
 
-This algorithm is literally randomly guessing a route from start to end, it is by no means ment to be taken serious and was just something fun to look at.
+Like A*, Theta* uses a combination of a heuristic function and the cost of each path to determine the most efficient path to take. However, unlike A*, Theta* uses a more advanced search strategy that allows it to find the shortest path to the end point more efficiently.
+
+To implement Theta*, we first initialize a priority queue and add the starting vertex to it. We then repeatedly take the next vertex from the priority queue, visit it, and add all of its unvisited neighbors to the priority queue. When adding a vertex to the priority queue, we update the estimated cost of the path to that vertex based on the actual cost of the path and the current estimated cost of the path. Additionally, we use a special search strategy that allows us to prune the search space and avoid exploring paths that are unlikely to lead to the end point. This process continues until the end vertex is reached or all vertices in the graph have been visited.

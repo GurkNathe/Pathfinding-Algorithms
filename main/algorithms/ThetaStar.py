@@ -91,6 +91,12 @@ def theta_star(draw, start, end, grid):
     parent[start] = start
 
     while open_set:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
+                run = False
+        
         current = open_set.get()
 
         if current[2].is_end():
