@@ -7,6 +7,7 @@ The graph used is an undirected, unweighted, strongly connected graph.
 Currently implemented algorithms (7/32):
 
 - A\*
+- Bellman Ford's Algorithm
 - Breadth First Search (BFS)
 - Depth First Search (DFS)
 - Dijkstra's Algorithms
@@ -24,7 +25,6 @@ Planned algorithms (Going to look at them):
 
 - B\*
 - Beam Search
-- Bellman Ford's Algorithm
 - Bidirectional search
 - Branch & bound
 
@@ -99,8 +99,23 @@ The algorithm works by starting at the start point and exploring possible paths 
 
 As the algorithm continues to explore paths, it updates the estimated cost of each path based on the actual cost of the path and the heuristic function. This allows the algorithm to continually refine its search and find the shortest path to the end point.
 
-## Breadth First Search (BFS) pathfinding algorithm:
+## Bellman-Ford's pathfinding algorithm:
 
+The Bellman-Ford's pathfinding algorithm works by initially setting the distance from the source node to all other nodes in the graph to infinity, and the predecessor for all nodes to null. It then repeatedly relaxes the edges in the graph, updating the distance and predecessor values for each node. This is repeated for each node in the graph, until all distances and predecessors have been correctly updated.
+
+Here's a high-level overview of the algorithm:
+
+1. Set the distance from the source node to all other nodes in the graph to infinity, and the predecessor for all nodes to null.
+2. For each node in the graph, do the following:
+    - Relax the edges leaving the current node.
+    - Update the distance and predecessor values for each neighbor of the current node if a shorter path is found.
+3. Repeat step 2 for each node in the graph, until all distances and predecessors have been correctly updated.
+
+Once the algorithm has completed, the distance and predecessor values for each node in the graph will contain the correct shortest path information. These values can then be used to reconstruct the shortest path from the source node to any other node in the graph.
+
+In this implementation of Bellman-Ford's algorithm, there is no check for negative edge weights/cycles. This is due to the nature of this implementation, where each weight between two nodes is always 1, and never negative.
+
+## Breadth First Search (BFS) pathfinding algorithm:
 
 BFS works by starting at a given vertex and exploring all of its neighbors before moving on to any of their neighbors. This means that the algorithm will visit all of the vertices in a given layer of the graph before moving on to the next layer. This continues until all vertices in the graph have been visited or the desired vertex has been found.
 

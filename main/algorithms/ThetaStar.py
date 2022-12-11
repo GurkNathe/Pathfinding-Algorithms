@@ -89,8 +89,10 @@ def theta_star(draw, start, end, grid):
 
     parent = {}
     parent[start] = start
+    
+    run = True
 
-    while open_set:
+    while open_set and run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -104,11 +106,14 @@ def theta_star(draw, start, end, grid):
             break
 
         if not current[2].is_start():
-            current[2].check()
+            current[2].uncheck()
         else:
             current[2].been_checked = True
         
         draw()
+        
+        if not current[2].is_start():
+            current[2].check()
 
         for neighbor in current[2].neighbors:
             if not neighbor.been_checked:
