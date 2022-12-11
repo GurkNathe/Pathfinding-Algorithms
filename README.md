@@ -4,10 +4,12 @@ This is a Python (3.10+) implementation and visualization of various pathfinding
 
 The graph used is an undirected, unweighted, strongly connected graph.
 
-Currently implemented algorithms (8/32):
+```
+Currently implemented algorithms (9/34):
 
 - A\*
 - Bellman Ford's Algorithm
+- Best First Search
 - Breadth First Search (BFS)
 - Depth First Search (DFS)
 - Dijkstra's Algorithms
@@ -55,7 +57,56 @@ Planned algorithms (Going to look at them):
 - SSS\*
 - SUB
 
+- Viterbi algorithm
+
 - Yen's k-Shortest Paths
+```
+
+```
+Algorithms to look at:
+
+- Hill climbing
+- Genetic algorithms
+- Ant colony optimization
+- Particle swarm optimization
+- Simulated annealing
+
+- D* Lite
+- Landmark Label Setting
+- Hierarchical A*
+- Contraction Hierarchies
+- Lazy Theta*
+- Anytime Repairing A*
+- Weighted A*
+- Bounded A*
+
+- Optimal Reciprocal Collision Avoidance (ORCA)
+- Potential Field Path Planning (PFPP)
+- Rapidly-Exploring Random Tree (RRT)
+- Kinodynamic RRT (Kino-RRT)
+- Visibility Graph
+- Probabilistic Roadmap (PRM)
+- Elastic Band (EB)
+- A* with Elastic Band (AEB)
+
+- Cooperative Path Planning (CPP)
+- Optimal Cooperative Path Planning (OCPP)
+- Path Planning in Complex Environments (PPCP)
+- Path Planning for Multiple Robots (PPMR)
+- Multi-Agent Path Finding (MAPF)
+- Conflict-Based Search (CBS)
+- Incremental Search (ICS)
+- Conflict-Based Multi-Agent Path Finding (CB-MAPF)
+
+- Multi-Objective Evolutionary Algorithms (MOEA)
+- Constraint-Based Path Planning (CBPP)
+- Anytime Constraint-Based Path Planning (ACBPP)
+- Constraint-Based Multi-Agent Path Finding (CB-MAPF)
+- Sampling-Based Motion Planning (SMP)
+- Probabilistic Roadmap with Sampling (PRM-S)
+- Kinodynamic Sampling-Based Motion Planning (Kino-SMP)
+- Kinodynamic Probabilistic Roadmap with Sampling (Kino-PRM-S)
+```
 
 The visualization is implemented using PyGame. Credits to [Tech With Tim](https://www.youtube.com/watch?v=JtiK0DOeI4A).
 
@@ -114,6 +165,15 @@ Here's a high-level overview of the algorithm:
 Once the algorithm has completed, the distance and predecessor values for each node in the graph will contain the correct shortest path information. These values can then be used to reconstruct the shortest path from the source node to any other node in the graph.
 
 In this implementation of Bellman-Ford's algorithm, there is no check for negative edge weights/cycles. This is due to the nature of this implementation, where each weight between two nodes is always 1, and never negative.
+
+## Best-First Search pathfinding algorithm:
+
+Best first search is a type of search algorithm that uses a heuristic evaluation function to prioritize the nodes in the search space. The algorithm starts at the starting node and explores the neighbor nodes in order of their estimated cost to the goal. The estimated cost of a node is calculated using a heuristic function, which provides an estimate of the minimum cost from the current node to the goal. This allows the algorithm to focus on the most promising nodes first, and avoid exploring parts of the search space that are unlikely to lead to the goal.
+
+The algorithm continues to explore the neighbor nodes and expand the search space until the goal is reached, or until all possible paths have been explored. If the goal is found, the algorithm returns the minimum cost path from the start to the goal. If no path is found, the algorithm returns failure.
+
+Best first search can be implemented using a priority queue to store the nodes that need to be explored. The priority queue is ordered by the estimated cost of each node, with the node that has the lowest estimated cost being at the top of the queue. The algorithm then repeatedly takes the top node from the queue, expands it to explore its neighbor nodes, and adds the neighbor nodes to the queue. This process continues until the goal is reached or the queue is empty.
+
 
 ## Breadth First Search (BFS) pathfinding algorithm:
 

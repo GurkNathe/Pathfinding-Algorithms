@@ -1,6 +1,7 @@
 import pygame
 from queue import PriorityQueue, Queue
 from .RP import reconstruct_path
+from .RP import get_unvisited_nodes
 
 """
 Algorithm
@@ -19,21 +20,6 @@ while the queue is not empty:
             previous[vertex] = U
 
 """
-
-# Traverse the grid and find all nodes connected to the start
-def get_unvisited_nodes(start):
-    Q = Queue()
-    Q_hash = {start}
-    Q.put(start)
-
-    while not Q.empty():
-        current = Q.get()
-
-        for neighbor in current.neighbors:
-            if neighbor not in Q_hash:
-                Q.put(neighbor)
-                Q_hash.add(neighbor)
-    return Q_hash
 
 # TODO: Refactor using a priority queue
 # Make distance a priority queue (node, inf)

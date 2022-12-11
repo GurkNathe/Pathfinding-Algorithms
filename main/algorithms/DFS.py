@@ -1,5 +1,4 @@
 import pygame
-import time
 from .RP import reconstruct_path
 
 """

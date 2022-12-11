@@ -1,13 +1,8 @@
 import pygame
-import math
 from queue import PriorityQueue
 from .RP import reconstruct_path
-
-def euclidean(node1, node2):
-    x1, y1 = node1.get_pos()
-    x2, y2 = node2.get_pos()
-
-    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+from .RP import manhattan
+from .RP import euclidean
 
 
 def line_of_sight(node1, node2, grid):
@@ -49,7 +44,7 @@ def remove_add(open_set_hash, open_set, distance, counter, neighbor):
 def update_vertex(
     current, neighbor, parent, g_score, open_set, open_set_hash, end, counter, grid
 ):
-    h = heuristic(neighbor.get_pos(), end.get_pos())
+    h = manhattan(neighbor.get_pos(), end.get_pos())
     if line_of_sight(parent[current], neighbor, grid):
         g_p_curr = g_score[parent[current]] + euclidean(parent[current], neighbor)
         if g_p_curr < g_score[neighbor]:
@@ -68,13 +63,6 @@ def update_vertex(
             )
 
 
-# Manhattan distance
-def heuristic(point1, point2):
-    x1, y1 = point1
-    x2, y2 = point2
-    return abs(x1 - x2) + abs(y1 - y2)
-
-
 def theta_star(draw, start, end, grid):
     g_score = {}
     g_score[start] = 0
@@ -82,14 +70,14 @@ def theta_star(draw, start, end, grid):
     counter = 0
     open_set = PriorityQueue()
     open_set.put(
-        (g_score[start] + heuristic(start.get_pos(), end.get_pos()), counter, start)
+        (g_score[start] + manhattan(start.get_pos(), end.get_pos()), counter, start)
     )
     open_set_hash = {}
     open_set_hash[start] = start
 
     parent = {}
     parent[start] = start
-    
+
     run = True
 
     while open_set and run:
@@ -98,7 +86,7 @@ def theta_star(draw, start, end, grid):
                 pygame.quit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
                 run = False
-        
+
         current = open_set.get()
 
         if current[2].is_end():
@@ -109,9 +97,9 @@ def theta_star(draw, start, end, grid):
             current[2].uncheck()
         else:
             current[2].been_checked = True
-        
+
         draw()
-        
+
         if not current[2].is_start():
             current[2].check()
 
@@ -130,5 +118,5 @@ def theta_star(draw, start, end, grid):
                     open_set_hash,
                     end,
                     counter,
-                    grid
+                    grid,
                 )

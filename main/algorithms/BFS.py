@@ -29,7 +29,7 @@ def bfs(draw, start, end):
                 pygame.quit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
                 run = False
-        
+
         current = nodes.pop(0)
 
         if current.is_checked():
@@ -39,7 +39,7 @@ def bfs(draw, start, end):
             current.uncheck()
 
         draw()
-        
+
         if not current.is_start() and not current.is_end():
             current.check()
 
