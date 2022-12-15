@@ -43,7 +43,7 @@ While an algorithm is running:
 ```
 Currently implemented algorithms (9/34):
 
-- A\*
+- A*
 - Bellman Ford's Algorithm
 - Best First Search
 - Breadth First Search (BFS)
@@ -51,7 +51,7 @@ Currently implemented algorithms (9/34):
 - Dijkstra's Algorithms
 - Greedy Best First Search (GBFS)
 - Random Walk
-- Theta\*
+- Theta*
 
 Currently looking at:
 
@@ -61,14 +61,14 @@ Planned algorithms (Going to look at them):
 
 - α–β pruning
 
-- B\*
+- B*
 - Beam Search
 - Bidirectional search
 - Branch & bound
 
 - Concurrent Dijkstra
 
-- D\*
+- D*
 
 - Fast Iterative Method
 - Fast Marching Method
@@ -78,7 +78,7 @@ Planned algorithms (Going to look at them):
 
 - Greedy Best Line Search
 
-- Iterative Deepening (IDA\*)
+- Iterative Deepening (IDA*)
 - Iterative Deepening DFS (IDDFS)
 
 - Johnson's
@@ -89,8 +89,8 @@ Planned algorithms (Going to look at them):
 - Lexicographic BFS
 - Lifelong Planning A* (LPA*)
 
-- SMA\*
-- SSS\*
+- SMA*
+- SSS*
 - SUB
 
 - Viterbi algorithm
