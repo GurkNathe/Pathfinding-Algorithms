@@ -1,4 +1,5 @@
 import pygame
+import time
 from queue import PriorityQueue
 from .RP import reconstruct_path
 from .RP import manhattan
@@ -63,6 +64,52 @@ def update_vertex(
             )
 
 
+def connect_path(came_from, current, draw, grid):
+    # Temp variable to for connected path
+    end = current
+    
+    # Displaying what Theta* generates (the turn points)
+    reconstruct_path(came_from, current, draw)
+    
+    # Timeout for turn point visualization
+    time.sleep(1.5)
+    
+    # Fill in path between turn points 
+    current = end
+    while current in came_from and not current.is_start():
+        previous = came_from[current]
+        xp, yp = previous.get_pos()
+        xc, yc = current.get_pos()
+        
+        x_dir = xp - xc
+        y_dir = yp - yc
+        
+        if x_dir == 0:
+            # Current is above previous
+            if y_dir > 0:
+                for y in range(yc, yp):
+                    if not grid[xp][y].is_start():
+                        grid[xp][y].make_path()
+            # Current is bellow previous
+            else:
+                for y in range(yp, yc):
+                    if not grid[xp][y].is_start():
+                        grid[xp][y].make_path()
+        elif y_dir == 0:
+            # Current is left of previous
+            if x_dir > 0:
+                for x in range(xc, xp):
+                    if not grid[x][yp].is_start():
+                        grid[x][yp].make_path()
+            # Current is right of previous
+            else:
+                for x in range(xp, xc):
+                    if not grid[x][yp].is_start():
+                        grid[x][yp].make_path()
+
+        current = previous
+        draw()
+
 def theta_star(draw, start, end, grid):
     g_score = {}
     g_score[start] = 0
@@ -90,7 +137,8 @@ def theta_star(draw, start, end, grid):
         current = open_set.get()
 
         if current[2].is_end():
-            reconstruct_path(parent, end, draw)
+            connect_path(parent, end, draw, grid)
+            end.make_end()
             break
 
         if not current[2].is_start():

@@ -182,10 +182,7 @@ def main(argv):
                             node.update_neighbors(grid)
 
                     Algorithms(
-                        lambda: draw(win, grid, ROWS, width),
-                        grid,
-                        start,
-                        end,
+                        lambda: draw(win, grid, ROWS, width), grid, start, end
                     ).algorithm(func)
                     ran = True
 

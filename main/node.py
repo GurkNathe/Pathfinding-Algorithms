@@ -61,6 +61,9 @@ class Node:
 
     def make_path(self):
         self.color = PATH
+    
+    def make_color(self, color: tuple):
+        self.color = color
 
     def mult_check(self, dec):
         if self.checked_color[0] > dec:
