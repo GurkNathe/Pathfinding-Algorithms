@@ -14,12 +14,22 @@ def bell_ford(draw, start, end, accuracy):
     run = True
 
     while counter >= 0 and run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
+                run = False
+        
         for current in nodes:
+            if not run:
+                break
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
                     run = False
+                    break
+                
             if not current.is_start() and not current.is_end():
                 current.uncheck()
 

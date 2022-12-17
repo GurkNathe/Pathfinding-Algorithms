@@ -26,6 +26,8 @@ algorithm = astar, bfs, dfs, dijkstra, rand, yen [See line 8 of Algorithms.py fo
 
 While an algorithm isn't running:
 
+- Press "B" to go to previous algorithm in list
+- Press "N" to go to next algorithm in list
 - Press "Q" to exit
 - Press "C" to clear grid
 - Left click to place Start, then End, then Obstacles

@@ -6,6 +6,7 @@ from node import Node
 from Algorithms import Algorithms, ALGORITHMS
 from Maze import gen_maze
 
+
 def make_grid(rows, width):
     grid = []
     node_width = width // rows
@@ -71,8 +72,8 @@ def get_clicked_pos(pos, rows, width):
     return row, col
 
 
-def main(argv):
-    func = None
+def handle_errors(argv, func):
+    func = "bellford"
     if len(argv) > 3:
         raise ValueError(
             "Too many arguments. arg-1: width, arg-2: # rows, alg-3: algorithm type"
@@ -91,7 +92,10 @@ def main(argv):
         raise ValueError("Width too small. width >= 2")
     if len(argv) == 2 and int(argv[1]) < 2:
         raise ValueError("Number of rows too small. # rows >= 2")
+    return func
 
+
+def setup(argv):
     width = 800 if len(argv) == 0 else int(argv[0])
     ROWS = 50 if len(argv) < 2 else int(argv[1])
 
@@ -102,9 +106,17 @@ def main(argv):
 
     start, end = gen_maze(grid, None, None)
 
+    return start, end, grid, win, width, ROWS
+
+
+def main(argv):
+    func = handle_errors(argv, None)
+
+    start, end, grid, win, width, ROWS = setup(argv)
+
     run = True
     ran = False
-
+    print(func)
     while run:
         draw(win, grid, ROWS, width)
 
@@ -191,6 +203,26 @@ def main(argv):
                     start = None
                     end = None
                     grid = make_grid(ROWS, width)
+                
+                if event.key == pygame.K_n:
+                    # Clear algorithm mark-up upon edit
+                    if ran:
+                        ran = False
+                        grid = clear_grid(grid, ROWS, width)
+                    index = ALGORITHMS.index(func) + 1
+                    if index == len(ALGORITHMS):
+                        index = 0
+                    func = ALGORITHMS[index]
+                
+                if event.key == pygame.K_b:
+                    # Clear algorithm mark-up upon edit
+                    if ran:
+                        ran = False
+                        grid = clear_grid(grid, ROWS, width)
+                    index = ALGORITHMS.index(func) - 1
+                    if index == -1:
+                        index = len(ALGORITHMS) - 1
+                    func = ALGORITHMS[index]
 
     pygame.quit()
 
