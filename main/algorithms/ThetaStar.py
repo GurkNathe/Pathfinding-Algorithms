@@ -1,9 +1,7 @@
 import pygame
 import time
 from queue import PriorityQueue
-from .RP import reconstruct_path
-from .RP import manhattan
-from .RP import euclidean
+from .RP import reconstruct_path, manhattan, euclidean
 
 
 def line_of_sight(node1, node2, grid):

@@ -1,7 +1,6 @@
 import pygame
 from queue import PriorityQueue
-from .RP import reconstruct_path
-from .RP import manhattan
+from .RP import reconstruct_path, manhattan
 
 
 def gbfs(draw, start, end):

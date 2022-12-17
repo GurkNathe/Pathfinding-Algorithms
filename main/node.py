@@ -1,6 +1,7 @@
 import pygame
 from colors import COLORS
 
+DEFAULT = COLORS.get("WHITE")
 CHECKED = COLORS.get("RED")
 UNCHECKED = COLORS.get("GREEN")
 OBSTACLE = COLORS.get("BLACK")
@@ -15,7 +16,7 @@ class Node:
         self.col = col
         self.x = row * width
         self.y = col * width
-        self.color = COLORS.get("WHITE")
+        self.color = DEFAULT
         self.neighbors = []
         self.width = width
         self.total_rows = total_rows
@@ -26,6 +27,9 @@ class Node:
         return self.row, self.col
 
     # Checking states
+    def is_default(self):
+        return self.color == DEFAULT
+    
     def is_checked(self):
         return self.color == CHECKED
 

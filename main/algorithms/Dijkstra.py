@@ -1,7 +1,6 @@
 import pygame
 from queue import PriorityQueue, Queue
-from .RP import reconstruct_path
-from .RP import get_unvisited_nodes
+from .RP import reconstruct_path, get_unvisited_nodes
 
 """
 Algorithm

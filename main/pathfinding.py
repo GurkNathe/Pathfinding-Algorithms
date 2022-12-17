@@ -1,10 +1,10 @@
 import pygame
 import sys
+import random
 from colors import COLORS
 from node import Node
-from Algorithms import Algorithms
-from Algorithms import ALGORITHMS
-
+from Algorithms import Algorithms, ALGORITHMS
+from Maze import gen_maze
 
 def make_grid(rows, width):
     grid = []
@@ -100,8 +100,7 @@ def main(argv):
 
     grid = make_grid(ROWS, width)
 
-    start = None
-    end = None
+    start, end = gen_maze(grid, None, None)
 
     run = True
     ran = False

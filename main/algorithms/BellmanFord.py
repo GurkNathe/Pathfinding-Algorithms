@@ -1,7 +1,6 @@
 import pygame
 from queue import Queue
-from .RP import reconstruct_path
-from .RP import get_unvisited_nodes
+from .RP import reconstruct_path, get_unvisited_nodes
 
 
 def bell_ford(draw, start, end, accuracy):
