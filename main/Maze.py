@@ -138,18 +138,20 @@ def gen_maze(grid, start, end):
     
     # Set start and end
     while not start:
-        for i in range(0, width):
-            if grid[1][i].is_unchecked() and random.random() < 0.1:
-                start = grid[0][i]
-                start.make_start()
-                break
+        node = random.randint(1, width - 1)
+        
+        if grid[1][node].is_unchecked():
+            start = grid[0][node]
+            start.make_start()
+            break
     
     while not end:
-        for i in range(width - 1, 0, -1):
-            if grid[height - 2][i].is_unchecked() and random.random() < 0.1:
-                end = grid[height - 1][i]
-                end.make_end()
-                break
+        node = random.randint(1, width - 1)
+        
+        if grid[height - 2][node].is_unchecked():
+            end = grid[height - 1][node]
+            end.make_end()
+            break
     
     # Clear unchecks
     for row in grid:

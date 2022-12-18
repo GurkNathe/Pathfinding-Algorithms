@@ -41,6 +41,16 @@ BFS works by starting at a given vertex and exploring all of its neighbors befor
 
 To implement BFS, a queue is typically used to store the vertices that are yet to be visited. We start by adding the starting vertex to the queue, and then we repeatedly take the next vertex from the queue, visit it, and add all of its unvisited neighbors to the queue. This process continues until the queue is empty, at which point all vertices in the graph have been visited.
 
+## B\* pathfinding algorithm:
+
+The B\* algorithm was based off of the A\* algorithm created and shown [here](https://www.youtube.com/watch?v=JtiK0DOeI4A) by Tech With Tim.
+
+The B\* algorithm is a modified version of the A\* algorithm. The only difference between the two algorithms is the inclusion of a "forbbiden" nodes list in B\*.
+
+The forbbiden nodes list denotes which nodes should be avoided while traversing the graph. This is a user-defined list of nodes that the user wasn't the algorithm to avoid.
+
+In this implementation, 
+
 ## Depth First Search (DFS) pathfinding algorithm:
 
 

@@ -1,6 +1,5 @@
 import pygame
 import sys
-import random
 from colors import COLORS
 from node import Node
 from Algorithms import Algorithms, ALGORITHMS
@@ -32,6 +31,7 @@ def clear_grid(current_grid, rows, width):
                 not current_grid[i][j].is_start()
                 and not current_grid[i][j].is_end()
                 and not current_grid[i][j].is_obstacle()
+                and not current_grid[i][j].is_forbidden()
             ):
                 node = Node(i, j, node_width, rows)
                 grid[i].append(node)
@@ -73,7 +73,6 @@ def get_clicked_pos(pos, rows, width):
 
 
 def handle_errors(argv, func):
-    func = "bellford"
     if len(argv) > 3:
         raise ValueError(
             "Too many arguments. arg-1: width, arg-2: # rows, alg-3: algorithm type"
@@ -92,6 +91,10 @@ def handle_errors(argv, func):
         raise ValueError("Width too small. width >= 2")
     if len(argv) == 2 and int(argv[1]) < 2:
         raise ValueError("Number of rows too small. # rows >= 2")
+    
+    if not func:
+        func = "astar"
+    
     return func
 
 
@@ -116,7 +119,9 @@ def main(argv):
 
     run = True
     ran = False
+    
     print(func)
+    
     while run:
         draw(win, grid, ROWS, width)
 
@@ -153,7 +158,10 @@ def main(argv):
                     end = node
                     end.make_end()
                 elif node != start and node != end:
-                    node.make_obstacle()
+                    if pygame.key.get_mods() & pygame.K_LSHIFT:
+                        node.make_forbbiden()
+                    else:
+                        node.make_obstacle()
 
             # Right mouse click
             # Remove start, end, and obstacle nodes
@@ -213,6 +221,7 @@ def main(argv):
                     if index == len(ALGORITHMS):
                         index = 0
                     func = ALGORITHMS[index]
+                    print(func)
                 
                 if event.key == pygame.K_b:
                     # Clear algorithm mark-up upon edit
@@ -223,6 +232,7 @@ def main(argv):
                     if index == -1:
                         index = len(ALGORITHMS) - 1
                     func = ALGORITHMS[index]
+                    print(func)
 
     pygame.quit()
 

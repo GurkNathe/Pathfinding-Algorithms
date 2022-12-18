@@ -6,7 +6,9 @@ The graph used is an undirected, unweighted, strongly connected graph.
 
 The visualization is implemented using PyGame. Credits to [Tech With Tim](https://www.youtube.com/watch?v=JtiK0DOeI4A).
 
-![Best First Search](./resources/Best-First-Search.gif)
+A maze generator is implemented, however, it only has one correct path from start to end node. The implementation is based on [this](https://github.com/OrWestSide/python-scripts/blob/master/maze.py).
+
+![A* + Maze](./resources/astar_maze.gif)
 
 ## Command line arguments
 
@@ -26,29 +28,41 @@ algorithm = astar, bfs, dfs, dijkstra, rand, yen [See line 8 of Algorithms.py fo
 
 While an algorithm isn't running:
 
-- Press "B" to go to previous algorithm in list
-- Press "N" to go to next algorithm in list
-- Press "Q" to exit
-- Press "C" to clear grid
-- Left click to place Start, then End, then Obstacles
-- Right click to remove Start, End, or Obstacles
+- Press <kbd>B</kbd> to go to previous algorithm in list
+- Press <kbd>N</kbd> to go to next algorithm in list
+- Press <kbd>Q</kbd> to exit
+- Press <kbd>C</kbd> to clear grid
+- <kbd>Left Shift</kbd> + <kbd>Left Click</kbd> to place a forbbiden node after placing Start and End nodes
+- <kbd>Left Click</kbd> to place Start, then End, then Obstacles
+- <kbd>Right Click</kbd> to remove Start, End, or Obstacles
 
 After an algorithm has run:
 
-- "W", Left, or Right click to clear the Algorithm Mark-up
+- <kbd>W</kbd>, <kbd>Left Click</kbd>, or <kbd>Right Click</kbd> to clear the Algorithm Mark-up
 
 While an algorithm is running:
-- Press "S" key to stop the algorithm
+- Press <kbd>S</kbd> key to stop the algorithm
+
+## Node Types
+
+- Start: where the search algorithm will start
+- End: where the search algorithm is trying to get to
+- Obstacle: a position the algorithms avoid
+- Forbidden: a position certain algorithms avoid
+- Check/Uncheck: markup for visualizing the algorithm
+- Path: markup for visualizing the found path
+- Default: a position that can be traversed
 
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (9/34):
+Currently implemented algorithms (10/34):
 
 - A*
 - Bellman Ford's Algorithm
 - Best First Search
 - Breadth First Search (BFS)
+- B*
 - Depth First Search (DFS)
 - Dijkstra's Algorithms
 - Greedy Best First Search (GBFS)
@@ -63,7 +77,6 @@ Planned algorithms (Going to look at them):
 
 - α–β pruning
 
-- B*
 - Beam Search
 - Bidirectional search
 - Branch & bound

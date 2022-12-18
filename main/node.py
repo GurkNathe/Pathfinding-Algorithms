@@ -8,7 +8,7 @@ OBSTACLE = COLORS.get("BLACK")
 START = COLORS.get("ORANGE")
 END = COLORS.get("TURQUOISE")
 PATH = COLORS.get("PURPLE")
-
+FORBID = COLORS.get("GREY")
 
 class Node:
     def __init__(self, row, col, width, total_rows):
@@ -45,6 +45,9 @@ class Node:
     def is_end(self):
         return self.color == END
 
+    def is_forbidden(self):
+        return self.color == FORBID
+
     # Setting states
     def check(self):
         self.color = CHECKED
@@ -68,6 +71,9 @@ class Node:
     
     def make_color(self, color: tuple):
         self.color = color
+    
+    def make_forbbiden(self):
+        self.color = FORBID
 
     def mult_check(self, dec):
         if self.checked_color[0] > dec:

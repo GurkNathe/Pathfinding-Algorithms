@@ -1,4 +1,5 @@
 from algorithms.AStar import a_star
+from algorithms.BStar import b_star
 from algorithms.ThetaStar import theta_star
 from algorithms.Dijkstra import dijkstra
 from algorithms.RandomWalk import rand_walk
@@ -13,6 +14,7 @@ ALGORITHMS = [
     "bellford",
     "bestfs",
     "bfs",
+    "bstar",
     "dfs",
     "dijkstra",
     "gbfs",
@@ -40,6 +42,8 @@ class Algorithms:
                 best_fs(self.draw, self.start, self.end)
             case "bfs":
                 bfs(self.draw, self.start, self.end)
+            case "bstar":
+                b_star(self.draw, self.grid, self.start, self.end)
             case "dfs":
                 dfs(self.draw, self.start, self.end)
             case "dijkstra":
