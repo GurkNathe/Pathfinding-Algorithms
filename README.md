@@ -34,7 +34,7 @@ While an algorithm isn't running:
 - Press <kbd>C</kbd> to clear grid
 - <kbd>Left Shift</kbd> + <kbd>Left Click</kbd> to place a forbbiden node after placing Start and End nodes
 - <kbd>Left Click</kbd> to place Start, then End, then Obstacles
-- <kbd>Right Click</kbd> to remove Start, End, or Obstacles
+- <kbd>Right Click</kbd> to remove Start, End, Forbbiden nodes, or Obstacles
 
 After an algorithm has run:
 
@@ -48,7 +48,7 @@ While an algorithm is running:
 - Start: where the search algorithm will start
 - End: where the search algorithm is trying to get to
 - Obstacle: a position the algorithms avoid
-- Forbidden: a position certain algorithms avoid
+- Forbidden: a position certain algorithms avoid (a different type of obstacle)
 - Check/Uncheck: markup for visualizing the algorithm
 - Path: markup for visualizing the found path
 - Default: a position that can be traversed
