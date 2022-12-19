@@ -1,6 +1,6 @@
 import pygame
 from collections import deque
-from .RP import manhattan
+from .RP import heuristic
 
 
 def get_checked_neighbors(node):
@@ -38,7 +38,7 @@ def best_fs(draw, start, end):
                 run = False
 
         current = min(
-            queue, key=lambda x: costs[x] + manhattan(x.get_pos(), end.get_pos())
+            queue, key=lambda x: costs[x] + heuristic("manhattan", x, end)
         )
         queue.remove(current)
 

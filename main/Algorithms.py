@@ -39,7 +39,7 @@ class Algorithms:
             case "astar":
                 a_star(self.draw, self.grid, self.start, self.end)
             case "beam":
-                beam_search(self.draw, self.start, self.end, 1000)
+                beam_search(self.draw, self.start, self.end, 50)
             case "bellford":
                 bell_ford(self.draw, self.start, self.end, 1)
             case "bestfs":

@@ -2,9 +2,10 @@ from queue import Queue
 import math
 
 # Manhattan distance
-def manhattan(point1, point2):
-    x1, y1 = point1
-    x2, y2 = point2
+def manhattan(node1, node2):
+    x1, y1 = node1.get_pos()
+    x2, y2 = node2.get_pos()
+    
     return abs(x1 - x2) + abs(y1 - y2)
 
 
@@ -15,6 +16,15 @@ def euclidean(node1, node2):
 
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
+
+def heuristic(type, node1, node2):
+    match type:
+        case "euclidean":
+            return euclidean(node1, node2)
+        case "manhattan":
+            return manhattan(node1, node2)
+        case _:
+            return manhattan(node1, node2)
 
 # Reconstructs path using a dictionary mapping
 def reconstruct_path(came_from, current, draw):

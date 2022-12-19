@@ -1,11 +1,11 @@
 import pygame
 from queue import PriorityQueue
-from .RP import reconstruct_path, manhattan
+from .RP import reconstruct_path, heuristic
 
 
 def gbfs(draw, start, end):
     Q = PriorityQueue()
-    Q.put((manhattan(start.get_pos(), end.get_pos()), 0, start))
+    Q.put((heuristic("manhattan", start, end), 0, start))
 
     counter = 0
     run = True
@@ -42,7 +42,9 @@ def gbfs(draw, start, end):
                     break
 
                 counter += 1
-                distance = manhattan(neighbor.get_pos(), end.get_pos())
+                distance = heuristic(
+                    "manhattan", neighbor, end
+                )
                 largest = (distance, counter, neighbor)
                 previous[largest[2]] = current[2]
                 Q.put(largest)

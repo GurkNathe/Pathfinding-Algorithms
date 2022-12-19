@@ -1,6 +1,6 @@
 import pygame
 from queue import PriorityQueue
-from .RP import reconstruct_path, manhattan
+from .RP import reconstruct_path, heuristic
 
 
 def a_star(draw, grid, start, end):
@@ -13,7 +13,7 @@ def a_star(draw, grid, start, end):
     g_score[start] = 0
 
     f_score = {node: float("inf") for row in grid for node in row}
-    f_score[start] = manhattan(start.get_pos(), end.get_pos())
+    f_score[start] = heuristic("manhattan", start, end)
 
     open_set_hash = {start}
 
@@ -40,8 +40,8 @@ def a_star(draw, grid, start, end):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + manhattan(
-                    neighbor.get_pos(), end.get_pos()
+                f_score[neighbor] = temp_g_score + heuristic(
+                    "manhattan", neighbor, end
                 )
 
                 if neighbor not in open_set_hash:

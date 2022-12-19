@@ -1,7 +1,7 @@
 import pygame
 import time
 from queue import PriorityQueue
-from .RP import reconstruct_path, manhattan, euclidean
+from .RP import reconstruct_path, heuristic
 
 
 def line_of_sight(node1, node2, grid):
@@ -43,9 +43,9 @@ def remove_add(open_set_hash, open_set, distance, counter, neighbor):
 def update_vertex(
     current, neighbor, parent, g_score, open_set, open_set_hash, end, counter, grid
 ):
-    h = manhattan(neighbor.get_pos(), end.get_pos())
+    h = heuristic("manhattan", neighbor, end)
     if line_of_sight(parent[current], neighbor, grid):
-        g_p_curr = g_score[parent[current]] + euclidean(parent[current], neighbor)
+        g_p_curr = g_score[parent[current]] + heuristic("euclidean", parent[current], neighbor)
         if g_p_curr < g_score[neighbor]:
             g_score[neighbor] = g_p_curr
             parent[neighbor] = parent[current]
@@ -53,7 +53,7 @@ def update_vertex(
                 open_set_hash, open_set, g_score[neighbor] + h, counter, neighbor
             )
     else:
-        g_curr = g_score[current] + euclidean(current, neighbor)
+        g_curr = g_score[current] + heuristic("euclidean", current, neighbor)
         if g_curr < g_score[neighbor]:
             g_score[neighbor] = g_curr
             parent[neighbor] = current
@@ -115,7 +115,7 @@ def theta_star(draw, start, end, grid):
     counter = 0
     open_set = PriorityQueue()
     open_set.put(
-        (g_score[start] + manhattan(start.get_pos(), end.get_pos()), counter, start)
+        (g_score[start] + heuristic("manhattan", start, end), counter, start)
     )
     open_set_hash = {}
     open_set_hash[start] = start

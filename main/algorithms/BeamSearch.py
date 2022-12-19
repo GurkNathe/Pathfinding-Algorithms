@@ -1,6 +1,6 @@
 import pygame
 import heapq
-from .RP import reconstruct_path, manhattan
+from .RP import reconstruct_path, heuristic
 
 def beam_search(draw, start, end, beam_size):
     # Initialize the beam with the root node
@@ -44,7 +44,7 @@ def beam_search(draw, start, end, beam_size):
         for child in children:
             if not child.is_checked():
                 previous[child] = current
-                heapq.heappush(beam, (manhattan(child.get_pos(), end.get_pos()), child))
+                heapq.heappush(beam, (heuristic("manhattan", child, end), child))
         
         # Trim the beam to the desired size
         beam = beam[:beam_size]
