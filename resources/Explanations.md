@@ -10,6 +10,26 @@ The algorithm works by starting at the start point and exploring possible paths 
 
 As the algorithm continues to explore paths, it updates the estimated cost of each path based on the actual cost of the path and the heuristic function. This allows the algorithm to continually refine its search and find the shortest path to the end point.
 
+## Beam Search:
+
+Beam search is a heuristic search algorithm that is used to explore a graph by expanding the most promising nodes in a limited set, rather than exploring all nodes in the graph.
+
+The basic operation of beam search in a graph is similar to that in a tree, with a few key differences:
+
+1. Root node: The search begins at a root node, which is the starting point for the search.
+
+2. Beam: The beam is a fixed-size list of the most promising nodes that are currently being explored. The beam is initialized with the root node, and new nodes are added to the beam as they are expanded.
+
+3. Expansion: To expand a node, the search generates a list of child nodes that are reachable from the current node and have not already been visited. The cost of reaching each child node is also computed, which can be used to guide the search.
+
+4. Prioritization: The nodes in the beam are prioritized based on some heuristic function that estimates the distance from the current node to a goal node. The most promising nodes are expanded first, while less promising nodes are discarded.
+
+5. Termination: The search terminates when a goal node is found or when the search space has been exhausted. If a goal is found, the path to the goal is reconstructed and returned. If no goal was found, an empty path is returned.
+
+By following these steps, beam search is able to efficiently explore a large search space by prioritizing the expansion of the most promising nodes, while still limiting the number of nodes that are explored. This can help the search to find a solution more quickly, compared to a brute-force search algorithm that explores all nodes in the graph.
+
+An important aspect to note is the beam size. If the beam size is too small, the search may terminate before it can reach the goal. However, if it is too large, the search becomes more computationally intensive. For this implementation, most large beam sizes are fine for the default size grid, and won't impact performance, in general.
+
 ## Bellman-Ford's pathfinding algorithm:
 
 The Bellman-Ford's pathfinding algorithm works by initially setting the distance from the source node to all other nodes in the graph to infinity, and the predecessor for all nodes to null. It then repeatedly relaxes the edges in the graph, updating the distance and predecessor values for each node. This is repeated for each node in the graph, until all distances and predecessors have been correctly updated.
@@ -49,7 +69,7 @@ The B\* algorithm is a modified version of the A\* algorithm. The only differenc
 
 The forbbiden nodes list denotes which nodes should be avoided while traversing the graph. This is a user-defined list of nodes that the user wasn't the algorithm to avoid.
 
-In this implementation, 
+In this implementation, forbbiden nodes are designated with <kbd>Left Shift</kbd> + <kbd>Left Click</kbd> and are grey in color. No list is passed to the algorithm, but it checks whether a node is forbbiden or not.
 
 ## Depth First Search (DFS) pathfinding algorithm:
 

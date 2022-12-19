@@ -9,6 +9,7 @@ Algorithms to look at:
 - Particle swarm optimization
 - Simulated annealing
 
+- D*
 - D* Lite
 - Landmark Label Setting
 - Hierarchical A*

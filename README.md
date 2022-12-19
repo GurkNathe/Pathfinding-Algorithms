@@ -2,7 +2,7 @@
 
 This is a Python (3.10+) implementation and visualization of various pathfinding algorithms.
 
-The graph used is an undirected, unweighted, strongly connected graph.
+The graph used is a static, undirected, unweighted, strongly connected graph (aka, a grid that doesn't change while algorithm is running).
 
 The visualization is implemented using PyGame. Credits to [Tech With Tim](https://www.youtube.com/watch?v=JtiK0DOeI4A).
 
@@ -56,9 +56,10 @@ While an algorithm is running:
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (10/34):
+Currently implemented algorithms (11/33):
 
 - A*
+- Beam Search
 - Bellman Ford's Algorithm
 - Best First Search
 - Breadth First Search (BFS)
@@ -77,13 +78,10 @@ Planned algorithms (Going to look at them):
 
 - α–β pruning
 
-- Beam Search
 - Bidirectional search
 - Branch & bound
 
 - Concurrent Dijkstra
-
-- D*
 
 - Fast Iterative Method
 - Fast Marching Method

@@ -1,16 +1,18 @@
 from algorithms.AStar import a_star
-from algorithms.BStar import b_star
-from algorithms.ThetaStar import theta_star
-from algorithms.Dijkstra import dijkstra
-from algorithms.RandomWalk import rand_walk
+from algorithms.BeamSearch import beam_search
 from algorithms.BellmanFord import bell_ford
 from algorithms.BestFS import best_fs
-from algorithms.GBFS import gbfs
 from algorithms.BFS import bfs
+from algorithms.BStar import b_star
 from algorithms.DFS import dfs
+from algorithms.Dijkstra import dijkstra
+from algorithms.GBFS import gbfs
+from algorithms.RandomWalk import rand_walk
+from algorithms.ThetaStar import theta_star
 
 ALGORITHMS = [
     "astar",
+    "beam",
     "bellford",
     "bestfs",
     "bfs",
@@ -36,6 +38,8 @@ class Algorithms:
         match algorithm:
             case "astar":
                 a_star(self.draw, self.grid, self.start, self.end)
+            case "beam":
+                beam_search(self.draw, self.start, self.end, 1000)
             case "bellford":
                 bell_ford(self.draw, self.start, self.end, 1)
             case "bestfs":

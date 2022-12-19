@@ -32,7 +32,7 @@ def a_star(draw, grid, start, end):
         if current == end:
             reconstruct_path(came_from, end, draw)
             end.make_end()
-            return True
+            break
 
         for neighbor in current.neighbors:
             temp_g_score = g_score[current] + 1
@@ -54,5 +54,3 @@ def a_star(draw, grid, start, end):
 
         if current != start:
             current.check()
-
-    return False
