@@ -40,9 +40,7 @@ def a_star(draw, grid, start, end):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + heuristic(
-                    "manhattan", neighbor, end
-                )
+                f_score[neighbor] = temp_g_score + heuristic("manhattan", neighbor, end)
 
                 if neighbor not in open_set_hash:
                     count += 1

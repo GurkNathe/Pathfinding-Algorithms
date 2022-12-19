@@ -42,9 +42,7 @@ def gbfs(draw, start, end):
                     break
 
                 counter += 1
-                distance = heuristic(
-                    "manhattan", neighbor, end
-                )
+                distance = heuristic("manhattan", neighbor, end)
                 largest = (distance, counter, neighbor)
                 previous[largest[2]] = current[2]
                 Q.put(largest)

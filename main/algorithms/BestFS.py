@@ -37,9 +37,7 @@ def best_fs(draw, start, end):
             if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
                 run = False
 
-        current = min(
-            queue, key=lambda x: costs[x] + heuristic("manhattan", x, end)
-        )
+        current = min(queue, key=lambda x: costs[x] + heuristic("manhattan", x, end))
         queue.remove(current)
 
         if current == end:

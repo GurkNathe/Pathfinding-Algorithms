@@ -5,7 +5,7 @@ import math
 def manhattan(node1, node2):
     x1, y1 = node1.get_pos()
     x2, y2 = node2.get_pos()
-    
+
     return abs(x1 - x2) + abs(y1 - y2)
 
 
@@ -25,6 +25,7 @@ def heuristic(type, node1, node2):
             return manhattan(node1, node2)
         case _:
             return manhattan(node1, node2)
+
 
 # Reconstructs path using a dictionary mapping
 def reconstruct_path(came_from, current, draw):

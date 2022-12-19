@@ -10,6 +10,7 @@ END = COLORS.get("TURQUOISE")
 PATH = COLORS.get("PURPLE")
 FORBID = COLORS.get("GREY")
 
+
 class Node:
     def __init__(self, row, col, width, total_rows):
         self.row = row
@@ -29,7 +30,7 @@ class Node:
     # Checking states
     def is_default(self):
         return self.color == DEFAULT
-    
+
     def is_checked(self):
         return self.color == CHECKED
 
@@ -68,10 +69,10 @@ class Node:
 
     def make_path(self):
         self.color = PATH
-    
+
     def make_color(self, color: tuple):
         self.color = color
-    
+
     def make_forbbiden(self):
         self.color = FORBID
 

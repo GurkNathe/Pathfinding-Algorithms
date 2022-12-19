@@ -45,7 +45,9 @@ def update_vertex(
 ):
     h = heuristic("manhattan", neighbor, end)
     if line_of_sight(parent[current], neighbor, grid):
-        g_p_curr = g_score[parent[current]] + heuristic("euclidean", parent[current], neighbor)
+        g_p_curr = g_score[parent[current]] + heuristic(
+            "euclidean", parent[current], neighbor
+        )
         if g_p_curr < g_score[neighbor]:
             g_score[neighbor] = g_p_curr
             parent[neighbor] = parent[current]
@@ -65,23 +67,23 @@ def update_vertex(
 def connect_path(came_from, current, draw, grid):
     # Temp variable to for connected path
     end = current
-    
+
     # Displaying what Theta* generates (the turn points)
     reconstruct_path(came_from, current, draw)
-    
+
     # Timeout for turn point visualization
     time.sleep(1.5)
-    
-    # Fill in path between turn points 
+
+    # Fill in path between turn points
     current = end
     while current in came_from and not current.is_start():
         previous = came_from[current]
         xp, yp = previous.get_pos()
         xc, yc = current.get_pos()
-        
+
         x_dir = xp - xc
         y_dir = yp - yc
-        
+
         if x_dir == 0:
             # Current is above previous
             if y_dir > 0:
@@ -108,15 +110,14 @@ def connect_path(came_from, current, draw, grid):
         current = previous
         draw()
 
+
 def theta_star(draw, start, end, grid):
     g_score = {}
     g_score[start] = 0
 
     counter = 0
     open_set = PriorityQueue()
-    open_set.put(
-        (g_score[start] + heuristic("manhattan", start, end), counter, start)
-    )
+    open_set.put((g_score[start] + heuristic("manhattan", start, end), counter, start))
     open_set_hash = {}
     open_set_hash[start] = start
 

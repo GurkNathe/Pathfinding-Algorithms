@@ -91,10 +91,10 @@ def handle_errors(argv, func):
         raise ValueError("Width too small. width >= 2")
     if len(argv) == 2 and int(argv[1]) < 2:
         raise ValueError("Number of rows too small. # rows >= 2")
-    
+
     if not func:
         func = "astar"
-    
+
     return func
 
 
@@ -119,9 +119,9 @@ def main(argv):
 
     run = True
     ran = False
-    
+
     print(func)
-    
+
     while run:
         draw(win, grid, ROWS, width)
 
@@ -211,7 +211,7 @@ def main(argv):
                     start = None
                     end = None
                     grid = make_grid(ROWS, width)
-                
+
                 if event.key == pygame.K_n:
                     # Clear algorithm mark-up upon edit
                     if ran:
@@ -222,7 +222,7 @@ def main(argv):
                         index = 0
                     func = ALGORITHMS[index]
                     print(func)
-                
+
                 if event.key == pygame.K_b:
                     # Clear algorithm mark-up upon edit
                     if ran:

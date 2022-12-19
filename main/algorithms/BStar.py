@@ -3,6 +3,7 @@ import random
 from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic
 
+
 def b_star(draw, grid, start, end):
     count = 0
     open_set = PriorityQueue()
@@ -40,9 +41,7 @@ def b_star(draw, grid, start, end):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + heuristic(
-                    "manhattan", neighbor, end
-                )
+                f_score[neighbor] = temp_g_score + heuristic("manhattan", neighbor, end)
 
                 if neighbor not in open_set_hash and not neighbor.is_forbidden():
                     count += 1
