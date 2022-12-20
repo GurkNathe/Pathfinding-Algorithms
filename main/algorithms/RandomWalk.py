@@ -1,5 +1,6 @@
 import pygame
 import random
+from .RP import check
 
 # TODO: Find a more efficient way to store path,
 # TODO: causes drawing issues when path is too long
@@ -20,11 +21,7 @@ def rand_walk(draw, start, end):
     make_path = True
 
     while run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                run = False
+        run = check(pygame.event.get(), run)
 
         neighbor = random.randint(0, len(current.neighbors) - 1)
         came_from.append(current)

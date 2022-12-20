@@ -1,6 +1,6 @@
 import pygame
 from collections import deque
-from .RP import heuristic
+from .RP import heuristic, check, markup
 
 
 def get_checked_neighbors(node):
@@ -31,11 +31,7 @@ def best_fs(draw, start, end):
     run = True
 
     while len(queue) > 0 and run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                run = False
+        run = check(pygame.event.get(), run)
 
         current = min(queue, key=lambda x: costs[x] + heuristic("manhattan", x, end))
         queue.remove(current)
@@ -45,14 +41,7 @@ def best_fs(draw, start, end):
             end.make_end()
             break
 
-        # Drawing stuff
-        if current != start:
-            current.uncheck()
-
-        draw()
-
-        if current != start:
-            current.check()
+        markup(draw, current)
 
         for neighbor in current.neighbors:
             cost = costs[current] + 1

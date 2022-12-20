@@ -1,6 +1,6 @@
 import pygame
 from queue import Queue
-from .RP import reconstruct_path, get_unvisited_nodes
+from .RP import reconstruct_path, get_unvisited_nodes, check, markup
 
 
 def bell_ford(draw, start, end, accuracy):
@@ -14,29 +14,14 @@ def bell_ford(draw, start, end, accuracy):
     run = True
 
     while counter >= 0 and run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                run = False
+        run = check(pygame.event.get(), run)
 
         for current in nodes:
             if not run:
                 break
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                    run = False
-                    break
+            run = check(pygame.event.get(), run)
 
-            if not current.is_start() and not current.is_end():
-                current.uncheck()
-
-            draw()
-
-            if not current.is_start() and not current.is_end():
-                current.check()
+            markup(draw, current)
 
             for neighbor in current.neighbors:
                 if distance[current] + 1 < distance[neighbor]:

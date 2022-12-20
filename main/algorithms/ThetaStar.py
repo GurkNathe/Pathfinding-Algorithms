@@ -1,7 +1,7 @@
 import pygame
 import time
 from queue import PriorityQueue
-from .RP import reconstruct_path, heuristic
+from .RP import reconstruct_path, heuristic, check
 
 
 def line_of_sight(node1, node2, grid):
@@ -127,11 +127,7 @@ def theta_star(draw, start, end, grid):
     run = True
 
     while open_set and run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                run = False
+        run = check(pygame.event.get(), run)
 
         current = open_set.get()
 

@@ -41,6 +41,7 @@ After an algorithm has run:
 - <kbd>W</kbd>, <kbd>Left Click</kbd>, or <kbd>Right Click</kbd> to clear the Algorithm Mark-up
 
 While an algorithm is running:
+
 - Press <kbd>S</kbd> key to stop the algorithm
 
 ## Node Types
@@ -56,7 +57,7 @@ While an algorithm is running:
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (11/33):
+Currently implemented algorithms (12/33):
 
 - A*
 - Beam Search
@@ -66,6 +67,7 @@ Currently implemented algorithms (11/33):
 - B*
 - Depth First Search (DFS)
 - Dijkstra's Algorithms
+- Floyd-Warshall's algorithm
 - Greedy Best First Search (GBFS)
 - Random Walk
 - Theta*
@@ -86,7 +88,6 @@ Planned algorithms (Going to look at them):
 - Fast Iterative Method
 - Fast Marching Method
 - Fast Sweeping Method
-- Floyd-Warshall's algorithm
 - Fringe search
 
 - Greedy Best Line Search

@@ -6,6 +6,7 @@ from algorithms.BFS import bfs
 from algorithms.BStar import b_star
 from algorithms.DFS import dfs
 from algorithms.Dijkstra import dijkstra
+from algorithms.FloydWarshall import floyd_warshall
 from algorithms.GBFS import gbfs
 from algorithms.RandomWalk import rand_walk
 from algorithms.ThetaStar import theta_star
@@ -19,6 +20,7 @@ ALGORITHMS = [
     "bstar",
     "dfs",
     "dijkstra",
+    "floyd",
     "gbfs",
     "rand",
     "theta",
@@ -52,6 +54,8 @@ class Algorithms:
                 dfs(self.draw, self.start, self.end)
             case "dijkstra":
                 dijkstra(self.draw, self.start, self.end)
+            case "floyd":
+                floyd_warshall(self.draw, self.start, self.end, self.grid)
             case "gbfs":
                 gbfs(self.draw, self.start, self.end)
             case "rand":

@@ -1,6 +1,6 @@
 import pygame
 from queue import Queue
-from .RP import reconstruct_path
+from .RP import reconstruct_path, check, markup
 
 """
 1. Add root node to the queue, and mark it as visited(already explored).
@@ -24,24 +24,14 @@ def bfs(draw, start, end):
     run = True
 
     while nodes and not found and run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                run = False
+        run = check(pygame.event.get(), run)
 
         current = nodes.pop(0)
 
         if current.is_checked():
             continue
 
-        if not current.is_start() and not current.is_end():
-            current.uncheck()
-
-        draw()
-
-        if not current.is_start() and not current.is_end():
-            current.check()
+        markup(draw, current)
 
         for neighbor in current.neighbors:
             if not neighbor.is_checked():

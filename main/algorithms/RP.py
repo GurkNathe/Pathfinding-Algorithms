@@ -1,5 +1,6 @@
-from queue import Queue
+import pygame
 import math
+from queue import Queue
 
 # Manhattan distance
 def manhattan(node1, node2):
@@ -46,7 +47,7 @@ def reconstruct_path(came_from, current, draw):
 # Traverse the grid and find all nodes connected to the start
 def get_unvisited_nodes(start):
     Q = Queue()
-    Q_hash = {start}
+    Q_hash = [start]
     Q.put(start)
 
     while not Q.empty():
@@ -55,5 +56,24 @@ def get_unvisited_nodes(start):
         for neighbor in current.neighbors:
             if neighbor not in Q_hash:
                 Q.put(neighbor)
-                Q_hash.add(neighbor)
+                Q_hash.append(neighbor)
     return Q_hash
+
+
+def check(events, run):
+    for event in events:
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
+            run = False
+    
+    return run
+
+def markup(draw, current):
+    if not current.is_start() and not current.is_end():
+        current.uncheck()
+
+    draw()
+
+    if not current.is_start() and not current.is_end():
+        current.check()
