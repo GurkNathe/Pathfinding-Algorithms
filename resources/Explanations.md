@@ -104,6 +104,14 @@ The greedy best-first search (GBFS) algorithm is a type of best-first search alg
 
 To implement GBFS, we first initialize a priority queue and add the starting vertex to it. We then repeatedly take the next vertex from the priority queue, visit it, and add all of its unvisited neighbors to the priority queue. When adding a vertex to the priority queue, we update the estimated cost of the path to that vertex based on the heuristic function. This process continues until the end vertex is reached or all vertices in the graph have been visited.
 
+## Greedy Best-Line Search (GBLS) pathfinding algorithm:
+
+The greedy best-line search (GBLS) is a modified version of the greedy best-first search algorithm that prioritizes the exploration of neighbors in the direction of the last chosen neighbor, as long as the estimated distance to the goal is shorter than the current node.
+
+The algorithm works by starting at the starting node and exploring all of its neighbors. For each neighbor, it calculates an estimated distance to the goal node based on a heuristic function. If the neighbor is the goal node, the search stops and the path is reconstructed. If the neighbor is not the goal, the algorithm continues to explore the neighbors of the chosen neighbor in the same direction as long as the estimated distance is shorter than the current node. If the estimated distance becomes longer, or if there are no more neighbors in that direction, the algorithm will explore other neighbors as well.
+
+This modified version of the algorithm may be useful in certain cases where there is a clear path in a particular direction that is likely to lead to the goal, and where other factors (such as obstacles or constraints) are not as important. However, it is important to note that this modified version of the algorithm may not always find the shortest path to the goal, because it is still a greedy algorithm that does not consider other factors that may affect the overall length of the path.
+
 ## Random Walk pathfinding algorithm:
 
 The random walk algorithm is a type of pathfinding algorithm that uses a random exploration strategy to find a path between two points. It works by starting at the start point and randomly selecting one of the available neighbors to explore. This process is repeated until the end point is reached or all possible paths have been explored.

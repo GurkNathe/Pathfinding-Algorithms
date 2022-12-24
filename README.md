@@ -32,6 +32,7 @@ While an algorithm isn't running:
 - Press <kbd>N</kbd> to go to next algorithm in list
 - Press <kbd>Q</kbd> to exit
 - Press <kbd>C</kbd> to clear grid
+- Press <kbd>G</kbd> to generate a new maze
 - <kbd>Left Shift</kbd> + <kbd>Left Click</kbd> to place a forbbiden node after placing Start and End nodes
 - <kbd>Left Click</kbd> to place Start, then End, then Obstacles
 - <kbd>Right Click</kbd> to remove Start, End, Forbbiden nodes, or Obstacles
@@ -57,7 +58,7 @@ While an algorithm is running:
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (12/33):
+Currently implemented algorithms (13/33):
 
 - A*
 - Beam Search
@@ -69,6 +70,7 @@ Currently implemented algorithms (12/33):
 - Dijkstra's Algorithms
 - Floyd-Warshall's algorithm
 - Greedy Best First Search (GBFS)
+- Greedy Best Line Search (GBLS)
 - Random Walk
 - Theta*
 
@@ -90,7 +92,6 @@ Planned algorithms (Going to look at them):
 - Fast Sweeping Method
 - Fringe search
 
-- Greedy Best Line Search
 
 - Iterative Deepening (IDA*)
 - Iterative Deepening DFS (IDDFS)

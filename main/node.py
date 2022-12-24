@@ -78,7 +78,7 @@ class Node:
 
     def mult_check(self, dec):
         if self.checked_color[0] > dec:
-            self.color = (self.checked_color[0] - dec, 0, 0)
+            self.color = (self.checked_color[0] - dec, 0, self.checked_color[2] + dec)
             self.checked_color = self.color
         else:
             self.color = self.checked_color

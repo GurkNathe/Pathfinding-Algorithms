@@ -107,9 +107,7 @@ def setup(argv):
 
     grid = make_grid(ROWS, width)
 
-    start, end = gen_maze(grid, None, None)
-
-    return start, end, grid, win, width, ROWS
+    return None, None, grid, win, width, ROWS
 
 
 def main(argv):
@@ -233,6 +231,14 @@ def main(argv):
                         index = len(ALGORITHMS) - 1
                     func = ALGORITHMS[index]
                     print(func)
+                
+                # Generate a new maze when "G" key is pressed
+                if event.key == pygame.K_g:
+                    ran = False
+                    start = None
+                    end = None
+                    grid = make_grid(ROWS, width)
+                    start, end = gen_maze(grid, None, None)
 
     pygame.quit()
 

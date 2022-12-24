@@ -2,19 +2,35 @@ import pygame
 from .RP import get_unvisited_nodes, check
 
 
-def reconstruct_path(draw, dist, V, start, end, nodes):
-    if end not in nodes:
+def reconstruct_path(draw, dist, V, start, end, nodes, checked_nodes):
+    # If the end node is not in the list of nodes, return False
+    try:
+        test = nodes.index(end)
+        if end not in checked_nodes:
+            return False
+    except ValueError:
         return False
 
+    # Get the indices of the start and end nodes in the list of nodes
     u, v = nodes.index(start), nodes.index(end)
 
+    # Initialize empty lists for the path, left-side distances, 
+    # and right-side distances
     path = []
     left = []
     right = []
     current = v
 
+    # Iterate backwards through the distance matrix
     for k in range(V - 1, -1, -1):
+        # If the distance between the start and end nodes is equal to the
+        # distance between the start node and the k-th node plus the distance
+        # between the k-th node and the end node, add the k-th node to the
+        # path and add the coresponding distances to the left and right lists
         if dist[u][v] == dist[u][k] + dist[k][v]:
+            # Only add the node to the path if it is not the start or end node
+            # and its distance values are not already in the 
+            # left and right lists
             if (
                 not nodes[k].is_start()
                 and not nodes[k].is_end()
@@ -27,12 +43,18 @@ def reconstruct_path(draw, dist, V, start, end, nodes):
                 draw()
             current = k
 
+    # Set the current node to the end node
     curr = end
+    # Keep looping until the current node is the start node
     while curr != start:
+        # Check each neighbor of the current node
         for node in curr.neighbors:
+            # If the neighbor is the start node, return True
             if node.is_start():
                 return True
 
+            # If the neighbor is in the path, mark it as part of the path and
+            # set the current node to the neighbor
             if node in path:
                 node.make_path()
                 path.remove(node)
@@ -40,36 +62,62 @@ def reconstruct_path(draw, dist, V, start, end, nodes):
 
 
 def floyd_warshall(draw, start, end, grid):
+    """
+    Implements the Floyd-Warshall algorithm to find the shortest path between 
+    the start and end nodes in the given grid.
+    
+    Parameters:
+        draw (function): A function used to draw the search on the screen.
+        start (Node): The starting node of the search.
+        end (Node): The ending node of the search.
+        grid (List[List[Node]]): The grid of nodes to search.
+    
+    Returns: 
+        None: The function updates the screen with the search progress and path.
+    """
+    
+    # Get a list of all unvisited nodes, excluding the start node
     nodes = get_unvisited_nodes(start)
 
+    # Get the number of nodes
     V = len(nodes)
 
-    # Distances matrix
+    # Initialize the distance matrix with all values set to infinity
     distance = [[float("inf") for _ in range(V)] for _ in range(V)]
 
-    # Initialize distance values
+    # Initialize the distance values in the distance matrix
     for i in range(V):
         for j in range(V):
+            # If the two nodes are the same, set the distance to 0
             if i == j:
                 distance[i][j] = 0
+            # If the nodes are neighbors, set the distance to 1
             elif nodes[i] in nodes[j].neighbors:
                 distance[i][j] = 1
 
+    # Initialize a flag to run the algorithm
     run = True
 
-    for k in range(V):
+    # Used for path reconstruction
+    checked_nodes = [start]
 
+    # Iterate through all nodes in the list
+    for k in range(V):
+        # If the run flag is False, break out of the loop
         if not run:
             break
+        # Update the run flag based on the current event queue
         run = check(pygame.event.get(), run)
 
+        # Iterate through all pairs of nodes in the list
         for i in range(V):
             for j in range(V):
-                # if distance between two nodes is currently longer than the
-                # path through the k node, set it to new shorter distance
+                # If the distance between the two nodes is currently longer than
+                # the path through the k-th node, set it to the new shorter distance
                 if distance[i][j] > distance[i][k] + distance[k][j]:
                     distance[i][j] = distance[i][k] + distance[k][j]
 
+                    # If none of the nodes are the start or end nodes, uncheck them
                     if (
                         not nodes[i].is_start()
                         and not nodes[i].is_end()
@@ -82,8 +130,10 @@ def floyd_warshall(draw, start, end, grid):
                         nodes[j].uncheck()
                         nodes[k].uncheck()
 
+                    # Draw the updated distances
                     draw()
 
+                    # If none of the nodes are the start or end nodes, check them again
                     if (
                         not nodes[i].is_start()
                         and not nodes[i].is_end()
@@ -92,8 +142,12 @@ def floyd_warshall(draw, start, end, grid):
                         and not nodes[k].is_start()
                         and not nodes[k].is_end()
                     ):
+                        checked_nodes.append(nodes[i])
+                        checked_nodes.append(nodes[j])
+                        checked_nodes.append(nodes[k])
                         nodes[i].check()
                         nodes[j].check()
                         nodes[k].check()
 
-    reconstruct_path(draw, distance, V, start, end, nodes)
+    # Trace the shortest path through the distance matrix
+    reconstruct_path(draw, distance, V, start, end, nodes, checked_nodes)

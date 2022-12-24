@@ -1,12 +1,25 @@
 import pygame
-from queue import PriorityQueue, Queue
+from queue import PriorityQueue
 from .RP import reconstruct_path, get_unvisited_nodes, check, markup
 
 
-# TODO: Refactor using a priority queue
-# Make distance a priority queue (node, inf)
 def dijkstra(draw, start, end):
-    # Stores all nodes connected to start
+    """
+    Perform Dijkstra's algorithm from start to end.
+    
+    Args:
+        draw (function): A function used to draw the search on the screen.
+        start (Node): The starting node of the search.
+        end (Node): The ending node of the search.
+    
+    Returns:
+        None: The function updates the screen with the search progress and path.
+    """
+    
+    # Initialize a priority queue to store the nodes to visit
+    queue = PriorityQueue()
+
+    # Initialize a set to store the unvisited nodes
     unvisited_nodes = get_unvisited_nodes(start)
 
     # Set up the node values
@@ -16,19 +29,29 @@ def dijkstra(draw, start, end):
     # Holds the path from start to end
     previous = {}
 
+    # Add the start node to the priority queue
+    queue.put((distance[start], 0, start))
+    count = 0
+
+    # Initialize a flag to track the search status
     run = True
 
-    while unvisited_nodes and run:
+    # Perform the search
+    while not queue.empty() and run:
+        # Check for exit events
         run = check(pygame.event.get(), run)
 
-        # Choose node with smallest distance
-        current_min = min(unvisited_nodes, key=distance.get)
+        # Get the next node to visit
+        current_distance, _, current_min = queue.get()
 
-        # Ends the search once the end is reached
-        # May add a toggle for this
+        # End the search if the current node is the end node
         if current_min == end:
             break
 
+        # Draw the current node
+        markup(draw, current_min)
+        
+        # Check the neighbors of the current node
         for neighbor in current_min.neighbors:
             # Don't recheck for performance
             if not neighbor.is_checked():
@@ -39,8 +62,16 @@ def dijkstra(draw, start, end):
                     distance[neighbor] = temp_value
                     previous[neighbor] = current_min
 
-                markup(draw, neighbor)
+                    # Add the neighbor to the priority queue
+                    queue.put((distance[neighbor], count + 1, neighbor))
+                    
+                    # Uncheck the neighbor if it is not the start or end node
+                    # for markup
+                    if not neighbor.is_end() and not neighbor.is_start():
+                        neighbor.uncheck()
 
+        # Remove the current node from the set of unvisited nodes
         unvisited_nodes.remove(current_min)
 
+    # Draw the path from the end node to the start node
     reconstruct_path(previous, end, draw)
