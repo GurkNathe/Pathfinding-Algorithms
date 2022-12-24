@@ -3,7 +3,7 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check
 
 
-def b_star(draw, grid: list, start, end):
+def b_star(draw: object, grid: list, start: object, end: object):
     """
     Perform a B* search from start to end.
 
@@ -55,14 +55,14 @@ def b_star(draw, grid: list, start, end):
             # Calculate the tentative g score for the neighbor
             temp_g_score = g_score[current] + 1
 
-            # Update the g and f scores for the neighbor if the 
+            # Update the g and f scores for the neighbor if the
             # tentative g score is lower
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
                 f_score[neighbor] = temp_g_score + heuristic("manhattan", neighbor, end)
 
-                # Add the neighbor to the open set if it is not already there 
+                # Add the neighbor to the open set if it is not already there
                 # and the neighbor isn't marked as forbidden
                 if neighbor not in open_set_hash and not neighbor.is_forbidden():
                     count += 1
@@ -76,4 +76,3 @@ def b_star(draw, grid: list, start, end):
         # Check the current node if it is not the start node
         if current != start:
             current.check()
-

@@ -3,7 +3,7 @@ from queue import PriorityQueue
 from .RP import heuristic, check, markup
 
 
-def get_checked_neighbors(node):
+def get_checked_neighbors(node: object):
     """
     Get the neighbors of a node that have been checked or are the start node.
 
@@ -13,7 +13,7 @@ def get_checked_neighbors(node):
     Returns:
         List[Node]: The list of checked or start neighbors.
     """
-    
+
     checked = []
     for neighbor in node.neighbors:
         if neighbor.is_checked() or neighbor.is_start():
@@ -21,7 +21,7 @@ def get_checked_neighbors(node):
     return checked
 
 
-def reconstruct_path(current, costs: dict, draw):
+def reconstruct_path(current: object, costs: dict, draw: object):
     """
     Reconstruct the path from the end node to the start node.
 
@@ -33,7 +33,7 @@ def reconstruct_path(current, costs: dict, draw):
     Returns:
         None: The function updates the screen with the path.
     """
-    
+
     # Continue until the current node is the start node
     while not current.is_start():
         # Find the neighbor with the lowest cost
@@ -48,7 +48,7 @@ def reconstruct_path(current, costs: dict, draw):
         draw()
 
 
-def best_fs(draw, start, end):
+def best_fs(draw: object, start: object, end: object):
     """
     Perform a best-first search from start to end.
 
@@ -93,7 +93,7 @@ def best_fs(draw, start, end):
         for neighbor in current.neighbors:
             # Calculate the cost of reaching the neighbor
             cost = costs[current] + 1
-            
+
             # Update the cost in the dictionary if it is lower than the current value
             if neighbor not in costs or cost < costs[neighbor]:
                 costs[neighbor] = cost
@@ -101,8 +101,8 @@ def best_fs(draw, start, end):
                 queue.put(
                     (cost + heuristic("manhattan", neighbor, end), count + 1, neighbor)
                 )
-                
+
                 # Uncheck the child if it is not the start or end node
                 # for markup
                 if not neighbor.is_start() and not neighbor.is_end():
-                        neighbor.uncheck()
+                    neighbor.uncheck()

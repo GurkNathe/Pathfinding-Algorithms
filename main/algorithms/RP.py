@@ -3,7 +3,7 @@ import math
 from queue import Queue
 
 # Manhattan distance
-def manhattan(node1, node2):
+def manhattan(node1: object, node2: object):
     """
     Calculate the Manhattan distance between two nodes.
 
@@ -21,7 +21,7 @@ def manhattan(node1, node2):
 
 
 # Euclidean distance
-def euclidean(node1, node2):
+def euclidean(node1: object, node2: object):
     """
     Calculate the Euclidean distance between two nodes.
 
@@ -38,7 +38,7 @@ def euclidean(node1, node2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
 
-def heuristic(type: str, node1, node2):
+def heuristic(type: str, node1: object, node2: object):
     """
     Calculate the heuristic distance between two nodes.
 
@@ -60,7 +60,7 @@ def heuristic(type: str, node1, node2):
             return manhattan(node1, node2)
 
 
-def reconstruct_path(came_from, current, draw):
+def reconstruct_path(came_from: object, current: object, draw: object):
     """
     Reconstructs the path from the start node to the end node in a maze.
 
@@ -82,7 +82,7 @@ def reconstruct_path(came_from, current, draw):
             break
 
 
-def get_unvisited_nodes(start):
+def get_unvisited_nodes(start: object):
     """
     Find all nodes connected to the start node in the grid.
 
@@ -126,7 +126,7 @@ def check(events: list, run: bool):
     
     return run
 
-def markup(draw, current):
+def markup(draw: object, current: object):
     """
     Mark the current node as visited and redraw the grid.
 

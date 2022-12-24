@@ -3,7 +3,7 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check
 
 
-def a_star(draw, grid: list, start, end):
+def a_star(draw: object, grid: list, start: object, end: object):
     """
     Perform an A* search from start to end.
 
@@ -55,7 +55,7 @@ def a_star(draw, grid: list, start, end):
             # Calculate the tentative g score for the neighbor
             temp_g_score = g_score[current] + 1
 
-            # Update the g and f scores for the neighbor if the 
+            # Update the g and f scores for the neighbor if the
             # tentative g score is lower
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current

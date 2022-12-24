@@ -3,7 +3,7 @@ from queue import Queue
 from .RP import reconstruct_path, get_unvisited_nodes, check, markup
 
 
-def bell_ford(draw, start, end, accuracy: float):
+def bell_ford(draw: object, start: object, end: object, accuracy: float):
     """
     Perform a Bellman-Ford search from start to end with a given accuracy.
 

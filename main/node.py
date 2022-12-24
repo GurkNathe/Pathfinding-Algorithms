@@ -14,10 +14,10 @@ FORBID = COLORS.get("GREY")
 
 
 class Node:
-    def __init__(self, row, col, width, total_rows):
+    def __init__(self, row: int, col: int, width: int, total_rows: int):
         """
         Initializes a node with its position, size, and color.
-        
+
         Parameters:
             row (int): row index of the node in the grid
             col (int): column index of the node in the grid
@@ -32,17 +32,17 @@ class Node:
         self.neighbors = []
         self.width = width
         self.total_rows = total_rows
-        
+
         # Flag for whether the node has been checked
         self.been_checked = False
-        
+
         # Color for checked nodes that have been checked multiple times
         self.checked_color = None
 
     def get_pos(self):
         """
         Returns the position (row, column) of the node in the grid.
-        
+
         Returns:
             tuple: (row, column) of the node in the grid
         """
@@ -97,9 +97,9 @@ class Node:
     def make_color(self, color: tuple):
         """
         Makes the node the specified color.
-        
+
         Parameters:
-            color (tuple): tuple of (R, G, B) values representing the 
+            color (tuple): tuple of (R, G, B) values representing the
             desired color of the node
 
         Returns:
@@ -113,7 +113,7 @@ class Node:
     def mult_check(self, dec: int):
         """
         Changes the color of a checked node that has been checked multiple times.
-        
+
         Parameters:
             dec (int): value to change the color by
 
@@ -132,10 +132,10 @@ class Node:
         self.checked_color = None
 
     # Visualization functions
-    def draw(self, win):
+    def draw(self, win: object):
         """
         Draws the node on the given window.
-        
+
         Parameters:
             win (pygame.Surface): window to draw the node on
 
@@ -147,7 +147,7 @@ class Node:
     def update_neighbors(self, grid: list):
         """
         Updates the neighbors of the node in the grid.
-        
+
         Parameters:
             grid (List[List[Node]]): 2D list of nodes representing the grid
 
@@ -178,13 +178,13 @@ class Node:
         ):
             self.neighbors.append(grid[self.row][self.col + 1])
 
-    def __lt__(self, other):
+    def __lt__(self, other: object):
         """
         Comparison operator for the priority queue.
-        
+
         Parameters:
             other (Node): node to compare to
-        
+
         Returns:
             bool: False (nodes are not meant to be sorted)
         """

@@ -3,7 +3,7 @@ import heapq
 from .RP import reconstruct_path, heuristic, check, markup
 
 
-def beam_search(draw, start, end, beam_size: int):
+def beam_search(draw: object, start: object, end: object, beam_size: int):
     """
     Perform a beam search from start to end with a given beam size.
 
@@ -57,7 +57,7 @@ def beam_search(draw, start, end, beam_size: int):
             if not child.is_checked():
                 previous[child] = current
                 heapq.heappush(beam, (heuristic("manhattan", child, end), child))
-                
+
                 # Uncheck the child if it is not the start or end node
                 # for markup
                 if not child.is_start() and not child.is_end():

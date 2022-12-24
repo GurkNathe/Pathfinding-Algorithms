@@ -3,7 +3,13 @@ from .RP import get_unvisited_nodes, check
 
 
 def reconstruct_path(
-    draw, dist: list, V: int, start, end, nodes: list, checked_nodes: list
+    draw: object,
+    dist: list,
+    V: int,
+    start: object,
+    end: object,
+    nodes: list,
+    checked_nodes: list,
 ):
     """
     Function to reconstruct a path from the start node to the end node based on
@@ -80,7 +86,7 @@ def reconstruct_path(
                 curr = node
 
 
-def floyd_warshall(draw, start, end, grid: list):
+def floyd_warshall(draw: object, start: object, end: object, grid: list):
     """
     Implements the Floyd-Warshall algorithm to find the shortest path between
     the start and end nodes in the given grid.
@@ -168,7 +174,7 @@ def floyd_warshall(draw, start, end, grid: list):
                         nodes[j].check()
                         nodes[k].check()
 
-    # Adding end if it is connected to start 
+    # Adding end if it is connected to start
     try:
         test = nodes.index(end)
         checked_nodes.append(end)

@@ -2,7 +2,7 @@ import pygame
 from .RP import reconstruct_path, check, markup
 
 
-def bfs(draw, start, end):
+def bfs(draw: object, start: object, end: object):
     """
     Perform a breadth-first search from start to end.
 
@@ -54,7 +54,7 @@ def bfs(draw, start, end):
                 else:
                     previous[neighbor] = current
                     nodes.append(neighbor)
-                    
+
                     # Uncheck the child if it is not the start or end node
                     # for markup
                     if not neighbor.is_start() and not neighbor.is_end():

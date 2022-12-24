@@ -29,7 +29,7 @@ def surroundingCells(grid: list, y: int, x: int):
     return s_cells
 
 
-def delete_wall(walls: list, rand_wall):
+def delete_wall(walls: list, rand_wall: object):
     """
     Remove the given wall from the list of walls.
 
@@ -118,7 +118,7 @@ def check_right(grid: list, walls: list, r_y: int, r_x: int, width: int):
             walls.append(grid[r_y][r_x + 1])
 
 
-def gen_maze(grid: list, start, end):
+def gen_maze(grid: list, start: object = None, end: object = None):
     """
     Generate a maze using the recursive backtracking algorithm.
 

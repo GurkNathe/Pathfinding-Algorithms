@@ -76,7 +76,7 @@ def clear_grid(current_grid: list, rows: int, width: int):
     return grid
 
 
-def draw_grid_lines(win, rows: int, width: int):
+def draw_grid_lines(win: object, rows: int, width: int):
     """
     Draw the lines separating the nodes in the grid.
 
@@ -382,7 +382,7 @@ def main(argv: list):
                     start = None
                     end = None
                     grid = make_grid(ROWS, width)
-                    start, end = gen_maze(grid, None, None)
+                    start, end = gen_maze(grid)
 
     pygame.quit()
 

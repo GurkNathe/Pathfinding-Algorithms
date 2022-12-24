@@ -4,7 +4,7 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check
 
 
-def line_of_sight(node1, node2, grid: list):
+def line_of_sight(node1: object, node2: object, grid: list):
     """
     Check if there is a straight line of sight between two nodes on the grid.
     This is determined by checking if there are any obstacles in a straight line
@@ -48,7 +48,7 @@ def line_of_sight(node1, node2, grid: list):
     return True
 
 
-def remove_add(open_set_hash: dict, open_set, distance, counter: int, neighbor):
+def remove_add(open_set_hash: dict, open_set: object, distance: int or float, counter: int, neighbor: object):
     """
     Remove a node from the open set (if it exists) and add it back to the open set
     with an updated distance value.
@@ -84,13 +84,13 @@ def remove_add(open_set_hash: dict, open_set, distance, counter: int, neighbor):
 
 
 def update_vertex(
-    current,
-    neighbor,
+    current: object,
+    neighbor: object,
     parent: dict,
     g_score: dict,
-    open_set,
+    open_set: object,
     open_set_hash: dict,
-    end,
+    end: object,
     counter: int,
     grid: list,
 ):
@@ -152,7 +152,7 @@ def update_vertex(
             )
 
 
-def connect_path(came_from: dict, current, draw, grid: list):
+def connect_path(came_from: dict, current: object, draw: object, grid: list):
     """
     Connect the path between turn points on the grid.
 

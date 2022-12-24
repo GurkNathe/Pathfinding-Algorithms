@@ -3,7 +3,7 @@ import random
 from .RP import check
 
 
-def reconstruct_path(came_from: dict, current, draw):
+def reconstruct_path(came_from: dict, current: object, draw: object):
     """
     Reconstructs the path from the starting node to the current node,
     by following the `came_from` dictionary.
@@ -24,7 +24,7 @@ def reconstruct_path(came_from: dict, current, draw):
             draw()
 
 
-def rand_walk(draw, start, end):
+def rand_walk(draw: object, start: object, end: object):
     """
     Generates a random walk from the starting node to the goal node.
 

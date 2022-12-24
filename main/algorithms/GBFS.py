@@ -3,7 +3,7 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check, markup
 
 
-def gbfs(draw, start, end):
+def gbfs(draw: object, start: object, end: object):
     """
     Perform a greedy best-first search from start to end.
 

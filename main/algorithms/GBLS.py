@@ -3,7 +3,7 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check, markup
 
 
-def gbls(draw, start, end, grid: list):
+def gbls(draw: object, start: object, end: object, grid: list):
     """
     Modified version of the greedy best-first search algorithm that explores neighbors in the direction of the last chosen node
     as long as the estimated distance to the goal is shorter than the current node.
@@ -20,7 +20,7 @@ def gbls(draw, start, end, grid: list):
 
     # Initialize the priority queue with the starting node
     Q = PriorityQueue()
-    Q.put((heuristic("euclidean", start, end), 0, start))
+    Q.put((heuristic("manhattan", start, end), 0, start))
 
     # Initialize the counter and flags
     counter = 0
@@ -71,7 +71,7 @@ def gbls(draw, start, end, grid: list):
                     neighbor.uncheck()
 
                 counter += 1
-                distance = heuristic("euclidean", neighbor, end)
+                distance = heuristic("manhattan", neighbor, end)
 
                 # Add the neighbor to the queue with the estimated
                 # distance as the priority

@@ -35,11 +35,12 @@ class Algorithms:
     Wrapper class to access all the pathfinding algorithms.
     Default is A* pathfinding.
     """
-    def __init__(self, *argv):
+
+    def __init__(self, *argv: list):
         """
         Parameters:
             draw (function): function to draw the grid and path
-            grid (list): 2D list of nodes representing the grid
+            grid (List[List[Node]]): 2D list of nodes representing the grid
             start (Node): starting node
             end (Node): ending node
         """
@@ -51,10 +52,10 @@ class Algorithms:
     def algorithm(self, algorithm: str):
         """
         Select and run the specified pathfinding algorithm.
-        
+
         Parameters:
             algorithm (str): name of the algorithm to use
-        
+
         Returns:
             None
         """

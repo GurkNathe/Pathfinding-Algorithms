@@ -2,19 +2,19 @@ import pygame
 from .RP import reconstruct_path, check, markup
 
 
-def dfs(draw, start, end):
+def dfs(draw: object, start: object, end: object):
     """
     Perform a depth-first search from start to end.
-    
+
     Args:
         draw (function): A function used to draw the search on the screen.
         start (Node): The starting node of the search.
         end (Node): The ending node of the search.
-    
+
     Returns:
         None: The function updates the screen with the search progress and path.
     """
-    
+
     # Initialize a stack to store the nodes to visit
     stack = [start]
 
