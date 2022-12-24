@@ -12,6 +12,7 @@ from algorithms.GBLS import gbls
 from algorithms.RandomWalk import rand_walk
 from algorithms.ThetaStar import theta_star
 
+
 ALGORITHMS = [
     "astar",
     "beam",
@@ -29,16 +30,34 @@ ALGORITHMS = [
 ]
 
 
-# Wrapper class to access all the pathfinding algorithms
-# Default is A* pathfinding
 class Algorithms:
+    """
+    Wrapper class to access all the pathfinding algorithms.
+    Default is A* pathfinding.
+    """
     def __init__(self, *argv):
+        """
+        Parameters:
+            draw (function): function to draw the grid and path
+            grid (list): 2D list of nodes representing the grid
+            start (Node): starting node
+            end (Node): ending node
+        """
         self.draw = argv[0]
         self.grid = argv[1]
         self.start = argv[2]
         self.end = argv[3]
 
-    def algorithm(self, algorithm):
+    def algorithm(self, algorithm: str):
+        """
+        Select and run the specified pathfinding algorithm.
+        
+        Parameters:
+            algorithm (str): name of the algorithm to use
+        
+        Returns:
+            None
+        """
         match algorithm:
             case "astar":
                 a_star(self.draw, self.grid, self.start, self.end)

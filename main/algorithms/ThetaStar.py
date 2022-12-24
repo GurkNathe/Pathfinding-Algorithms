@@ -4,24 +4,24 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check
 
 
-def line_of_sight(node1, node2, grid):
+def line_of_sight(node1, node2, grid: list):
     """
     Check if there is a straight line of sight between two nodes on the grid.
     This is determined by checking if there are any obstacles in a straight line
     between the two nodes.
-    
+
     Args:
         node1 (Node): The first node to check.
         node2 (Node): The second node to check.
         grid (List[List[Node]]): The grid of nodes to search.
-    
+
     Returns:
-        bool: True if there is a straight line of sight between the two nodes, 
+        bool: True if there is a straight line of sight between the two nodes,
         False otherwise.
     """
-    
+
     # Get the x and y coordinates of the first and second nodes
-    x1, y1 = node1.get_pos()  
+    x1, y1 = node1.get_pos()
     x2, y2 = node2.get_pos()
 
     # If the x coordinates of the two nodes are the same
@@ -31,11 +31,11 @@ def line_of_sight(node1, node2, grid):
         for y in range(min_y + 1, max_y):
             # Return False as there is not a straight line of sight between the nodes
             if grid[x1][y].is_obstacle():
-                return False 
+                return False
     # If the y coordinates of the two nodes are the same
     elif y1 == y2:
         # Check if there are no obstacles in between the nodes on the x axis
-        min_x, max_x = min(x1, x2), max(x1, x2)  
+        min_x, max_x = min(x1, x2), max(x1, x2)
         for x in range(min_x + 1, max_x):
             # Return False as there is not a straight line of sight between the nodes
             if grid[x][y1].is_obstacle():
@@ -48,30 +48,30 @@ def line_of_sight(node1, node2, grid):
     return True
 
 
-def remove_add(open_set_hash, open_set, distance, counter, neighbor):
+def remove_add(open_set_hash: dict, open_set, distance, counter: int, neighbor):
     """
     Remove a node from the open set (if it exists) and add it back to the open set
     with an updated distance value.
-    
+
     Parameters:
-        open_set_hash (dict): A dictionary mapping nodes to distance values in 
-            the open set.
-        open_set (PriorityQueue): The open set of nodes to search, prioritized 
+        open_set_hash (Dict[Node, Node]): A dictionary mapping nodes to distance 
+            values in the open set.
+        open_set (PriorityQueue): The open set of nodes to search, prioritized
             by distance and then FIFO order.
         distance (int or float): The updated distance value for the node.
         counter (int): A counter value for the node.
         neighbor (Node): The node to remove from and add back to the open set.
-    
+
     Returns:
         None
     """
-    
+
     # If the neighbor node is in the open set
     if neighbor in open_set_hash and neighbor in open_set.queue:
         # Remove the neighbor from the open set
         open_set_hash.pop(neighbor)
         open_set.queue.remove(neighbor)
-    
+
     # Add the neighbor node back to the open set with the updated distance value
     open_set.put(
         (
@@ -84,80 +84,88 @@ def remove_add(open_set_hash, open_set, distance, counter, neighbor):
 
 
 def update_vertex(
-    current, neighbor, parent, g_score, open_set, open_set_hash, end, counter, grid
+    current,
+    neighbor,
+    parent: dict,
+    g_score: dict,
+    open_set,
+    open_set_hash: dict,
+    end,
+    counter: int,
+    grid: list,
 ):
     """
     Update the distance values and parent pointers for a node in the search.
-    
+
     Parameters:
         current (Node): The current node being processed.
         neighbor (Node): The neighbor node being processed.
-        parent (dict): A dictionary mapping nodes to their parent nodes.
-        g_score (dict): A dictionary mapping nodes to their g scores 
+        parent (Dict[Node, Node]): A dictionary mapping nodes to their parent nodes.
+        g_score (Dict[Node, int]): A dictionary mapping nodes to their g scores
             (distance from the start node).
-        open_set (PriorityQueue): The open set of nodes to search, prioritized 
+        open_set (PriorityQueue): The open set of nodes to search, prioritized
             by distance then FIFO order.
-        open_set_hash (dict): A dictionary mapping nodes to distance values in 
+        open_set_hash (Dict[Node, Node]): A dictionary mapping nodes to distance values in
             the open set.
         end (Node): The end node of the search.
         counter (int): A counter value for the node.
         grid (List[List[Node]]): The grid of nodes to search.
-    
+
     Returns:
         None
     """
-    
+
     # Calculate the Manhattan distance heuristic for the neighbor node
     h = heuristic("manhattan", neighbor, end)
-    
+
     # If there is a line of sight between the current node's parent and the neighbor
     if line_of_sight(parent[current], neighbor, grid):
-        
+
         # Calculate the Euclidean distance between the parent and the neighbor
         g_p_curr = g_score[parent[current]] + heuristic(
             "euclidean", parent[current], neighbor
         )
-        
+
         # If the distance through the parent is shorter
         if g_p_curr < g_score[neighbor]:
             g_score[neighbor] = g_p_curr
             parent[neighbor] = parent[current]
-            
+
             # Update the open set with the new distance for the neighbor
             remove_add(
                 open_set_hash, open_set, g_score[neighbor] + h, counter, neighbor
             )
-    # If there is no line of sight between the current node's parent and 
+    # If there is no line of sight between the current node's parent and
     # the neighbor
     else:
         # Calculate the Euclidean distance between the current node and the neighbor
         g_curr = g_score[current] + heuristic("euclidean", current, neighbor)
-        
+
         # If the distance through the current node is shorter
         if g_curr < g_score[neighbor]:
             g_score[neighbor] = g_curr
             parent[neighbor] = current
-            
+
             # Update the open set with the new distance for the neighbor
             remove_add(
                 open_set_hash, open_set, g_score[neighbor] + h, counter, neighbor
             )
 
 
-def connect_path(came_from, current, draw, grid):
+def connect_path(came_from: dict, current, draw, grid: list):
     """
     Connect the path between turn points on the grid.
-    
+
     Parameters:
-        came_from (dict): A dictionary mapping nodes to their parent nodes.
+        came_from (Dict[Node, Node]): A dictionary mapping nodes to their parent nodes.
         current (Node): The current node being processed.
         draw (function): A function to draw the grid.
         grid (List[List[Node]]): The grid of nodes to search.
-    
+
     Returns:
         None
     """
-    
+
     # Temp variable to for connected path
     end = current
 
@@ -181,33 +189,33 @@ def connect_path(came_from, current, draw, grid):
         if x_dir == 0:
             # Current is above previous
             if y_dir > 0:
-                # Iterate through all y values between the current and 
+                # Iterate through all y values between the current and
                 # previous nodes
                 for y in range(yc, yp):
                     if not grid[xp][y].is_start():
                         grid[xp][y].make_path()
-            
+
             # Current is bellow previous
             else:
-                # Iterate through all y values between the current and 
+                # Iterate through all y values between the current and
                 # previous nodes
                 for y in range(yp, yc):
                     if not grid[xp][y].is_start():
                         grid[xp][y].make_path()
-        
+
         # If the previous node is aligned with the current node on the y axis
         elif y_dir == 0:
             # Current is left of previous
             if x_dir > 0:
-                # Iterate through all x values between the current and 
+                # Iterate through all x values between the current and
                 # previous nodes
                 for x in range(xc, xp):
                     if not grid[x][yp].is_start():
                         grid[x][yp].make_path()
-            
+
             # Current is right of previous
             else:
-                # Iterate through all x values between the current and 
+                # Iterate through all x values between the current and
                 # previous nodes
                 for x in range(xp, xc):
                     if not grid[x][yp].is_start():
@@ -217,16 +225,16 @@ def connect_path(came_from, current, draw, grid):
         draw()
 
 
-def theta_star(draw, start, end, grid):
+def theta_star(draw, start, end, grid: list):
     """
     Perform the Theta* search algorithm on the grid.
-    
+
     Parameters:
         draw (function): A function to draw the grid.
         start (Node): The start node of the search.
         end (Node): The end node of the search.
         grid (List[List[Node]]): The grid of nodes to search.
-    
+
     Returns:
         None
     """
@@ -234,7 +242,6 @@ def theta_star(draw, start, end, grid):
     # Dictionary mapping nodes to their g scores (distance from the start vertex)
     g_score = {}
     g_score[start] = 0
-
 
     counter = 0
 

@@ -3,13 +3,13 @@ import random
 from .RP import check
 
 
-def reconstruct_path(came_from, current, draw):
+def reconstruct_path(came_from: dict, current, draw):
     """
     Reconstructs the path from the starting node to the current node,
     by following the `came_from` dictionary.
 
     Parameters:
-        came_from (dict): dictionary mapping each node to its previous
+        came_from (Dict[Node, Node]): dictionary mapping each node to its previous
             node in the path
         current (Node): current node
         draw (function): function for drawing the search path on the grid

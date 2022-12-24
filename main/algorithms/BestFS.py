@@ -21,7 +21,7 @@ def get_checked_neighbors(node):
     return checked
 
 
-def reconstruct_path(current, costs, draw):
+def reconstruct_path(current, costs: dict, draw):
     """
     Reconstruct the path from the end node to the start node.
 

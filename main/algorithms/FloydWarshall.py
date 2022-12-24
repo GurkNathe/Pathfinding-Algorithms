@@ -2,7 +2,26 @@ import pygame
 from .RP import get_unvisited_nodes, check
 
 
-def reconstruct_path(draw, dist, V, start, end, nodes, checked_nodes):
+def reconstruct_path(
+    draw, dist: list, V: int, start, end, nodes: list, checked_nodes: list
+):
+    """
+    Function to reconstruct a path from the start node to the end node based on
+    the given distance matrix, list of nodes, and list of checked nodes.
+
+    Parameters:
+        draw (function): Function to draw the updated grid.
+        dist (list): A 2D list representing the distance matrix between nodes.
+        V (int): The number of nodes in the grid.
+        start (Node): The starting node.
+        end (Node): The ending node.
+        nodes (list): A list of all nodes in the grid.
+        checked_nodes (list): A list of nodes that have been visited during the search.
+
+    Returns:
+        bool: True if a path is found, False if not.
+    """
+
     # If the end node is not in the list of nodes, return False
     try:
         test = nodes.index(end)
@@ -14,7 +33,7 @@ def reconstruct_path(draw, dist, V, start, end, nodes, checked_nodes):
     # Get the indices of the start and end nodes in the list of nodes
     u, v = nodes.index(start), nodes.index(end)
 
-    # Initialize empty lists for the path, left-side distances, 
+    # Initialize empty lists for the path, left-side distances,
     # and right-side distances
     path = []
     left = []
@@ -29,7 +48,7 @@ def reconstruct_path(draw, dist, V, start, end, nodes, checked_nodes):
         # path and add the coresponding distances to the left and right lists
         if dist[u][v] == dist[u][k] + dist[k][v]:
             # Only add the node to the path if it is not the start or end node
-            # and its distance values are not already in the 
+            # and its distance values are not already in the
             # left and right lists
             if (
                 not nodes[k].is_start()
@@ -61,21 +80,21 @@ def reconstruct_path(draw, dist, V, start, end, nodes, checked_nodes):
                 curr = node
 
 
-def floyd_warshall(draw, start, end, grid):
+def floyd_warshall(draw, start, end, grid: list):
     """
-    Implements the Floyd-Warshall algorithm to find the shortest path between 
+    Implements the Floyd-Warshall algorithm to find the shortest path between
     the start and end nodes in the given grid.
-    
+
     Parameters:
         draw (function): A function used to draw the search on the screen.
         start (Node): The starting node of the search.
         end (Node): The ending node of the search.
         grid (List[List[Node]]): The grid of nodes to search.
-    
-    Returns: 
+
+    Returns:
         None: The function updates the screen with the search progress and path.
     """
-    
+
     # Get a list of all unvisited nodes, excluding the start node
     nodes = get_unvisited_nodes(start)
 
@@ -148,6 +167,13 @@ def floyd_warshall(draw, start, end, grid):
                         nodes[i].check()
                         nodes[j].check()
                         nodes[k].check()
+
+    # Adding end if it is connected to start 
+    try:
+        test = nodes.index(end)
+        checked_nodes.append(end)
+    except ValueError:
+        pass
 
     # Trace the shortest path through the distance matrix
     reconstruct_path(draw, distance, V, start, end, nodes, checked_nodes)

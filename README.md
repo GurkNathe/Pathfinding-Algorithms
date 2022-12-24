@@ -10,6 +10,8 @@ A maze generator is implemented, however, it only has one correct path from star
 
 ![A* + Maze](./resources/astar_maze.gif)
 
+See the explanations for the implemented algorithms [here](./resources/Explanations.md).
+
 ## Command line arguments
 
 There are three optional command line arguments: width, # rows, algorithm type.

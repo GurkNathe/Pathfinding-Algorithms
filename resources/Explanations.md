@@ -1,5 +1,20 @@
 # Algorithm explanation documentation
 
+# Table of contents
+1. [A*](#a-pathfinding-algorithm)
+2. [Beam Search](#beam-search)
+3. [Bellman-Ford's Algorithm](#bellman-fords-pathfinding-algorithm)
+4. [Best First Search](#best-first-search-pathfinding-algorithm)
+5. [Breadth First Search](#breadth-first-search-bfs-pathfinding-algorithm)
+6. [B*](#b-pathfinding-algorithm)
+7. [Depth First Search](#depth-first-search-dfs-pathfinding-algorithm)
+8. [Dijkstra's Algorithm](#dijkstras-pathfinding-algorithm)
+9. [Floyd-Warshall's Algorithm](#floyd-warshalls-algorithm)
+10. [Greedy Best-First Search](#greedy-best-first-search-gbfs-pathfinding-algorithm)
+11. [Greedy Best Line Search](#greedy-best-line-search-gbls-pathfinding-algorithm)
+12. [Random Walk Algorithm](#random-walk-pathfinding-algorithm)
+13. [Theta*](#theta-pathfinding-algorithm)
+
 ## A\* pathfinding algorithm:
 
 The A\* algorithm was created and shown [here](https://www.youtube.com/watch?v=JtiK0DOeI4A) by Tech With Tim.

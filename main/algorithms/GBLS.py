@@ -3,7 +3,7 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check, markup
 
 
-def gbls(draw, start, end, grid):
+def gbls(draw, start, end, grid: list):
     """
     Modified version of the greedy best-first search algorithm that explores neighbors in the direction of the last chosen node
     as long as the estimated distance to the goal is shorter than the current node.

@@ -1,6 +1,8 @@
 import pygame
 from colors import COLORS
 
+
+# Define colors for different node states
 DEFAULT = COLORS.get("WHITE")
 CHECKED = COLORS.get("RED")
 UNCHECKED = COLORS.get("GREEN")
@@ -13,6 +15,15 @@ FORBID = COLORS.get("GREY")
 
 class Node:
     def __init__(self, row, col, width, total_rows):
+        """
+        Initializes a node with its position, size, and color.
+        
+        Parameters:
+            row (int): row index of the node in the grid
+            col (int): column index of the node in the grid
+            width (int): width of the node
+            total_rows (int): total number of rows in the grid
+        """
         self.row = row
         self.col = col
         self.x = row * width
@@ -21,13 +32,23 @@ class Node:
         self.neighbors = []
         self.width = width
         self.total_rows = total_rows
+        
+        # Flag for whether the node has been checked
         self.been_checked = False
+        
+        # Color for checked nodes that have been checked multiple times
         self.checked_color = None
 
     def get_pos(self):
+        """
+        Returns the position (row, column) of the node in the grid.
+        
+        Returns:
+            tuple: (row, column) of the node in the grid
+        """
         return self.row, self.col
 
-    # Checking states
+    # Checking node states
     def is_default(self):
         return self.color == DEFAULT
 
@@ -49,8 +70,11 @@ class Node:
     def is_forbidden(self):
         return self.color == FORBID
 
-    # Setting states
+    # Setting node states
     def check(self):
+        """
+        Marks the node as checked and sets the checked flag to True.
+        """
         self.color = CHECKED
         self.been_checked = True
         self.checked_color = CHECKED
@@ -71,12 +95,31 @@ class Node:
         self.color = PATH
 
     def make_color(self, color: tuple):
+        """
+        Makes the node the specified color.
+        
+        Parameters:
+            color (tuple): tuple of (R, G, B) values representing the 
+            desired color of the node
+
+        Returns:
+            None
+        """
         self.color = color
 
     def make_forbbiden(self):
         self.color = FORBID
 
-    def mult_check(self, dec):
+    def mult_check(self, dec: int):
+        """
+        Changes the color of a checked node that has been checked multiple times.
+        
+        Parameters:
+            dec (int): value to change the color by
+
+        Returns:
+            None
+        """
         if self.checked_color[0] > dec:
             self.color = (self.checked_color[0] - dec, 0, self.checked_color[2] + dec)
             self.checked_color = self.color
@@ -84,13 +127,33 @@ class Node:
             self.color = self.checked_color
 
     def reset(self):
-        self.color = COLORS.get("WHITE")
+        self.color = DEFAULT
+        self.been_checked = False
+        self.checked_color = None
 
     # Visualization functions
     def draw(self, win):
+        """
+        Draws the node on the given window.
+        
+        Parameters:
+            win (pygame.Surface): window to draw the node on
+
+        Returns:
+            None
+        """
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
 
-    def update_neighbors(self, grid):
+    def update_neighbors(self, grid: list):
+        """
+        Updates the neighbors of the node in the grid.
+        
+        Parameters:
+            grid (List[List[Node]]): 2D list of nodes representing the grid
+
+        Returns:
+            None
+        """
         self.neighbors = []
 
         # BOTTOM CELL
@@ -116,4 +179,13 @@ class Node:
             self.neighbors.append(grid[self.row][self.col + 1])
 
     def __lt__(self, other):
+        """
+        Comparison operator for the priority queue.
+        
+        Parameters:
+            other (Node): node to compare to
+        
+        Returns:
+            bool: False (nodes are not meant to be sorted)
+        """
         return False

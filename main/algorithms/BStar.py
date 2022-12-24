@@ -3,7 +3,7 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check
 
 
-def b_star(draw, grid, start, end):
+def b_star(draw, grid: list, start, end):
     """
     Perform a B* search from start to end.
 

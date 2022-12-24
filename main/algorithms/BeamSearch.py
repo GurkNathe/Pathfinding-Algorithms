@@ -3,7 +3,7 @@ import heapq
 from .RP import reconstruct_path, heuristic, check, markup
 
 
-def beam_search(draw, start, end, beam_size):
+def beam_search(draw, start, end, beam_size: int):
     """
     Perform a beam search from start to end with a given beam size.
 
