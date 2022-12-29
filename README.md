@@ -60,12 +60,13 @@ While an algorithm is running:
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (13/33):
+Currently implemented algorithms (14/33):
 
 - A*
 - Beam Search
 - Bellman Ford's Algorithm
 - Best First Search
+- Bidirectional search
 - Breadth First Search (BFS)
 - B*
 - Depth First Search (DFS)
@@ -84,7 +85,6 @@ Planned algorithms (Going to look at them):
 
 - α–β pruning
 
-- Bidirectional search
 - Branch & bound
 
 - Concurrent Dijkstra

@@ -2,6 +2,7 @@ import pygame
 import math
 from queue import Queue
 
+
 # Manhattan distance
 def manhattan(node1: object, node2: object):
     """

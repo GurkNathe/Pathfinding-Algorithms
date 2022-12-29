@@ -1,10 +1,13 @@
 # Algorithm explanation documentation
 
+<strong/> Disclaimer: A large portion of the documentation below was generated using ChatGPT, take what is written here with a grain of salt since ChatGPT is not infallible.</strong>
+
 # Table of contents
 1. [A*](#a-pathfinding-algorithm)
 2. [Beam Search](#beam-search)
 3. [Bellman-Ford's Algorithm](#bellman-fords-pathfinding-algorithm)
 4. [Best First Search](#best-first-search-pathfinding-algorithm)
+4. [Bidirectional Search](#bidirectional-search-pathfinding-algorithm)
 5. [Breadth First Search](#breadth-first-search-bfs-pathfinding-algorithm)
 6. [B*](#b-pathfinding-algorithm)
 7. [Depth First Search](#depth-first-search-dfs-pathfinding-algorithm)
@@ -17,7 +20,7 @@
 
 ## A\* pathfinding algorithm:
 
-The A\* algorithm was created and shown [here](https://www.youtube.com/watch?v=JtiK0DOeI4A) by Tech With Tim.
+The A\* algorithm implemented here was created and shown [here](https://www.youtube.com/watch?v=JtiK0DOeI4A) by Tech With Tim.
 
 The A\* algorithm is a type of best-first search algorithm that uses a combination of a heuristic function and the cost of each path to determine the most efficient path to take.
 
@@ -69,6 +72,22 @@ The algorithm continues to explore the neighbor nodes and expand the search spac
 
 Best first search can be implemented using a priority queue to store the nodes that need to be explored. The priority queue is ordered by the estimated cost of each node, with the node that has the lowest estimated cost being at the top of the queue. The algorithm then repeatedly takes the top node from the queue, expands it to explore its neighbor nodes, and adds the neighbor nodes to the queue. This process continues until the goal is reached or the queue is empty.
 
+## Bidirectional Search pathfinding algorithm:
+
+Bidirectional search is an algorithm that allows you to find the shortest path between two nodes in a graph by simultaneously searching from both the starting node and the ending node. It is a variant of the breadth-first search algorithm that can significantly reduce the time complexity of the search in some cases.
+
+Here's how it works:
+
+1. Initialize two queues, one for each direction of the search (i.e., from the starting node and from the ending node).
+2. Enqueue the starting node and the ending node into their respective queues.
+3. While both queues are not empty:
+   1. Dequeue a node from each queue and process it.
+   2. For each neighbor of the node that was just dequeued from the starting node queue, check if it has already been visited from the other direction. If it has, then a path has been found and the search can be stopped. If it has not, then add it to the starting node queue.
+   3. For each neighbor of the node that was just dequeued from the ending node queue, check if it has already been visited from the other direction. If it has, then a path has been found and the search can be stopped. If it has not, then add it to the ending node queue.
+4. If a path was found, then reconstruct it from the visited nodes.
+
+One of the key benefits of bidirectional search is that it can significantly reduce the time complexity of the search, especially in cases where the two nodes are relatively close to each other. In such cases, the search will typically find a path much faster than a traditional breadth-first search, since it is searching from both ends of the path at the same time. However, it is important to note that bidirectional search can be more complex to implement and may require more memory than a traditional breadth-first search.
+
 ## Breadth First Search (BFS) pathfinding algorithm:
 
 BFS works by starting at a given vertex and exploring all of its neighbors before moving on to any of their neighbors. This means that the algorithm will visit all of the vertices in a given layer of the graph before moving on to the next layer. This continues until all vertices in the graph have been visited or the desired vertex has been found.
@@ -76,8 +95,6 @@ BFS works by starting at a given vertex and exploring all of its neighbors befor
 To implement BFS, a queue is typically used to store the vertices that are yet to be visited. We start by adding the starting vertex to the queue, and then we repeatedly take the next vertex from the queue, visit it, and add all of its unvisited neighbors to the queue. This process continues until the queue is empty, at which point all vertices in the graph have been visited.
 
 ## B\* pathfinding algorithm:
-
-The B\* algorithm was based off of the A\* algorithm created and shown [here](https://www.youtube.com/watch?v=JtiK0DOeI4A) by Tech With Tim.
 
 The B\* algorithm is a modified version of the A\* algorithm. The only difference between the two algorithms is the inclusion of a "forbbiden" nodes list in B\*.
 

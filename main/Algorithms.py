@@ -3,6 +3,7 @@ from algorithms.BeamSearch import beam_search
 from algorithms.BellmanFord import bell_ford
 from algorithms.BestFS import best_fs
 from algorithms.BFS import bfs
+from algorithms.BidirectionalSearch import bi_search
 from algorithms.BStar import b_star
 from algorithms.DFS import dfs
 from algorithms.Dijkstra import dijkstra
@@ -19,6 +20,7 @@ ALGORITHMS = [
     "bellford",
     "bestfs",
     "bfs",
+    "bisearch",
     "bstar",
     "dfs",
     "dijkstra",
@@ -70,6 +72,8 @@ class Algorithms:
                 best_fs(self.draw, self.start, self.end)
             case "bfs":
                 bfs(self.draw, self.start, self.end)
+            case "bisearch":
+                bi_search(self.draw, self.start, self.end)
             case "bstar":
                 b_star(self.draw, self.grid, self.start, self.end)
             case "dfs":
