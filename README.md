@@ -1,4 +1,4 @@
-# Pathfinding/Graph Search Algorithms
+# Pathfinding/Graph Search Algorithms ![License: MIT](https://img.shields.io/badge/License-GPL_3.0-red.svg)
 
 This is a Python (3.10+) implementation and visualization of various pathfinding algorithms.
 
