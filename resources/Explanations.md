@@ -15,6 +15,8 @@
 9. [Floyd-Warshall's Algorithm](#floyd-warshalls-algorithm)
 10. [Greedy Best-First Search](#greedy-best-first-search-gbfs-pathfinding-algorithm)
 11. [Greedy Best Line Search](#greedy-best-line-search-gbls-pathfinding-algorithm)
+11. [Iterative Deepening DFS](#greedy-best-line-search-gbls-pathfinding-algorithm)
+11. [Iterative Deepening A*](#greedy-best-line-search-gbls-pathfinding-algorithm)
 12. [Random Walk Algorithm](#random-walk-pathfinding-algorithm)
 13. [Theta*](#theta-pathfinding-algorithm)
 
@@ -143,6 +145,26 @@ The greedy best-line search (GBLS) is a modified version of the greedy best-firs
 The algorithm works by starting at the starting node and exploring all of its neighbors. For each neighbor, it calculates an estimated distance to the goal node based on a heuristic function. If the neighbor is the goal node, the search stops and the path is reconstructed. If the neighbor is not the goal, the algorithm continues to explore the neighbors of the chosen neighbor in the same direction as long as the estimated distance is shorter than the current node. If the estimated distance becomes longer, or if there are no more neighbors in that direction, the algorithm will explore other neighbors as well.
 
 This modified version of the algorithm may be useful in certain cases where there is a clear path in a particular direction that is likely to lead to the goal, and where other factors (such as obstacles or constraints) are not as important. However, it is important to note that this modified version of the algorithm may not always find the shortest path to the goal, because it is still a greedy algorithm that does not consider other factors that may affect the overall length of the path.
+
+## Iterative Deepening DFS pathfinding algorithm:
+
+Iterative Deepening Depth-First Search (IDDFS) is an extension of the Depth-First Search (DFS) algorithm that is designed to find the optimal path between a start node and a goal node in a graph.
+
+Like DFS, IDDFS works by starting at the start node and exploring as far as possible along each branch before backtracking. However, unlike DFS, which continues to explore until it reaches the goal node or exhausts all possibilities, IDDFS imposes a depth limit on the search and increases the depth limit iteratively.
+
+At each iteration of the algorithm, the depth limit is increased by one, and the search is restarted from the start node. This process is repeated until the goal node is found or the depth limit becomes greater than the maximum depth of the graph.
+
+IDDFS has a time complexity of O(b<sup>d</sup>), where b is the branching factor (the average number of children per node) and d is the depth of the goal node. IDDFS is not guaranteed to find the optimal path between the start and goal nodes, but it can be used as a baseline for comparison with other pathfinding algorithms.
+
+## Iterative Deepening A\* pathfinding algorithm:
+
+Iterative Deepening A\* (IDA\*) is an extension of the A\* algorithm that is designed to find the optimal path between a start node and a goal node in a graph. Like the A\* algorithm, IDA\* uses a combination of a heuristic function and a cost function to guide the search towards the goal node.
+
+The IDA\* algorithm works by iteratively increasing a depth limit on the search and starting the search from the start node each time the depth limit is increased. At each iteration of the algorithm, the search is conducted using the A\* algorithm, with the depth limit serving as a threshold on the cost of the path.
+
+If the cost of the path exceeds the depth limit at any point during the search, the search is terminated and the depth limit is increased. This process is repeated until the goal node is found or the depth limit becomes greater than the maximum possible cost of a path between the start and goal nodes.
+
+IDA\* has a time complexity of O(b<sup>d</sup>), where b is the branching factor (the average number of children per node) and d is the depth of the goal node. IDA\* is guaranteed to find the optimal path between the start and goal nodes if the heuristic function is admissible (it never overestimates the cost to reach the goal node) and the cost of the edges is non-negative.
 
 ## Random Walk pathfinding algorithm:
 

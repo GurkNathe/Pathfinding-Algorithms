@@ -10,6 +10,8 @@ from algorithms.Dijkstra import dijkstra
 from algorithms.FloydWarshall import floyd_warshall
 from algorithms.GBFS import gbfs
 from algorithms.GBLS import gbls
+from algorithms.IDAStar import ida_star
+from algorithms.IDDFS import iddfs
 from algorithms.RandomWalk import rand_walk
 from algorithms.ThetaStar import theta_star
 
@@ -27,6 +29,8 @@ ALGORITHMS = [
     "floyd",
     "gbfs",
     "gbls",
+    "ida",
+    "iddfs",
     "rand",
     "theta",
 ]
@@ -86,6 +90,10 @@ class Algorithms:
                 gbfs(self.draw, self.start, self.end)
             case "gbls":
                 gbls(self.draw, self.start, self.end, self.grid)
+            case "ida":
+                ida_star(self.draw, self.start, self.end)
+            case "iddfs":
+                iddfs(self.draw, self.start, self.end, self.grid, len(self.grid) * len(self.grid[0]))
             case "rand":
                 rand_walk(self.draw, self.start, self.end)
             case "theta":

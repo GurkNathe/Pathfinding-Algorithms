@@ -60,7 +60,7 @@ While an algorithm is running:
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (14/33):
+Currently implemented algorithms (15/33):
 
 - A*
 - Beam Search
@@ -74,12 +74,13 @@ Currently implemented algorithms (14/33):
 - Floyd-Warshall's algorithm
 - Greedy Best First Search (GBFS)
 - Greedy Best Line Search (GBLS)
+- Iterative Deepening DFS (IDDFS)
 - Random Walk
 - Theta*
 
 Currently looking at:
 
-- None
+- Iterative Deepening (IDA*)
 
 Planned algorithms (Going to look at them):
 
@@ -93,10 +94,6 @@ Planned algorithms (Going to look at them):
 - Fast Marching Method
 - Fast Sweeping Method
 - Fringe search
-
-
-- Iterative Deepening (IDA*)
-- Iterative Deepening DFS (IDDFS)
 
 - Johnson's
 - Jump Point Search (JPS)
