@@ -11,6 +11,9 @@ def search(draw, current, end, path, depth, cost, visited):
     if f > cost:
         return f
 
+    if current in visited:
+        return float("inf")
+
     visited.add(current)
 
     markup(draw, current)

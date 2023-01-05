@@ -15,8 +15,8 @@
 9. [Floyd-Warshall's Algorithm](#floyd-warshalls-algorithm)
 10. [Greedy Best-First Search](#greedy-best-first-search-gbfs-pathfinding-algorithm)
 11. [Greedy Best Line Search](#greedy-best-line-search-gbls-pathfinding-algorithm)
-11. [Iterative Deepening DFS](#greedy-best-line-search-gbls-pathfinding-algorithm)
-11. [Iterative Deepening A*](#greedy-best-line-search-gbls-pathfinding-algorithm)
+11. [Iterative Deepening A*](#iterative-deepening-a-pathfinding-algorithm)
+11. [Iterative Deepening DFS](#iterative-deepening-dfs-pathfinding-algorithm)
 12. [Random Walk Algorithm](#random-walk-pathfinding-algorithm)
 13. [Theta*](#theta-pathfinding-algorithm)
 

@@ -3,6 +3,24 @@ import math
 from queue import Queue
 
 
+# Chebyshev distance
+def chebyshev(node1: object, node2: object):
+    """
+    Calculate the Chebyshev distance between two nodes.
+
+    Parameters:
+        node1 (Node): The first node.
+        node2 (Node): The second node.
+
+    Returns:
+        int: The Chebyshev distance between the two nodes.
+    """
+    x1, y1 = node1.get_pos()
+    x2, y2 = node2.get_pos()
+
+    return max(abs(x1 - x2), abs(y1 - y2))
+
+
 # Manhattan distance
 def manhattan(node1: object, node2: object):
     """
@@ -53,6 +71,8 @@ def heuristic(type: str, node1: object, node2: object):
         float: The heuristic distance between the two nodes.
     """
     match type:
+        case "chebyshev":
+            return chebyshev(node1, node2)
         case "euclidean":
             return euclidean(node1, node2)
         case "manhattan":
@@ -66,7 +86,7 @@ def reconstruct_path(came_from: object, current: object, draw: object):
     Reconstructs the path from the start node to the end node in a maze.
 
     Parameters:
-        came_from (Dict[Node, Node]): A dictionary containing the nodes traversed 
+        came_from (Dict[Node, Node]): A dictionary containing the nodes traversed
             during the pathfinding algorithm.
         current (Node): The end node of the path.
         draw (function): A function for drawing the maze.
@@ -109,7 +129,7 @@ def get_unvisited_nodes(start: object):
 
 def check(events: list, run: bool):
     """
-    Check for and handle user events such as quitting the program or 
+    Check for and handle user events such as quitting the program or
     pausing the algorithm.
 
     Parameters:
@@ -124,8 +144,9 @@ def check(events: list, run: bool):
             pygame.quit()
         if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
             run = False
-    
+
     return run
+
 
 def markup(draw: object, current: object):
     """
