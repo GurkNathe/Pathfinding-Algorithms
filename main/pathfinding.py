@@ -198,7 +198,7 @@ def handle_errors(argv: list, func: str):
     return func
 
 
-def setup(argv: list):
+def setup(argv: list, func: str):
     """
     Set up the Pygame window and grid.
 
@@ -217,7 +217,7 @@ def setup(argv: list):
 
     # Create the Pygame window
     win = pygame.display.set_mode((width, width))
-    pygame.display.set_caption("Pathfinding Visualization")
+    pygame.display.set_caption(f"Pathfinding Visualization - {func}")
 
     # Create the grid
     grid = make_grid(ROWS, width)
@@ -240,7 +240,7 @@ def main(argv: list):
     func = handle_errors(argv, None)
 
     # Set up the Pygame window and grid
-    start, end, grid, win, width, ROWS = setup(argv)
+    start, end, grid, win, width, ROWS = setup(argv, func)
 
     run = True
     ran = False
@@ -359,6 +359,7 @@ def main(argv: list):
                     func = ALGORITHMS[index]
 
                     print(func)
+                    pygame.display.set_caption(f"Pathfinding Visualization - {func}")
 
                 # Go to previous algorithm in list
                 if event.key == pygame.K_b:
@@ -375,6 +376,7 @@ def main(argv: list):
                     func = ALGORITHMS[index]
 
                     print(func)
+                    pygame.display.set_caption(f"Pathfinding Visualization - {func}")
 
                 # Generate a new maze when "G" key is pressed
                 if event.key == pygame.K_g:

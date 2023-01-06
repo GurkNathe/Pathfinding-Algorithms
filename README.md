@@ -74,13 +74,14 @@ Currently implemented algorithms (15/33):
 - Floyd-Warshall's algorithm
 - Greedy Best First Search (GBFS)
 - Greedy Best Line Search (GBLS)
+- Iterative Deepening (IDA*)
 - Iterative Deepening DFS (IDDFS)
 - Random Walk
 - Theta*
 
 Currently looking at:
 
-- Iterative Deepening (IDA*)
+- None
 
 Planned algorithms (Going to look at them):
 

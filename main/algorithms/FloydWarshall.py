@@ -174,12 +174,13 @@ def floyd_warshall(draw: object, start: object, end: object, grid: list):
                         nodes[j].check()
                         nodes[k].check()
 
-    # Adding end if it is connected to start
-    try:
-        test = nodes.index(end)
-        checked_nodes.append(end)
-    except ValueError:
-        pass
+    if run:
+        # Adding end if it is connected to start
+        try:
+            test = nodes.index(end)
+            checked_nodes.append(end)
+        except ValueError:
+            pass
 
-    # Trace the shortest path through the distance matrix
-    reconstruct_path(draw, distance, V, start, end, nodes, checked_nodes)
+        # Trace the shortest path through the distance matrix
+        reconstruct_path(draw, distance, V, start, end, nodes, checked_nodes)
