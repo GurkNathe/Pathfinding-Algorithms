@@ -14,6 +14,7 @@ from algorithms.IDAStar import ida_star
 from algorithms.IDDFS import iddfs
 from algorithms.RandomWalk import rand_walk
 from algorithms.ThetaStar import theta_star
+from algorithms.LexicographicBFS import LBFS
 
 
 ALGORITHMS = [
@@ -31,6 +32,7 @@ ALGORITHMS = [
     "gbls",
     "ida",
     "iddfs",
+    "lbfs",
     "rand",
     "theta",
 ]
@@ -94,6 +96,8 @@ class Algorithms:
                 ida_star(self.draw, self.start, self.end)
             case "iddfs":
                 iddfs(self.draw, self.start, self.end, self.grid, len(self.grid) * len(self.grid[0]))
+            case "lbfs":
+                LBFS(self.draw, self.start, self.end, self.grid)
             case "rand":
                 rand_walk(self.draw, self.start, self.end)
             case "theta":

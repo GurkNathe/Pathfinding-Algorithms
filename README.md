@@ -60,7 +60,7 @@ While an algorithm is running:
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (15/33):
+Currently implemented algorithms (17/33):
 
 - A*
 - Beam Search
@@ -76,6 +76,7 @@ Currently implemented algorithms (15/33):
 - Greedy Best Line Search (GBLS)
 - Iterative Deepening (IDA*)
 - Iterative Deepening DFS (IDDFS)
+- Lexicographic BFS
 - Random Walk
 - Theta*
 
@@ -101,7 +102,6 @@ Planned algorithms (Going to look at them):
 
 - Kruskal's
 
-- Lexicographic BFS
 - Lifelong Planning A* (LPA*)
 
 - SMA*

@@ -17,6 +17,7 @@
 11. [Greedy Best Line Search](#greedy-best-line-search-gbls-pathfinding-algorithm)
 11. [Iterative Deepening A*](#iterative-deepening-a-pathfinding-algorithm)
 11. [Iterative Deepening DFS](#iterative-deepening-dfs-pathfinding-algorithm)
+11. [Lexicographic BFS](#lexicographic-bfs-pathfinding-algorithm)
 12. [Random Walk Algorithm](#random-walk-pathfinding-algorithm)
 13. [Theta*](#theta-pathfinding-algorithm)
 
@@ -165,6 +166,19 @@ The IDA\* algorithm works by iteratively increasing a depth limit on the search 
 If the cost of the path exceeds the depth limit at any point during the search, the search is terminated and the depth limit is increased. This process is repeated until the goal node is found or the depth limit becomes greater than the maximum possible cost of a path between the start and goal nodes.
 
 IDA\* has a time complexity of O(b<sup>d</sup>), where b is the branching factor (the average number of children per node) and d is the depth of the goal node. IDA\* is guaranteed to find the optimal path between the start and goal nodes if the heuristic function is admissible (it never overestimates the cost to reach the goal node) and the cost of the edges is non-negative.
+
+## Lexicographic BFS pathfinding algorithm:
+
+The Lexicographic Breadth-First Search (LexBFS) algorithm is a variant of the standard breadth-first search (BFS) algorithm that orders the vertices in the graph in a specific way. Given an undirected graph and a starting vertex, LexBFS generates a list of the vertices of the graph in lexicographic order, starting from the starting vertex.
+
+The main advantage of using LexBFS for the shortest path problem is that it guarantees that the distances of the vertices are non-decreasing as the algorithm progresses. This is important because it allows us to use the distances of the vertices to make sure that we are always considering the shortest path to each vertex.
+
+To solve the shortest path problem using LexBFS, we can follow the following steps:
+
+1. Run LexBFS on the graph to get the order of the vertices.
+2. Initialize a dictionary to store the distances of the vertices from the starting vertex. Set the distance of the starting vertex to 0, and the distances of all other vertices to infinity.
+3. Iterate through the vertices in the order produced by LexBFS. For each vertex, update the distances of its neighbors using the distance of the vertex itself. This ensures that the distances of the vertices are non-decreasing as we go through the vertices in the order produced by LexBFS.
+4. When we reach the ending vertex, the distance of the ending vertex is the shortest path distance from the starting vertex to the ending vertex. We can then use the parent pointers produced by LexBFS to reconstruct the shortest path from the starting vertex to the ending vertex.
 
 ## Random Walk pathfinding algorithm:
 
