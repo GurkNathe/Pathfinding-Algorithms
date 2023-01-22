@@ -12,9 +12,9 @@ from algorithms.GBFS import gbfs
 from algorithms.GBLS import gbls
 from algorithms.IDAStar import ida_star
 from algorithms.IDDFS import iddfs
+from algorithms.LexicographicBFS import LBFS
 from algorithms.RandomWalk import rand_walk
 from algorithms.ThetaStar import theta_star
-from algorithms.LexicographicBFS import LBFS
 
 
 ALGORITHMS = [
@@ -34,7 +34,7 @@ ALGORITHMS = [
     "iddfs",
     "lbfs",
     "rand",
-    "theta",
+    "theta"
 ]
 
 

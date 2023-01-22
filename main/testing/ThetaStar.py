@@ -1,7 +1,6 @@
-import pygame
 import time
 from queue import PriorityQueue
-from .RP import reconstruct_path, heuristic, check
+from .RP import heuristic, check
 
 
 def line_of_sight(node1: object, node2: object, grid: list):
@@ -152,85 +151,11 @@ def update_vertex(
             )
 
 
-def connect_path(came_from: dict, current: object, draw: object, grid: list):
-    """
-    Connect the path between turn points on the grid.
-
-    Parameters:
-        came_from (Dict[Node, Node]): A dictionary mapping nodes to their parent nodes.
-        current (Node): The current node being processed.
-        draw (function): A function to draw the grid.
-        grid (List[List[Node]]): The grid of nodes to search.
-
-    Returns:
-        None
-    """
-
-    # Temp variable to for connected path
-    end = current
-
-    # Displaying what Theta* generates (the turn points)
-    reconstruct_path(came_from, current, draw)
-
-    # Timeout for turn point visualization
-    time.sleep(1.5)
-
-    # Fill in path between turn points
-    current = end
-    while current in came_from and not current.is_start():
-        previous = came_from[current]
-        xp, yp = previous.get_pos()
-        xc, yc = current.get_pos()
-
-        x_dir = xp - xc
-        y_dir = yp - yc
-
-        # If the previous node is aligned with the current node on the x axis
-        if x_dir == 0:
-            # Current is above previous
-            if y_dir > 0:
-                # Iterate through all y values between the current and
-                # previous nodes
-                for y in range(yc, yp):
-                    if not grid[xp][y].is_start():
-                        grid[xp][y].make_path()
-
-            # Current is bellow previous
-            else:
-                # Iterate through all y values between the current and
-                # previous nodes
-                for y in range(yp, yc):
-                    if not grid[xp][y].is_start():
-                        grid[xp][y].make_path()
-
-        # If the previous node is aligned with the current node on the y axis
-        elif y_dir == 0:
-            # Current is left of previous
-            if x_dir > 0:
-                # Iterate through all x values between the current and
-                # previous nodes
-                for x in range(xc, xp):
-                    if not grid[x][yp].is_start():
-                        grid[x][yp].make_path()
-
-            # Current is right of previous
-            else:
-                # Iterate through all x values between the current and
-                # previous nodes
-                for x in range(xp, xc):
-                    if not grid[x][yp].is_start():
-                        grid[x][yp].make_path()
-
-        current = previous
-        draw()
-
-
-def theta_star(draw: object, start: object, end: object, grid: list):
+def theta_star(start: object, end: object, grid: list):
     """
     Perform the Theta* search algorithm on the grid.
 
     Parameters:
-        draw (function): A function to draw the grid.
         start (Node): The start node of the search.
         end (Node): The end node of the search.
         grid (List[List[Node]]): The grid of nodes to search.
@@ -254,42 +179,29 @@ def theta_star(draw: object, start: object, end: object, grid: list):
     parent = {}
     parent[start] = start
 
-    run = True
+    visited_nodes: int = 0
 
     # While the open set is not empty and the run flag is True
-    while open_set and run:
-        # Check for any events that may have occurred
-        run = check(pygame.event.get(), run)
-
+    while open_set:
         # Get minimum distance node in the open set
         current = open_set.get()[2]
 
+        visited_nodes += 1
+
         # If the current vertex is the end vertex
         if current.is_end():
-            connect_path(parent, end, draw, grid)
-            end.make_end()
             break
 
-        # Markup for drawing grid
-        if not current.is_start():
-            current.uncheck()
-        else:
+        if current.is_start():
             current.been_checked = True
-
-        draw()
-
-        if not current.is_start():
-            current.check()
-
+        else:
+            check(current)
+        
         for neighbor in current.neighbors:
             if not neighbor.been_checked:
                 if not neighbor in open_set_hash:
                     g_score[neighbor] = float("inf")
                     parent[neighbor] = None
-
-                # Markup for drawing neighbor
-                if not neighbor.is_start() and not neighbor.is_end():
-                    neighbor.uncheck()
 
                 # Update the distance values and parent pointers for the neighbor
                 update_vertex(
@@ -303,3 +215,4 @@ def theta_star(draw: object, start: object, end: object, grid: list):
                     counter,
                     grid,
                 )
+    return visited_nodes

@@ -4,7 +4,7 @@ from colors import COLORS
 from node import Node
 from Algorithms import Algorithms, ALGORITHMS
 from Maze import gen_maze
-
+from Testing import Testing
 
 def make_grid(rows: int, width: int):
     """
@@ -245,8 +245,6 @@ def main(argv: list):
     run = True
     ran = False
 
-    print(func)
-
     # Main loop
     while run:
         # Draw the grid and nodes
@@ -332,6 +330,10 @@ def main(argv: list):
 
                     ran = True
 
+                # Test algorithms if T key is pressed
+                if event.key == pygame.K_t:
+                    Testing(grid, start, end, ROWS, width)
+
                 # Clear algorithm markup if W key is pressed
                 if event.key == pygame.K_w:
                     ran = False
@@ -358,7 +360,6 @@ def main(argv: list):
 
                     func = ALGORITHMS[index]
 
-                    print(func)
                     pygame.display.set_caption(f"Pathfinding Visualization - {func}")
 
                 # Go to previous algorithm in list
@@ -375,7 +376,6 @@ def main(argv: list):
 
                     func = ALGORITHMS[index]
 
-                    print(func)
                     pygame.display.set_caption(f"Pathfinding Visualization - {func}")
 
                 # Generate a new maze when "G" key is pressed
