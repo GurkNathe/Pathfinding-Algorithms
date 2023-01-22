@@ -30,6 +30,7 @@ algorithm = astar, bfs, dfs, dijkstra, rand, yen [See line 8 of Algorithms.py fo
 
 While an algorithm isn't running:
 
+- Press <kbd>T</kbd> to test algorithms
 - Press <kbd>B</kbd> to go to previous algorithm in list
 - Press <kbd>N</kbd> to go to next algorithm in list
 - Press <kbd>Q</kbd> to exit
@@ -46,6 +47,12 @@ After an algorithm has run:
 While an algorithm is running:
 
 - Press <kbd>S</kbd> key to stop the algorithm
+
+## Testing
+
+The testing function runs every implemented algorithm for the current grid. It outputs the time it took to run the algorithm and the number of node checks while running. The results are written into a CSV file, which can be found in the `main/testing/results` directory. An example output is given for a randomly generated maze, with default settings.
+
+The testing will take longer as the visitable nodes increases. For my system, and a randomly generated maze on default settings, it takes ~4 minutes to run and save the data.
 
 ## Node Types
 

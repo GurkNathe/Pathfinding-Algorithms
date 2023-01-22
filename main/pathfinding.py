@@ -331,7 +331,7 @@ def main(argv: list):
                     ran = True
 
                 # Test algorithms if T key is pressed
-                if event.key == pygame.K_t:
+                if event.key == pygame.K_t and start and end:
                     Testing(grid, start, end, ROWS, width)
 
                 # Clear algorithm markup if W key is pressed
