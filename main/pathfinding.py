@@ -37,7 +37,7 @@ def make_grid(rows: int, width: int):
 def clear_grid(current_grid: list, rows: int, width: int):
     """
     Clear the grid by creating a new 2D list of Node objects,
-    keeping the start, end, obstacles and forbidden nodes from the
+    keeping the start, end, and obstacles nodes from the
     original grid.
 
     Parameters:
@@ -57,14 +57,12 @@ def clear_grid(current_grid: list, rows: int, width: int):
     for i in range(rows):
         grid.append([])
         for j in range(rows):
-            # If the current node is not the start, end, an obstacle or
-            # forbidden, create a new Node object for the current position
-            # and add it to the grid
+            # If the current node is not the start, end, or an obstacle, create a new Node 
+            # object for the current position and add it to the grid
             if (
                 not current_grid[i][j].is_start()
                 and not current_grid[i][j].is_end()
                 and not current_grid[i][j].is_obstacle()
-                and not current_grid[i][j].is_forbidden()
             ):
                 node = Node(i, j, node_width, rows)
                 grid[i].append(node)
@@ -282,9 +280,6 @@ def main(argv: list):
                     end = node
                     end.make_end()
                 elif node != start and node != end:
-                    if pygame.key.get_mods() & pygame.K_LSHIFT:
-                        node.make_forbbiden()
-                    else:
                         node.make_obstacle()
 
             # Right mouse click

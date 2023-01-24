@@ -1,5 +1,27 @@
 from queue import PriorityQueue
-from .RP import heuristic
+
+
+# Manhattan distance
+def heuristic(node1: object, node2: object):
+    """
+    Calculate the Dynamic Manhattan distance between two nodes.
+
+    Parameters:
+        node1 (Node): The first node.
+        node2 (Node): The second node.
+
+    Returns:
+        int: The Dynamic Manhattan distance between the two nodes.
+    """
+    x1, y1 = node1.get_pos()
+    x2, y2 = node2.get_pos()
+    
+    blocked_penalty = len(node1.neighbors)
+    for node in node1.neighbors:
+        if not node.is_checked() and not node.is_unchecked():
+            blocked_penalty -= 1
+
+    return abs(x1 - x2) + abs(y1 - y2) + blocked_penalty
 
 
 def b_star(grid: list, start: object, end: object):
@@ -25,7 +47,7 @@ def b_star(grid: list, start: object, end: object):
     g_score = {node: float("inf") for row in grid for node in row}
     g_score[start] = 0
     f_score = {node: float("inf") for row in grid for node in row}
-    f_score[start] = heuristic("manhattan", start, end)
+    f_score[start] = heuristic(start, end)
 
     # Initialize a set to store the nodes in the open set
     open_set_hash = {start}
@@ -54,11 +76,10 @@ def b_star(grid: list, start: object, end: object):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + heuristic("manhattan", neighbor, end)
+                f_score[neighbor] = temp_g_score + heuristic(neighbor, end)
 
                 # Add the neighbor to the open set if it is not already there
-                # and the neighbor isn't marked as forbidden
-                if neighbor not in open_set_hash and not neighbor.is_forbidden():
+                if neighbor not in open_set_hash:
                     count += 1
                     open_set.put((f_score[neighbor], count, neighbor))
                     open_set_hash.add(neighbor)

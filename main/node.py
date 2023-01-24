@@ -10,7 +10,6 @@ OBSTACLE = COLORS.get("BLACK")
 START = COLORS.get("ORANGE")
 END = COLORS.get("TURQUOISE")
 PATH = COLORS.get("PURPLE")
-FORBID = COLORS.get("GREY")
 
 
 class Node:
@@ -67,9 +66,6 @@ class Node:
     def is_end(self):
         return self.color == END
 
-    def is_forbidden(self):
-        return self.color == FORBID
-
     # Setting node states
     def check(self):
         """
@@ -106,9 +102,6 @@ class Node:
             None
         """
         self.color = color
-
-    def make_forbbiden(self):
-        self.color = FORBID
 
     def mult_check(self, dec: int):
         """

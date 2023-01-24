@@ -65,8 +65,8 @@ class Testing:
             wr = csv.writer(myfile, delimiter=',',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-            wr.writerow(['Algorithm', 'Local Run Time', 'Times Nodes Checked'])
-            algo_data: list = [['', '', len(get_unvisited_nodes(self.start))]]
+            wr.writerow(['Algorithm', 'Local Run Time', 'Times Nodes Checked', 'Path Length'])
+            algo_data: list = [['', '', len(get_unvisited_nodes(self.start)), '']]
 
             for alg in ALGORITHMS:
                 # Clear grid after every run
@@ -98,24 +98,10 @@ class Testing:
             wr.writerows(algo_data)
 
 
-    def get_num_nodes(self, start: object):
-        checked_nodes = []
-        to_check = [start]
-        num_nodes = 0
-        
-        while to_check:
-            print(to_check)
-            current = to_check.pop(0)
-            num_nodes += 1
-            for neighbor in current.neighbors:
-                if not neighbor in checked_nodes and neighbor not in to_check:
-                    to_check.append(neighbor)
-        return num_nodes
-
     def clear_grid(self, current_grid: list, rows: int, width: int):
         """
         Clear the grid by creating a new 2D list of Node objects,
-        keeping the start, end, obstacles and forbidden nodes from the
+        keeping the start, end, and obstacles nodes from the
         original grid.
 
         Parameters:
@@ -135,14 +121,13 @@ class Testing:
         for i in range(rows):
             grid.append([])
             for j in range(rows):
-                # If the current node is not the start, end, an obstacle or
-                # forbidden, create a new Node object for the current position
+                # If the current node is not the start, end, or an obstacle
+                # create a new Node object for the current position
                 # and add it to the grid
                 if (
                     not current_grid[i][j].is_start()
                     and not current_grid[i][j].is_end()
                     and not current_grid[i][j].is_obstacle()
-                    and not current_grid[i][j].is_forbidden()
                 ):
                     node = Node(i, j, node_width, rows)
                     grid[i].append(node)

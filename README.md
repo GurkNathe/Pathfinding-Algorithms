@@ -36,9 +36,8 @@ While an algorithm isn't running:
 - Press <kbd>Q</kbd> to exit
 - Press <kbd>C</kbd> to clear grid
 - Press <kbd>G</kbd> to generate a new maze
-- <kbd>Left Shift</kbd> + <kbd>Left Click</kbd> to place a forbbiden node after placing Start and End nodes
 - <kbd>Left Click</kbd> to place Start, then End, then Obstacles
-- <kbd>Right Click</kbd> to remove Start, End, Forbbiden nodes, or Obstacles
+- <kbd>Right Click</kbd> to remove Start, End, or Obstacles
 
 After an algorithm has run:
 
@@ -59,7 +58,6 @@ The testing will take longer as the visitable nodes increases. For my system, an
 - Start: where the search algorithm will start
 - End: where the search algorithm is trying to get to
 - Obstacle: a position the algorithms avoid
-- Forbidden: a position certain algorithms avoid (a different type of obstacle)
 - Check/Uncheck: markup for visualizing the algorithm
 - Path: markup for visualizing the found path
 - Default: a position that can be traversed
@@ -119,3 +117,7 @@ Planned algorithms (Going to look at them):
 
 - Yen's k-Shortest Paths
 ```
+
+Possible Incorrectly Implemented algorithms:
+
+- [B*](./resources/b_star.pdf)
