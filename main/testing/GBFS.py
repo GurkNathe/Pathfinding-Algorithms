@@ -1,5 +1,5 @@
 from queue import PriorityQueue
-from .RP import heuristic, check
+from .RP import heuristic, check, count_path
 
 
 def gbfs(start: object, end: object):
@@ -21,7 +21,10 @@ def gbfs(start: object, end: object):
     # Initialize counters and flags
     counter = 0
     found = False
-    
+
+    # Initialize a dictionary to store the previous nodes for each node
+    previous = {}
+
     visited_nodes: int = 0
 
     # Perform the search
@@ -44,11 +47,13 @@ def gbfs(start: object, end: object):
             if not neighbor.is_checked():
                 # End the search if the neighbor is the end node
                 if neighbor.is_end():
+                    previous[neighbor] = current
                     found = True
                     break
 
                 # Add the neighbor to the queue
                 counter += 1
                 distance = heuristic("manhattan", neighbor, end)
+                previous[neighbor] = current
                 Q.put((distance, counter, neighbor))
-    return visited_nodes
+    return visited_nodes, count_path(previous, end)

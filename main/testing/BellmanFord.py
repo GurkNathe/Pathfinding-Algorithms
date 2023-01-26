@@ -1,5 +1,5 @@
 from queue import Queue
-from .RP import get_unvisited_nodes, check
+from .RP import get_unvisited_nodes, check, count_path
 
 
 def bell_ford(start: object, end: object, accuracy: float):
@@ -48,4 +48,5 @@ def bell_ford(start: object, end: object, accuracy: float):
                     predecessor[neighbor] = current
         # Decrement the counter
         counter -= 1
-    return visited_nodes
+    
+    return visited_nodes, count_path(predecessor, end)

@@ -6,11 +6,11 @@ The graph used is a static, undirected, unweighted, strongly connected graph (ak
 
 The visualization is implemented using PyGame. Credits to [Tech With Tim](https://www.youtube.com/watch?v=JtiK0DOeI4A).
 
-A maze generator is implemented, however, it only has one correct path from start to end node. The implementation is based on [this](https://github.com/OrWestSide/python-scripts/blob/master/maze.py).
+A maze generator is implemented, it has at least one valid path from the start to end node. The implementation is based on [this](https://github.com/OrWestSide/python-scripts/blob/master/maze.py).
 
 ![A* + Maze](./resources/astar_maze.gif)
 
-See the explanations for the implemented algorithms [here](./resources/Explanations.md).
+See the explanations for the implemented algorithms [here](./resources/AlgorithmExplanations.md).
 
 ## Command line arguments
 

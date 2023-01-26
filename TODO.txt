@@ -1,0 +1,2 @@
+Path Counting:
+- Bidirectional Search, B* incorrect path amounts

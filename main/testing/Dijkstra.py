@@ -1,5 +1,5 @@
 from queue import PriorityQueue
-from .RP import get_unvisited_nodes, check
+from .RP import get_unvisited_nodes, check, count_path
 
 
 def dijkstra(start: object, end: object):
@@ -32,6 +32,7 @@ def dijkstra(start: object, end: object):
     count = 0
 
     visited_nodes: int = 0
+    path_size: int = 0
 
     # Perform the search
     while not queue.empty():
@@ -42,6 +43,7 @@ def dijkstra(start: object, end: object):
 
         # End the search if the current node is the end node
         if current_min == end:
+            path_size = count_path(previous, end)
             break
 
         check(current_min)
@@ -62,4 +64,4 @@ def dijkstra(start: object, end: object):
 
         # Remove the current node from the set of unvisited nodes
         unvisited_nodes.remove(current_min)
-    return visited_nodes
+    return visited_nodes, path_size

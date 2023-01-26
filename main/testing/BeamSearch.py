@@ -1,5 +1,5 @@
 import heapq
-from .RP import heuristic, check
+from .RP import heuristic, check, count_path
 
 
 def beam_search(start: object, end: object, beam_size: int):
@@ -23,6 +23,7 @@ def beam_search(start: object, end: object, beam_size: int):
     previous[start] = start
     
     visited_nodes: int = 0
+    path_size: int = 0
 
     # Perform the search
     while beam:
@@ -33,6 +34,7 @@ def beam_search(start: object, end: object, beam_size: int):
 
         # End the search if the current node is the end node
         if current.is_end():
+            path_size = count_path(previous, end)
             break
 
         check(current)
@@ -53,4 +55,4 @@ def beam_search(start: object, end: object, beam_size: int):
 
         # Trim the beam to the desired size
         beam = beam[:beam_size]
-    return visited_nodes
+    return visited_nodes, path_size

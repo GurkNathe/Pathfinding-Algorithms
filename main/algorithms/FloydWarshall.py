@@ -16,7 +16,6 @@ def reconstruct_path(
     the given distance matrix, list of nodes, and list of checked nodes.
 
     Parameters:
-        draw (function): Function to draw the updated grid.
         dist (list): A 2D list representing the distance matrix between nodes.
         V (int): The number of nodes in the grid.
         start (Node): The starting node.
@@ -25,16 +24,16 @@ def reconstruct_path(
         checked_nodes (list): A list of nodes that have been visited during the search.
 
     Returns:
-        bool: True if a path is found, False if not.
+        int: size of path found
     """
 
     # If the end node is not in the list of nodes, return False
     try:
         test = nodes.index(end)
         if end not in checked_nodes:
-            return False
+            return 0
     except ValueError:
-        return False
+        return 0
 
     # Get the indices of the start and end nodes in the list of nodes
     u, v = nodes.index(start), nodes.index(end)
@@ -45,6 +44,7 @@ def reconstruct_path(
     left = []
     right = []
     current = v
+    path_size: int = 0
 
     # Iterate backwards through the distance matrix
     for k in range(V - 1, -1, -1):
@@ -65,7 +65,6 @@ def reconstruct_path(
                 path.append(nodes[k])
                 left.append(dist[u][k])
                 right.append(dist[k][v])
-                draw()
             current = k
 
     # Set the current node to the end node
@@ -76,15 +75,15 @@ def reconstruct_path(
         for node in curr.neighbors:
             # If the neighbor is the start node, return True
             if node.is_start():
-                return True
+                break
 
             # If the neighbor is in the path, mark it as part of the path and
             # set the current node to the neighbor
             if node in path:
-                node.make_path()
+                path_size += 1
                 path.remove(node)
                 curr = node
-
+    return path_size
 
 def floyd_warshall(draw: object, start: object, end: object, grid: list):
     """

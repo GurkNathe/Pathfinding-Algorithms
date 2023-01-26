@@ -1,6 +1,5 @@
 import random
 
-
 def rand_walk(start: object, end: object):
     """
     Generates a random walk from the starting node to the goal node.
@@ -13,7 +12,8 @@ def rand_walk(start: object, end: object):
         None
     """
 
-    # Initialize the current node
+    # Initialize the list of previous nodes and the current node
+    came_from = []
     current = start
 
     visited_nodes: int = 0
@@ -23,6 +23,11 @@ def rand_walk(start: object, end: object):
         # Choose a random neighbor of the current node
         neighbor = random.randint(0, len(current.neighbors) - 1)
 
+        # Add the current node to the list of previous nodes if it
+        # has not already been added
+        if current not in came_from:
+            came_from.append(current)
+
         # Move to the chosen neighbor
         current = current.neighbors[neighbor]
 
@@ -30,4 +35,4 @@ def rand_walk(start: object, end: object):
 
         if current == end:
             break
-    return visited_nodes
+    return visited_nodes, len(came_from) - 1

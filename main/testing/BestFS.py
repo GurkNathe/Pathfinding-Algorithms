@@ -20,6 +20,31 @@ def get_checked_neighbors(node: object):
     return checked
 
 
+def count_path(current: object, costs: dict):
+    """
+    Reconstruct the path from the end node to the start node.
+
+    Args:
+        current (Node): The current node in the search.
+        costs (Dict[Node, int]): The cost of reaching each node from the start.
+        draw (function): A function used to draw the search on the screen.
+
+    Returns:
+        None: The function updates the screen with the path.
+    """
+    path_size: int = 0
+
+    # Continue until the current node is the start node
+    while not current.is_start():
+        # Find the neighbor with the lowest cost
+        current = min(get_checked_neighbors(current), key=lambda x: costs[x])
+
+        # Break if the current node is the start node
+        if current.is_start():
+            break
+        path_size += 1
+    return path_size
+
 def best_fs(start: object, end: object):
     """
     Perform a best-first search from start to end.
@@ -41,6 +66,7 @@ def best_fs(start: object, end: object):
     costs = {start: 0}
     
     visited_nodes: int = 0
+    path_size: int = 0
 
     # Perform the search
     while not queue.empty():
@@ -51,6 +77,7 @@ def best_fs(start: object, end: object):
 
         # End the search if the current node is the end node
         if current == end:
+            path_size = count_path(current, costs)
             break
 
         check(current)
@@ -67,4 +94,4 @@ def best_fs(start: object, end: object):
                 queue.put(
                     (cost + heuristic("manhattan", neighbor, end), count + 1, neighbor)
                 )
-    return visited_nodes
+    return visited_nodes, path_size

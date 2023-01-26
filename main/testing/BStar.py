@@ -1,4 +1,5 @@
 from queue import PriorityQueue
+from .RP import count_path, check
 
 
 # Manhattan distance
@@ -53,6 +54,7 @@ def b_star(grid: list, start: object, end: object):
     open_set_hash = {start}
 
     visited_nodes: int = 0
+    path_size: int = 0
 
     # Perform the search
     while not open_set.empty():
@@ -64,6 +66,8 @@ def b_star(grid: list, start: object, end: object):
 
         # End the search if the current node is the end node
         if current == end:
+            path_size = count_path(came_from, end)
+            end.make_end()
             break
 
         # Check the neighbors of the current node
@@ -83,4 +87,8 @@ def b_star(grid: list, start: object, end: object):
                     count += 1
                     open_set.put((f_score[neighbor], count, neighbor))
                     open_set_hash.add(neighbor)
-    return visited_nodes
+                    neighbor.uncheck()
+
+        check(current)
+
+    return visited_nodes, path_size

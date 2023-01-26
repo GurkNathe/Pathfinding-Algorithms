@@ -1,6 +1,6 @@
 import time
 from queue import PriorityQueue
-from .RP import heuristic, check
+from .RP import heuristic, check, count_path
 
 
 def line_of_sight(node1: object, node2: object, grid: list):
@@ -151,6 +151,77 @@ def update_vertex(
             )
 
 
+def connect_path(came_from: dict, current: object, grid: list):
+    """
+    Connect the path between turn points on the grid.
+
+    Parameters:
+        came_from (Dict[Node, Node]): A dictionary mapping nodes to their parent nodes.
+        current (Node): The current node being processed.
+        draw (function): A function to draw the grid.
+        grid (List[List[Node]]): The grid of nodes to search.
+
+    Returns:
+        None
+    """
+
+    # Temp variable to for connected path
+    end = current
+
+    # Displaying what Theta* generates (the turn points)
+    path_points: int = count_path(came_from, current)
+    path_size: int = 0
+
+    # Fill in path between turn points
+    current = end
+    while current in came_from and not current.is_start():
+        previous = came_from[current]
+        xp, yp = previous.get_pos()
+        xc, yc = current.get_pos()
+
+        x_dir = xp - xc
+        y_dir = yp - yc
+
+        # If the previous node is aligned with the current node on the x axis
+        if x_dir == 0:
+            # Current is above previous
+            if y_dir > 0:
+                # Iterate through all y values between the current and
+                # previous nodes
+                for y in range(yc, yp):
+                    if not grid[xp][y].is_start():
+                        path_size += 1
+
+            # Current is bellow previous
+            else:
+                # Iterate through all y values between the current and
+                # previous nodes
+                for y in range(yp, yc):
+                    if not grid[xp][y].is_start():
+                        path_size += 1
+
+        # If the previous node is aligned with the current node on the y axis
+        elif y_dir == 0:
+            # Current is left of previous
+            if x_dir > 0:
+                # Iterate through all x values between the current and
+                # previous nodes
+                for x in range(xc, xp):
+                    if not grid[x][yp].is_start():
+                        path_size += 1
+
+            # Current is right of previous
+            else:
+                # Iterate through all x values between the current and
+                # previous nodes
+                for x in range(xp, xc):
+                    if not grid[x][yp].is_start():
+                        path_size += 1
+
+        current = previous
+    return (path_points, path_size)
+
+
 def theta_star(start: object, end: object, grid: list):
     """
     Perform the Theta* search algorithm on the grid.
@@ -180,6 +251,7 @@ def theta_star(start: object, end: object, grid: list):
     parent[start] = start
 
     visited_nodes: int = 0
+    path_info: tuple = ()
 
     # While the open set is not empty and the run flag is True
     while open_set:
@@ -190,6 +262,8 @@ def theta_star(start: object, end: object, grid: list):
 
         # If the current vertex is the end vertex
         if current.is_end():
+            path_info = connect_path(parent, end, grid)
+            end.make_end()
             break
 
         if current.is_start():
@@ -215,4 +289,4 @@ def theta_star(start: object, end: object, grid: list):
                     counter,
                     grid,
                 )
-    return visited_nodes
+    return visited_nodes, path_info

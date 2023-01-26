@@ -65,8 +65,8 @@ class Testing:
             wr = csv.writer(myfile, delimiter=',',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-            wr.writerow(['Algorithm', 'Local Run Time', 'Times Nodes Checked', 'Path Length'])
-            algo_data: list = [['', '', len(get_unvisited_nodes(self.start)), '']]
+            wr.writerow(['Algorithm', 'Local Run Time', 'Times Nodes Checked', 'Path Length','General Data'])
+            algo_data: list = [['', '', '', '', f'Total Open Nodes: {len(get_unvisited_nodes(self.start))}']]
 
             for alg in ALGORITHMS:
                 # Clear grid after every run
@@ -78,16 +78,20 @@ class Testing:
 
                 # Run and get run time of algorithm
                 start_time = timeit.default_timer()
-                num_visited_nodes = self.algorithm(alg)
+                num_visited_nodes, path_size = self.algorithm(alg)
                 end_time = timeit.default_timer()
 
-                algo_data.append([alg, end_time - start_time, num_visited_nodes])
+                if type(path_size) == tuple:
+                    algo_data.append([alg, end_time - start_time, num_visited_nodes, path_size[1], f'Turn points: {path_size[0]}'])
+                else:
+                    algo_data.append([alg, end_time - start_time, num_visited_nodes, path_size])
 
                 # Progress markup
+                # !!! There might be errors here in the future
                 completion += 1
                 index = int((completion / len(ALGORITHMS)) * len(animation))
 
-                if index == 9:
+                if alg == ALGORITHMS[-1]:
                     break
 
                 print(f" {int(100 * (completion / len(ALGORITHMS)))}% {animation[index]} \r", 

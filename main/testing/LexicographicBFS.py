@@ -1,3 +1,5 @@
+from .RP import count_path
+
 def LexBFS(visited_nodes: int, start: object):
     """
     Implements the Lexicographic Breadth-First Search (LexBFS) algorithm.
@@ -22,6 +24,7 @@ def LexBFS(visited_nodes: int, start: object):
 
     # Set the level of the starting vertex to 0 and its parent to None
     levels[start] = 0
+    parent[start] = None
     
     # Initialize the counter and the queue
     level = 0
@@ -41,10 +44,11 @@ def LexBFS(visited_nodes: int, start: object):
             if neighbor not in levels:
                 # Set the level of neighbor to the current level + 1
                 levels[neighbor] = level + 1
+                parent[neighbor] = current
                 Q.append(neighbor)
         level = level + 1
 
-    return order, levels, visited_nodes
+    return order, levels, visited_nodes, parent
 
 
 def LBFS(start: object, end: object, grid: list):
@@ -60,7 +64,7 @@ def LBFS(start: object, end: object, grid: list):
     visited_nodes: int = 0
 
     # Run LexBFS to get the order of the vertices
-    order, levels, temp_v_n = LexBFS(visited_nodes, start)
+    order, levels, temp_v_n, parent = LexBFS(visited_nodes, start)
 
     visited_nodes = temp_v_n
 
@@ -76,4 +80,6 @@ def LBFS(start: object, end: object, grid: list):
             for neighbor in current.neighbors:
                 if distances[current] + 1 < distances[neighbor]:
                     distances[neighbor] = distances[current] + 1
-    return visited_nodes
+                    parent[neighbor] = current
+
+    return visited_nodes, count_path(parent, end)

@@ -30,7 +30,8 @@ def ida_star(start: object, end: object):
             break
 
         bound = result
-    return visited_nodes
+
+    return visited_nodes, len(path) - 2
 
 
 def search(visited_nodes: int, path: list, g: int, bound: float, end: object):

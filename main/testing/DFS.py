@@ -1,4 +1,4 @@
-from .RP import check
+from .RP import check, count_path
 
 
 def dfs(start: object, end: object):
@@ -50,4 +50,5 @@ def dfs(start: object, end: object):
                 else:
                     previous[neighbor] = current
                     stack.append(neighbor)
-    return visited_nodes
+
+    return visited_nodes, count_path(previous, end)

@@ -1,4 +1,4 @@
-from .RP import check
+from .RP import check, count_path
 
 
 def depth_limit(
@@ -58,6 +58,7 @@ def iddfs(start: object, end: object, grid: list, length: int):
     """
 
     visited_nodes: int = 0
+    path_size: int = 0
 
     for depth in range(0, length):
         visited = set()
@@ -66,5 +67,6 @@ def iddfs(start: object, end: object, grid: list, length: int):
         visited_nodes = temp_v_n
 
         if path:
+            path_size = count_path(path, end)
             break
-    return visited_nodes
+    return visited_nodes, path_size

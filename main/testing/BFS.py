@@ -1,4 +1,4 @@
-from .RP import check
+from .RP import check, count_path
 
 
 def bfs(start: object, end: object):
@@ -51,4 +51,4 @@ def bfs(start: object, end: object):
                 else:
                     previous[neighbor] = current
                     nodes.append(neighbor)
-    return visited_nodes
+    return visited_nodes, count_path(previous, end)

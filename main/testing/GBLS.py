@@ -1,5 +1,5 @@
 from queue import PriorityQueue
-from .RP import heuristic, check
+from .RP import heuristic, check, count_path
 
 
 def gbls(start: object, end: object, grid: list):
@@ -25,6 +25,7 @@ def gbls(start: object, end: object, grid: list):
     counter = 0
     found = False
 
+    previous = {}
     last_direction = None
 
     visited_nodes: int = 0
@@ -60,6 +61,7 @@ def gbls(start: object, end: object, grid: list):
         for neighbor in neighbors:
             if not neighbor.is_checked():
                 if neighbor.is_end():
+                    previous[neighbor] = current
                     found = True
                     break
 
@@ -68,6 +70,7 @@ def gbls(start: object, end: object, grid: list):
 
                 # Add the neighbor to the queue with the estimated
                 # distance as the priority
+                previous[neighbor] = current
                 Q.put((distance, counter, neighbor))
 
                 # Save the direction to the neighbor
@@ -75,4 +78,4 @@ def gbls(start: object, end: object, grid: list):
                     neighbor.get_pos()[0] - current.get_pos()[0],
                     neighbor.get_pos()[1] - current.get_pos()[1],
                 )
-    return visited_nodes
+    return visited_nodes, count_path(previous, end)
