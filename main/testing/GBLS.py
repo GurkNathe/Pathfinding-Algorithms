@@ -4,8 +4,8 @@ from .RP import heuristic, check, count_path
 
 def gbls(start: object, end: object, grid: list):
     """
-    Modified version of the greedy best-first search algorithm that explores neighbors 
-    in the direction of the last chosen node as long as the estimated distance to the 
+    Modified version of the greedy best-first search algorithm that explores neighbors
+    in the direction of the last chosen node as long as the estimated distance to the
     goal is shorter than the current node.
 
     Parameters:
@@ -30,7 +30,7 @@ def gbls(start: object, end: object, grid: list):
 
     visited_nodes: int = 0
 
-    # Continue the search as long as there are nodes in the queue or the goal has 
+    # Continue the search as long as there are nodes in the queue or the goal has
     # not been found
     while not Q.empty() and not found:
         current = Q.get()[2]

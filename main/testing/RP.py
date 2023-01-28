@@ -118,9 +118,10 @@ def check(current: object):
     if not current.is_start() and not current.is_end():
         current.check()
 
+
 def count_path(came_from: dict, current: object):
     num_nodes_path = 0
-    
+
     while current in came_from:
         if not came_from[current].is_start():
             current = came_from[current]

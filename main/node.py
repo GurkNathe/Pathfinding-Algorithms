@@ -1,5 +1,5 @@
 import pygame
-from colors import COLORS
+from Colors import COLORS
 
 
 # Define colors for different node states

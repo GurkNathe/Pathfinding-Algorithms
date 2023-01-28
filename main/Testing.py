@@ -22,7 +22,8 @@ from testing.ThetaStar import theta_star
 from testing.RP import get_unvisited_nodes
 
 from Algorithms import ALGORITHMS
-from node import Node
+from Node import Node
+
 
 class Testing:
     """
@@ -41,32 +42,62 @@ class Testing:
         self.end = argv[2]
         self.rows = argv[3]
         self.width = argv[4]
-        
-        
+
         # Clear grid after every run
         self.grid = self.clear_grid(self.grid, self.rows, self.width)
 
         for row in self.grid:
             for node in row:
                 node.update_neighbors(self.grid)
-        
-        animation: list = ["[■□□□□□□□□□]","[■■□□□□□□□□]", "[■■■□□□□□□□]", "[■■■■□□□□□□]", 
-                     "[■■■■■□□□□□]", "[■■■■■■□□□□]", "[■■■■■■■□□□]", "[■■■■■■■■□□]", 
-                     "[■■■■■■■■■□]", "[■■■■■■■■■■]"]
+
+        animation: list = [
+            "[■□□□□□□□□□]",
+            "[■■□□□□□□□□]",
+            "[■■■□□□□□□□]",
+            "[■■■■□□□□□□]",
+            "[■■■■■□□□□□]",
+            "[■■■■■■□□□□]",
+            "[■■■■■■■□□□]",
+            "[■■■■■■■■□□]",
+            "[■■■■■■■■■□]",
+            "[■■■■■■■■■■]",
+        ]
         completion: int = 0
 
         self.clear()
 
         print("Testing Algorithms...")
 
-        with open(path.join(path.dirname(__file__), 
-                            f'testing/results/{int(timeit.default_timer())}.csv'), 
-                  'w', newline='') as myfile:
-            wr = csv.writer(myfile, delimiter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        with open(
+            path.join(
+                path.dirname(__file__),
+                f"testing/results/{int(timeit.default_timer())}.csv",
+            ),
+            "w",
+            newline="",
+        ) as myfile:
+            wr = csv.writer(
+                myfile, delimiter=",", quotechar="|", quoting=csv.QUOTE_MINIMAL
+            )
 
-            wr.writerow(['Algorithm', 'Local Run Time', 'Times Nodes Checked', 'Path Length','General Data'])
-            algo_data: list = [['', '', '', '', f'Total Open Nodes: {len(get_unvisited_nodes(self.start))}']]
+            wr.writerow(
+                [
+                    "Algorithm",
+                    "Local Run Time",
+                    "Times Nodes Checked",
+                    "Path Length",
+                    "General Data",
+                ]
+            )
+            algo_data: list = [
+                [
+                    "",
+                    "",
+                    "",
+                    "",
+                    f"Total Open Nodes: {len(get_unvisited_nodes(self.start))}",
+                ]
+            ]
 
             for alg in ALGORITHMS:
                 # Clear grid after every run
@@ -82,9 +113,19 @@ class Testing:
                 end_time = timeit.default_timer()
 
                 if type(path_size) == tuple:
-                    algo_data.append([alg, end_time - start_time, num_visited_nodes, path_size[1], f'Turn points: {path_size[0]}'])
+                    algo_data.append(
+                        [
+                            alg,
+                            end_time - start_time,
+                            num_visited_nodes,
+                            path_size[1],
+                            f"Turn points: {path_size[0]}",
+                        ]
+                    )
                 else:
-                    algo_data.append([alg, end_time - start_time, num_visited_nodes, path_size])
+                    algo_data.append(
+                        [alg, end_time - start_time, num_visited_nodes, path_size]
+                    )
 
                 # Progress markup
                 # !!! There might be errors here in the future
@@ -94,13 +135,15 @@ class Testing:
                 if alg == ALGORITHMS[-1]:
                     break
 
-                print(f" {int(100 * (completion / len(ALGORITHMS)))}% {animation[index]} \r", 
-                        flush=True, end="")
-            
-            print(f"100% {animation[9]} \rTesting Finished!", flush=True, end="")
-            
-            wr.writerows(algo_data)
+                print(
+                    f" {int(100 * (completion / len(ALGORITHMS)))}% {animation[index]} \r",
+                    flush=True,
+                    end="",
+                )
 
+            print(f"100% {animation[9]} \rTesting Finished!", flush=True, end="")
+
+            wr.writerows(algo_data)
 
     def clear_grid(self, current_grid: list, rows: int, width: int):
         """
@@ -144,11 +187,11 @@ class Testing:
 
     def clear(self):
         # for windows
-        if name == 'nt':
-            _ = system('cls')
+        if name == "nt":
+            _ = system("cls")
         # for mac and linux(here, os.name is 'posix')
         else:
-            _ = system('clear')
+            _ = system("clear")
 
     def algorithm(self, algorithm: str):
         """
@@ -188,7 +231,9 @@ class Testing:
             case "ida":
                 return ida_star(self.start, self.end)
             case "iddfs":
-                return iddfs(self.start, self.end, self.grid, len(self.grid) * len(self.grid[0]))
+                return iddfs(
+                    self.start, self.end, self.grid, len(self.grid) * len(self.grid[0])
+                )
             case "lbfs":
                 return LBFS(self.start, self.end, self.grid)
             case "rand":

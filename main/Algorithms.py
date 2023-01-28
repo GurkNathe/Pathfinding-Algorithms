@@ -34,7 +34,7 @@ ALGORITHMS = [
     "iddfs",
     "lbfs",
     "rand",
-    "theta"
+    "theta",
 ]
 
 
@@ -95,7 +95,13 @@ class Algorithms:
             case "ida":
                 ida_star(self.draw, self.start, self.end)
             case "iddfs":
-                iddfs(self.draw, self.start, self.end, self.grid, len(self.grid) * len(self.grid[0]))
+                iddfs(
+                    self.draw,
+                    self.start,
+                    self.end,
+                    self.grid,
+                    len(self.grid) * len(self.grid[0]),
+                )
             case "lbfs":
                 LBFS(self.draw, self.start, self.end, self.grid)
             case "rand":

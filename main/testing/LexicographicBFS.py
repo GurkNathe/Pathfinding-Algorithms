@@ -1,5 +1,6 @@
 from .RP import count_path
 
+
 def LexBFS(visited_nodes: int, start: object):
     """
     Implements the Lexicographic Breadth-First Search (LexBFS) algorithm.
@@ -25,7 +26,7 @@ def LexBFS(visited_nodes: int, start: object):
     # Set the level of the starting vertex to 0 and its parent to None
     levels[start] = 0
     parent[start] = None
-    
+
     # Initialize the counter and the queue
     level = 0
     Q = [start]

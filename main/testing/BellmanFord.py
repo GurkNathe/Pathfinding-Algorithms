@@ -34,11 +34,11 @@ def bell_ford(start: object, end: object, accuracy: float):
     while counter >= 0:
         # Visit each node
         for current in nodes:
-            
+
             visited_nodes += 1
-            
+
             check(current)
-            
+
             # Check the neighbors of the current node
             for neighbor in current.neighbors:
                 # Update the distance and predecessor for the neighbor if the
@@ -48,5 +48,5 @@ def bell_ford(start: object, end: object, accuracy: float):
                     predecessor[neighbor] = current
         # Decrement the counter
         counter -= 1
-    
+
     return visited_nodes, count_path(predecessor, end)

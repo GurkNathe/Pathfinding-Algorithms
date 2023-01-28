@@ -2,7 +2,12 @@ from .RP import check, count_path
 
 
 def depth_limit(
-    visited_nodes: int, current: object, end: object, depth: int, visited: set, path: dict
+    visited_nodes: int,
+    current: object,
+    end: object,
+    depth: int,
+    visited: set,
+    path: dict,
 ):
     """
     Recursive DFS with a depth limit.
@@ -33,7 +38,9 @@ def depth_limit(
         if neighbor not in visited:
             path[neighbor] = current
 
-            result, temp_v_n = depth_limit(visited_nodes, neighbor, end, depth - 1, visited, path)
+            result, temp_v_n = depth_limit(
+                visited_nodes, neighbor, end, depth - 1, visited, path
+            )
 
             visited_nodes = temp_v_n
 
@@ -62,7 +69,9 @@ def iddfs(start: object, end: object, grid: list, length: int):
 
     for depth in range(0, length):
         visited = set()
-        path, temp_v_n = depth_limit(visited_nodes, start, end, depth, visited, {start: None})
+        path, temp_v_n = depth_limit(
+            visited_nodes, start, end, depth, visited, {start: None}
+        )
 
         visited_nodes = temp_v_n
 

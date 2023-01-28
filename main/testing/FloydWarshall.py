@@ -157,4 +157,6 @@ def floyd_warshall(start: object, end: object, grid: list):
     except ValueError:
         pass
 
-    return visited_nodes, reconstruct_path(distance, V, start, end, nodes, checked_nodes)
+    return visited_nodes, reconstruct_path(
+        distance, V, start, end, nodes, checked_nodes
+    )

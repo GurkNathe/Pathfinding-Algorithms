@@ -1,10 +1,11 @@
 import pygame
 import sys
-from colors import COLORS
-from node import Node
+from Colors import COLORS
+from Node import Node
 from Algorithms import Algorithms, ALGORITHMS
 from Maze import gen_maze
 from Testing import Testing
+
 
 def make_grid(rows: int, width: int):
     """
@@ -57,7 +58,7 @@ def clear_grid(current_grid: list, rows: int, width: int):
     for i in range(rows):
         grid.append([])
         for j in range(rows):
-            # If the current node is not the start, end, or an obstacle, create a new Node 
+            # If the current node is not the start, end, or an obstacle, create a new Node
             # object for the current position and add it to the grid
             if (
                 not current_grid[i][j].is_start()
@@ -97,7 +98,7 @@ def draw_grid_lines(win: object, rows: int, width: int):
             pygame.draw.line(win, COLORS.get("GREY"), (j * node, 0), (j * node, width))
 
 
-def draw(win, grid: list, rows: int, width: int):
+def draw(win: object, grid: list, rows: int, width: int):
     """
     Draw the grid and nodes on the window.
 
@@ -223,12 +224,221 @@ def setup(argv: list, func: str):
     return None, None, grid, win, width, ROWS
 
 
+def handle_mouse_clicks(
+    mouse: object,
+    ran: bool,
+    grid: list,
+    start: object,
+    end: object,
+    rows: int,
+    width: int,
+):
+    """
+    Hanlde mouse left and right clicks
+
+    Args:
+        mouse (object): pygame mouse object
+        ran (bool): flag set if an algorithm was previously run
+        grid (List[List[Node]]): A 2D list of Node objects representing the grid.
+        start (Node): starting node
+        end (Node): ending node
+        rows (int): number of rows in the grid
+        width (int): width of each cell in the grid
+
+    Returns:
+        ran (bool): flag set if an algorithm was previously run
+        grid (list): A 2D list of Node objects representing the grid
+        start (Node): starting node
+        end (Node): ending node
+    """
+
+    # Left mouse click
+    # Add start, end, and obstacle nodes
+    if mouse.get_pressed()[0]:
+        # Clear algorithm mark-up upon edit
+        if ran:
+            ran = False
+            grid = clear_grid(grid, rows, width)
+
+        pos = mouse.get_pos()
+        row, col = get_clicked_pos(pos, rows, width)
+
+        # Handling for non-square window dimensions
+        if row > rows - 1 or col > rows - 1:
+            return ran, grid, start, end
+
+        node = grid[row][col]
+
+        if not start and node != end:
+            start = node
+            start.make_start()
+        elif not end and node != start:
+            end = node
+            end.make_end()
+        elif node != start and node != end:
+            node.make_obstacle()
+
+    # Right mouse click
+    # Remove start, end, and obstacle nodes
+    elif mouse.get_pressed()[2]:
+        # Clear algorithm mark-up upon edit
+        if ran:
+            ran = False
+            grid = clear_grid(grid, rows, width)
+
+        pos = mouse.get_pos()
+        row, col = get_clicked_pos(pos, rows, width)
+
+        # Handling for non-square window dimensions
+        if row > rows - 1 or col > rows - 1:
+            return ran, grid, start, end
+
+        node = grid[row][col]
+
+        node.reset()
+
+        if node == start:
+            start = None
+        elif node == end:
+            end = None
+
+    return ran, grid, start, end
+
+
+def handle_key_presses(
+    win: object,
+    event: object,
+    ran: bool,
+    grid: list,
+    start: object,
+    end: object,
+    rows: int,
+    width: int,
+    func: str,
+):
+    """
+    Handles key pressed on keyboard
+
+    Args:
+        win (object): pygame window object
+        event (object): pygame event object
+        ran (bool): flag set if an algorithm was previously run
+        grid (List[List[Node]]): A 2D list of Node objects representing the grid.
+        start (Node): starting node
+        end (Node): ending node
+        rows (int): number of rows in the grid
+        width (int): width of each cell in the grid
+        func (str): name of algorithm selected
+
+    Returns:
+        ran (bool): flag set if an algorithm was previously run
+        grid (list): A 2D list of Node objects representing the grid
+        start (Node): starting node
+        end (Node): ending node
+        func (str): name of algorithm selected
+    """
+    # Start algorithm if "SPACE" is pressed and
+    # a start and end are designated
+    if event.key == pygame.K_SPACE and start and end:
+        # Clear algorithm mark-up
+        if ran:
+            ran = False
+            grid = clear_grid(grid, rows, width)
+
+        for row in grid:
+            for node in row:
+                node.update_neighbors(grid)
+
+        Algorithms(lambda: draw(win, grid, rows, width), grid, start, end).algorithm(
+            func
+        )
+
+        ran = True
+
+    # Test algorithms if T key is pressed
+    if event.key == pygame.K_t and start and end:
+        Testing(grid, start, end, rows, width)
+
+    # Clear algorithm markup if W key is pressed
+    if event.key == pygame.K_w:
+        ran = False
+        grid = clear_grid(grid, rows, width)
+
+    # Reset grid when the "C" key is pressed
+    if event.key == pygame.K_c:
+        ran = False
+        start = None
+        end = None
+        grid = make_grid(rows, width)
+
+    # Go to next algorithm in list
+    if event.key == pygame.K_n:
+        # Clear algorithm mark-up upon edit
+        if ran:
+            ran = False
+            grid = clear_grid(grid, rows, width)
+
+        index = ALGORITHMS.index(func) + 1
+
+        if index == len(ALGORITHMS):
+            index = 0
+
+        func = ALGORITHMS[index]
+
+        pygame.display.set_caption(f"Pathfinding Visualization - {func}")
+
+    # Go to previous algorithm in list
+    if event.key == pygame.K_b:
+        # Clear algorithm mark-up upon edit
+        if ran:
+            ran = False
+            grid = clear_grid(grid, rows, width)
+
+        index = ALGORITHMS.index(func) - 1
+
+        if index == -1:
+            index = len(ALGORITHMS) - 1
+
+        func = ALGORITHMS[index]
+
+        pygame.display.set_caption(f"Pathfinding Visualization - {func}")
+
+    # Generate a new maze when "G" key is pressed
+    if event.key == pygame.K_g:
+        ran = False
+        start = None
+        end = None
+        grid = make_grid(rows, width)
+        start, end = gen_maze(grid)
+
+    return ran, grid, start, end, func
+
+
+def quit(event: object, run: bool):
+    """
+    Checks if user wants to close window
+
+    Args:
+        event (object): pygame event object
+        run (bool): flag indicating whether to continue running the program
+
+    Returns:
+        run (bool): flag indicating whether to continue running the program
+    """
+    # Quit the program if the user closes the window or presses Q
+    if event.type == pygame.QUIT or (
+        event.type == pygame.KEYDOWN and event.key == pygame.K_q
+    ):
+        run = False
+    return run
+
+
 def main(argv: list):
     """
     Run the Pygame window and handle user input.
 
     Parameters:
-        argv (list): A list of command line arguments.
+        argv (list): A list of command line arguments.q
 
     Returns:
         None
@@ -250,136 +460,19 @@ def main(argv: list):
 
         # Handle user input
         for event in pygame.event.get():
-            # Quit the program if the user closes the window
-            if event.type == pygame.QUIT or (
-                event.type == pygame.KEYDOWN and event.key == pygame.K_q
-            ):
-                run = False
+            # Check if user wants to close window
+            run = quit(event, run)
 
-            # Left mouse click
-            # Add start, end, and obstacle nodes
-            if pygame.mouse.get_pressed()[0]:
-                # Clear algorithm mark-up upon edit
-                if ran:
-                    ran = False
-                    grid = clear_grid(grid, ROWS, width)
+            # Handle left and right mouse clicks
+            ran, grid, start, end = handle_mouse_clicks(
+                pygame.mouse, ran, grid, start, end, ROWS, width
+            )
 
-                pos = pygame.mouse.get_pos()
-                row, col = get_clicked_pos(pos, ROWS, width)
-
-                # Handling for non-square window dimensions
-                if row > ROWS - 1 or col > ROWS - 1:
-                    continue
-
-                node = grid[row][col]
-
-                if not start and node != end:
-                    start = node
-                    start.make_start()
-                elif not end and node != start:
-                    end = node
-                    end.make_end()
-                elif node != start and node != end:
-                        node.make_obstacle()
-
-            # Right mouse click
-            # Remove start, end, and obstacle nodes
-            elif pygame.mouse.get_pressed()[2]:
-                # Clear algorithm mark-up upon edit
-                if ran:
-                    ran = False
-                    grid = clear_grid(grid, ROWS, width)
-
-                pos = pygame.mouse.get_pos()
-                row, col = get_clicked_pos(pos, ROWS, width)
-
-                # Handling for non-square window dimensions
-                if row > ROWS - 1 or col > ROWS - 1:
-                    continue
-
-                node = grid[row][col]
-
-                node.reset()
-
-                if node == start:
-                    start = None
-                elif node == end:
-                    end = None
-
+            # Check if user pressed a key
             if event.type == pygame.KEYDOWN:
-                # Start algorithm if "SPACE" is pressed and
-                # a start and end are designated
-                if event.key == pygame.K_SPACE and start and end:
-                    # Clear algorithm mark-up
-                    if ran:
-                        ran = False
-                        grid = clear_grid(grid, ROWS, width)
-
-                    for row in grid:
-                        for node in row:
-                            node.update_neighbors(grid)
-
-                    Algorithms(
-                        lambda: draw(win, grid, ROWS, width), grid, start, end
-                    ).algorithm(func)
-
-                    ran = True
-
-                # Test algorithms if T key is pressed
-                if event.key == pygame.K_t and start and end:
-                    Testing(grid, start, end, ROWS, width)
-
-                # Clear algorithm markup if W key is pressed
-                if event.key == pygame.K_w:
-                    ran = False
-                    grid = clear_grid(grid, ROWS, width)
-
-                # Reset grid when the "C" key is pressed
-                if event.key == pygame.K_c:
-                    ran = False
-                    start = None
-                    end = None
-                    grid = make_grid(ROWS, width)
-
-                # Go to next algorithm in list
-                if event.key == pygame.K_n:
-                    # Clear algorithm mark-up upon edit
-                    if ran:
-                        ran = False
-                        grid = clear_grid(grid, ROWS, width)
-
-                    index = ALGORITHMS.index(func) + 1
-
-                    if index == len(ALGORITHMS):
-                        index = 0
-
-                    func = ALGORITHMS[index]
-
-                    pygame.display.set_caption(f"Pathfinding Visualization - {func}")
-
-                # Go to previous algorithm in list
-                if event.key == pygame.K_b:
-                    # Clear algorithm mark-up upon edit
-                    if ran:
-                        ran = False
-                        grid = clear_grid(grid, ROWS, width)
-
-                    index = ALGORITHMS.index(func) - 1
-
-                    if index == -1:
-                        index = len(ALGORITHMS) - 1
-
-                    func = ALGORITHMS[index]
-
-                    pygame.display.set_caption(f"Pathfinding Visualization - {func}")
-
-                # Generate a new maze when "G" key is pressed
-                if event.key == pygame.K_g:
-                    ran = False
-                    start = None
-                    end = None
-                    grid = make_grid(ROWS, width)
-                    start, end = gen_maze(grid)
+                ran, grid, start, end, func = handle_key_presses(
+                    win, event, ran, grid, start, end, ROWS, width, func
+                )
 
     pygame.quit()
 

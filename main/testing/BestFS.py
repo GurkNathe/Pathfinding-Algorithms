@@ -45,6 +45,7 @@ def count_path(current: object, costs: dict):
         path_size += 1
     return path_size
 
+
 def best_fs(start: object, end: object):
     """
     Perform a best-first search from start to end.
@@ -64,7 +65,7 @@ def best_fs(start: object, end: object):
 
     # Initialize a dictionary to store the cost of reaching each node from the start
     costs = {start: 0}
-    
+
     visited_nodes: int = 0
     path_size: int = 0
 
@@ -72,7 +73,7 @@ def best_fs(start: object, end: object):
     while not queue.empty():
         # Get the node with the lowest cost from the queue
         cost, _, current = queue.get()
-        
+
         visited_nodes += 1
 
         # End the search if the current node is the end node

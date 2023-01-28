@@ -21,7 +21,7 @@ def dfs(start: object, end: object):
 
     # Initialize flags to track the search status
     found = False
-    
+
     visited_nodes: int = 0
 
     # Perform the search

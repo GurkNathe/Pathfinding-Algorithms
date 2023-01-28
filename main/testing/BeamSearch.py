@@ -21,7 +21,7 @@ def beam_search(start: object, end: object, beam_size: int):
     # Initialize a dictionary to store the previous nodes for each node
     previous = {}
     previous[start] = start
-    
+
     visited_nodes: int = 0
     path_size: int = 0
 

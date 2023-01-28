@@ -1,6 +1,7 @@
 import pygame
 import threading
 
+
 def count_path(path_size: list, came_from: object, current: object, target: object):
     """
     Reconstructs the path from the current node to the target node in a maze.
@@ -15,7 +16,7 @@ def count_path(path_size: list, came_from: object, current: object, target: obje
     Returns:
         None
     """
-    
+
     while current in came_from:
         if came_from[current] != target:
             current = came_from[current]
@@ -41,7 +42,7 @@ def thread_construct(args1: tuple, args2: tuple):
     # given arguments
     path1 = [0]
     path2 = [0]
-    
+
     n1 = threading.Thread(target=count_path, args=(path1, *args1))
     n2 = threading.Thread(target=count_path, args=(path2, *args2))
 
@@ -53,6 +54,7 @@ def thread_construct(args1: tuple, args2: tuple):
     n1.join()
     n2.join()
     return path1[0] + path2[0] + 1
+
 
 def bi_search(start: object, end: object):
     """
@@ -80,7 +82,7 @@ def bi_search(start: object, end: object):
     # Add the start and end nodes to the path dictionaries
     start_path[start] = start
     end_path[end] = end
-    
+
     visited_nodes: int = 0
     path_size: int = 0
 

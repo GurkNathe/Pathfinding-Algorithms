@@ -1,5 +1,6 @@
 import random
 
+
 def rand_walk(start: object, end: object):
     """
     Generates a random walk from the starting node to the goal node.

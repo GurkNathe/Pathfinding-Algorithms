@@ -38,7 +38,7 @@ def a_star(grid: list, start: object, end: object):
         # Get the current node from the open set
         current = open_set.get()[2]
         open_set_hash.remove(current)
-        
+
         visited_nodes += 1
 
         # End the search if the current node is the end node

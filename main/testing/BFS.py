@@ -24,7 +24,7 @@ def bfs(start: object, end: object):
     found = False
 
     visited_nodes: int = 0
-    
+
     # Perform the search
     while nodes and not found:
         # Get the next node to visit
