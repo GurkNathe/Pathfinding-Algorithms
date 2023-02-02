@@ -119,12 +119,16 @@ def floyd_warshall(start: object, end: object, grid: list):
     for i in range(V):
         for j in range(V):
             visited_nodes += 1
-            # If the two nodes are the same, set the distance to 0
-            if i == j:
-                distance[i][j] = 0
+
             # If the nodes are neighbors, set the distance to 1
-            elif nodes[i] in nodes[j].neighbors:
+            if nodes[i] in nodes[j].neighbors:
                 distance[i][j] = 1
+
+    # If the two nodes are the same, set the distance to 0
+    for i in range(V):
+        visited_nodes += 1
+        distance[i][i] = 0
+
 
     # Iterate through all nodes in the list
     for k in range(V):

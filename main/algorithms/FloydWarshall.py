@@ -109,15 +109,17 @@ def floyd_warshall(draw: object, start: object, end: object, grid: list):
     # Initialize the distance matrix with all values set to infinity
     distance = [[float("inf") for _ in range(V)] for _ in range(V)]
 
+
     # Initialize the distance values in the distance matrix
     for i in range(V):
         for j in range(V):
-            # If the two nodes are the same, set the distance to 0
-            if i == j:
-                distance[i][j] = 0
             # If the nodes are neighbors, set the distance to 1
-            elif nodes[i] in nodes[j].neighbors:
+            if nodes[i] in nodes[j].neighbors:
                 distance[i][j] = 1
+
+    # If the two nodes are the same, set the distance to 0
+    for i in range(V):
+        distance[i][i] = 0
 
     # Initialize a flag to run the algorithm
     run = True
