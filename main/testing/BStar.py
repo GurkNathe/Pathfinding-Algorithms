@@ -7,7 +7,7 @@ def heuristic(node1: object, node2: object):
     """
     Calculate the Dynamic Manhattan distance between two nodes.
 
-    Parameters:
+    Args:
         node1 (Node): The first node.
         node2 (Node): The second node.
 

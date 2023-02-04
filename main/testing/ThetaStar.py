@@ -58,7 +58,7 @@ def remove_add(
     Remove a node from the open set (if it exists) and add it back to the open set
     with an updated distance value.
 
-    Parameters:
+    Args:
         open_set_hash (Dict[Node, Node]): A dictionary mapping nodes to distance
             values in the open set.
         open_set (PriorityQueue): The open set of nodes to search, prioritized
@@ -102,7 +102,7 @@ def update_vertex(
     """
     Update the distance values and parent pointers for a node in the search.
 
-    Parameters:
+    Args:
         current (Node): The current node being processed.
         neighbor (Node): The neighbor node being processed.
         parent (Dict[Node, Node]): A dictionary mapping nodes to their parent nodes.
@@ -161,7 +161,7 @@ def connect_path(came_from: dict, current: object, grid: list):
     """
     Connect the path between turn points on the grid.
 
-    Parameters:
+    Args:
         came_from (Dict[Node, Node]): A dictionary mapping nodes to their parent nodes.
         current (Node): The current node being processed.
         draw (function): A function to draw the grid.
@@ -232,10 +232,8 @@ def theta_star(start: object, end: object, grid: list):
     """
     Perform the Theta* search algorithm on the grid.
 
-    Parameters:
-        start (Node): The start node of the search.
-        end (Node): The end node of the search.
-        grid (List[List[Node]]): The grid of nodes to search.
+    Args:
+        grid (Grid): An object representing the current grid
 
     Returns:
         None

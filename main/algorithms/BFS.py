@@ -2,14 +2,12 @@ import pygame
 from .RP import reconstruct_path, check, markup
 
 
-def bfs(draw: object, start: object, end: object):
+def bfs(grid: object):
     """
     Perform a breadth-first search from start to end.
 
     Args:
-        draw (function): A function used to draw the search on the screen.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid
 
     Returns:
         None: The function updates the screen with the search progress and path.
@@ -17,7 +15,7 @@ def bfs(draw: object, start: object, end: object):
 
     # Initialize a list to store the nodes to visit (queue)
     nodes = []
-    nodes.append(start)
+    nodes.append(grid.start)
 
     # Initialize a dictionary to store the predecessor of each node
     previous = {}
@@ -39,7 +37,7 @@ def bfs(draw: object, start: object, end: object):
             continue
 
         # Draw the current node
-        markup(draw, current)
+        markup(grid.draw, current)
 
         # Check the neighbors of the current node
         for neighbor in current.neighbors:
@@ -61,4 +59,4 @@ def bfs(draw: object, start: object, end: object):
                         neighbor.uncheck()
 
     # Draw the path from the end node to the start node
-    reconstruct_path(previous, end, draw)
+    reconstruct_path(previous, grid.end, grid.draw)

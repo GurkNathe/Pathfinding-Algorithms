@@ -12,7 +12,7 @@ def depth_limit(
     """
     Recursive DFS with a depth limit.
 
-    Parameters:
+    Args:
         current (Node): Current node being visited.
         end (Node): Goal node.
         depth (int): Current depth of the search.
@@ -54,7 +54,7 @@ def iddfs(start: object, end: object, grid: list, length: int):
     """
     Iterative deepening DFS.
 
-    Parameters:
+    Args:
         start (Node): Start node.
         end (Node): Goal node.
         grid (List[List[Node]]): List of nodes in the grid.

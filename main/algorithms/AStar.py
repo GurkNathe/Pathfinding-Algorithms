@@ -3,15 +3,12 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check
 
 
-def a_star(draw: object, grid: list, start: object, end: object):
+def a_star(grid: object):
     """
     Perform an A* search from start to end.
 
     Args:
-        draw (function): A function used to draw the search on the screen.
-        grid (List[List[Node]]): The grid of nodes to search.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid
 
     Returns:
         None: The function updates the screen with the search progress and path.
@@ -20,17 +17,17 @@ def a_star(draw: object, grid: list, start: object, end: object):
     # Initialize counters and sets
     count = 0
     open_set = PriorityQueue()
-    open_set.put((0, count, start))
+    open_set.put((0, count, grid.start))
     came_from = {}
 
     # Initialize dictionaries to store the g and f scores for each node
-    g_score = {node: float("inf") for row in grid for node in row}
-    g_score[start] = 0
-    f_score = {node: float("inf") for row in grid for node in row}
-    f_score[start] = heuristic("manhattan", start, end)
+    g_score = {node: float("inf") for row in grid.grid for node in row}
+    g_score[grid.start] = 0
+    f_score = {node: float("inf") for row in grid.grid for node in row}
+    f_score[grid.start] = heuristic("manhattan", grid.start, grid.end)
 
     # Initialize a set to store the nodes in the open set
-    open_set_hash = {start}
+    open_set_hash = {grid.start}
 
     # Initialize a flag to track whether the search should continue
     run = True
@@ -45,9 +42,9 @@ def a_star(draw: object, grid: list, start: object, end: object):
         open_set_hash.remove(current)
 
         # End the search if the current node is the end node
-        if current == end:
-            reconstruct_path(came_from, end, draw)
-            end.make_end()
+        if current.is_end():
+            reconstruct_path(came_from, grid.end, grid.draw)
+            grid.end.make_end()
             break
 
         # Check the neighbors of the current node
@@ -60,18 +57,22 @@ def a_star(draw: object, grid: list, start: object, end: object):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + heuristic("manhattan", neighbor, end)
+                f_score[neighbor] = temp_g_score + heuristic(
+                    "manhattan", neighbor, grid.end
+                )
 
                 # Add the neighbor to the open set if it is not already there
                 if neighbor not in open_set_hash:
                     count += 1
                     open_set.put((f_score[neighbor], count, neighbor))
                     open_set_hash.add(neighbor)
-                    neighbor.uncheck()
+
+                    if not neighbor.is_start() and not neighbor.is_end():
+                        neighbor.uncheck()
 
         # Update the screen with the search progress
-        draw()
+        grid.draw()
 
         # Check the current node if it is not the start node
-        if current != start:
+        if not current.is_start():
             current.check()

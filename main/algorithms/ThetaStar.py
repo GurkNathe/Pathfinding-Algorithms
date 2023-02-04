@@ -53,7 +53,7 @@ def remove_add(open_set_hash: dict, open_set: object, distance: int or float, co
     Remove a node from the open set (if it exists) and add it back to the open set
     with an updated distance value.
 
-    Parameters:
+    Args:
         open_set_hash (Dict[Node, Node]): A dictionary mapping nodes to distance 
             values in the open set.
         open_set (PriorityQueue): The open set of nodes to search, prioritized
@@ -97,7 +97,7 @@ def update_vertex(
     """
     Update the distance values and parent pointers for a node in the search.
 
-    Parameters:
+    Args:
         current (Node): The current node being processed.
         neighbor (Node): The neighbor node being processed.
         parent (Dict[Node, Node]): A dictionary mapping nodes to their parent nodes.
@@ -156,7 +156,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
     """
     Connect the path between turn points on the grid.
 
-    Parameters:
+    Args:
         came_from (Dict[Node, Node]): A dictionary mapping nodes to their parent nodes.
         current (Node): The current node being processed.
         draw (function): A function to draw the grid.
@@ -179,6 +179,12 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
     current = end
     while current in came_from and not current.is_start():
         previous = came_from[current]
+        
+        # Making sure not to mark the end as a path
+        if current.is_end():
+            current = previous
+            continue
+        
         xp, yp = previous.get_pos()
         xc, yc = current.get_pos()
 
@@ -225,15 +231,12 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
         draw()
 
 
-def theta_star(draw: object, start: object, end: object, grid: list):
+def theta_star(grid: object):
     """
     Perform the Theta* search algorithm on the grid.
 
-    Parameters:
-        draw (function): A function to draw the grid.
-        start (Node): The start node of the search.
-        end (Node): The end node of the search.
-        grid (List[List[Node]]): The grid of nodes to search.
+    Args:
+        grid (Grid): An object representing the current grid
 
     Returns:
         None
@@ -241,18 +244,18 @@ def theta_star(draw: object, start: object, end: object, grid: list):
 
     # Dictionary mapping nodes to their g scores (distance from the start vertex)
     g_score = {}
-    g_score[start] = 0
+    g_score[grid.start] = 0
 
     counter = 0
 
     # Priority queue for the open set of nodes to search
     open_set = PriorityQueue()
-    open_set.put((g_score[start] + heuristic("manhattan", start, end), counter, start))
+    open_set.put((g_score[grid.start] + heuristic("manhattan", grid.start, grid.end), counter, grid.start))
     open_set_hash = {}
-    open_set_hash[start] = start
+    open_set_hash[grid.start] = grid.start
 
     parent = {}
-    parent[start] = start
+    parent[grid.start] = grid.start
 
     run = True
 
@@ -266,8 +269,7 @@ def theta_star(draw: object, start: object, end: object, grid: list):
 
         # If the current vertex is the end vertex
         if current.is_end():
-            connect_path(parent, end, draw, grid)
-            end.make_end()
+            connect_path(parent, grid.end, grid.draw, grid.grid)
             break
 
         # Markup for drawing grid
@@ -276,7 +278,7 @@ def theta_star(draw: object, start: object, end: object, grid: list):
         else:
             current.been_checked = True
 
-        draw()
+        grid.draw()
 
         if not current.is_start():
             current.check()
@@ -299,7 +301,7 @@ def theta_star(draw: object, start: object, end: object, grid: list):
                     g_score,
                     open_set,
                     open_set_hash,
-                    end,
+                    grid.end,
                     counter,
-                    grid,
+                    grid.grid,
                 )

@@ -8,7 +8,7 @@ def gbls(start: object, end: object, grid: list):
     in the direction of the last chosen node as long as the estimated distance to the
     goal is shorter than the current node.
 
-    Parameters:
+    Args:
         start (Node): The starting node of the search.
         end (Node): The ending node of the search.
         grid (List[List[Node]]): grid containing the nodes

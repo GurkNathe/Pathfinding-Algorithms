@@ -7,7 +7,7 @@ def reconstruct_path(draw: object, path: list):
     Reconstructs the path taken by the search algorithm and marks the
     path on the grid.
 
-    Parameters:
+    Args:
         draw (function): The draw function to update the grid display.
         path (list): The list of nodes representing the path taken by
             the search algorithm.
@@ -21,33 +21,31 @@ def reconstruct_path(draw: object, path: list):
             draw()
 
 
-def ida_star(draw: object, start: object, end: object):
+def ida_star(grid: object):
     """
     Implements the IDA* search algorithm.
 
-    Parameters:
-        draw (function): The draw function to update the grid display.
-        start (Node): The starting node.
-        end (Node): The ending node.
+    Args:
+        grid (Grid): An object representing the current grid
 
     Returns:
         None
     """
-    bound = heuristic("manhattan", start, end)
+    bound = heuristic("manhattan", grid.start, grid.end)
 
     # Stack for path being searched
-    path = [start]
+    path = [grid.start]
 
     run = True
 
     while True and run:
         run = check(pygame.event.get(), run)
 
-        result = search(draw, path, 0, bound, end)
+        result = search(grid.draw, path, 0, bound, grid.end)
 
         if result is True:
             path.reverse()
-            reconstruct_path(draw, path)
+            reconstruct_path(grid.draw, path)
             break
         if result is float("inf"):
             break
@@ -59,7 +57,7 @@ def search(draw: object, path: list, g: int, bound: float, end: object):
     """
     Recursive search function used by the IDA* algorithm.
 
-    Parameters:
+    Args:
         draw (function): The draw function to update the grid display.
         path (list): The list of nodes representing the path taken by the
             search algorithm.

@@ -30,18 +30,18 @@ class Testing:
     Testing class for detailing various metrics for each algorithm.
     """
 
-    def __init__(self, *argv: list):
+    def __init__(self, grid: object):
         """
-        Parameters:
+        Args:
             grid (List[List[Node]]): 2D list of nodes representing the grid
             start (Node): starting node
             end (Node): ending node
         """
-        self.grid = argv[0]
-        self.start = argv[1]
-        self.end = argv[2]
-        self.rows = argv[3]
-        self.width = argv[4]
+        self.grid = grid.grid
+        self.start = grid.start
+        self.end = grid.end
+        self.rows = grid.rows
+        self.width = grid.width
 
         # Clear grid after every run
         self.grid = self.clear_grid(self.grid, self.rows, self.width)
@@ -151,7 +151,7 @@ class Testing:
         keeping the start, end, and obstacles nodes from the
         original grid.
 
-        Parameters:
+        Args:
             current_grid (List[List[Node]]): The original grid.
             rows (int): The number of rows in the grid.
             width (int): The width of the grid in pixels.
@@ -197,7 +197,7 @@ class Testing:
         """
         Select and run the specified pathfinding algorithm.
 
-        Parameters:
+        Args:
             algorithm (str): name of the algorithm to use
 
         Returns:

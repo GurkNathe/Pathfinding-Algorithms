@@ -13,7 +13,7 @@ def reconstruct_path(
     Function to reconstruct a path from the start node to the end node based on
     the given distance matrix, list of nodes, and list of checked nodes.
 
-    Parameters:
+    Args:
         draw (function): Function to draw the updated grid.
         dist (list): A 2D list representing the distance matrix between nodes.
         V (int): The number of nodes in the grid.
@@ -92,7 +92,7 @@ def floyd_warshall(start: object, end: object, grid: list):
     Implements the Floyd-Warshall algorithm to find the shortest path between
     the start and end nodes in the given grid.
 
-    Parameters:draw (function): A function used to draw the search on the screen.
+    Args:draw (function): A function used to draw the search on the screen.
         start (Node): The starting node of the search.
         end (Node): The ending node of the search.
         grid (List[List[Node]]): The grid of nodes to search.

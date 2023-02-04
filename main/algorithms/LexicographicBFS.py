@@ -6,7 +6,7 @@ def LexBFS(draw: object, start: object):
     """
     Implements the Lexicographic Breadth-First Search (LexBFS) algorithm.
 
-    Parameters:
+    Args:
         draw (function): The draw function to update the grid display.
         start (start): The starting node.
 
@@ -69,24 +69,24 @@ def LexBFS(draw: object, start: object):
     return order, levels, parent
 
 
-def LBFS(draw: object, start: object, end: object, grid: list):
+def lbfs(grid: object):
     """
     Solves the shortest path problem using LexBFS.
 
-    Parameters:
-        draw (function): The draw function to update the grid display.
-        start (Node): The starting node.
-        end (Node): The ending node.
-        grid (List[List[Node]]): A 2D list of nodes representing the graph.
+    Args:
+        grid (Grid): An object representing the current grid
+    
+    Returns:
+        None
     """
 
     # Run LexBFS to get the order of the vertices
-    order, levels, parent = LexBFS(draw, start)
+    order, levels, parent = LexBFS(grid.draw, grid.start)
 
     if order is not False:
         # Initialize the distances dictionary
-        distances = {node: float("inf") for row in grid for node in row}
-        distances[start] = 0
+        distances = {node: float("inf") for row in grid.grid for node in row}
+        distances[grid.start] = 0
 
         # Iterate through the vertices in the order produced by LexBFS
         for current in order:
@@ -96,4 +96,4 @@ def LBFS(draw: object, start: object, end: object, grid: list):
                     distances[neighbor] = distances[current] + 1
                     parent[neighbor] = current
 
-        reconstruct_path(parent, end, draw)
+        reconstruct_path(parent, grid.end, grid.draw)

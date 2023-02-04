@@ -16,6 +16,8 @@ See the explanations for the implemented algorithms [here](./resources/Algorithm
 
 There are three optional command line arguments: width, # rows, algorithm type.
 
+<strong>Disclaimer: Testing is done on default settings, there is no guarantee, as of now, that things work smoothly for different widths and rows.</strong>
+
 ```
 width >= 2
 rows >= 2

@@ -5,7 +5,7 @@ def LexBFS(visited_nodes: int, start: object):
     """
     Implements the Lexicographic Breadth-First Search (LexBFS) algorithm.
 
-    Parameters:
+    Args:
         start (start): The starting node.
 
     Returns:
@@ -56,7 +56,7 @@ def LBFS(start: object, end: object, grid: list):
     """
     Solves the shortest path problem using LexBFS.
 
-    Parameters:draw (function): The draw function to update the grid display.
+    Args:draw (function): The draw function to update the grid display.
         start (Node): The starting node.
         end (Node): The ending node.
         grid (List[List[Node]]): A 2D list of nodes representing the graph.

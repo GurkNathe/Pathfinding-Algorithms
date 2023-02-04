@@ -3,14 +3,12 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check, markup
 
 
-def gbfs(draw: object, start: object, end: object):
+def gbfs(grid: object):
     """
     Perform a greedy best-first search from start to end.
 
     Args:
-        draw (function): A function used to draw the search on the screen.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid
 
     Returns:
         None: The function updates the screen with the search progress and path.
@@ -18,7 +16,7 @@ def gbfs(draw: object, start: object, end: object):
 
     # Initialize priority queue with the start node
     Q = PriorityQueue()
-    Q.put((heuristic("manhattan", start, end), 0, start))
+    Q.put((heuristic("manhattan", grid.start, grid.end), 0, grid.start))
 
     # Initialize counters and flags
     counter = 0
@@ -41,7 +39,7 @@ def gbfs(draw: object, start: object, end: object):
             continue
 
         # Draw the current node
-        markup(draw, current)
+        markup(grid.draw, current)
 
         # Check the neighbors of the current node
         for neighbor in current.neighbors:
@@ -59,9 +57,9 @@ def gbfs(draw: object, start: object, end: object):
 
                 # Add the neighbor to the queue
                 counter += 1
-                distance = heuristic("manhattan", neighbor, end)
+                distance = heuristic("manhattan", neighbor, grid.end)
                 previous[neighbor] = current
                 Q.put((distance, counter, neighbor))
 
     # Draw the path from the end node to the start node
-    reconstruct_path(previous, end, draw)
+    reconstruct_path(previous, grid.end, grid.draw)

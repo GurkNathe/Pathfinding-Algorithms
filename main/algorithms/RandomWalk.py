@@ -3,14 +3,13 @@ import random
 from .RP import check
 
 
-def reconstruct_path(came_from: dict, current: object, draw: object):
+def reconstruct_path(came_from: list, current: object, draw: object):
     """
     Reconstructs the path from the starting node to the current node,
     by following the `came_from` dictionary.
 
-    Parameters:
-        came_from (Dict[Node, Node]): dictionary mapping each node to its previous
-            node in the path
+    Args:
+        came_from (List[Node]): list containing which nodes were checked
         current (Node): current node
         draw (function): function for drawing the search path on the grid
 
@@ -24,14 +23,12 @@ def reconstruct_path(came_from: dict, current: object, draw: object):
             draw()
 
 
-def rand_walk(draw: object, start: object, end: object):
+def rand_walk(grid: object):
     """
     Generates a random walk from the starting node to the goal node.
 
-    Parameters:
-        draw (function): function for drawing the search path on the grid
-        start (Node): starting node
-        end (Node): goal node
+    Args:
+        grid (Grid): An object representing the current grid
 
     Returns:
         None
@@ -39,7 +36,7 @@ def rand_walk(draw: object, start: object, end: object):
 
     # Initialize the list of previous nodes and the current node
     came_from = []
-    current = start
+    current = grid.start
 
     # Flag for continuing the search
     run = True
@@ -65,18 +62,18 @@ def rand_walk(draw: object, start: object, end: object):
 
         # If the current node is the goal node and the path has not
         # been made yet, reconstruct the path and make the goal node
-        if current == end and make_path:
-            reconstruct_path(came_from, end, draw)
-            end.make_end()
+        if current.is_end() and make_path:
+            reconstruct_path(came_from, grid.end, grid.draw)
+            grid.end.make_end()
             break
 
         # Markup for drawing path with color change
-        if current != start:
+        if not current.is_start():
             current.uncheck()
 
-        draw()
+        grid.draw()
 
-        if current != start and not current.been_checked:
+        if not current.is_start() and not current.been_checked:
             current.check()
-        elif current != start:
+        elif not current.is_start():
             current.mult_check(3)

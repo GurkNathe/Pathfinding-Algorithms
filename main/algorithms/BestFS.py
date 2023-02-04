@@ -48,14 +48,12 @@ def reconstruct_path(current: object, costs: dict, draw: object):
         draw()
 
 
-def best_fs(draw: object, start: object, end: object):
+def best_fs(grid: object):
     """
     Perform a best-first search from start to end.
 
     Args:
-        draw (function): A function used to draw the search on the screen.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid
 
     Returns:
         None: The function updates the screen with the search progress and path.
@@ -63,11 +61,11 @@ def best_fs(draw: object, start: object, end: object):
 
     # Initialize the priority queue with the start node
     queue = PriorityQueue()
-    queue.put((0, 0, start))
+    queue.put((0, 0, grid.start))
     count = 0
 
     # Initialize a dictionary to store the cost of reaching each node from the start
-    costs = {start: 0}
+    costs = {grid.start: 0}
 
     # Initialize a flag to track whether the search should continue
     run = True
@@ -81,13 +79,13 @@ def best_fs(draw: object, start: object, end: object):
         cost, _, current = queue.get()
 
         # End the search if the current node is the end node
-        if current == end:
-            reconstruct_path(current, costs, draw)
-            end.make_end()
+        if current.is_end():
+            reconstruct_path(current, costs, grid.draw)
+            grid.end.make_end()
             break
 
         # Draw the current node
-        markup(draw, current)
+        markup(grid.draw, current)
 
         # Check the neighbors of the current node
         for neighbor in current.neighbors:
@@ -99,7 +97,11 @@ def best_fs(draw: object, start: object, end: object):
                 costs[neighbor] = cost
                 # Add the neighbor to the queue with the calculated cost as the priority
                 queue.put(
-                    (cost + heuristic("manhattan", neighbor, end), count + 1, neighbor)
+                    (
+                        cost + heuristic("manhattan", neighbor, grid.end),
+                        count + 1,
+                        neighbor,
+                    )
                 )
 
                 # Uncheck the child if it is not the start or end node

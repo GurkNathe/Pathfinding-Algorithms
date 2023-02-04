@@ -3,11 +3,9 @@ from .RP import get_unvisited_nodes, check
 
 
 def reconstruct_path(
-    draw: object,
+    grid: object,
     dist: list,
     V: int,
-    start: object,
-    end: object,
     nodes: list,
     checked_nodes: list,
 ):
@@ -15,28 +13,27 @@ def reconstruct_path(
     Function to reconstruct a path from the start node to the end node based on
     the given distance matrix, list of nodes, and list of checked nodes.
 
-    Parameters:
+    Args:
+        grid (Grid): An object representing the current grid
         dist (list): A 2D list representing the distance matrix between nodes.
         V (int): The number of nodes in the grid.
-        start (Node): The starting node.
-        end (Node): The ending node.
         nodes (list): A list of all nodes in the grid.
         checked_nodes (list): A list of nodes that have been visited during the search.
 
     Returns:
-        int: size of path found
+        bool or None: bool if error, otherwise None
     """
 
     # If the end node is not in the list of nodes, return False
     try:
-        test = nodes.index(end)
-        if end not in checked_nodes:
-            return 0
+        test = nodes.index(grid.end)
+        if grid.end not in checked_nodes:
+            return False
     except ValueError:
-        return 0
+        return False
 
     # Get the indices of the start and end nodes in the list of nodes
-    u, v = nodes.index(start), nodes.index(end)
+    u, v = nodes.index(grid.start), nodes.index(grid.end)
 
     # Initialize empty lists for the path, left-side distances,
     # and right-side distances
@@ -44,7 +41,6 @@ def reconstruct_path(
     left = []
     right = []
     current = v
-    path_size: int = 0
 
     # Iterate backwards through the distance matrix
     for k in range(V - 1, -1, -1):
@@ -68,47 +64,45 @@ def reconstruct_path(
             current = k
 
     # Set the current node to the end node
-    curr = end
+    curr = grid.end
     # Keep looping until the current node is the start node
-    while curr != start:
+    while not curr.is_start():
         # Check each neighbor of the current node
         for node in curr.neighbors:
             # If the neighbor is the start node, return True
             if node.is_start():
+                curr = grid.start
                 break
 
             # If the neighbor is in the path, mark it as part of the path and
             # set the current node to the neighbor
             if node in path:
-                path_size += 1
+                node.make_path()
                 path.remove(node)
                 curr = node
-    return path_size
+                grid.draw()
 
-def floyd_warshall(draw: object, start: object, end: object, grid: list):
+
+def floyd_warshall(grid: object):
     """
     Implements the Floyd-Warshall algorithm to find the shortest path between
     the start and end nodes in the given grid.
 
-    Parameters:
-        draw (function): A function used to draw the search on the screen.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
-        grid (List[List[Node]]): The grid of nodes to search.
+    Args:
+        grid (Grid): An object representing the current grid
 
     Returns:
         None: The function updates the screen with the search progress and path.
     """
 
     # Get a list of all unvisited nodes, excluding the start node
-    nodes = get_unvisited_nodes(start)
+    nodes = get_unvisited_nodes(grid.start)
 
     # Get the number of nodes
     V = len(nodes)
 
     # Initialize the distance matrix with all values set to infinity
     distance = [[float("inf") for _ in range(V)] for _ in range(V)]
-
 
     # Initialize the distance values in the distance matrix
     for i in range(V):
@@ -125,7 +119,7 @@ def floyd_warshall(draw: object, start: object, end: object, grid: list):
     run = True
 
     # Used for path reconstruction
-    checked_nodes = [start]
+    checked_nodes = [grid.start]
 
     # Iterate through all nodes in the list
     for k in range(V):
@@ -157,7 +151,7 @@ def floyd_warshall(draw: object, start: object, end: object, grid: list):
                         nodes[k].uncheck()
 
                     # Draw the updated distances
-                    draw()
+                    grid.draw()
 
                     # If none of the nodes are the start or end nodes, check them again
                     if (
@@ -178,10 +172,10 @@ def floyd_warshall(draw: object, start: object, end: object, grid: list):
     if run:
         # Adding end if it is connected to start
         try:
-            test = nodes.index(end)
-            checked_nodes.append(end)
+            test = nodes.index(grid.end)
+            checked_nodes.append(grid.end)
         except ValueError:
             pass
 
         # Trace the shortest path through the distance matrix
-        reconstruct_path(draw, distance, V, start, end, nodes, checked_nodes)
+        reconstruct_path(grid, distance, V, nodes, checked_nodes)

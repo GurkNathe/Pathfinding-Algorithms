@@ -17,7 +17,7 @@ class Node:
         """
         Initializes a node with its position, size, and color.
 
-        Parameters:
+        Args:
             row (int): row index of the node in the grid
             col (int): column index of the node in the grid
             width (int): width of the node
@@ -94,7 +94,7 @@ class Node:
         """
         Makes the node the specified color.
 
-        Parameters:
+        Args:
             color (tuple): tuple of (R, G, B) values representing the
             desired color of the node
 
@@ -107,7 +107,7 @@ class Node:
         """
         Changes the color of a checked node that has been checked multiple times.
 
-        Parameters:
+        Args:
             dec (int): value to change the color by
 
         Returns:
@@ -129,7 +129,7 @@ class Node:
         """
         Draws the node on the given window.
 
-        Parameters:
+        Args:
             win (pygame.Surface): window to draw the node on
 
         Returns:
@@ -141,7 +141,7 @@ class Node:
         """
         Updates the neighbors of the node in the grid.
 
-        Parameters:
+        Args:
             grid (List[List[Node]]): 2D list of nodes representing the grid
 
         Returns:
@@ -175,7 +175,7 @@ class Node:
         """
         Comparison operator for the priority queue.
 
-        Parameters:
+        Args:
             other (Node): node to compare to
 
         Returns:

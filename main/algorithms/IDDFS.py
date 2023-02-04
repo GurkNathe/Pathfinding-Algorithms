@@ -2,13 +2,11 @@ import pygame
 from .RP import check, markup, reconstruct_path
 
 
-def depth_limit(
-    draw: object, current: object, end: object, depth: int, visited: set, path: dict
-):
+def depth_limit(draw: object, current: object, depth: int, visited: set, path: dict):
     """
     Recursive DFS with a depth limit.
 
-    Parameters:
+    Args:
         draw (function): Function to draw the current state of the search.
         current (Node): Current node being visited.
         end (Node): Goal node.
@@ -22,7 +20,7 @@ def depth_limit(
     """
     if depth < 0:
         return {}
-    if current == end:
+    if current.is_end():
         return path
 
     visited.add(current)
@@ -36,7 +34,7 @@ def depth_limit(
 
             path[neighbor] = current
 
-            result = depth_limit(draw, neighbor, end, depth - 1, visited, path)
+            result = depth_limit(draw, neighbor, depth - 1, visited, path)
 
             if result:
                 return result
@@ -44,15 +42,12 @@ def depth_limit(
     return {}
 
 
-def iddfs(draw: object, start: object, end: object, grid: list, length: int):
+def iddfs(grid: object, length: int):
     """
     Iterative deepening DFS.
 
-    Parameters:
-        draw (function): Function to draw the current state of the search.
-        start (Node): Start node.
-        end (Node): Goal node.
-        grid (List[List[Node]]): List of nodes in the grid.
+    Args:
+        grid (Grid): An object representing the current grid
         length (int): Length of the grid.
 
     Returns:
@@ -67,8 +62,8 @@ def iddfs(draw: object, start: object, end: object, grid: list, length: int):
         run = check(pygame.event.get(), run)
 
         visited = set()
-        path = depth_limit(draw, start, end, depth, visited, {start: None})
+        path = depth_limit(grid.draw, grid.start, depth, visited, {grid.start: None})
 
         if path:
-            reconstruct_path(path, end, draw)
+            reconstruct_path(path, grid.end, grid.draw)
             break

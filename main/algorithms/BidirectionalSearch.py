@@ -8,7 +8,7 @@ def reconstruct_path(came_from: object, current: object, target: object, draw: o
     """
     Reconstructs the path from the current node to the target node in a maze.
 
-    Parameters:
+    Args:
         came_from (Dict[Node, Node]): A dictionary containing the nodes traversed
             during the pathfinding algorithm.
         current (Node): The node being checked when the algorithm terminated
@@ -43,7 +43,7 @@ def thread_construct(args1: tuple, args2: tuple):
     given arguments. The threads are started and then joined, which waits for
     them to finish before returning.
 
-    Parameters:
+    Args:
         args1 (tuple): A tuple of arguments to pass to the first
             `reconstruct_path` function.
         args2 (tuple): A tuple of arguments to pass to the second
@@ -63,21 +63,18 @@ def thread_construct(args1: tuple, args2: tuple):
     n2.join()
 
 
-def bi_search(draw: object, start: object, end: object):
+def bi_search(grid: object):
     """
     Performs a bidirectional search to find the shortest path between the
     start and end nodes. The search is visualized using the given draw object.
 
-    Parameters:
-        draw (function): A function that is responsible for drawing the
-            search visualization.
-        start (Node): The starting node for the search.
-        end (Node): The ending node for the search.
+    Args:
+        grid (Grid): An object representing the current grid
     """
 
     # Initialize two queues, one for each direction of the search
-    queue_start = [start]
-    queue_end = [end]
+    queue_start = [grid.start]
+    queue_end = [grid.end]
 
     # Initialize two sets to keep track of visited nodes, one for
     # each direction of the search
@@ -89,8 +86,8 @@ def bi_search(draw: object, start: object, end: object):
     end_path = {}
 
     # Add the start and end nodes to the path dictionaries
-    start_path[start] = start
-    end_path[end] = end
+    start_path[grid.start] = grid.start
+    end_path[grid.end] = grid.end
 
     run = True
 
@@ -116,20 +113,22 @@ def bi_search(draw: object, start: object, end: object):
             # Construct two threads to reconstruct the path from the start and
             # end directions
             thread_construct(
-                (start_path, node1, start, draw), (end_path, node1, end, draw)
+                (start_path, node1, grid.start, grid.draw),
+                (end_path, node1, grid.end, grid.draw),
             )
             break
         if node2 in visited_start:
             # Construct two threads to reconstruct the path from the start and
             # end directions
             thread_construct(
-                (start_path, node2, start, draw), (end_path, node2, end, draw)
+                (start_path, node2, grid.start, grid.draw),
+                (end_path, node2, grid.end, grid.draw),
             )
             break
 
         # Mark up the nodes that are being processed
-        markup(draw, node1)
-        markup(draw, node2)
+        markup(grid.draw, node1)
+        markup(grid.draw, node2)
 
         # Mark the nodes as visited
         visited_start.add(node1)

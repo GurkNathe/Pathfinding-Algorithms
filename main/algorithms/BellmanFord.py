@@ -3,14 +3,12 @@ from queue import Queue
 from .RP import reconstruct_path, get_unvisited_nodes, check, markup
 
 
-def bell_ford(draw: object, start: object, end: object, accuracy: float):
+def bell_ford(grid: object, accuracy: float):
     """
     Perform a Bellman-Ford search from start to end with a given accuracy.
 
     Args:
-        draw (function): A function used to draw the search on the screen.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid
         accuracy (float): The fraction of nodes to visit at each step. (0, 1]
 
     Returns:
@@ -18,14 +16,14 @@ def bell_ford(draw: object, start: object, end: object, accuracy: float):
     """
 
     # Get the list of unvisited nodes
-    nodes = get_unvisited_nodes(start)
+    nodes = get_unvisited_nodes(grid.start)
 
     # Initialize dictionaries to store the distance and predecessor for each node
     distance = {node: float("inf") for node in nodes}
     predecessor = {}
 
     # Set the distance of the start node to 0
-    distance[start] = 0
+    distance[grid.start] = 0
 
     # Calculate the number of nodes to visit at each step
     counter = int((len(nodes) - 1) * accuracy)
@@ -47,7 +45,7 @@ def bell_ford(draw: object, start: object, end: object, accuracy: float):
             run = check(pygame.event.get(), run)
 
             # Draw the current node
-            markup(draw, current)
+            markup(grid.draw, current)
 
             # Check the neighbors of the current node
             for neighbor in current.neighbors:
@@ -66,4 +64,4 @@ def bell_ford(draw: object, start: object, end: object, accuracy: float):
         counter -= 1
 
     # Draw the path from the end node to the start node
-    reconstruct_path(predecessor, end, draw)
+    reconstruct_path(predecessor, grid.end, grid.draw)

@@ -8,7 +8,7 @@ def chebyshev(node1: object, node2: object):
     """
     Calculate the Chebyshev distance between two nodes.
 
-    Parameters:
+    Args:
         node1 (Node): The first node.
         node2 (Node): The second node.
 
@@ -26,7 +26,7 @@ def manhattan(node1: object, node2: object):
     """
     Calculate the Manhattan distance between two nodes.
 
-    Parameters:
+    Args:
         node1 (Node): The first node.
         node2 (Node): The second node.
 
@@ -44,7 +44,7 @@ def euclidean(node1: object, node2: object):
     """
     Calculate the Euclidean distance between two nodes.
 
-    Parameters:
+    Args:
         node1 (Node): The first node.
         node2 (Node): The second node.
 
@@ -61,7 +61,7 @@ def heuristic(type: str, node1: object, node2: object):
     """
     Calculate the heuristic distance between two nodes.
 
-    Parameters:
+    Args:
         type (str): The type of heuristic distance to use.
             Valid options are "euclidean" and "manhattan".
         node1 (Node): The first node.
@@ -85,7 +85,7 @@ def get_unvisited_nodes(start: object):
     """
     Find all nodes connected to the start node in the grid.
 
-    Parameters:
+    Args:
         start (Node): The starting node.
 
     Returns:
@@ -109,7 +109,7 @@ def check(current: object):
     """
     Mark the current node as visited.
 
-    Parameters:
+    Args:
         current (Node): The current node being visited.
 
     Returns:

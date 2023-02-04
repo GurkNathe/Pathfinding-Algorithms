@@ -3,14 +3,12 @@ import heapq
 from .RP import reconstruct_path, heuristic, check, markup
 
 
-def beam_search(draw: object, start: object, end: object, beam_size: int):
+def beam_search(grid: object, beam_size: int):
     """
     Perform a beam search from start to end with a given beam size.
 
     Args:
-        draw (function): A function used to draw the search on the screen.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid
         beam_size (int): The maximum number of nodes to consider at each step.
 
     Returns:
@@ -18,11 +16,11 @@ def beam_search(draw: object, start: object, end: object, beam_size: int):
     """
 
     # Initialize the beam with the root node
-    beam = [(0, start)]
+    beam = [(0, grid.start)]
 
     # Initialize a dictionary to store the previous nodes for each node
     previous = {}
-    previous[start] = start
+    previous[grid.start] = grid.start
 
     # Initialize a flag to track whether the search should continue
     run = True
@@ -37,12 +35,12 @@ def beam_search(draw: object, start: object, end: object, beam_size: int):
 
         # End the search if the current node is the end node
         if current.is_end():
-            reconstruct_path(previous, end, draw)
-            end.make_end()
+            reconstruct_path(previous, grid.end, grid.draw)
+            grid.end.make_end()
             break
 
         # Draw the current node
-        markup(draw, current)
+        markup(grid.draw, current)
 
         # Expand the current node and add its children to the beam
         children = current.neighbors
@@ -56,7 +54,7 @@ def beam_search(draw: object, start: object, end: object, beam_size: int):
             # Skip the child if it has already been checked
             if not child.is_checked():
                 previous[child] = current
-                heapq.heappush(beam, (heuristic("manhattan", child, end), child))
+                heapq.heappush(beam, (heuristic("manhattan", child, grid.end), child))
 
                 # Uncheck the child if it is not the start or end node
                 # for markup

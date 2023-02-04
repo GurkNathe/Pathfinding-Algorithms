@@ -6,7 +6,7 @@ def count_path(path_size: list, came_from: object, current: object, target: obje
     """
     Reconstructs the path from the current node to the target node in a maze.
 
-    Parameters:
+    Args:
         came_from (Dict[Node, Node]): A dictionary containing the nodes traversed
             during the pathfinding algorithm.
         current (Node): The node being checked when the algorithm terminated
@@ -32,7 +32,7 @@ def thread_construct(args1: tuple, args2: tuple):
     given arguments. The threads are started and then joined, which waits for
     them to finish before returning.
 
-    Parameters:
+    Args:
         args1 (tuple): A tuple of arguments to pass to the first
             `reconstruct_path` function.
         args2 (tuple): A tuple of arguments to pass to the second
@@ -61,7 +61,7 @@ def bi_search(start: object, end: object):
     Performs a bidirectional search to find the shortest path between the
     start and end nodes.
 
-    Parameters:
+    Args:
         start (Node): The starting node for the search.
         end (Node): The ending node for the search.
     """

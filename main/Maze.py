@@ -8,7 +8,7 @@ def surroundingCells(grid: list, y: int, x: int):
     """
     Calculate the number of unchecked cells surrounding the given cell.
 
-    Parameters:
+    Args:
         grid (List[List[Node]]): A 2D list representing the maze grid.
         y (int): The y-coordinate of the cell.
         x (int): The x-coordinate of the cell.
@@ -33,7 +33,7 @@ def delete_wall(walls: list, rand_wall: object):
     """
     Remove the given wall from the list of walls.
 
-    Parameters:
+    Args:
         walls (list): A list of walls.
         rand_wall (Node): The wall to remove from the list.
     """
@@ -49,7 +49,7 @@ def check_up(grid: list, walls: list, r_y: int, r_x: int):
     Check the cell above the given cell and add it to the list of walls
     if it is not checked.
 
-    Parameters:
+    Args:
         grid (List[List[Node]]): A 2D list representing the maze grid.
         walls (List[Node]): A list of walls.
         r_y (int): The y-coordinate of the given cell.
@@ -67,7 +67,7 @@ def check_down(grid: list, walls: list, r_y: int, r_x: int, height: int):
     Check the cell below the given cell and add it to the list of walls
     if it is not checked.
 
-    Parameters:
+    Args:
         grid (List[List[Node]]): A 2D list representing the maze grid.
         walls (List[Node]): A list of walls.
         r_y (int): The y-coordinate of the given cell.
@@ -86,7 +86,7 @@ def check_left(grid: list, walls: list, r_y: int, r_x: int):
     Check the cell to the left of the given cell and add it to the
     list of walls if it is not checked.
 
-    Parameters:
+    Args:
         grid (List[List[Node]]): A 2D list representing the maze grid.
         walls (List[Node]): A list of walls.
         r_y (int): The y-coordinate of the given cell.
@@ -104,7 +104,7 @@ def check_right(grid: list, walls: list, r_y: int, r_x: int, width: int):
     Check the cell to the right of the given cell and add it to the
     list of walls if it is not checked.
 
-    Parameters:
+    Args:
         grid (List[List[Node]]): A 2D list representing the maze grid.
         walls (List[Node]): A list of walls.
         r_y (int): The y-coordinate of the given cell.
@@ -122,7 +122,7 @@ def gen_maze(grid: list, start: object = None, end: object = None):
     """
     Generate a maze using the recursive backtracking algorithm.
 
-    Parameters:
+    Args:
         grid (List[List[Node]]): A 2D list representing the maze grid.
         start (Node): The start node of the given grid.
         end (Node): The end node of the given grid.

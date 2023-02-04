@@ -5,7 +5,7 @@ def ida_star(start: object, end: object):
     """
     Implements the IDA* search algorithm.
 
-    Parameters:
+    Args:
         start (Node): The starting node.
         end (Node): The ending node.
 
@@ -38,7 +38,7 @@ def search(visited_nodes: int, path: list, g: int, bound: float, end: object):
     """
     Recursive search function used by the IDA* algorithm.
 
-    Parameters:
+    Args:
         path (list): The list of nodes representing the path taken by the
             search algorithm.
         g (int): The cost of the path represented by the list of nodes.

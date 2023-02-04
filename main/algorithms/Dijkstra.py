@@ -3,14 +3,12 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, get_unvisited_nodes, check, markup
 
 
-def dijkstra(draw: object, start: object, end: object):
+def dijkstra(grid: object):
     """
     Perform Dijkstra's algorithm from start to end.
 
     Args:
-        draw (function): A function used to draw the search on the screen.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid
 
     Returns:
         None: The function updates the screen with the search progress and path.
@@ -20,17 +18,17 @@ def dijkstra(draw: object, start: object, end: object):
     queue = PriorityQueue()
 
     # Initialize a set to store the unvisited nodes
-    unvisited_nodes = get_unvisited_nodes(start)
+    unvisited_nodes = get_unvisited_nodes(grid.start)
 
     # Set up the node values
     distance = {node: float("inf") for node in unvisited_nodes}
-    distance[start] = 0
+    distance[grid.start] = 0
 
     # Holds the path from start to end
     previous = {}
 
     # Add the start node to the priority queue
-    queue.put((distance[start], 0, start))
+    queue.put((0, 0, grid.start))
     count = 0
 
     # Initialize a flag to track the search status
@@ -45,11 +43,11 @@ def dijkstra(draw: object, start: object, end: object):
         current_distance, _, current_min = queue.get()
 
         # End the search if the current node is the end node
-        if current_min == end:
+        if current_min.is_end():
             break
 
         # Draw the current node
-        markup(draw, current_min)
+        markup(grid.draw, current_min)
 
         # Check the neighbors of the current node
         for neighbor in current_min.neighbors:
@@ -74,4 +72,4 @@ def dijkstra(draw: object, start: object, end: object):
         unvisited_nodes.remove(current_min)
 
     # Draw the path from the end node to the start node
-    reconstruct_path(previous, end, draw)
+    reconstruct_path(previous, grid.end, grid.draw)
