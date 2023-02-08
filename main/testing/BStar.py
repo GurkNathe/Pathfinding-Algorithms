@@ -25,14 +25,12 @@ def heuristic(node1: object, node2: object):
     return abs(x1 - x2) + abs(y1 - y2) + blocked_penalty
 
 
-def b_star(grid: list, start: object, end: object):
+def b_star(grid: object):
     """
     Perform a B* search from start to end.
 
     Args:
-        grid (List[List[Node]]): The grid of nodes to search.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid.
 
     Returns:
         None
@@ -41,17 +39,17 @@ def b_star(grid: list, start: object, end: object):
     # Initialize counters and sets
     count = 0
     open_set = PriorityQueue()
-    open_set.put((0, count, start))
+    open_set.put((0, count, grid.start))
     came_from = {}
 
     # Initialize dictionaries to store the g and f scores for each node
-    g_score = {node: float("inf") for row in grid for node in row}
-    g_score[start] = 0
-    f_score = {node: float("inf") for row in grid for node in row}
-    f_score[start] = heuristic(start, end)
+    g_score = {node: float("inf") for row in grid.grid for node in row}
+    g_score[grid.start] = 0
+    f_score = {node: float("inf") for row in grid.grid for node in row}
+    f_score[grid.start] = heuristic(grid.start, grid.end)
 
     # Initialize a set to store the nodes in the open set
-    open_set_hash = {start}
+    open_set_hash = {grid.start}
 
     visited_nodes: int = 0
     path_size: int = 0
@@ -65,9 +63,8 @@ def b_star(grid: list, start: object, end: object):
         visited_nodes += 1
 
         # End the search if the current node is the end node
-        if current == end:
-            path_size = count_path(came_from, end)
-            end.make_end()
+        if current.is_end():
+            path_size = count_path(came_from, grid.end)
             break
 
         # Check the neighbors of the current node
@@ -80,15 +77,12 @@ def b_star(grid: list, start: object, end: object):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + heuristic(neighbor, end)
+                f_score[neighbor] = temp_g_score + heuristic(neighbor, grid.end)
 
                 # Add the neighbor to the open set if it is not already there
                 if neighbor not in open_set_hash:
                     count += 1
                     open_set.put((f_score[neighbor], count, neighbor))
                     open_set_hash.add(neighbor)
-                    neighbor.uncheck()
-
-        check(current)
 
     return visited_nodes, path_size

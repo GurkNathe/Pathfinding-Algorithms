@@ -1,26 +1,26 @@
 from .RP import heuristic
 
 
-def ida_star(start: object, end: object):
+def ida_star(grid: object):
     """
     Implements the IDA* search algorithm.
 
     Args:
-        start (Node): The starting node.
-        end (Node): The ending node.
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        path_size (int): Length of the path found.
     """
-    bound = heuristic("manhattan", start, end)
+    bound = heuristic("manhattan", grid.start, grid.end)
 
     # Stack for path being searched
-    path = [start]
+    path = [grid.start]
 
     visited_nodes: int = 0
 
     while True:
-        result, temp_v_n = search(visited_nodes, path, 0, bound, end)
+        result, temp_v_n = search(visited_nodes, path, 0, bound, grid.end)
 
         visited_nodes = temp_v_n
 
@@ -39,14 +39,16 @@ def search(visited_nodes: int, path: list, g: int, bound: float, end: object):
     Recursive search function used by the IDA* algorithm.
 
     Args:
+        visited_nodes (int): Count of the number of nodes visited.
         path (list): The list of nodes representing the path taken by the
             search algorithm.
         g (int): The cost of the path represented by the list of nodes.
         bound (float): The bound on the cost of the path.
         end (Node): The ending node.
     Returns:
-        True (boolean): end was reached
-        f (float): g-score + heuristic is greater than current depth (bound)
+        True or f (boolean or float): 
+            end was reached;
+            g-score + heuristic is greater than current depth (bound)
         min_val (float): minimum value for the path
     """
     # Get last node in path

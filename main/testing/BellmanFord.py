@@ -2,28 +2,28 @@ from queue import Queue
 from .RP import get_unvisited_nodes, check, count_path
 
 
-def bell_ford(start: object, end: object, accuracy: float):
+def bell_ford(grid: object, accuracy: float):
     """
     Perform a Bellman-Ford search from start to end with a given accuracy.
 
     Args:
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid.
         accuracy (float): The fraction of nodes to visit at each step. (0, 1]
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        count_path (int): Length of the path found.
     """
 
     # Get the list of unvisited nodes
-    nodes = get_unvisited_nodes(start)
+    nodes = get_unvisited_nodes(grid.start)
 
     # Initialize dictionaries to store the distance and predecessor for each node
     distance = {node: float("inf") for node in nodes}
     predecessor = {}
 
     # Set the distance of the start node to 0
-    distance[start] = 0
+    distance[grid.start] = 0
 
     # Calculate the number of nodes to visit at each step
     counter = int((len(nodes) - 1) * accuracy)
@@ -49,4 +49,4 @@ def bell_ford(start: object, end: object, accuracy: float):
         # Decrement the counter
         counter -= 1
 
-    return visited_nodes, count_path(predecessor, end)
+    return visited_nodes, count_path(predecessor, grid.end)

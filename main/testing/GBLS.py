@@ -2,24 +2,23 @@ from queue import PriorityQueue
 from .RP import heuristic, check, count_path
 
 
-def gbls(start: object, end: object, grid: list):
+def gbls(grid: object):
     """
     Modified version of the greedy best-first search algorithm that explores neighbors
     in the direction of the last chosen node as long as the estimated distance to the
     goal is shorter than the current node.
 
     Args:
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
-        grid (List[List[Node]]): grid containing the nodes
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        count_path (int): Length of the path found.
     """
 
     # Initialize the priority queue with the starting node
     Q = PriorityQueue()
-    Q.put((heuristic("manhattan", start, end), 0, start))
+    Q.put((heuristic("manhattan", grid.start, grid.end), 0, grid.start))
 
     # Initialize the counter and flags
     counter = 0
@@ -66,7 +65,7 @@ def gbls(start: object, end: object, grid: list):
                     break
 
                 counter += 1
-                distance = heuristic("manhattan", neighbor, end)
+                distance = heuristic("manhattan", neighbor, grid.end)
 
                 # Add the neighbor to the queue with the estimated
                 # distance as the priority
@@ -78,4 +77,4 @@ def gbls(start: object, end: object, grid: list):
                     neighbor.get_pos()[0] - current.get_pos()[0],
                     neighbor.get_pos()[1] - current.get_pos()[1],
                 )
-    return visited_nodes, count_path(previous, end)
+    return visited_nodes, count_path(previous, grid.end)

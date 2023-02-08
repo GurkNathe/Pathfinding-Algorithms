@@ -1,7 +1,7 @@
 from .RP import get_unvisited_nodes, check
 
 
-def reconstruct_path(
+def count_path(
     dist: list,
     V: int,
     start: object,
@@ -14,7 +14,6 @@ def reconstruct_path(
     the given distance matrix, list of nodes, and list of checked nodes.
 
     Args:
-        draw (function): Function to draw the updated grid.
         dist (list): A 2D list representing the distance matrix between nodes.
         V (int): The number of nodes in the grid.
         start (Node): The starting node.
@@ -23,7 +22,10 @@ def reconstruct_path(
         checked_nodes (list): A list of nodes that have been visited during the search.
 
     Returns:
-        bool: True if a path is found, False if not.
+        error_value or path_size (int): 
+            -1 if the end node wasn't checked; 
+            -2 if the end node wasn't in the list of connected nodes; 
+            Length of the path found.
     """
 
     path_size: int = 0
@@ -87,22 +89,21 @@ def reconstruct_path(
     return path_size
 
 
-def floyd_warshall(start: object, end: object, grid: list):
+def floyd_warshall(grid: object):
     """
     Implements the Floyd-Warshall algorithm to find the shortest path between
     the start and end nodes in the given grid.
 
-    Args:draw (function): A function used to draw the search on the screen.
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
-        grid (List[List[Node]]): The grid of nodes to search.
+    Args:
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        count_path (int): Length of the path found.
     """
 
     # Get a list of all unvisited nodes, excluding the start node
-    nodes = get_unvisited_nodes(start)
+    nodes = get_unvisited_nodes(grid.start)
 
     # Get the number of nodes
     V = len(nodes)
@@ -111,7 +112,7 @@ def floyd_warshall(start: object, end: object, grid: list):
     distance = [[float("inf") for _ in range(V)] for _ in range(V)]
 
     # Used for path reconstruction
-    checked_nodes = [start]
+    checked_nodes = [grid.start]
 
     visited_nodes: int = 0
 
@@ -156,11 +157,11 @@ def floyd_warshall(start: object, end: object, grid: list):
 
     # Adding end if it is connected to start
     try:
-        test = nodes.index(end)
-        checked_nodes.append(end)
+        test = nodes.index(grid.end)
+        checked_nodes.append(grid.end)
     except ValueError:
         pass
 
-    return visited_nodes, reconstruct_path(
-        distance, V, start, end, nodes, checked_nodes
+    return visited_nodes, count_path(
+        distance, V, grid.start, grid.end, nodes, checked_nodes
     )

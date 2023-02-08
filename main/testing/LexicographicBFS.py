@@ -1,11 +1,12 @@
 from .RP import count_path
 
 
-def LexBFS(visited_nodes: int, start: object):
+def lex_bfs(visited_nodes: int, start: object):
     """
     Implements the Lexicographic Breadth-First Search (LexBFS) algorithm.
 
     Args:
+        visited_nodes (int): Count of the number of nodes visited.
         start (start): The starting node.
 
     Returns:
@@ -13,6 +14,8 @@ def LexBFS(visited_nodes: int, start: object):
             visited by LexBFS.
         levels (dict): A dictionary containing the level of each node in the
             breadth-first search tree.
+        visited_nodes (int): Count of the number of nodes visited.
+        parent (dict): A dictionary containing the parent of each node checked.
     """
 
     # Initialize the list to store the order of the vertices
@@ -52,27 +55,29 @@ def LexBFS(visited_nodes: int, start: object):
     return order, levels, visited_nodes, parent
 
 
-def LBFS(start: object, end: object, grid: list):
+def lbfs(grid: object):
     """
     Solves the shortest path problem using LexBFS.
 
-    Args:draw (function): The draw function to update the grid display.
-        start (Node): The starting node.
-        end (Node): The ending node.
-        grid (List[List[Node]]): A 2D list of nodes representing the graph.
+    Args:
+        grid (Grid): An object representing the current grid.
+
+    Returns:
+        visited_nodes (int): Count of the number of nodes visited.
+        count_path (int): Length of the path found.
     """
 
     visited_nodes: int = 0
 
     # Run LexBFS to get the order of the vertices
-    order, levels, temp_v_n, parent = LexBFS(visited_nodes, start)
+    order, levels, temp_v_n, parent = lex_bfs(visited_nodes, grid.start)
 
     visited_nodes = temp_v_n
 
     if order is not False:
         # Initialize the distances dictionary
-        distances = {node: float("inf") for row in grid for node in row}
-        distances[start] = 0
+        distances = {node: float("inf") for row in grid.grid for node in row}
+        distances[grid.start] = 0
 
         # Iterate through the vertices in the order produced by LexBFS
         for current in order:
@@ -83,4 +88,4 @@ def LBFS(start: object, end: object, grid: list):
                     distances[neighbor] = distances[current] + 1
                     parent[neighbor] = current
 
-    return visited_nodes, count_path(parent, end)
+    return visited_nodes, count_path(parent, grid.end)

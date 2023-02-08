@@ -1,21 +1,21 @@
 from .RP import check, count_path
 
 
-def bfs(start: object, end: object):
+def bfs(grid: object):
     """
     Perform a breadth-first search from start to end.
 
     Args:
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        count_path (int): Length of the path found.
     """
 
     # Initialize a list to store the nodes to visit (queue)
     nodes = []
-    nodes.append(start)
+    nodes.append(grid.start)
 
     # Initialize a dictionary to store the predecessor of each node
     previous = {}
@@ -51,4 +51,4 @@ def bfs(start: object, end: object):
                 else:
                     previous[neighbor] = current
                     nodes.append(neighbor)
-    return visited_nodes, count_path(previous, end)
+    return visited_nodes, count_path(previous, grid.end)

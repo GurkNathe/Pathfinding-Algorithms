@@ -1,21 +1,21 @@
 import random
 
 
-def rand_walk(start: object, end: object):
+def rand_walk(grid: object):
     """
     Generates a random walk from the starting node to the goal node.
 
     Parameters:
-        start (Node): starting node
-        end (Node): goal node
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        path_size (int): Length of the path found.
     """
 
     # Initialize the list of previous nodes and the current node
     came_from = []
-    current = start
+    current = grid.start
 
     visited_nodes: int = 0
 
@@ -34,6 +34,6 @@ def rand_walk(start: object, end: object):
 
         visited_nodes += 1
 
-        if current == end:
+        if current.is_end():
             break
     return visited_nodes, len(came_from) - 1

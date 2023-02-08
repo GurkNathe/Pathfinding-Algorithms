@@ -1,4 +1,3 @@
-import time
 from queue import PriorityQueue
 from .RP import heuristic, check, count_path
 
@@ -15,8 +14,9 @@ def line_of_sight(node1: object, node2: object, grid: list):
         grid (List[List[Node]]): The grid of nodes to search.
 
     Returns:
-        bool: True if there is a straight line of sight between the two nodes,
-        False otherwise.
+        bool: 
+            True if there is a straight line of sight between the two nodes,
+            False otherwise.
     """
 
     # Get the x and y coordinates of the first and second nodes
@@ -164,11 +164,12 @@ def connect_path(came_from: dict, current: object, grid: list):
     Args:
         came_from (Dict[Node, Node]): A dictionary mapping nodes to their parent nodes.
         current (Node): The current node being processed.
-        draw (function): A function to draw the grid.
         grid (List[List[Node]]): The grid of nodes to search.
 
     Returns:
-        None
+        path_info (tuple): 
+            Length of the path found; 
+            Number of turn points found
     """
 
     # Temp variable to for connected path
@@ -228,31 +229,34 @@ def connect_path(came_from: dict, current: object, grid: list):
     return (path_points, path_size)
 
 
-def theta_star(start: object, end: object, grid: list):
+def theta_star(grid: object):
     """
     Perform the Theta* search algorithm on the grid.
 
     Args:
-        grid (Grid): An object representing the current grid
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        path_info (tuple): 
+            Length of the path found; 
+            Number of turn points found
     """
 
     # Dictionary mapping nodes to their g scores (distance from the start vertex)
     g_score = {}
-    g_score[start] = 0
+    g_score[grid.start] = 0
 
     counter = 0
 
     # Priority queue for the open set of nodes to search
     open_set = PriorityQueue()
-    open_set.put((g_score[start] + heuristic("manhattan", start, end), counter, start))
+    open_set.put((g_score[grid.start] + heuristic("manhattan", grid.start, grid.end), counter, grid.start))
     open_set_hash = {}
-    open_set_hash[start] = start
+    open_set_hash[grid.start] = grid.start
 
     parent = {}
-    parent[start] = start
+    parent[grid.start] = grid.start
 
     visited_nodes: int = 0
     path_info: tuple = ()
@@ -266,8 +270,7 @@ def theta_star(start: object, end: object, grid: list):
 
         # If the current vertex is the end vertex
         if current.is_end():
-            path_info = connect_path(parent, end, grid)
-            end.make_end()
+            path_info = connect_path(parent, grid.end, grid.grid)
             break
 
         if current.is_start():
@@ -289,8 +292,8 @@ def theta_star(start: object, end: object, grid: list):
                     g_score,
                     open_set,
                     open_set_hash,
-                    end,
+                    grid.end,
                     counter,
-                    grid,
+                    grid.grid,
                 )
     return visited_nodes, path_info

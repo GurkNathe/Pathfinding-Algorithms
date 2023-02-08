@@ -2,21 +2,21 @@ from queue import PriorityQueue
 from .RP import heuristic, check, count_path
 
 
-def gbfs(start: object, end: object):
+def gbfs(grid: object):
     """
     Perform a greedy best-first search from start to end.
 
     Args:
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        count_path (int): Length of the path found.
     """
 
     # Initialize priority queue with the start node
     Q = PriorityQueue()
-    Q.put((heuristic("manhattan", start, end), 0, start))
+    Q.put((heuristic("manhattan", grid.start, grid.end), 0, grid.start))
 
     # Initialize counters and flags
     counter = 0
@@ -53,7 +53,7 @@ def gbfs(start: object, end: object):
 
                 # Add the neighbor to the queue
                 counter += 1
-                distance = heuristic("manhattan", neighbor, end)
+                distance = heuristic("manhattan", neighbor, grid.end)
                 previous[neighbor] = current
                 Q.put((distance, counter, neighbor))
-    return visited_nodes, count_path(previous, end)
+    return visited_nodes, count_path(previous, grid.end)

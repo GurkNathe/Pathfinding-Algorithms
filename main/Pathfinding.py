@@ -3,7 +3,7 @@ import sys
 from Colors import COLORS
 from Algorithms import algorithm, ALGORITHMS
 from Maze import gen_maze
-from Testing import Testing
+from Testing import testing
 from Grid import Grid
 
 
@@ -182,7 +182,7 @@ def handle_key_presses(event: object, ran: bool, grid: object, func: str):
 
     # Test algorithms if T key is pressed
     if event.key == pygame.K_t and grid.start and grid.end:
-        Testing(grid)
+        testing(grid)
 
     # Clear algorithm markup if W key is pressed
     if event.key == pygame.K_w:

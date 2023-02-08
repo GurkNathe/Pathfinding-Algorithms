@@ -2,33 +2,33 @@ from queue import PriorityQueue
 from .RP import get_unvisited_nodes, check, count_path
 
 
-def dijkstra(start: object, end: object):
+def dijkstra(grid: object):
     """
     Perform Dijkstra's algorithm from start to end.
 
     Args:
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        path_size (int): Length of the path found.
     """
 
     # Initialize a priority queue to store the nodes to visit
     queue = PriorityQueue()
 
     # Initialize a set to store the unvisited nodes
-    unvisited_nodes = get_unvisited_nodes(start)
+    unvisited_nodes = get_unvisited_nodes(grid.start)
 
     # Set up the node values
     distance = {node: float("inf") for node in unvisited_nodes}
-    distance[start] = 0
+    distance[grid.start] = 0
 
     # Holds the path from start to end
     previous = {}
 
     # Add the start node to the priority queue
-    queue.put((distance[start], 0, start))
+    queue.put((distance[grid.start], 0, grid.start))
     count = 0
 
     visited_nodes: int = 0
@@ -42,8 +42,8 @@ def dijkstra(start: object, end: object):
         visited_nodes += 1
 
         # End the search if the current node is the end node
-        if current_min == end:
-            path_size = count_path(previous, end)
+        if current_min.is_end():
+            path_size = count_path(previous, grid.end)
             break
 
         check(current_min)

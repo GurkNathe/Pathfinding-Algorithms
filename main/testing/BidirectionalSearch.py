@@ -7,11 +7,11 @@ def count_path(path_size: list, came_from: object, current: object, target: obje
     Reconstructs the path from the current node to the target node in a maze.
 
     Args:
+        path_size (int): Length of the path found.
         came_from (Dict[Node, Node]): A dictionary containing the nodes traversed
             during the pathfinding algorithm.
         current (Node): The node being checked when the algorithm terminated
         target (Node): The node to traverse back to
-        draw (function): A function for drawing the maze.
 
     Returns:
         None
@@ -37,6 +37,9 @@ def thread_construct(args1: tuple, args2: tuple):
             `reconstruct_path` function.
         args2 (tuple): A tuple of arguments to pass to the second
             `reconstruct_path` function.
+
+    Returns:
+        path_size (int): Length of the path found.
     """
     # Create two threads that will run the `reconstruct_path` function with the
     # given arguments
@@ -56,19 +59,22 @@ def thread_construct(args1: tuple, args2: tuple):
     return path1[0] + path2[0] + 1
 
 
-def bi_search(start: object, end: object):
+def bi_search(grid: object):
     """
     Performs a bidirectional search to find the shortest path between the
     start and end nodes.
 
     Args:
-        start (Node): The starting node for the search.
-        end (Node): The ending node for the search.
+        grid (Grid): An object representing the current grid.
+
+    Returns:
+        visited_nodes (int): Count of the number of nodes visited.
+        path_size (int): Length of the path found.
     """
 
     # Initialize two queues, one for each direction of the search
-    queue_start = [start]
-    queue_end = [end]
+    queue_start = [grid.start]
+    queue_end = [grid.end]
 
     # Initialize two sets to keep track of visited nodes, one for
     # each direction of the search
@@ -80,8 +86,8 @@ def bi_search(start: object, end: object):
     end_path = {}
 
     # Add the start and end nodes to the path dictionaries
-    start_path[start] = start
-    end_path[end] = end
+    start_path[grid.start] = grid.start
+    end_path[grid.end] = grid.end
 
     visited_nodes: int = 0
     path_size: int = 0
@@ -107,14 +113,14 @@ def bi_search(start: object, end: object):
             # Construct two threads to reconstruct the path from the start and
             # end directions
             path_size = thread_construct(
-                (start_path, start_node, start), (end_path, start_node, end)
+                (start_path, start_node, grid.start), (end_path, start_node, grid.end)
             )
             break
         if end_node in visited_start:
             # Construct two threads to reconstruct the path from the start and
             # end directions
             path_size = thread_construct(
-                (start_path, end_node, start), (end_path, end_node, end)
+                (start_path, end_node, grid.start), (end_path, end_node, grid.end)
             )
             break
 

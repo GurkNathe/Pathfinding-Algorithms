@@ -1,20 +1,20 @@
 from .RP import check, count_path
 
 
-def dfs(start: object, end: object):
+def dfs(grid: object):
     """
     Perform a depth-first search from start to end.
 
     Args:
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        count_path (int): Length of the path found.
     """
 
     # Initialize a stack to store the nodes to visit
-    stack = [start]
+    stack = [grid.start]
 
     # Initialize a dictionary to store the predecessor of each node
     previous = {}
@@ -51,4 +51,4 @@ def dfs(start: object, end: object):
                     previous[neighbor] = current
                     stack.append(neighbor)
 
-    return visited_nodes, count_path(previous, end)
+    return visited_nodes, count_path(previous, grid.end)

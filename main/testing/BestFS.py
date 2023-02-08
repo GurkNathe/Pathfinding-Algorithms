@@ -27,10 +27,9 @@ def count_path(current: object, costs: dict):
     Args:
         current (Node): The current node in the search.
         costs (Dict[Node, int]): The cost of reaching each node from the start.
-        draw (function): A function used to draw the search on the screen.
 
     Returns:
-        None: The function updates the screen with the path.
+        path_size (int): Length of the path found.
     """
     path_size: int = 0
 
@@ -46,25 +45,25 @@ def count_path(current: object, costs: dict):
     return path_size
 
 
-def best_fs(start: object, end: object):
+def best_fs(grid: object):
     """
     Perform a best-first search from start to end.
 
     Args:
-        start (Node): The starting node of the search.
-        end (Node): The ending node of the search.
+        grid (Grid): An object representing the current grid.
 
     Returns:
-        None
+        visited_nodes (int): Count of the number of nodes visited.
+        path_size (int): Length of the path found.
     """
 
     # Initialize the priority queue with the start node
     queue = PriorityQueue()
-    queue.put((0, 0, start))
+    queue.put((0, 0, grid.start))
     count = 0
 
     # Initialize a dictionary to store the cost of reaching each node from the start
-    costs = {start: 0}
+    costs = {grid.start: 0}
 
     visited_nodes: int = 0
     path_size: int = 0
@@ -77,7 +76,7 @@ def best_fs(start: object, end: object):
         visited_nodes += 1
 
         # End the search if the current node is the end node
-        if current == end:
+        if current.is_end():
             path_size = count_path(current, costs)
             break
 
@@ -93,6 +92,6 @@ def best_fs(start: object, end: object):
                 costs[neighbor] = cost
                 # Add the neighbor to the queue with the calculated cost as the priority
                 queue.put(
-                    (cost + heuristic("manhattan", neighbor, end), count + 1, neighbor)
+                    (cost + heuristic("manhattan", neighbor, grid.end), count + 1, neighbor)
                 )
     return visited_nodes, path_size
