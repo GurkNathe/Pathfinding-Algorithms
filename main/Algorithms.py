@@ -37,6 +37,26 @@ ALGORITHMS = [
     "theta",
 ]
 
+run_algs = {
+    "astar": "a_star(grid)",
+    "beam": "beam_search(grid, 50)",
+    "bellford": "bell_ford(grid, 1)",
+    "bestfs": "best_fs(grid)",
+    "bfs": "bfs(grid)",
+    "bisearch": "bi_search(grid)",
+    "bstar": "b_star(grid)",
+    "dfs": "dfs(grid)",
+    "dijkstra": "dijkstra(grid)",
+    "floyd": "floyd_warshall(grid)",
+    "gbfs": "gbfs(grid)",
+    "gbls": "gbls(grid)",
+    "ida": "ida_star(grid)",
+    "iddfs": "iddfs(grid, len(grid.grid) * len(grid.grid[0]))",
+    "lbfs": "lbfs(grid)",
+    "rand": "rand_walk(grid)",
+    "theta": "theta_star(grid)"
+}
+
 def algorithm(grid: object, algorithm: str, *args):
     """
     Select and run the specified pathfinding algorithm.
@@ -48,40 +68,7 @@ def algorithm(grid: object, algorithm: str, *args):
     Returns:
         None
     """
-    match algorithm:
-        case "astar":
-            a_star(grid)
-        case "beam":
-            beam_search(grid, 50)
-        case "bellford":
-            bell_ford(grid, 1)
-        case "bestfs":
-            best_fs(grid)
-        case "bfs":
-            bfs(grid)
-        case "bisearch":
-            bi_search(grid)
-        case "bstar":
-            b_star(grid)
-        case "dfs":
-            dfs(grid)
-        case "dijkstra":
-            dijkstra(grid)
-        case "floyd":
-            floyd_warshall(grid)
-        case "gbfs":
-            gbfs(grid)
-        case "gbls":
-            gbls(grid)
-        case "ida":
-            ida_star(grid)
-        case "iddfs":
-            iddfs(grid, len(grid.grid) * len(grid.grid[0]))
-        case "lbfs":
-            lbfs(grid)
-        case "rand":
-            rand_walk(grid)
-        case "theta":
-            theta_star(grid)
-        case _:
-            a_star(grid)
+    if algorithm in run_algs:
+        eval(run_algs[algorithm])
+    else:
+        eval(run_algs["astar"])

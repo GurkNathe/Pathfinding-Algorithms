@@ -21,7 +21,7 @@ from testing.RandomWalk import rand_walk
 from testing.ThetaStar import theta_star
 from testing.RP import get_unvisited_nodes
 
-from Algorithms import ALGORITHMS
+from Algorithms import ALGORITHMS, run_algs
 from Node import Node
 
 def testing(grid: object):
@@ -162,42 +162,4 @@ def algorithm(grid: object, algorithm: str):
         int: The number of nodes visited in the algorithm
         int or tuple: Length of path found; number of turning points
     """
-    match algorithm:
-        case "astar":
-            return a_star(grid)
-        case "beam":
-            return beam_search(grid, 50)
-        case "bellford":
-            return bell_ford(grid, 1)
-        case "bestfs":
-            return best_fs(grid)
-        case "bfs":
-            return bfs(grid)
-        case "bisearch":
-            return bi_search(grid)
-        case "bstar":
-            return b_star(grid)
-        case "dfs":
-            return dfs(grid)
-        case "dijkstra":
-            return dijkstra(grid)
-        case "floyd":
-            return floyd_warshall(grid)
-        case "gbfs":
-            return gbfs(grid)
-        case "gbls":
-            return gbls(grid)
-        case "ida":
-            return ida_star(grid)
-        case "iddfs":
-            return iddfs(
-                grid, len(grid.grid) * len(grid.grid[0])
-            )
-        case "lbfs":
-            return lbfs(grid)
-        case "rand":
-            return rand_walk(grid)
-        case "theta":
-            return theta_star(grid)
-        case _:
-            return a_star(grid)
+    return eval(run_algs[algorithm])
