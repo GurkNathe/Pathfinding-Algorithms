@@ -20,12 +20,9 @@ def a_star(grid: object):
     open_set.put((0, count, grid.start))
     came_from = {}
 
-    # Initialize dictionaries to store the g and f scores for each node
+    # Initialize dictionary to store the g scores for each node
     g_score = {node: float("inf") for row in grid.grid for node in row}
-    print(grid.start in g_score)
     g_score[grid.start] = 0
-    f_score = {node: float("inf") for row in grid.grid for node in row}
-    f_score[grid.start] = heuristic("manhattan", grid.start, grid.end)
 
     # Initialize a set to store the nodes in the open set
     open_set_hash = {grid.start}
@@ -51,16 +48,15 @@ def a_star(grid: object):
             # Calculate the tentative g score for the neighbor
             temp_g_score = g_score[current] + 1
 
-            # Update the g and f scores for the neighbor if the
-            # tentative g score is lower
+            # Update the g core for the neighbor if the tentative g score is lower
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + heuristic("manhattan", neighbor, grid.end)
+                f_score = temp_g_score + heuristic("manhattan", neighbor, grid.end)
 
                 # Add the neighbor to the open set if it is not already there
                 if neighbor not in open_set_hash:
                     count += 1
-                    open_set.put((f_score[neighbor], count, neighbor))
+                    open_set.put((f_score, count, neighbor))
                     open_set_hash.add(neighbor)
     return visited_nodes, path_size

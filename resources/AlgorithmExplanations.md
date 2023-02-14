@@ -19,6 +19,7 @@
 11. [Iterative Deepening DFS](#iterative-deepening-dfs-pathfinding-algorithm)
 11. [Lexicographic BFS](#lexicographic-bfs-pathfinding-algorithm)
 12. [Random Walk Algorithm](#random-walk-pathfinding-algorithm)
+12. [SSS* Algorithm](#sss-pathfinding-algorithm)
 13. [Theta*](#theta-pathfinding-algorithm)
 
 ## A\* pathfinding algorithm:
@@ -183,6 +184,14 @@ To solve the shortest path problem using LexBFS, we can follow the following ste
 ## Random Walk pathfinding algorithm:
 
 The random walk algorithm is a type of pathfinding algorithm that uses a random exploration strategy to find a path between two points. It works by starting at the start point and randomly selecting one of the available neighbors to explore. This process is repeated until the end point is reached or all possible paths have been explored.
+
+## SSS\* pathfinding algorithm:
+
+SSS* (Straight Skeleton Seeker Star) is a pathfinding algorithm for finding the shortest path between two points in a 2D plane. It is based on the A* algorithm, but it has some important differences in terms of its implementation and use cases. The algorithm is designed to be used in applications where the cost of traversing a cell is proportional to its Euclidean distance from the start cell, which is a common scenario in many 2D games and robotics applications.
+
+The key idea behind the SSS* algorithm is to use a straight skeleton representation of the map to prune the search space and reduce the number of cells that need to be evaluated by the algorithm. The straight skeleton of a map is a data structure that represents the map's medial axis, which is a one-pixel wide representation of the object's skeleton or its "innermost shape." By using this representation, SSS* can quickly eliminate cells that are farther from the shortest path than cells that have already been evaluated.
+
+In summary, SSS* is a pathfinding algorithm that combines the best features of A* and the straight skeleton representation of maps to achieve faster and more efficient search in 2D spaces.
 
 ## Theta\* pathfinding algorithm:
 

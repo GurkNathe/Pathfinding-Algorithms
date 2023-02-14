@@ -3,9 +3,9 @@ from queue import PriorityQueue
 from .RP import reconstruct_path, heuristic, check
 
 
-def a_star(grid: object):
+def branch_and_bound(grid: object):
     """
-    Perform an A* search from start to end.
+    Perform a Branch and Bound search from start to end.
 
     Args:
         grid (Grid): An object representing the current grid
@@ -24,50 +24,39 @@ def a_star(grid: object):
     g_score = {node: float("inf") for row in grid.grid for node in row}
     g_score[grid.start] = 0
 
-    # Initialize a set to store the nodes in the open set
-    open_set_hash = {grid.start}
-
     # Initialize a flag to track whether the search should continue
     run = True
 
     # Perform the search
-    while not open_set.empty() and run:
+    while run and not open_set.empty():
         # Check for exit events
         run = check(pygame.event.get(), run)
 
-        # Get the current node from the open set
-        current = open_set.get()[2]
-        open_set_hash.remove(current)
+        # Get the current node and distance from the open set
+        dist, _, node = open_set.get()
 
         # End the search if the current node is the end node
-        if current.is_end():
+        if node.is_end():
             reconstruct_path(came_from, grid.end, grid.draw)
-            grid.end.make_end()
             break
 
         # Check the neighbors of the current node
-        for neighbor in current.neighbors:
+        for neighbor in node.neighbors:
             # Calculate the tentative g score for the neighbor
-            temp_g_score = g_score[current] + 1
+            temp_g_score = dist + heuristic("manhattan", neighbor, grid.end)
 
-            # Update the g score for the neighbor if the tentative g score is lower
             if temp_g_score < g_score[neighbor]:
-                came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
+                came_from[neighbor] = node
+                count += 1
+                open_set.put((temp_g_score, count, neighbor))
 
-                # Add the neighbor to the open set if it is not already there
-                if neighbor not in open_set_hash:
-                    f_score = temp_g_score + heuristic("manhattan", neighbor, grid.end)
-                    count += 1
-                    open_set.put((f_score, count, neighbor))
-                    open_set_hash.add(neighbor)
-
-                    if not neighbor.is_start() and not neighbor.is_end():
-                        neighbor.uncheck()
+                if not neighbor.is_start() and not neighbor.is_end():
+                    neighbor.uncheck()
 
         # Update the screen with the search progress
         grid.draw()
 
         # Check the current node if it is not the start node
-        if not current.is_start():
-            current.check()
+        if not node.is_start():
+            node.check()

@@ -8,6 +8,7 @@ from testing.BellmanFord import bell_ford
 from testing.BestFS import best_fs
 from testing.BFS import bfs
 from testing.BidirectionalSearch import bi_search
+from testing.BranchBound import branch_and_bound
 from testing.BStar import b_star
 from testing.DFS import dfs
 from testing.Dijkstra import dijkstra

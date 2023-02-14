@@ -180,11 +180,6 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
     while current in came_from and not current.is_start():
         previous = came_from[current]
         
-        # Making sure not to mark the end as a path
-        if current.is_end():
-            current = previous
-            continue
-        
         xp, yp = previous.get_pos()
         xc, yc = current.get_pos()
 

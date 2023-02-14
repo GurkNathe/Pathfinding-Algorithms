@@ -4,6 +4,7 @@ from algorithms.BellmanFord import bell_ford
 from algorithms.BestFS import best_fs
 from algorithms.BFS import bfs
 from algorithms.BidirectionalSearch import bi_search
+from algorithms.BranchBound import branch_and_bound
 from algorithms.BStar import b_star
 from algorithms.DFS import dfs
 from algorithms.Dijkstra import dijkstra
@@ -24,6 +25,7 @@ ALGORITHMS = [
     "bestfs",
     "bfs",
     "bisearch",
+    "branch",
     "bstar",
     "dfs",
     "dijkstra",
@@ -44,6 +46,7 @@ run_algs = {
     "bestfs": "best_fs(grid)",
     "bfs": "bfs(grid)",
     "bisearch": "bi_search(grid)",
+    "branch": "branch_and_bound(grid)",
     "bstar": "b_star(grid)",
     "dfs": "dfs(grid)",
     "dijkstra": "dijkstra(grid)",
@@ -71,4 +74,4 @@ def algorithm(grid: object, algorithm: str, *args):
     if algorithm in run_algs:
         eval(run_algs[algorithm])
     else:
-        eval(run_algs["astar"])
+        a_star(grid)

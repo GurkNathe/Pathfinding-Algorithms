@@ -67,13 +67,14 @@ The testing will take longer as the visitable nodes increases. For my system, an
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (17/33):
+Currently implemented algorithms (17/31):
 
 - A*
 - Beam Search
 - Bellman Ford's Algorithm
 - Best First Search
 - Bidirectional search
+- Branch & bound
 - Breadth First Search (BFS)
 - B*
 - Depth First Search (DFS)
@@ -89,13 +90,8 @@ Currently implemented algorithms (17/33):
 
 Currently looking at:
 
-- None
 
 Planned algorithms (Going to look at them):
-
-- α–β pruning
-
-- Branch & bound
 
 - Concurrent Dijkstra
 
@@ -112,7 +108,6 @@ Planned algorithms (Going to look at them):
 - Lifelong Planning A* (LPA*)
 
 - SMA*
-- SSS*
 - SUB
 
 - Viterbi algorithm
@@ -120,6 +115,7 @@ Planned algorithms (Going to look at them):
 - Yen's k-Shortest Paths
 ```
 
-Possible Incorrectly Implemented algorithms:
+Possible incorrectly implemented algorithms:
 
 - [B*](./resources/b_star.pdf)
+- [Branch and Bound](https://en.wikipedia.org/wiki/Branch_and_bound) 
