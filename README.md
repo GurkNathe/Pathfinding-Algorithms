@@ -74,7 +74,7 @@ Currently implemented algorithms (17/31):
 - Bellman Ford's Algorithm
 - Best First Search
 - Bidirectional search
-- Branch & bound
+- Branch & Bound
 - Breadth First Search (BFS)
 - B*
 - Depth First Search (DFS)
@@ -90,6 +90,7 @@ Currently implemented algorithms (17/31):
 
 Currently looking at:
 
+- None
 
 Planned algorithms (Going to look at them):
 

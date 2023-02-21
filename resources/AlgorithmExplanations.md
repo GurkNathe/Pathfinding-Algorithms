@@ -9,6 +9,7 @@
 4. [Best First Search](#best-first-search-pathfinding-algorithm)
 4. [Bidirectional Search](#bidirectional-search-pathfinding-algorithm)
 5. [Breadth First Search](#breadth-first-search-bfs-pathfinding-algorithm)
+5. [Branch & Bound](#branch--bound-pathfinding-algorithm)
 6. [B*](#b-pathfinding-algorithm)
 7. [Depth First Search](#depth-first-search-dfs-pathfinding-algorithm)
 8. [Dijkstra's Algorithm](#dijkstras-pathfinding-algorithm)
@@ -91,6 +92,34 @@ Here's how it works:
 4. If a path was found, then reconstruct it from the visited nodes.
 
 One of the key benefits of bidirectional search is that it can significantly reduce the time complexity of the search, especially in cases where the two nodes are relatively close to each other. In such cases, the search will typically find a path much faster than a traditional breadth-first search, since it is searching from both ends of the path at the same time. However, it is important to note that bidirectional search can be more complex to implement and may require more memory than a traditional breadth-first search.
+
+## Branch & Bound pathfinding algorithm:
+
+The idea behind Branch and Bound is to divide the problem into smaller sub-problems and solve them independently, keeping track of the best solution found so far, and then use this information to prune the search space.
+
+Here's a general description of the Branch and Bound algorithm for the shortest path problem:
+
+1. Initialize the best path found so far as infinity.
+
+2. Create a priority queue (or a heap) of subproblems to explore, starting with the initial subproblem.
+
+3. While the priority queue is not empty:
+
+   a. Get the subproblem with the highest priority (i.e., the smallest lower bound).
+
+   b. If the lower bound of the subproblem is greater than the best path found so far, prune the subproblem and move on to the next one.
+
+   c. Otherwise, solve the subproblem and update the best path found so far if a better path is found.
+
+   d. Create new subproblems by branching on a variable (i.e., selecting a new edge to add to the current path) and add them to the priority queue.
+
+4. Return the best path found.
+
+The lower bound of a subproblem is the length of the shortest path from the current node to the destination node that passes through any of the unexplored nodes. This lower bound is used to prune the search space by eliminating subproblems that cannot possibly yield a better solution than the best path found so far.
+
+Branching is done by selecting an unexplored node and creating two new subproblems, one in which the node is added to the path and one in which it is not. The priority of each subproblem is determined by its lower bound.
+
+By using a combination of pruning and branching, the Branch and Bound algorithm can efficiently search the space of all possible paths and find the shortest path.
 
 ## Breadth First Search (BFS) pathfinding algorithm:
 
