@@ -8,10 +8,18 @@ fi
 
 # Enable extended globbing.
 shopt -s extglob 
+dir="main/testing/results"
 
-# Navigate to the subfolder containing the CSV files.
-cd main/testing/results  
-rm !(Generated_Maze-Example.csv)
+if [ -d "$dir" ]; then
+    file_count=$(ls -1 "$dir" | wc -l)
+    if [ "$file_count" -gt 1 ]; then
+
+        # Navigate to the subfolder containing the CSV files.
+        cd "$dir"
+        rm !(Generated_Maze-Example.csv)
+        echo "Deleting CSV files from ./main/testing/results"
+    fi
+fi
 
 # Upload to repository
 git add -A
