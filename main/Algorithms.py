@@ -60,8 +60,9 @@ run_algs = {
     "jps": "jps(grid)",
     "lbfs": "lbfs(grid)",
     "rand": "rand_walk(grid)",
-    "theta": "theta_star(grid)"
+    "theta": "theta_star(grid)",
 }
+
 
 def algorithm(grid: object, algorithm: str, *args):
     """

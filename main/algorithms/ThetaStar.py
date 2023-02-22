@@ -48,13 +48,19 @@ def line_of_sight(node1: object, node2: object, grid: list):
     return True
 
 
-def remove_add(open_set_hash: dict, open_set: object, distance: int or float, counter: int, neighbor: object):
+def remove_add(
+    open_set_hash: dict,
+    open_set: object,
+    distance: int or float,
+    counter: int,
+    neighbor: object,
+):
     """
     Remove a node from the open set (if it exists) and add it back to the open set
     with an updated distance value.
 
     Args:
-        open_set_hash (Dict[Node, Node]): A dictionary mapping nodes to distance 
+        open_set_hash (Dict[Node, Node]): A dictionary mapping nodes to distance
             values in the open set.
         open_set (PriorityQueue): The open set of nodes to search, prioritized
             by distance and then FIFO order.
@@ -179,7 +185,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
     current = end
     while current in came_from and not current.is_start():
         previous = came_from[current]
-        
+
         xp, yp = previous.get_pos()
         xc, yc = current.get_pos()
 
@@ -245,7 +251,13 @@ def theta_star(grid: object):
 
     # Priority queue for the open set of nodes to search
     open_set = PriorityQueue()
-    open_set.put((g_score[grid.start] + heuristic("manhattan", grid.start, grid.end), counter, grid.start))
+    open_set.put(
+        (
+            g_score[grid.start] + heuristic("manhattan", grid.start, grid.end),
+            counter,
+            grid.start,
+        )
+    )
     open_set_hash = {}
     open_set_hash[grid.start] = grid.start
 

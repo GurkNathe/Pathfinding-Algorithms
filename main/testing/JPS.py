@@ -1,9 +1,21 @@
 from .RP import heuristic, count_path
 
+
 def jps(grid: object):
+    """
+    Perform an Jump Point Search from start to end.
+
+    Args:
+        grid (Grid): An object representing the current grid
+
+    Returns:
+        visited_nodes (int): Count of the number of nodes visited.
+        path_size (int): Length of the path found.
+    """
+
     open_set = set([grid.start])
     closed_set = set()
-    
+
     came_from = {}
 
     g_values = {grid.start: 0}
@@ -35,7 +47,9 @@ def jps(grid: object):
                 g_value = g_values[current] + heuristic("manhattan", current, neighbor)
 
                 g_values[neighbor] = g_value
-                f_values[neighbor] = g_value + heuristic("manhattan", neighbor, grid.end)
+                f_values[neighbor] = g_value + heuristic(
+                    "manhattan", neighbor, grid.end
+                )
 
                 came_from[neighbor] = current
                 open_set.add(neighbor)

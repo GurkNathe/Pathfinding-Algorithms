@@ -1,10 +1,20 @@
 import pygame
 from .RP import heuristic, check, markup, reconstruct_path
 
+
 def jps(grid: object):
+    """
+    Perform an Jump Point Search from start to end.
+
+    Args:
+        grid (Grid): An object representing the current grid
+
+    Returns:
+        None: The function updates the screen with the search progress and path.
+    """
     open_set = set([grid.start])
     closed_set = set()
-    
+
     came_from = {}
 
     g_values = {grid.start: 0}
@@ -38,7 +48,9 @@ def jps(grid: object):
                 g_value = g_values[current] + heuristic("manhattan", current, neighbor)
 
                 g_values[neighbor] = g_value
-                f_values[neighbor] = g_value + heuristic("manhattan", neighbor, grid.end)
+                f_values[neighbor] = g_value + heuristic(
+                    "manhattan", neighbor, grid.end
+                )
 
                 came_from[neighbor] = current
                 open_set.add(neighbor)

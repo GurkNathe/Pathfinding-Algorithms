@@ -26,10 +26,11 @@ from testing.RP import get_unvisited_nodes
 from Algorithms import ALGORITHMS, run_algs
 from Node import Node
 
+
 def testing(grid: object):
     """
     Main function for testing
-    
+
     Args:
         grid (Grid): An object representing the current grid
 
@@ -72,9 +73,7 @@ def testing(grid: object):
         "w",
         newline="",
     ) as myfile:
-        wr = csv.writer(
-            myfile, delimiter=",", quotechar="|", quoting=csv.QUOTE_MINIMAL
-        )
+        wr = csv.writer(myfile, delimiter=",", quotechar="|", quoting=csv.QUOTE_MINIMAL)
 
         wr.writerow(
             [
@@ -144,6 +143,7 @@ def testing(grid: object):
         wr.writerows(algo_data)
         grid.clear_grid()
 
+
 def clear():
     # For Windows
     if name == "nt":
@@ -151,6 +151,7 @@ def clear():
     # For MacOS and Linux
     else:
         _ = system("clear")
+
 
 def algorithm(grid: object, algorithm: str):
     """

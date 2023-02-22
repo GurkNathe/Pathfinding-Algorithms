@@ -14,7 +14,7 @@ def line_of_sight(node1: object, node2: object, grid: list):
         grid (List[List[Node]]): The grid of nodes to search.
 
     Returns:
-        bool: 
+        bool:
             True if there is a straight line of sight between the two nodes,
             False otherwise.
     """
@@ -167,8 +167,8 @@ def connect_path(came_from: dict, current: object, grid: list):
         grid (List[List[Node]]): The grid of nodes to search.
 
     Returns:
-        path_info (tuple): 
-            Length of the path found; 
+        path_info (tuple):
+            Length of the path found;
             Number of turn points found
     """
 
@@ -196,7 +196,7 @@ def connect_path(came_from: dict, current: object, grid: list):
                 # Iterate through all y values between the current and
                 # previous nodes
                 for y in range(yc, yp):
-                    if not grid[xp][y].is_start():
+                    if not grid[xp][y].is_start() and not grid[xp][y].is_end():
                         path_size += 1
 
             # Current is bellow previous
@@ -204,7 +204,7 @@ def connect_path(came_from: dict, current: object, grid: list):
                 # Iterate through all y values between the current and
                 # previous nodes
                 for y in range(yp, yc):
-                    if not grid[xp][y].is_start():
+                    if not grid[xp][y].is_start() and not grid[xp][y].is_end():
                         path_size += 1
 
         # If the previous node is aligned with the current node on the y axis
@@ -214,7 +214,7 @@ def connect_path(came_from: dict, current: object, grid: list):
                 # Iterate through all x values between the current and
                 # previous nodes
                 for x in range(xc, xp):
-                    if not grid[x][yp].is_start():
+                    if not grid[x][yp].is_start() and not grid[xp][y].is_end():
                         path_size += 1
 
             # Current is right of previous
@@ -222,7 +222,7 @@ def connect_path(came_from: dict, current: object, grid: list):
                 # Iterate through all x values between the current and
                 # previous nodes
                 for x in range(xp, xc):
-                    if not grid[x][yp].is_start():
+                    if not grid[x][yp].is_start() and not grid[xp][y].is_end():
                         path_size += 1
 
         current = previous
@@ -238,8 +238,8 @@ def theta_star(grid: object):
 
     Returns:
         visited_nodes (int): Count of the number of nodes visited.
-        path_info (tuple): 
-            Length of the path found; 
+        path_info (tuple):
+            Length of the path found;
             Number of turn points found
     """
 
@@ -251,7 +251,13 @@ def theta_star(grid: object):
 
     # Priority queue for the open set of nodes to search
     open_set = PriorityQueue()
-    open_set.put((g_score[grid.start] + heuristic("manhattan", grid.start, grid.end), counter, grid.start))
+    open_set.put(
+        (
+            g_score[grid.start] + heuristic("manhattan", grid.start, grid.end),
+            counter,
+            grid.start,
+        )
+    )
     open_set_hash = {}
     open_set_hash[grid.start] = grid.start
 
