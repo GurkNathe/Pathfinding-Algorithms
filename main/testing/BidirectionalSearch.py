@@ -106,7 +106,7 @@ def bi_search(grid: object):
             queue_start.insert(0, start_node)
             continue
 
-        visited_nodes += 2
+        visited_nodes += 1
 
         # Check if the nodes have already been visited from the other direction
         if start_node in visited_end:
@@ -116,6 +116,9 @@ def bi_search(grid: object):
                 (start_path, start_node, grid.start), (end_path, start_node, grid.end)
             )
             break
+
+        visited_nodes += 1
+
         if end_node in visited_start:
             # Construct two threads to reconstruct the path from the start and
             # end directions

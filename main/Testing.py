@@ -17,6 +17,7 @@ from testing.GBFS import gbfs
 from testing.GBLS import gbls
 from testing.IDAStar import ida_star
 from testing.IDDFS import iddfs
+from testing.JPS import jps
 from testing.LexicographicBFS import lbfs
 from testing.RandomWalk import rand_walk
 from testing.ThetaStar import theta_star

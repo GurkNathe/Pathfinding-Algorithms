@@ -18,6 +18,7 @@
 11. [Greedy Best Line Search](#greedy-best-line-search-gbls-pathfinding-algorithm)
 11. [Iterative Deepening A*](#iterative-deepening-a-pathfinding-algorithm)
 11. [Iterative Deepening DFS](#iterative-deepening-dfs-pathfinding-algorithm)
+11. [Jump Point Search](#jump-point-search-jps-pathfinding-algorithm)
 11. [Lexicographic BFS](#lexicographic-bfs-pathfinding-algorithm)
 12. [Random Walk Algorithm](#random-walk-pathfinding-algorithm)
 12. [SSS* Algorithm](#sss-pathfinding-algorithm)
@@ -196,6 +197,18 @@ The IDA\* algorithm works by iteratively increasing a depth limit on the search 
 If the cost of the path exceeds the depth limit at any point during the search, the search is terminated and the depth limit is increased. This process is repeated until the goal node is found or the depth limit becomes greater than the maximum possible cost of a path between the start and goal nodes.
 
 IDA\* has a time complexity of O(b<sup>d</sup>), where b is the branching factor (the average number of children per node) and d is the depth of the goal node. IDA\* is guaranteed to find the optimal path between the start and goal nodes if the heuristic function is admissible (it never overestimates the cost to reach the goal node) and the cost of the edges is non-negative.
+
+## Jump Point Search (JPS) pathfinding algorithm:
+
+Jump Point Search involves identifying certain nodes called jump points which can help to prune the search space and reduce the time complexity of the algorithm. To find jump points, the algorithm needs to recursively search along certain directions to identify nodes that provide a direct path to the goal. When a jump point is identified, the algorithm can skip over all other nodes along that direction and jump directly to the next jump point, which reduces the number of nodes that need to be explored.
+
+1. Start by initializing the open set with the start node and setting its g-value to zero.
+2. While the open set is not empty, select the node with the lowest f-value and remove it from the open set.
+3. For each neighbor of the current node, calculate its g-value as the sum of the current node's g-value and the cost of moving from the current node to the neighbor. If the neighbor is not yet in the open set, add it and calculate its f-value. If the neighbor is already in the open set, update its g-value and f-value if the new path to the neighbor is shorter.
+4. If the neighbor is the goal node, return the path that led to it.
+5. Identify jump points in each of the eight possible directions from the current node and recursively search along those directions until a jump point is found.
+6. If a jump point is found, add it to the open set and calculate its g-value and f-value. If the jump point is the goal node, return the path that led to it.
+7. Repeat steps 2-6 until the goal node is found or the open set is empty.
 
 ## Lexicographic BFS pathfinding algorithm:
 

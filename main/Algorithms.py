@@ -13,6 +13,7 @@ from algorithms.GBFS import gbfs
 from algorithms.GBLS import gbls
 from algorithms.IDAStar import ida_star
 from algorithms.IDDFS import iddfs
+from algorithms.JPS import jps
 from algorithms.LexicographicBFS import lbfs
 from algorithms.RandomWalk import rand_walk
 from algorithms.ThetaStar import theta_star
@@ -34,6 +35,7 @@ ALGORITHMS = [
     "gbls",
     "ida",
     "iddfs",
+    "jps",
     "lbfs",
     "rand",
     "theta",
@@ -55,6 +57,7 @@ run_algs = {
     "gbls": "gbls(grid)",
     "ida": "ida_star(grid)",
     "iddfs": "iddfs(grid, len(grid.grid) * len(grid.grid[0]))",
+    "jps": "jps(grid)",
     "lbfs": "lbfs(grid)",
     "rand": "rand_walk(grid)",
     "theta": "theta_star(grid)"

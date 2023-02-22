@@ -193,7 +193,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
                 # Iterate through all y values between the current and
                 # previous nodes
                 for y in range(yc, yp):
-                    if not grid[xp][y].is_start():
+                    if not grid[xp][y].is_start() and not grid[xp][y].is_end():
                         grid[xp][y].make_path()
 
             # Current is bellow previous
@@ -201,7 +201,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
                 # Iterate through all y values between the current and
                 # previous nodes
                 for y in range(yp, yc):
-                    if not grid[xp][y].is_start():
+                    if not grid[xp][y].is_start() and not grid[xp][y].is_end():
                         grid[xp][y].make_path()
 
         # If the previous node is aligned with the current node on the y axis
@@ -211,7 +211,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
                 # Iterate through all x values between the current and
                 # previous nodes
                 for x in range(xc, xp):
-                    if not grid[x][yp].is_start():
+                    if not grid[x][yp].is_start() and not grid[x][yp].is_end():
                         grid[x][yp].make_path()
 
             # Current is right of previous
@@ -219,7 +219,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
                 # Iterate through all x values between the current and
                 # previous nodes
                 for x in range(xp, xc):
-                    if not grid[x][yp].is_start():
+                    if not grid[x][yp].is_start() and not grid[x][yp].is_end():
                         grid[x][yp].make_path()
 
         current = previous

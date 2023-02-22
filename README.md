@@ -67,7 +67,7 @@ The testing will take longer as the visitable nodes increases. For my system, an
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (17/31):
+Currently implemented algorithms (19/31):
 
 - A*
 - Beam Search
@@ -84,6 +84,7 @@ Currently implemented algorithms (17/31):
 - Greedy Best Line Search (GBLS)
 - Iterative Deepening (IDA*)
 - Iterative Deepening DFS (IDDFS)
+- Jump Point Search (JPS)
 - Lexicographic BFS
 - Random Walk
 - Theta*
@@ -102,7 +103,6 @@ Planned algorithms (Going to look at them):
 - Fringe search
 
 - Johnson's
-- Jump Point Search (JPS)
 
 - Kruskal's
 
@@ -120,3 +120,4 @@ Possible incorrectly implemented algorithms:
 
 - [B*](./resources/b_star.pdf)
 - [Branch and Bound](https://en.wikipedia.org/wiki/Branch_and_bound) 
+- [Jump Point Search](https://en.wikipedia.org/wiki/Jump_point_search)
