@@ -15,7 +15,6 @@ dir="main/testing/results"
 if [ -d "$dir" ]; then
     # Check if there are more than one file in the directory
     if [ "$(ls -1 "$dir" | wc -l)" -gt 1 ]; then
-
         # Navigate to the subfolder containing the CSV files.
         cd "$dir"
         rm !(Generated_Maze-Example.csv)

@@ -1,4 +1,4 @@
-# Pathfinding/Graph Search Algorithms ![License: MIT](https://img.shields.io/badge/License-GPL_3.0-red.svg)
+# Pathfinding/Graph Search Algorithms ![License: GPL 3.0](https://img.shields.io/badge/License-GPL_3.0-red.svg)
 
 This is a Python (3.10+) implementation and visualization of various pathfinding algorithms.
 
@@ -67,7 +67,7 @@ The testing will take longer as the visitable nodes increases. For my system, an
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (19/31):
+Currently implemented algorithms (19/30):
 
 - A*
 - Beam Search
@@ -95,8 +95,6 @@ Currently looking at:
 
 Planned algorithms (Going to look at them):
 
-- Concurrent Dijkstra
-
 - Fast Iterative Method
 - Fast Marching Method
 - Fast Sweeping Method
@@ -118,6 +116,6 @@ Planned algorithms (Going to look at them):
 
 Possible incorrectly implemented algorithms:
 
-- [B*](./resources/b_star.pdf)
-- [Branch and Bound](https://en.wikipedia.org/wiki/Branch_and_bound) 
+- [B\*](./resources/b_star.pdf)
+- [Branch and Bound](https://en.wikipedia.org/wiki/Branch_and_bound)
 - [Jump Point Search](https://en.wikipedia.org/wiki/Jump_point_search)
