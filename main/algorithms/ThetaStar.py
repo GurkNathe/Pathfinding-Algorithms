@@ -300,6 +300,7 @@ def theta_star(grid: object):
                 if not neighbor.is_start() and not neighbor.is_end():
                     neighbor.uncheck()
 
+                counter += 1
                 # Update the distance values and parent pointers for the neighbor
                 update_vertex(
                     current,

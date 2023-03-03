@@ -45,8 +45,6 @@ def b_star(grid: object):
     # Initialize dictionaries to store the g and f scores for each node
     g_score = {node: float("inf") for row in grid.grid for node in row}
     g_score[grid.start] = 0
-    f_score = {node: float("inf") for row in grid.grid for node in row}
-    f_score[grid.start] = heuristic(grid.start, grid.end)
 
     # Initialize a set to store the nodes in the open set
     open_set_hash = {grid.start}
@@ -77,12 +75,12 @@ def b_star(grid: object):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + heuristic(neighbor, grid.end)
+                f_score = temp_g_score + heuristic(neighbor, grid.end)
 
                 # Add the neighbor to the open set if it is not already there
                 if neighbor not in open_set_hash:
                     count += 1
-                    open_set.put((f_score[neighbor], count, neighbor))
+                    open_set.put((f_score, count, neighbor))
                     open_set_hash.add(neighbor)
 
     return visited_nodes, path_size

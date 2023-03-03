@@ -38,11 +38,12 @@ def bell_ford(grid: object, accuracy: float):
 
         # Visit each node
         for current in nodes:
+            # Check for exit events
+            run = check(pygame.event.get(), run)
+
             # Exit the loop if the user interrupted
             if not run:
                 break
-            # Check for exit events
-            run = check(pygame.event.get(), run)
 
             # Draw the current node
             markup(grid.draw, current)

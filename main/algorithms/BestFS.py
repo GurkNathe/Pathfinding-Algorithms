@@ -96,10 +96,11 @@ def best_fs(grid: object):
             if neighbor not in costs or cost < costs[neighbor]:
                 costs[neighbor] = cost
                 # Add the neighbor to the queue with the calculated cost as the priority
+                count += 1
                 queue.put(
                     (
                         cost + heuristic("manhattan", neighbor, grid.end),
-                        count + 1,
+                        count,
                         neighbor,
                     )
                 )

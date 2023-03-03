@@ -90,8 +90,9 @@ def best_fs(grid: object):
             # Update the cost in the dictionary if it is lower than the current value
             if neighbor not in costs or cost < costs[neighbor]:
                 costs[neighbor] = cost
+                count += 1
                 # Add the neighbor to the queue with the calculated cost as the priority
                 queue.put(
-                    (cost + heuristic("manhattan", neighbor, grid.end), count + 1, neighbor)
+                    (cost + heuristic("manhattan", neighbor, grid.end), count, neighbor)
                 )
     return visited_nodes, path_size

@@ -1,5 +1,5 @@
 from queue import PriorityQueue
-from .RP import get_unvisited_nodes, check, count_path
+from .RP import check, count_path
 
 
 def dijkstra(grid: object):
@@ -17,11 +17,8 @@ def dijkstra(grid: object):
     # Initialize a priority queue to store the nodes to visit
     queue = PriorityQueue()
 
-    # Initialize a set to store the unvisited nodes
-    unvisited_nodes = get_unvisited_nodes(grid.start)
-
     # Set up the node values
-    distance = {node: float("inf") for node in unvisited_nodes}
+    distance = {node: float("inf") for row in grid.grid for node in row}
     distance[grid.start] = 0
 
     # Holds the path from start to end
@@ -58,10 +55,9 @@ def dijkstra(grid: object):
                 if temp_value < distance[neighbor]:
                     distance[neighbor] = temp_value
                     previous[neighbor] = current_min
+                    count += 1
 
                     # Add the neighbor to the priority queue
-                    queue.put((distance[neighbor], count + 1, neighbor))
+                    queue.put((distance[neighbor], count, neighbor))
 
-        # Remove the current node from the set of unvisited nodes
-        unvisited_nodes.remove(current_min)
     return visited_nodes, path_size

@@ -1,6 +1,6 @@
 import pygame
 from queue import PriorityQueue
-from .RP import reconstruct_path, get_unvisited_nodes, check, markup
+from .RP import reconstruct_path, check, markup
 
 
 def dijkstra(grid: object):
@@ -17,11 +17,8 @@ def dijkstra(grid: object):
     # Initialize a priority queue to store the nodes to visit
     queue = PriorityQueue()
 
-    # Initialize a set to store the unvisited nodes
-    unvisited_nodes = get_unvisited_nodes(grid.start)
-
     # Set up the node values
-    distance = {node: float("inf") for node in unvisited_nodes}
+    distance = {node: float("inf") for row in grid.grid for node in row}
     distance[grid.start] = 0
 
     # Holds the path from start to end
@@ -61,15 +58,13 @@ def dijkstra(grid: object):
                     previous[neighbor] = current_min
 
                     # Add the neighbor to the priority queue
-                    queue.put((distance[neighbor], count + 1, neighbor))
+                    count += 1
+                    queue.put((distance[neighbor], count, neighbor))
 
                     # Uncheck the neighbor if it is not the start or end node
                     # for markup
                     if not neighbor.is_end() and not neighbor.is_start():
                         neighbor.uncheck()
-
-        # Remove the current node from the set of unvisited nodes
-        unvisited_nodes.remove(current_min)
 
     # Draw the path from the end node to the start node
     reconstruct_path(previous, grid.end, grid.draw)

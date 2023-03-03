@@ -214,7 +214,7 @@ def connect_path(came_from: dict, current: object, grid: list):
                 # Iterate through all x values between the current and
                 # previous nodes
                 for x in range(xc, xp):
-                    if not grid[x][yp].is_start() and not grid[xp][y].is_end():
+                    if not grid[x][yp].is_start() and not grid[x][yp].is_end():
                         path_size += 1
 
             # Current is right of previous
@@ -222,7 +222,7 @@ def connect_path(came_from: dict, current: object, grid: list):
                 # Iterate through all x values between the current and
                 # previous nodes
                 for x in range(xp, xc):
-                    if not grid[x][yp].is_start() and not grid[xp][y].is_end():
+                    if not grid[x][yp].is_start() and not grid[x][yp].is_end():
                         path_size += 1
 
         current = previous
@@ -290,6 +290,7 @@ def theta_star(grid: object):
                     g_score[neighbor] = float("inf")
                     parent[neighbor] = None
 
+                counter += 1
                 # Update the distance values and parent pointers for the neighbor
                 update_vertex(
                     current,
