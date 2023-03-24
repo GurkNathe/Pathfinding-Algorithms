@@ -1,6 +1,5 @@
-import pygame
 import heapq
-from .RP import heuristic, check
+from .RP import heuristic
 
 
 def get_checked_neighbors(node: object):
@@ -21,14 +20,14 @@ def get_checked_neighbors(node: object):
     return checked
 
 
-def reconstruct_path(current: object, costs: dict, draw: object):
+def count_path(current: object, costs: dict, path_size: int):
     """
     Reconstruct the path from the end node to the start node.
 
     Args:
         current (Node): The current node in the search.
         costs (Dict[Node, int]): The cost of reaching each node from the start.
-        draw (function): A function used to draw the search on the screen.
+        path_size (int): Counter for path size found.
 
     Returns:
         None: The function updates the screen with the path.
@@ -43,9 +42,8 @@ def reconstruct_path(current: object, costs: dict, draw: object):
         if current.is_start():
             break
 
-        # Draw the path to the current node
-        current.make_path()
-        draw()
+        path_size += 1
+    return path_size
 
 
 def update_vertex(grid: object, node: object, rhs: dict, g: dict, open_list: list):
@@ -108,7 +106,8 @@ def lpa_star(grid: object):
         grid (Grid): An object representing the current grid
 
     Returns:
-        None: The function updates the screen with the search progress and path.
+        visited_nodes (int): Count of the number of nodes visited.
+        path_size (int): Length of the path found.
     """
     rhs = {node: float("inf") for row in grid.grid for node in row}
     g = {node: float("inf") for row in grid.grid for node in row}
@@ -118,18 +117,14 @@ def lpa_star(grid: object):
     topKey = calc_key(grid.end, grid.start, g, rhs)
     open_list.append((topKey, grid.start))
 
-    # Initialize a flag to track whether the search should continue
-    run = True
+    visited_nodes: int = 0
+    path_size: int = 0
 
-    while (
-        topKey < calc_key(grid.end, grid.end, g, rhs) or rhs[grid.end] != g[grid.end]
-    ) and run:
-        # Check for exit events
-        run = check(pygame.event.get(), run)
-
+    while topKey < calc_key(grid.end, grid.end, g, rhs) or rhs[grid.end] != g[grid.end]:
         # Check for no path found
         if open_list:
             topKey, node = heapq.heappop(open_list)
+            visited_nodes += 1
         else:
             break
 
@@ -149,13 +144,11 @@ def lpa_star(grid: object):
                 neighbor.uncheck()
             open_list = update_vertex(grid, neighbor, rhs, g, open_list)
 
-        # Update the screen with the search progress
-        grid.draw()
-
         # Check the current node if it is not the start node or end node
         if not node.is_start() and not node.is_end():
             node.check()
 
         # Reconstruct path if at end
         if node == grid.end:
-            reconstruct_path(node, rhs, grid.draw)
+            path_size = count_path(node, rhs, path_size)
+    return visited_nodes, path_size

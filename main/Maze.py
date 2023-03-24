@@ -118,7 +118,16 @@ def check_right(grid: list, walls: list, r_y: int, r_x: int, width: int):
             walls.append(grid[r_y][r_x + 1])
 
 
-def check_borders(dirs: str, grid: list, walls: list, r_y: int, r_x: int, width: int, height: int, rand_wall: object):
+def check_borders(
+    dirs: str,
+    grid: list,
+    walls: list,
+    r_y: int,
+    r_x: int,
+    width: int,
+    height: int,
+    rand_wall: object,
+):
     """
     Checks the four neighbors of the current node and marks them accordingly.
 

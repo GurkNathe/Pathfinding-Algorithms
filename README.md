@@ -67,7 +67,7 @@ The testing will take longer as the visitable nodes increases. For my system, an
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (19/30):
+Currently implemented algorithms (20/30):
 
 - A*
 - Beam Search
@@ -86,6 +86,7 @@ Currently implemented algorithms (19/30):
 - Iterative Deepening DFS (IDDFS)
 - Jump Point Search (JPS)
 - Lexicographic BFS
+- Lifelong Planning A* (LPA*)
 - Random Walk
 - Theta*
 
@@ -103,8 +104,6 @@ Planned algorithms (Going to look at them):
 - Johnson's
 
 - Kruskal's
-
-- Lifelong Planning A* (LPA*)
 
 - SMA*
 - SUB

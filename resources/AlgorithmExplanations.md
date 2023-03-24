@@ -20,6 +20,7 @@
 11. [Iterative Deepening DFS](#iterative-deepening-dfs-pathfinding-algorithm)
 11. [Jump Point Search](#jump-point-search-jps-pathfinding-algorithm)
 11. [Lexicographic BFS](#lexicographic-bfs-pathfinding-algorithm)
+11. [Lifelong Planning A*](#lifelong-planning-a-pathfinding-algorithm)
 12. [Random Walk Algorithm](#random-walk-pathfinding-algorithm)
 13. [Theta*](#theta-pathfinding-algorithm)
 
@@ -221,6 +222,16 @@ To solve the shortest path problem using LexBFS, we can follow the following ste
 2. Initialize a dictionary to store the distances of the vertices from the starting vertex. Set the distance of the starting vertex to 0, and the distances of all other vertices to infinity.
 3. Iterate through the vertices in the order produced by LexBFS. For each vertex, update the distances of its neighbors using the distance of the vertex itself. This ensures that the distances of the vertices are non-decreasing as we go through the vertices in the order produced by LexBFS.
 4. When we reach the ending vertex, the distance of the ending vertex is the shortest path distance from the starting vertex to the ending vertex. We can then use the parent pointers produced by LexBFS to reconstruct the shortest path from the starting vertex to the ending vertex.
+
+## Lifelong Planning A\* pathfinding algorithm:
+
+The Lifelong Planning A\* (LPA\*) algorithm is a variant of the well-known A\* search algorithm that is designed to efficiently update the optimal path in a graph as changes are made to the graph over time. LPA\* is a popular algorithm for planning and pathfinding in dynamic environments, where the underlying graph can change frequently.
+
+In contrast to A\*, which assumes a fixed graph and recomputes the optimal path from scratch whenever changes occur, LPA\* keeps track of the current best path from the start node to each node in the graph, and updates these paths as necessary when the graph changes. LPA\* maintains two values for each node: the "g-value", which is the cost of the best path found so far from the start node to that node, and the "rhs-value", which is the cost of the second-best path. These values are used to determine which nodes to expand during the search.
+
+LPA\* uses a heuristic function to estimate the cost of the remaining path to the goal from each node, and expands nodes with the lowest "key-value", which is a combination of the g-value and the heuristic estimate. When the graph changes, LPA\* updates the g- and rhs-values of the affected nodes, and re-expands nodes whose key-values have changed.
+
+Despite the ability to handle dynamic environments, the algorithm implemented here is in a static environment, so performance and graph traversal will be almost identical to the A\* algorithm.
 
 ## Random Walk pathfinding algorithm:
 
