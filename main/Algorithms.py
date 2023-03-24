@@ -15,6 +15,7 @@ from algorithms.IDAStar import ida_star
 from algorithms.IDDFS import iddfs
 from algorithms.JPS import jps
 from algorithms.LexicographicBFS import lbfs
+from algorithms.LPAStar import lpa_star
 from algorithms.RandomWalk import rand_walk
 from algorithms.ThetaStar import theta_star
 
@@ -37,6 +38,7 @@ ALGORITHMS = [
     "iddfs",
     "jps",
     "lbfs",
+    "lpa",
     "rand",
     "theta",
 ]
@@ -59,6 +61,7 @@ run_algs = {
     "iddfs": "iddfs(grid, len(grid.grid) * len(grid.grid[0]))",
     "jps": "jps(grid)",
     "lbfs": "lbfs(grid)",
+    "lpa": "lpa_star(grid)",
     "rand": "rand_walk(grid)",
     "theta": "theta_star(grid)",
 }

@@ -118,6 +118,36 @@ def check_right(grid: list, walls: list, r_y: int, r_x: int, width: int):
             walls.append(grid[r_y][r_x + 1])
 
 
+def check_borders(dirs: str, grid: list, walls: list, r_y: int, r_x: int, width: int, height: int, rand_wall: object):
+    """
+    Checks the four neighbors of the current node and marks them accordingly.
+
+    Args:
+        dirs (str): Directions to check.
+        grid (list): A 2D list representing the maze grid.
+        walls (list): Current list of obstacles in the grid.
+        r_y (int): Y-value of the current node.
+        r_x (int): X-value of the current node.
+        width (int): Number of nodes wide the grid is.
+        height (int): Number of nodes tall the grid is.
+        rand_wall (object): Current node.
+    """
+    s_cells = surroundingCells(grid, r_y, r_x)
+    if s_cells < 2:
+        grid[r_y][r_x].uncheck()
+
+        if "u" in dirs:
+            check_up(grid, walls, r_y, r_x)
+        if "d" in dirs:
+            check_down(grid, walls, r_y, r_x, height)
+        if "l" in dirs:
+            check_left(grid, walls, r_y, r_x)
+        if "r" in dirs:
+            check_right(grid, walls, r_y, r_x, width)
+
+    delete_wall(walls, rand_wall)
+
+
 def gen_maze(grid: list, start: object = None, end: object = None):
     """
     Generate a maze using the recursive backtracking algorithm.
@@ -165,15 +195,7 @@ def gen_maze(grid: list, start: object = None, end: object = None):
             # Check if the cell to the left of the wall is not checked and the cell
             # to the right of the wall is checked
             if grid[r_y][r_x - 1].is_default() and grid[r_y][r_x + 1].is_unchecked():
-                s_cells = surroundingCells(grid, r_y, r_x)
-                if s_cells < 2:
-                    grid[r_y][r_x].uncheck()
-
-                    check_up(grid, walls, r_y, r_x)
-                    check_down(grid, walls, r_y, r_x, height)
-                    check_left(grid, walls, r_y, r_x)
-
-                delete_wall(walls, rand_wall)
+                check_borders("udl", grid, walls, r_y, r_x, width, height, rand_wall)
                 continue
 
         # Check if the wall is not on the top border of the grid
@@ -181,15 +203,7 @@ def gen_maze(grid: list, start: object = None, end: object = None):
             # Check if the cell above the wall is not checked and the cell below the
             # wall is checked
             if grid[r_y - 1][r_x].is_default() and grid[r_y + 1][r_x].is_unchecked():
-                s_cells = surroundingCells(grid, r_y, r_x)
-                if s_cells < 2:
-                    grid[r_y][r_x].uncheck()
-
-                    check_up(grid, walls, r_y, r_x)
-                    check_left(grid, walls, r_y, r_x)
-                    check_right(grid, walls, r_y, r_x, width)
-
-                delete_wall(walls, rand_wall)
+                check_borders("ulr", grid, walls, r_y, r_x, width, height, rand_wall)
                 continue
 
         # Check if the wall is not on the bottom border of the grid
@@ -197,15 +211,7 @@ def gen_maze(grid: list, start: object = None, end: object = None):
             # Check if the cell bellow the wall is not checked and the cell above the
             # wall is checked
             if grid[r_y + 1][r_x].is_default() and grid[r_y - 1][r_x].is_unchecked():
-                s_cells = surroundingCells(grid, r_y, r_x)
-                if s_cells < 2:
-                    grid[r_y][r_x].uncheck()
-
-                    check_down(grid, walls, r_y, r_x, height)
-                    check_left(grid, walls, r_y, r_x)
-                    check_right(grid, walls, r_y, r_x, width)
-
-                delete_wall(walls, rand_wall)
+                check_borders("dlr", grid, walls, r_y, r_x, width, height, rand_wall)
                 continue
 
         # Check if the wall is not on the right border of the grid
@@ -213,15 +219,7 @@ def gen_maze(grid: list, start: object = None, end: object = None):
             # Check if the cell to the right of the wall is not checked and the cell
             # to the left of the wall is checked
             if grid[r_y][r_x + 1].is_default() and grid[r_y][r_x - 1].is_unchecked():
-                s_cells = surroundingCells(grid, r_y, r_x)
-                if s_cells < 2:
-                    grid[r_y][r_x].uncheck()
-
-                    check_right(grid, walls, r_y, r_x, width)
-                    check_down(grid, walls, r_y, r_x, height)
-                    check_up(grid, walls, r_y, r_x)
-
-                delete_wall(walls, rand_wall)
+                check_borders("udr", grid, walls, r_y, r_x, width, height, rand_wall)
                 continue
 
         delete_wall(walls, rand_wall)
