@@ -136,7 +136,8 @@ def heuristic(type: str, node1: object, node2: object, *args):
 
     Args:
         type (str): The type of heuristic distance to use.
-            Valid options are "euclidean" and "manhattan".
+            Valid options are "chebyshev", "euclidean", 
+            "manhattan", "minkowski", and "mahalanobis".
         node1 (Node): The first node.
         node2 (Node): The second node.
         *args (list): additional arguments for different heuristics

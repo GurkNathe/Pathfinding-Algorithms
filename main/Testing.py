@@ -1,4 +1,4 @@
-import timeit
+import time
 import csv
 from os import system, name, path
 
@@ -69,7 +69,7 @@ def testing(grid: object):
     with open(
         path.join(
             path.dirname(__file__),
-            f"testing/results/{int(timeit.default_timer())}.csv",
+            f"testing/results/{int(time.time())}.csv",
         ),
         "w",
         newline="",
@@ -104,9 +104,9 @@ def testing(grid: object):
                     node.update_neighbors(grid.grid)
 
             # Run and get statistics for ran algorithm
-            start_time = timeit.default_timer()
+            start_time = time.perf_counter()
             num_visited_nodes, path_size = algorithm(grid, alg)
-            end_time = timeit.default_timer()
+            end_time = time.perf_counter()
 
             # Used for handling Theta* turn points
             # ! Will most likely change in the future when more data is being collected from each algorithm
