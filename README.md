@@ -67,12 +67,13 @@ The testing will take longer as the visitable nodes increases. For my system, an
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (20/30):
+Currently implemented algorithms (21/31):
 
 - A*
 - Beam Search
 - Bellman Ford's Algorithm
 - Best First Search
+- Bidirectional A*
 - Bidirectional search
 - Branch & Bound
 - Breadth First Search (BFS)

@@ -7,6 +7,7 @@
 2. [Beam Search](#beam-search)
 3. [Bellman-Ford's Algorithm](#bellman-fords-pathfinding-algorithm)
 4. [Best First Search](#best-first-search-pathfinding-algorithm)
+4. [Bidirectional Search Algorithms](#bidirectional-search-algorithms)
 4. [Bidirectional Search](#bidirectional-search-pathfinding-algorithm)
 5. [Breadth First Search](#breadth-first-search-bfs-pathfinding-algorithm)
 5. [Branch & Bound](#branch--bound-pathfinding-algorithm)
@@ -77,6 +78,16 @@ Best first search is a type of search algorithm that uses a heuristic evaluation
 The algorithm continues to explore the neighbor nodes and expand the search space until the goal is reached, or until all possible paths have been explored. If the goal is found, the algorithm returns the minimum cost path from the start to the goal. If no path is found, the algorithm returns failure.
 
 Best first search can be implemented using a priority queue to store the nodes that need to be explored. The priority queue is ordered by the estimated cost of each node, with the node that has the lowest estimated cost being at the top of the queue. The algorithm then repeatedly takes the top node from the queue, expands it to explore its neighbor nodes, and adds the neighbor nodes to the queue. This process continues until the goal is reached or the queue is empty.
+
+## Bidirectional Search Algorithms:
+
+I plan on implementing a section for bidirectional algorithms in the future (i.e., all algorithms can be run bidirectionally).
+
+Birdirectional search can greatly improve the performance of the algorithm, however, generally it requires additional memory (close to double the memory without any optimization), which can actually slow the algorithm down. At the time of writing this, I just implemented the A* algorithm for bidirectional algorithms. When testing, the original A* algorithm was 2.83x faster then the bidirectional version (2.5112e-3 vs 7.0988e-3), and it only performed 4 extra node checks (302 vs 298 with a total node count of 1170). I haven't tried testing both algorithms with a significantly large grid, however, from this initial test, it appears that bidirectional search is slower in searching for a target and then reporting the path than the standard version.
+
+The only other bidirectional algorithm implemented as of writing this is the Breadth-First Search (BFS) algorithm. Compared to the A* version, the BFS version was faster when compared to the original BFS algorithm, where the original was 1.24x faster than the bidirectional version (1.0871e-3 vs 1.3469e-3). However, the node checks were significantly different where there was a difference of 146 node checks between the two versions (566 vs 420 with a total node count of 1170). 
+
+So, it seems like either a diffence in optimization or simply due to the nature of the algorithms and memory requirements.
 
 ## Bidirectional Search pathfinding algorithm:
 

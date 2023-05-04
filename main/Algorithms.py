@@ -4,6 +4,7 @@ from algorithms.BellmanFord import bell_ford
 from algorithms.BestFS import best_fs
 from algorithms.BFS import bfs
 from algorithms.BidirectionalSearch import bi_search
+from algorithms.BidirectionalAStar import bi_a_star
 from algorithms.BranchBound import branch_and_bound
 from algorithms.BStar import b_star
 from algorithms.DFS import dfs
@@ -26,6 +27,7 @@ ALGORITHMS = [
     "bellford",
     "bestfs",
     "bfs",
+    "biastar",
     "bisearch",
     "branch",
     "bstar",
@@ -49,6 +51,7 @@ run_algs = {
     "bellford": "bell_ford(grid, 1)",
     "bestfs": "best_fs(grid)",
     "bfs": "bfs(grid)",
+    "biastar": "bi_a_star(grid)",
     "bisearch": "bi_search(grid)",
     "branch": "branch_and_bound(grid)",
     "bstar": "b_star(grid)",
