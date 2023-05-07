@@ -3,8 +3,8 @@ from algorithms.BeamSearch import beam_search
 from algorithms.BellmanFord import bell_ford
 from algorithms.BestFS import best_fs
 from algorithms.BFS import bfs
-from algorithms.BidirectionalSearch import bi_search
-from algorithms.BidirectionalAStar import bi_a_star
+from algorithms.bidirectional.BFS import bi_search
+from algorithms.bidirectional.AStar import bi_a_star
 from algorithms.BranchBound import branch_and_bound
 from algorithms.BStar import b_star
 from algorithms.DFS import dfs

@@ -57,4 +57,5 @@ def dfs(grid: object):
                         neighbor.uncheck()
 
     # Draw the path from the end node to the start node
-    reconstruct_path(previous, grid.end, grid.draw)
+    if run:
+        reconstruct_path(previous, grid.end, grid.draw)

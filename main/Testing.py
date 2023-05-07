@@ -7,8 +7,8 @@ from testing.BeamSearch import beam_search
 from testing.BellmanFord import bell_ford
 from testing.BestFS import best_fs
 from testing.BFS import bfs
-from testing.BidirectionalAStar import bi_a_star
-from testing.BidirectionalSearch import bi_search
+from testing.bidirectional.AStar import bi_a_star
+from testing.bidirectional.BFS import bi_search
 from testing.BranchBound import branch_and_bound
 from testing.BStar import b_star
 from testing.DFS import dfs
@@ -110,7 +110,8 @@ def testing(grid: object):
             end_time = time.perf_counter()
 
             # Used for handling Theta* turn points
-            # ! Will most likely change in the future when more data is being collected from each algorithm
+            # ! Will most likely change in the future when more data is being collected 
+            # ! from each algorithm
             if type(path_size) == tuple:
                 algo_data.append(
                     [
@@ -127,7 +128,7 @@ def testing(grid: object):
                 )
 
             # Progress markup
-            # !!! Unreplicable error with printing the completion animation
+            # ? Unreplicable error with printing the completion animation
             completion += 1
             index = int((completion / len(ALGORITHMS)) * len(animation))
 

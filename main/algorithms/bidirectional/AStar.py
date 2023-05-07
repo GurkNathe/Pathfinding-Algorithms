@@ -1,67 +1,6 @@
 import pygame
-import threading
-import time
 from queue import PriorityQueue
-from .RP import heuristic, check, markup
-
-
-def reconstruct_path(came_from: object, current: object, target: object, draw: object):
-    """
-    Reconstructs the path from the current node to the target node in a maze.
-
-    Args:
-        came_from (Dict[Node, Node]): A dictionary containing the nodes traversed
-            during the pathfinding algorithm.
-        current (Node): The node being checked when the algorithm terminated
-        target (Node): The node to traverse back to
-        draw (function): A function for drawing the maze.
-
-    Returns:
-        None
-    """
-
-    # Draw the intersected node
-    win = pygame.display.get_surface()
-    current.make_path()
-    current.draw(win)
-    pygame.display.update()
-
-    while current in came_from:
-        if came_from[current] != target:
-            current = came_from[current]
-            current.make_path()
-            current.draw(win)
-            pygame.display.update()
-            time.sleep(0.015)
-        else:
-            break
-
-
-# This method is included for a more aesthetic reconstruction
-def thread_construct(args1: tuple, args2: tuple):
-    """
-    Constructs two threads that will run the `reconstruct_path` function with the
-    given arguments. The threads are started and then joined, which waits for
-    them to finish before returning.
-
-    Args:
-        args1 (tuple): A tuple of arguments to pass to the first
-            `reconstruct_path` function.
-        args2 (tuple): A tuple of arguments to pass to the second
-            `reconstruct_path` function.
-    """
-    # Create two threads that will run the `reconstruct_path` function with the
-    # given arguments
-    n1 = threading.Thread(target=reconstruct_path, args=args1)
-    n2 = threading.Thread(target=reconstruct_path, args=args2)
-
-    # Start the threads
-    n1.start()
-    n2.start()
-
-    # Wait for the threads to finish
-    n1.join()
-    n2.join()
+from ..RP import heuristic, check, markup, thread_construct
 
 
 def bi_a_star(grid: object):

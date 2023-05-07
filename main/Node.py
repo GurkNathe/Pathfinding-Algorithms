@@ -13,7 +13,7 @@ PATH = COLORS.get("PURPLE")
 
 
 class Node:
-    def __init__(self, row: int, col: int, width: int, total_rows: int, *args):
+    def __init__(self, row: int, col: int, width: int, total_rows: int):
         """
         Initializes a node with its position, size, and color.
 

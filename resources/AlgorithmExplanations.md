@@ -89,6 +89,8 @@ The only other bidirectional algorithm implemented as of writing this is the Bre
 
 So, it seems like either a diffence in optimization or simply due to the nature of the algorithms and memory requirements.
 
+Another thing to note about bidirectional algorithms in the context of this project is that the main body of the algorithm can't be run on seperate threads due to the nature of how the visualization is rendered. When it's threaded it causes a jittery effect because each thread is trying to rerender the window, which causes visual issues. This is the main reason why the bidirectional algorithm isn't split into separate threads for start and end.
+
 ## Bidirectional Search pathfinding algorithm:
 
 Bidirectional search is an algorithm that allows you to find the shortest path between two nodes in a graph by simultaneously searching from both the starting node and the ending node. It is a variant of the breadth-first search algorithm that can significantly reduce the time complexity of the search in some cases.

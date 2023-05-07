@@ -3,7 +3,7 @@ import pygame
 
 
 class Grid:
-    def __init__(self, win: object, ROWS: int, width: int, **kwargs):
+    def __init__(self, win: object, ROWS: int, width: int):
         self.rows = ROWS
         self.width = width
         self.node_width = width // ROWS
@@ -11,7 +11,6 @@ class Grid:
         self.grid = []
         self.start = None
         self.end = None
-        self.others = kwargs.copy()
 
         self.make_grid()
 

@@ -1,5 +1,5 @@
 from queue import Queue
-from .RP import get_unvisited_nodes, check, count_path
+from .RP import get_unvisited_nodes, count_path
 
 
 def bell_ford(grid: object, accuracy: float):
@@ -36,8 +36,6 @@ def bell_ford(grid: object, accuracy: float):
         for current in nodes:
 
             visited_nodes += 1
-
-            check(current)
 
             # Check the neighbors of the current node
             for neighbor in current.neighbors:

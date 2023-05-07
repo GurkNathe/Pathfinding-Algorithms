@@ -1,4 +1,4 @@
-from .RP import get_unvisited_nodes, check
+from .RP import get_unvisited_nodes
 
 
 def count_path(

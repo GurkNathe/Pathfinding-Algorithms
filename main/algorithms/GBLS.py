@@ -81,4 +81,5 @@ def gbls(grid: object):
                     neighbor.get_pos()[1] - current.get_pos()[1],
                 )
 
-    reconstruct_path(previous, grid.end, grid.draw)
+    if run:
+        reconstruct_path(previous, grid.end, grid.draw)

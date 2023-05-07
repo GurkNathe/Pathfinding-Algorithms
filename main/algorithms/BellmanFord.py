@@ -65,4 +65,5 @@ def bell_ford(grid: object, accuracy: float):
         counter -= 1
 
     # Draw the path from the end node to the start node
-    reconstruct_path(predecessor, grid.end, grid.draw)
+    if run:
+        reconstruct_path(predecessor, grid.end, grid.draw)
