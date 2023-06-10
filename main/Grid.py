@@ -19,9 +19,6 @@ class Grid:
         self.end = None
         self.make_grid()
 
-    def get_cell(self, row: int, col: int):
-        return self.grid[row][col]
-
     def get_clicked_pos(self, pos: tuple):
         """
         Get the position of the node that was clicked in the grid.
@@ -150,3 +147,6 @@ class Grid:
         self.draw_grid_lines()
 
         pygame.display.update()
+
+    def __getitem__(self, key):
+        return self.grid[key]

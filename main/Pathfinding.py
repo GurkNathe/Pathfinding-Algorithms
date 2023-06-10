@@ -111,7 +111,7 @@ def handle_mouse_clicks(mouse: object, ran: bool, grid: object):
         if row > grid.rows - 1 or col > grid.rows - 1:
             return ran, grid
 
-        node = grid.get_cell(row, col)
+        node = grid[row][col]
 
         if not grid.start and node != grid.end:
             grid.start = node
@@ -137,7 +137,7 @@ def handle_mouse_clicks(mouse: object, ran: bool, grid: object):
         if row > grid.rows - 1 or col > grid.rows - 1:
             return ran, grid
 
-        node = grid.get_cell(row, col)
+        node = grid[row][col]
 
         node.reset()
 

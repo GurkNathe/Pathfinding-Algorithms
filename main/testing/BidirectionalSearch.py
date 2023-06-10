@@ -1,4 +1,62 @@
-from ..RP import thread_construct
+import pygame
+import threading
+
+
+def count_path(path_size: list, came_from: object, current: object, target: object):
+    """
+    Reconstructs the path from the current node to the target node in a maze.
+
+    Args:
+        path_size (int): Length of the path found.
+        came_from (Dict[Node, Node]): A dictionary containing the nodes traversed
+            during the pathfinding algorithm.
+        current (Node): The node being checked when the algorithm terminated
+        target (Node): The node to traverse back to
+
+    Returns:
+        None
+    """
+
+    while current in came_from:
+        if came_from[current] != target:
+            current = came_from[current]
+            path_size[0] += 1
+        else:
+            break
+
+
+# This method is included for a more aesthetic reconstruction
+def thread_construct(args1: tuple, args2: tuple):
+    """
+    Constructs two threads that will run the `reconstruct_path` function with the
+    given arguments. The threads are started and then joined, which waits for
+    them to finish before returning.
+
+    Args:
+        args1 (tuple): A tuple of arguments to pass to the first
+            `reconstruct_path` function.
+        args2 (tuple): A tuple of arguments to pass to the second
+            `reconstruct_path` function.
+
+    Returns:
+        path_size (int): Length of the path found.
+    """
+    # Create two threads that will run the `reconstruct_path` function with the
+    # given arguments
+    path1 = [0]
+    path2 = [0]
+
+    n1 = threading.Thread(target=count_path, args=(path1, *args1))
+    n2 = threading.Thread(target=count_path, args=(path2, *args2))
+
+    # Start the threads
+    n1.start()
+    n2.start()
+
+    # Wait for the threads to finish
+    n1.join()
+    n2.join()
+    return path1[0] + path2[0] + 1
 
 
 def bi_search(grid: object):
@@ -48,6 +106,8 @@ def bi_search(grid: object):
             queue_start.insert(0, start_node)
             continue
 
+        visited_nodes += 1
+
         # Check if the nodes have already been visited from the other direction
         if start_node in visited_end:
             # Construct two threads to reconstruct the path from the start and
@@ -57,6 +117,8 @@ def bi_search(grid: object):
             )
             break
 
+        visited_nodes += 1
+
         if end_node in visited_start:
             # Construct two threads to reconstruct the path from the start and
             # end directions
@@ -65,34 +127,18 @@ def bi_search(grid: object):
             )
             break
 
-        visited_nodes += 2
-
         # Mark the nodes as visited
         visited_start.add(start_node)
         visited_end.add(end_node)
 
         # Add the neighbors of the dequeued nodes to their respective queues
-        loop_helper(start_node, visited_start, queue_start, start_path)
-        loop_helper(end_node, visited_end, queue_end, end_path)
+        for neighbor in start_node.neighbors:
+            if neighbor not in visited_start:
+                queue_start.append(neighbor)
+                start_path[neighbor] = start_node
+        for neighbor in end_node.neighbors:
+            if neighbor not in visited_end:
+                queue_end.append(neighbor)
+                end_path[neighbor] = end_node
 
     return visited_nodes, path_size
-
-
-def loop_helper(node: object, visited: set, queue: list, path: dict):
-    """
-    Does the neighbor search.
-
-    Args:
-        node (Node): The node being checked.
-        visited (set): The set of visited nodes from the side the node is being 
-            checked from.
-        queue (list): The list of node to visit.
-        path (dict): The path taken from the side the node is being checked.
-
-    Returns:
-        None
-    """
-    for neighbor in node.neighbors:
-        if neighbor not in visited:
-            queue.append(neighbor)
-            path[neighbor] = node
