@@ -12,6 +12,8 @@ A maze generator is implemented, it has at least one valid path from the start t
 
 See the explanations for the implemented algorithms [here](./resources/AlgorithmExplanations.md).
 
+<strong>Warning: There is an issue with PyGame that can cause the program to crash. On my system running Linux Mint, the update display function causes a segmentation fault. Non-Windows users seem to be the group affected by this, so if you're using Windows, you should be fine.</strong>
+
 ## Command line arguments
 
 There are three optional command line arguments: width, # rows, algorithm type.

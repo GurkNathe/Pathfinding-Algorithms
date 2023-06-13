@@ -61,6 +61,7 @@ def gbls(grid: object):
                 if neighbor.is_end():
                     previous[neighbor] = current
                     found = True
+                    reconstruct_path(previous, grid.end, grid.draw)
                     break
 
                 # Markup for drawing neighbor
@@ -80,6 +81,3 @@ def gbls(grid: object):
                     neighbor.get_pos()[0] - current.get_pos()[0],
                     neighbor.get_pos()[1] - current.get_pos()[1],
                 )
-
-    if run:
-        reconstruct_path(previous, grid.end, grid.draw)

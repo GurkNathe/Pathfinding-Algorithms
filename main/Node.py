@@ -1,4 +1,5 @@
 import pygame
+from pygame import Rect
 from Colors import COLORS
 
 
@@ -31,6 +32,7 @@ class Node:
         self.neighbors = []
         self.width = width
         self.total_rows = total_rows
+        self.rect = Rect(self.x, self.y, self.width, self.width)
 
         # Flag for whether the node has been checked
         self.been_checked = False
@@ -135,7 +137,7 @@ class Node:
         Returns:
             None
         """
-        pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
+        pygame.draw.rect(win, self.color, self.rect)
 
     def update_neighbors(self, grid: list):
         """

@@ -4,7 +4,6 @@ import threading
 import time
 from queue import Queue
 
-
 def determinant_2x2(matrix: list):
     """
     Determinant for a 2x2 matrix, used for divide by zero checking
@@ -39,8 +38,6 @@ def covariance_matrix(point1: tuple, point2: tuple):
     return [[cov_x_x, cov_x_y], [cov_x_y, cov_y_y]]
 
 # Mahalanobis distance
-
-
 def mahalanobis(node1: object, node2: object):
     """
     Calculates the Mahalanobis distance between two nodes.

@@ -49,6 +49,7 @@ def gbfs(grid: object):
                 if neighbor.is_end():
                     previous[neighbor] = current
                     found = True
+                    reconstruct_path(previous, grid.end, grid.draw)
                     break
 
                 # Markup for drawing neighbor
@@ -60,7 +61,3 @@ def gbfs(grid: object):
                 distance = heuristic("manhattan", neighbor, grid.end)
                 previous[neighbor] = current
                 Q.put((distance, counter, neighbor))
-
-    # Draw the path from the end node to the start node
-    if run:
-        reconstruct_path(previous, grid.end, grid.draw)

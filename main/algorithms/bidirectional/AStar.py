@@ -62,7 +62,7 @@ def bi_a_star(grid: object):
         if node2 in visited_end:
             open_set_start.put((f_score1, count1, node1))
             continue
-
+        
         # Check if the nodes have already been visited from the other direction
         if node1 in visited_end:
             # Construct two threads to reconstruct the path from the start and

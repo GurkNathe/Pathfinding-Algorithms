@@ -47,6 +47,7 @@ def bfs(grid: object):
                 if neighbor.is_end():
                     previous[neighbor] = current
                     found = True
+                    reconstruct_path(previous, grid.end, grid.draw)
                     break
                 # Add the neighbor to the list of nodes to visit if it is not the end node
                 else:
@@ -57,7 +58,3 @@ def bfs(grid: object):
                     # for markup
                     if not neighbor.is_start() and not neighbor.is_end():
                         neighbor.uncheck()
-
-    # Draw the path from the end node to the start node
-    if run:
-        reconstruct_path(previous, grid.end, grid.draw)

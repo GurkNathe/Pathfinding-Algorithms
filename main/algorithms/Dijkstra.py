@@ -41,6 +41,7 @@ def dijkstra(grid: object):
 
         # End the search if the current node is the end node
         if current_min.is_end():
+            reconstruct_path(previous, grid.end, grid.draw)
             break
 
         # Draw the current node
@@ -65,7 +66,3 @@ def dijkstra(grid: object):
                     # for markup
                     if not neighbor.is_end() and not neighbor.is_start():
                         neighbor.uncheck()
-
-    # Draw the path from the end node to the start node
-    if run:
-        reconstruct_path(previous, grid.end, grid.draw)

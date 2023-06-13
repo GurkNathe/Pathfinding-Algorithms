@@ -46,6 +46,7 @@ def dfs(grid: object):
                 if neighbor.is_end():
                     previous[neighbor] = current
                     found = True
+                    reconstruct_path(previous, grid.end, grid.draw)
                     break
                 # Add the neighbor to the stack of nodes to visit if it is not the end node
                 else:
@@ -56,6 +57,3 @@ def dfs(grid: object):
                     if not neighbor.is_start():
                         neighbor.uncheck()
 
-    # Draw the path from the end node to the start node
-    if run:
-        reconstruct_path(previous, grid.end, grid.draw)
