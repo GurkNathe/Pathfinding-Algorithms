@@ -3,3 +3,4 @@ __pycache__/
 *.ipynb
 node_modules/
 build/
+*.yaml
