@@ -37,6 +37,7 @@ export default function Panel() {
     const [width, setWidth] = useState<number>(window.innerWidth < 500 ? 15 : 20);
     const [interestPoints, setInterestPoints] = useState<Interests>({start: [-1, -1], end: [-1, -1]})
     const [alg, setAlg] = useState<string>("A*");
+    const [control, setCtrl] = useState<boolean>(false);
 
 
     const algorithms: string[] = [
@@ -79,11 +80,13 @@ export default function Panel() {
     }
 
     const changeRows = (newRows: string) => {
+        if (isNaN(Number(newRows))) return;
         setRows({rows: rows.rows, toSubmit: Number(newRows) > maxrows ? maxrows : Number(newRows)})
     }
-
+    
     const changeWidth = (input: string) => {
-        setWidth(window.innerWidth < 500 ? Number(input) > 15 ? 15 : Number(input) : Number(input));
+        if (isNaN(Number(input))) return;
+        setWidth(window.innerWidth < 500 ? window.innerWidth < 400 ? (Number(input) > 10 ? 10 : Number(input)) : (Number(input) > 15 ? 15 : Number(input)) : Number(input));
     }
 
     const draw = (i: number, j: number, color: States, ctrl: boolean, button: boolean, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -95,7 +98,7 @@ export default function Panel() {
             const newColorGrid = [...prev];
 
             let newColor : States = 
-                ctrl ? "white" : 
+                (ctrl || control) ? "white" : 
                 interestPoints.start[0] === -1 && color !== "blue" ? "orange" :
                 interestPoints.end[0] === -1 && color !== "orange" ? "blue" :
                 color !== "orange" && color !== "blue" ? "black" : color;
@@ -362,11 +365,10 @@ export default function Panel() {
     return(
         <div className="panel">
             <div className="options">
-                <div>
+                <div className="options">
                     <span>Rows: </span>
                     <input 
                         value={rows.toSubmit} 
-                        type="number"
                         onChange={(event) => changeRows(event.target.value)}
                         onKeyDown={(event) => {
                             if (event.key === "Enter") {
@@ -376,11 +378,10 @@ export default function Panel() {
                         }}
                     />
                 </div>
-                <div>
+                <div className="options">
                     <span>Cell Width: </span>
                     <input 
                         value={width} 
-                        type="number"
                         onChange={(event) => changeWidth(event.target.value)}
                         onKeyDown={(event) => {
                             if (event.key === "Enter") {
@@ -390,7 +391,7 @@ export default function Panel() {
                         }}
                     />
                 </div>
-                <div>
+                <div className="options">
                     <span>Algorithm: </span>
                     <select onChange={(event) => setAlg(event.target.value)}>
                         {algorithms.map((func, index) => {
@@ -398,18 +399,19 @@ export default function Panel() {
                         })}
                     </select>
                 </div>
-                <button onClick={() => {
+                <button className="options" onClick={() => {
                     makeNewGrid(rows.rows)
                     genMaze()
                 }}>
                     Generate Maze
                 </button>
-                <button onClick={() => makeNewGrid(rows.rows)}>Clear Grid</button>
-                <button onClick={() => removeMarkup()}>Clear Markup</button>
-                <button onClick={() => run()}>Run</button>
+                <button className="options" onClick={() => run()}>Run</button>
+                <button className="options" onClick={() => removeMarkup()}>Clear Markup</button>
+                <button className="options" onClick={() => makeNewGrid(rows.rows)}>Clear Grid</button>
                 <p>
                     Left Click to place Start, End, Obstance.
-                    Ctrl + Left Click to remove coloring.
+                    Ctrl + Left Click to remove coloring
+                    Enable Removing Color: <input type="checkbox" onChange={() => setCtrl(prev => !prev)}/>
                 </p>
             </div>
             <div className="grid" onDragStart={(e)=>e.preventDefault()} onDrop={(e)=>e.preventDefault()}>
