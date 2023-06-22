@@ -79,8 +79,11 @@ export default function Panel() {
     }
 
     const changeRows = (newRows: string) => {
-        if (isNaN(Number(newRows))) return;
         setRows({rows: rows.rows, toSubmit: Number(newRows) > maxrows ? maxrows : Number(newRows)})
+    }
+
+    const changeWidth = (input: string) => {
+        setWidth(window.innerWidth < 500 ? Number(input) > 15 ? 15 : Number(input) : Number(input));
     }
 
     const draw = (i: number, j: number, color: States, ctrl: boolean, button: boolean, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -378,7 +381,7 @@ export default function Panel() {
                     <input 
                         value={width} 
                         type="number"
-                        onChange={(event) => setWidth(Number(event.target.value))}
+                        onChange={(event) => changeWidth(event.target.value)}
                         onKeyDown={(event) => {
                             if (event.key === "Enter") {
                                 setRows({rows: rows.toSubmit, toSubmit: rows.toSubmit})
@@ -404,6 +407,10 @@ export default function Panel() {
                 <button onClick={() => makeNewGrid(rows.rows)}>Clear Grid</button>
                 <button onClick={() => removeMarkup()}>Clear Markup</button>
                 <button onClick={() => run()}>Run</button>
+                <p>
+                    Left Click to place Start, End, Obstance.
+                    Ctrl + Left Click to remove coloring.
+                </p>
             </div>
             <div className="grid" onDragStart={(e)=>e.preventDefault()} onDrop={(e)=>e.preventDefault()}>
                 <div style={{ display: 'grid', gridTemplateColumns: `repeat(${rows.rows}, 1fr)` }}>
