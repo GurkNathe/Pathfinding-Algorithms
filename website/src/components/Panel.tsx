@@ -34,7 +34,7 @@ export default function Panel() {
     const maxrows = 25;
     const [colorGrid, setColorGrid] = useState<States[][]>([]!);
     const [rows, setRows] = useState<Rows>({rows: maxrows, toSubmit: maxrows});
-    const [width, setWidth] = useState<number>(30);
+    const [width, setWidth] = useState<number>(window.innerWidth < 500 ? 15 : 20);
     const [interestPoints, setInterestPoints] = useState<Interests>({start: [-1, -1], end: [-1, -1]})
     const [alg, setAlg] = useState<string>("A*");
 
