@@ -2,6 +2,8 @@
 
 This is a Python (3.10+) implementation and visualization of various pathfinding algorithms.
 
+There is also a web version of this at [this hyperlink](https://gurknathe.github.io/Pathfinding-Algorithms). However, there are a number of features that are missing including node-to-node updating. So, the final grid will display basically immediately after you click Run. Additionally, not every algorithm is implemented yet. 
+
 The graph used is a static, undirected, unweighted, strongly connected graph (aka, a grid that doesn't change while algorithm is running).
 
 The visualization is implemented using PyGame. Credits to [Tech With Tim](https://www.youtube.com/watch?v=JtiK0DOeI4A).
