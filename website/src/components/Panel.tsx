@@ -96,8 +96,8 @@ export default function Panel() {
 
             let newColor : States = 
                 ctrl ? "white" : 
-                interestPoints.start[0] === -1 ? "orange" :
-                interestPoints.end[0] === -1 ? "blue" :
+                interestPoints.start[0] === -1 && color !== "blue" ? "orange" :
+                interestPoints.end[0] === -1 && color !== "orange" ? "blue" :
                 color !== "orange" && color !== "blue" ? "black" : color;
 
             let newInterest : Interests = {...interestPoints};
