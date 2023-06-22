@@ -371,6 +371,7 @@ export default function Panel() {
                         value={rows.toSubmit} 
                         onChange={(event) => changeRows(event.target.value)}
                         onKeyDown={(event) => {
+                            console.log(event)
                             if (event.key === "Enter") {
                                 setRows({rows: rows.toSubmit, toSubmit: rows.toSubmit})
                                 makeNewGrid(rows.toSubmit)
