@@ -37,7 +37,7 @@ def dijkstra(grid: object):
         run = check(pygame.event.get(), run)
 
         # Get the next node to visit
-        current_distance, _, current_min = queue.get()
+        _, _, current_min = queue.get()
 
         # End the search if the current node is the end node
         if current_min.is_end():

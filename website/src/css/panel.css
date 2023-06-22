@@ -1,0 +1,41 @@
+.panel {
+    display: grid;
+    overflow: auto;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: auto auto;
+    background-color: cadetblue;
+}
+
+@media only screen and (max-width: 600px) {
+    .panel {
+        justify-content: center;
+    }
+
+    .options {
+        justify-self: center;
+        grid-row-start: 1;
+        grid-row-end: 1;
+    }
+
+    .grid {
+        align-self: baseline;
+        margin: 10px 10px 10px 10px !important;
+        grid-row-start: 2;
+        grid-row-end: 2;
+    }
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 20px 35px 0px;
+}
+
+.options { 
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    max-width: 295px;
+}
