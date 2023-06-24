@@ -129,6 +129,28 @@ def euclidean(node1: object, node2: object):
 
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
+# Dynamic Manhattan distance
+def d_manhattan(node1: object, node2: object):
+    """
+    Calculate the Dynamic Manhattan distance between two nodes.
+
+    Args:
+        node1 (Node): The first node.
+        node2 (Node): The second node.
+
+    Returns:
+        int: The Dynamic Manhattan distance between the two nodes.
+    """
+    x1, y1 = node1.get_pos()
+    x2, y2 = node2.get_pos()
+
+    blocked_penalty = len(node1.neighbors)
+    for node in node1.neighbors:
+        if not node.is_checked() and not node.is_unchecked():
+            blocked_penalty -= 1
+
+    return abs(x1 - x2) + abs(y1 - y2) + blocked_penalty
+
 
 def heuristic(type: str, node1: object, node2: object, *args):
     """
@@ -147,6 +169,8 @@ def heuristic(type: str, node1: object, node2: object, *args):
     match type:
         case "chebyshev":
             return chebyshev(node1, node2)
+        case "d_manhattan":
+            return d_manhattan(node1, node2)
         case "euclidean":
             return euclidean(node1, node2)
         case "manhattan":

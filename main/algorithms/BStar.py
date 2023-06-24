@@ -1,29 +1,6 @@
 import pygame
 from queue import PriorityQueue
-from .RP import reconstruct_path, check
-
-# Manhattan distance
-def heuristic(node1: object, node2: object):
-    """
-    Calculate the Dynamic Manhattan distance between two nodes.
-
-    Args:
-        node1 (Node): The first node.
-        node2 (Node): The second node.
-
-    Returns:
-        int: The Dynamic Manhattan distance between the two nodes.
-    """
-    x1, y1 = node1.get_pos()
-    x2, y2 = node2.get_pos()
-
-    blocked_penalty = len(node1.neighbors)
-    for node in node1.neighbors:
-        if not node.is_checked() and not node.is_unchecked():
-            blocked_penalty -= 1
-
-    return abs(x1 - x2) + abs(y1 - y2) + blocked_penalty
-
+from .RP import reconstruct_path, check, heuristic
 
 def b_star(grid: object):
     """
@@ -77,7 +54,7 @@ def b_star(grid: object):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score = temp_g_score + heuristic(neighbor, grid.end)
+                f_score = temp_g_score + heuristic("d_manhattan", neighbor, grid.end)
 
                 # Add the neighbor to the open set if it is not already there
                 if neighbor not in open_set_hash:

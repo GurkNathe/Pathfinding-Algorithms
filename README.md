@@ -57,7 +57,7 @@ While an algorithm is running:
 
 The testing function runs every implemented algorithm for the current grid. It outputs the time it took to run the algorithm and the number of node checks while running. The results are written into a CSV file, which can be found in the `main/testing/results` directory. An example output is given for a randomly generated maze, with default settings.
 
-The testing will take longer as the visitable nodes increases. For my system, and a randomly generated maze on default settings, it takes ~4 minutes to run and save the data. The Floyd-Watshall algorithm takes up the most time and can vary significantly it the execution time (e.g., most of the time I get a run time of ~260 seconds where as of writing this I record a run time of ~670 seconds).
+The testing will take longer as the visitable nodes increases. For my system, and a randomly generated maze on default settings, it takes ~4 minutes to run and save the data. The Floyd-Warshall algorithm takes up the most time and can vary significantly in its execution time (e.g., most of the time I get a run time of ~260 seconds where as of writing this I record a run time of ~670 seconds).
 
 ## Node Types
 
@@ -71,7 +71,7 @@ The testing will take longer as the visitable nodes increases. For my system, an
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (21/31):
+Currently implemented algorithms (20/32):
 
 - A*
 - Beam Search
@@ -79,7 +79,6 @@ Currently implemented algorithms (21/31):
 - Best First Search
 - Bidirectional A*
 - Bidirectional search
-- Branch & Bound
 - Breadth First Search (BFS)
 - B*
 - Depth First Search (DFS)
@@ -95,6 +94,10 @@ Currently implemented algorithms (21/31):
 - Random Walk
 - Theta*
 
+Algorithms to redo:
+
+- Branch & Bound
+
 Currently looking at:
 
 - None
@@ -104,6 +107,7 @@ Planned algorithms (Going to look at them):
 - Fast Iterative Method
 - Fast Marching Method
 - Fast Sweeping Method
+- Flood Fill Algorithm
 - Fringe search
 
 - Johnson's
@@ -121,5 +125,4 @@ Planned algorithms (Going to look at them):
 Possible incorrectly implemented algorithms:
 
 - [B\*](./resources/b_star.pdf)
-- [Branch and Bound](https://en.wikipedia.org/wiki/Branch_and_bound)
 - [Jump Point Search](https://en.wikipedia.org/wiki/Jump_point_search)
