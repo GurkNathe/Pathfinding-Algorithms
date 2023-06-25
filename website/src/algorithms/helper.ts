@@ -34,7 +34,7 @@ export function reconstructPath(grid: States[][], path: any, current: [number, n
     }
 }
 
-function manhattan(grid: States[][], node1: [number, number], node2: [number, number]) {
+function manhattan(node1: [number, number], node2: [number, number]) {
     let [y1, x1] = node1;
     let [y2, x2] = node2;
 
@@ -44,10 +44,48 @@ function manhattan(grid: States[][], node1: [number, number], node2: [number, nu
 export function heuristic(type: string, grid: States[][], start: [number, number], end: [number, number]) {
     switch(type) {
         case "manhattan":
-            return manhattan(grid, start, end);
+            return manhattan(start, end);
         default:
-            return manhattan(grid, start, end);
+            return manhattan(start, end);
     }
+}
+
+export function getUnvisitedNodes(grid: States[][], start: [number, number]) {
+    let queue = new Queue();
+    let queuehash: [number, number][] = [start];
+    queue.enqueue(start);
+
+    while (!queue.isEmpty) {
+        let current: [number, number] = queue.dequeue() as [number, number];
+
+        for (const neighbor of getNeighbors(grid, current)) {
+            if (!queuehash.some(node => {
+                return node[0] === neighbor[0] && node[1] === neighbor[1];
+            })) {
+                queue.enqueue(neighbor);
+                queuehash.push(neighbor);
+            }
+        }
+    }
+
+    return queuehash;
+}
+
+export function containsPos(list: [number, number][], target: [number, number]) {
+    return list.some((pos) => {
+        return pos[0] === target[0] && pos[1] === target[1];
+    })
+}
+
+export function findPos(list: [number, number][], target: [number, number]) {
+    let index = -1;
+    for (const [i, node] of list.entries()) {
+        if (node[0] === target[0] && node[1] === target[1]) {
+            index = i;
+            break;
+        }
+    }
+    return index;
 }
 
 class QElement {
@@ -63,7 +101,7 @@ class QElement {
 }
 
 export class PriorityQueue {
-    items: QElement[];
+    private items: QElement[];
 
     constructor() {
         this.items = [];
@@ -118,5 +156,41 @@ export class PriorityQueue {
 
     isEmpty() {
         return this.items.length === 0;
+    }
+}
+
+class Queue<T> {
+    private elements: { [key: number]: T };
+    private head: number;
+    private tail: number;
+
+    constructor() {
+        this.elements = {};
+        this.head = 0;
+        this.tail = 0;
+    }
+
+    enqueue(element: T): void {
+        this.elements[this.tail] = element;
+        this.tail++;
+    }
+
+    dequeue(): T | undefined {
+        const item = this.elements[this.head];
+        delete this.elements[this.head];
+        this.head++;
+        return item;
+    }
+
+    peek(): T | undefined {
+        return this.elements[this.head];
+    }
+
+    get length(): number {
+        return this.tail - this.head;
+    }
+
+    get isEmpty(): boolean {
+        return this.length === 0;
     }
 }

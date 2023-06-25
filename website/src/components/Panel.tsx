@@ -4,9 +4,12 @@ import "../css/panel.css"
 
 import astar from "../algorithms/a*";
 import beamsearch from "../algorithms/beamsearch";
+import bellmanford from "../algorithms/bellford";
+import bestfirstsearch from "../algorithms/bestfirstsearch";
 import bfs from "../algorithms/bfs";
 import dfs from "../algorithms/dfs";
 import dijkstra from "../algorithms/dijkstra";
+import floydwarshall from "../algorithms/floydwarshall";
 import gbls from "../algorithms/gbls";
 
 type Rows = {
@@ -43,12 +46,12 @@ export default function Panel() {
     const algorithms: string[] = [
         "A*", 
         "Beam Search",
-        // "Bellman-Ford",
-        // "Best First Search",
+        "Bellman-Ford",
+        "Best First Search",
         "BFS", 
         "DFS",
         "Dijkstra",
-        // "Floyd-Warshall",
+        "Floyd-Warshall",
         // "Greedy Best First Search",
         "Greedy Best Line Search",
         // "Iterative Deepening A*",
@@ -344,6 +347,12 @@ export default function Panel() {
             case "Beam Search":
                 beamsearch(colorGrid, setColorGrid, interestPoints);
                 break;
+            case "Bellman-Ford":
+                bellmanford(colorGrid, setColorGrid, interestPoints);
+                break;
+            case "Best First Search":
+                bestfirstsearch(colorGrid, setColorGrid, interestPoints);
+                break;
             case "BFS":
                 bfs(colorGrid, setColorGrid, interestPoints);
                 break;
@@ -352,6 +361,9 @@ export default function Panel() {
                 break;
             case "Dijkstra":
                 dijkstra(colorGrid, setColorGrid, interestPoints);
+                break;
+            case "Floyd-Warshall":
+                floydwarshall(colorGrid, setColorGrid, interestPoints);
                 break;
             case "Greedy Best Line Search":
                 gbls(colorGrid, setColorGrid, interestPoints);
