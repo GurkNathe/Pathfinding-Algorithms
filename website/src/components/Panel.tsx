@@ -426,6 +426,14 @@ export default function Panel() {
                     Ctrl + Left Click to remove coloring
                     Enable Removing Color: <input type="checkbox" onChange={() => setCtrl(prev => !prev)}/>
                 </p>
+                {
+                    alg === "Floyd-Warshall" ? 
+                    <span style={{ color: "red", fontSize: "24px"}}>
+                        WARNING: IF THE SEARCH SPACE IS TOO LARGE THE FLOYD-WARSHALL ALGORITHM WILL CAUSE PERFORMANCE ISSUES AND POSSIBLY CAUSE A CRASH.
+                    </span> :
+                    <></>
+                }
+                
             </div>
             <div className="grid" onDragStart={(e)=>e.preventDefault()} onDrop={(e)=>e.preventDefault()}>
                 <div style={{ display: 'grid', gridTemplateColumns: `repeat(${rows.rows}, 1fr)` }}>

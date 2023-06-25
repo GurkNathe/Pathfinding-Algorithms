@@ -98,7 +98,9 @@ export default function floydwarshall(colorGrid: States[][], setGrid: React.Disp
 
                 setGrid(grid);
             }
+            setGrid(grid);
         }
+        setGrid(grid);
     }
 
     if (containsPos(nodes, endPoints.end)) {
