@@ -54,10 +54,10 @@ def b_star(grid: object):
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
-                f_score = temp_g_score + heuristic("d_manhattan", neighbor, grid.end)
 
                 # Add the neighbor to the open set if it is not already there
                 if neighbor not in open_set_hash:
+                    f_score = temp_g_score + heuristic("d_manhattan", neighbor, grid.end)
                     count += 1
                     open_set.put((f_score, count, neighbor))
                     open_set_hash.add(neighbor)

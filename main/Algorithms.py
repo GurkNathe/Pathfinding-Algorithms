@@ -5,7 +5,6 @@ from algorithms.BestFS import best_fs
 from algorithms.BFS import bfs
 from algorithms.bidirectional.BFS import bi_search
 from algorithms.bidirectional.AStar import bi_a_star
-from algorithms.BranchBound import branch_and_bound
 from algorithms.BStar import b_star
 from algorithms.DFS import dfs
 from algorithms.Dijkstra import dijkstra
@@ -29,7 +28,6 @@ ALGORITHMS = [
     "bfs",
     "biastar",
     "bisearch",
-    "branch",
     "bstar",
     "dfs",
     "dijkstra",
@@ -53,7 +51,6 @@ run_algs = {
     "bfs": "bfs(grid)",
     "biastar": "bi_a_star(grid)",
     "bisearch": "bi_search(grid)",
-    "branch": "branch_and_bound(grid)",
     "bstar": "b_star(grid)",
     "dfs": "dfs(grid)",
     "dijkstra": "dijkstra(grid)",
