@@ -48,6 +48,7 @@ def gbfs(grid: object):
                 # End the search if the neighbor is the end node
                 if neighbor.is_end():
                     previous[neighbor] = current
+                    visited_nodes += 1
                     found = True
                     break
 

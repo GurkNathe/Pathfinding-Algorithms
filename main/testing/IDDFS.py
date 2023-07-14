@@ -26,6 +26,7 @@ def depth_limit(
     if depth < 0:
         return {}, visited_nodes
     if current.is_end():
+        visited_nodes += 1
         return path, visited_nodes
 
     visited.add(current)

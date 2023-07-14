@@ -14,6 +14,7 @@
 6. [B*](#b-pathfinding-algorithm)
 7. [Depth First Search](#depth-first-search-dfs-pathfinding-algorithm)
 8. [Dijkstra's Algorithm](#dijkstras-pathfinding-algorithm)
+8. [Fast Marching Method](#fast-marching-method)
 9. [Floyd-Warshall's Algorithm](#floyd-warshalls-algorithm)
 10. [Greedy Best-First Search](#greedy-best-first-search-gbfs-pathfinding-algorithm)
 11. [Greedy Best Line Search](#greedy-best-line-search-gbls-pathfinding-algorithm)
@@ -160,6 +161,12 @@ To implement DFS, a stack is typically used to store the vertices that are yet t
 Dijkstra's pathfinding algorithm is a type of best-first search algorithm that uses a priority queue to store the vertices that are yet to be visited. The algorithm works by starting at the starting vertex and exploring all of its neighbors, updating the cost of each path based on the actual cost of the path and the current estimated cost of the path. As the algorithm continues to explore paths, it updates the estimated cost of each path and selects the path with the lowest estimated cost. This allows the algorithm to continually refine its search and find the shortest path to the end point.
 
 To implement Dijkstra's algorithm, we first initialize a priority queue and add the starting vertex to it. We then repeatedly take the next vertex from the priority queue, visit it, and add all of its unvisited neighbors to the priority queue. When adding a vertex to the priority queue, we update the estimated cost of the path to that vertex based on the actual cost of the path and the current estimated cost of the path. This process continues until the end vertex is reached or all vertices in the graph have been visited.
+
+## Fast Marching Method:
+
+The fast marching method (FMM) is a numerical method created by James Sethian for solving boundary value problems of the Eikonal equation. In the context of this simulation, the Eikonal equation resolves to 1 for every node in the grid. So, the traversal of the grid will be almost identical to other graph travesal algorithms like Dijkstra's, and the explanation for Dijkstra's above is sufficient to figure out how the FMM works in the context of this simulation.
+
+Typically, the FMM is used in distance mapping, heat mapping, and other problems that can utilize the Eikonal equation. In this application, however, the benefits of the FMM are minimized due to the constraints of the simulation. In a uniform cost grid, there is no change in the way the "wave front" propogates through the grid. Essentially, you can think of a drop of water entering a bigger body of water. If there are no obstructions, when the water drop enters the water, the ripple in the water will have an indistinguishable shape to any random water drop entering that body of water, given identical water drop conditions. This simulation can be thought of as the body of water without obstructions, so the "ripple" will propogate the same way every time.
 
 ## Floyd-Warshall's algorithm
 

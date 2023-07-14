@@ -61,6 +61,7 @@ def gbls(grid: object):
             if not neighbor.is_checked():
                 if neighbor.is_end():
                     previous[neighbor] = current
+                    visited_nodes += 1
                     found = True
                     break
 

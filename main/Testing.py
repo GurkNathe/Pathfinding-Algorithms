@@ -12,6 +12,7 @@ from testing.bidirectional.BFS import bi_search
 from testing.BStar import b_star
 from testing.DFS import dfs
 from testing.Dijkstra import dijkstra
+from testing.FastMarching import fmm
 from testing.FloydWarshall import floyd_warshall
 from testing.GBFS import gbfs
 from testing.GBLS import gbls
