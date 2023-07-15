@@ -13,7 +13,7 @@ def fmm(grid: object):
     Returns:
         None: The function updates the screen with the search progress and path.
     """
-    # Initialize dictionarie to store the cost for each node
+    # Initialize dictionary to store the cost for each node
     costs = {node: float("inf") for row in grid.grid for node in row}
     costs[grid.start] = 0
 

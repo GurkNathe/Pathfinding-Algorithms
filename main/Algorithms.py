@@ -8,8 +8,9 @@ from algorithms.bidirectional.AStar import bi_a_star
 from algorithms.BStar import b_star
 from algorithms.DFS import dfs
 from algorithms.Dijkstra import dijkstra
-from algorithms.FastMarching import fmm
+from algorithms.FloodFill import flood_fill
 from algorithms.FloydWarshall import floyd_warshall
+from algorithms.FastMarching import fmm
 from algorithms.GBFS import gbfs
 from algorithms.GBLS import gbls
 from algorithms.IDAStar import ida_star
@@ -32,8 +33,9 @@ ALGORITHMS = [
     "bstar",
     "dfs",
     "dijkstra",
-    "fmm",
+    "flood",
     "floyd",
+    "fmm",
     "gbfs",
     "gbls",
     "ida",
@@ -56,8 +58,9 @@ run_algs = {
     "bstar": "b_star(grid)",
     "dfs": "dfs(grid)",
     "dijkstra": "dijkstra(grid)",
-    "fmm": "fmm(grid)",
+    "flood": "flood_fill(grid)",
     "floyd": "floyd_warshall(grid)",
+    "fmm": "fmm(grid)",
     "gbfs": "gbfs(grid)",
     "gbls": "gbls(grid)",
     "ida": "ida_star(grid)",

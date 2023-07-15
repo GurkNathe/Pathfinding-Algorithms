@@ -15,6 +15,7 @@
 7. [Depth First Search](#depth-first-search-dfs-pathfinding-algorithm)
 8. [Dijkstra's Algorithm](#dijkstras-pathfinding-algorithm)
 8. [Fast Marching Method](#fast-marching-method)
+9. [Flood Fill Algorithm](#flood-fill-algorithm)
 9. [Floyd-Warshall's Algorithm](#floyd-warshalls-algorithm)
 10. [Greedy Best-First Search](#greedy-best-first-search-gbfs-pathfinding-algorithm)
 11. [Greedy Best Line Search](#greedy-best-line-search-gbls-pathfinding-algorithm)
@@ -167,6 +168,28 @@ To implement Dijkstra's algorithm, we first initialize a priority queue and add 
 The fast marching method (FMM) is a numerical method created by James Sethian for solving boundary value problems of the Eikonal equation. In the context of this simulation, the Eikonal equation resolves to 1 for every node in the grid. So, the traversal of the grid will be almost identical to other graph travesal algorithms like Dijkstra's, and the explanation for Dijkstra's above is sufficient to figure out how the FMM works in the context of this simulation.
 
 Typically, the FMM is used in distance mapping, heat mapping, and other problems that can utilize the Eikonal equation. In this application, however, the benefits of the FMM are minimized due to the constraints of the simulation. In a uniform cost grid, there is no change in the way the "wave front" propogates through the grid. Essentially, you can think of a drop of water entering a bigger body of water. If there are no obstructions, when the water drop enters the water, the ripple in the water will have an indistinguishable shape to any random water drop entering that body of water, given identical water drop conditions. This simulation can be thought of as the body of water without obstructions, so the "ripple" will propogate the same way every time.
+
+## Flood Fill algorithm:
+
+The goal of the flood fill algorithm is to explore all reachable areas of a grid starting from a given initial position. It works by iteratively expanding from the initial position and visiting neighboring cells until all reachable cells have been explored, or until the stopping condition is met.
+
+Here is a step-by-step explanation of the flood fill algorithm:
+
+1. Create a distances data structure to hold the distance associated with a position in the grid (a dictionary is used here).
+
+2. Create a priority queue to iterate through the grid in lowest distance first order.
+
+3. Start at the initial position (also known as the seed position) in the grid. In the case of the implementation here, that is the grid end node.
+
+4. Get current cell to be explored and mark it as visited.
+
+5. Check the neighboring cells of the current position. For each neighboring cell, check if it is unvisited.
+
+6. If a neighboring cell is unvisited, update its distance value and add it to the queue.
+
+7. Repeat steps 4-6 until all reachable cells have been visited.
+
+The exploration method used is the same as for BFS. The Flood Fill algorithm can be implemented using basically any graph traversal method, however, efficiency can be affected as a result.
 
 ## Floyd-Warshall's algorithm
 

@@ -11,9 +11,10 @@ def fmm(grid: object):
         grid (Grid): An object representing the current grid
 
     Returns:
-        None: The function updates the screen with the search progress and path.
+        visited_nodes (int): Count of the number of nodes visited.
+        path_size (int): Length of the path found.
     """
-    # Initialize dictionarie to store the cost for each node
+    # Initialize dictionary to store the cost for each node
     costs = {node: float("inf") for row in grid.grid for node in row}
     costs[grid.start] = 0
 
