@@ -94,6 +94,7 @@ Currently implemented algorithms (22/28):
 - Lexicographic BFS (LBFS)
 - Lifelong Planning A* (LPA*)
 - Random Walk
+- Random Walk with LIFO Queue
 - Theta*
 
 Currently looking at:

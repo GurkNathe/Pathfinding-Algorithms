@@ -18,6 +18,7 @@ from algorithms.IDDFS import iddfs
 from algorithms.JPS import jps
 from algorithms.LexicographicBFS import lbfs
 from algorithms.LPAStar import lpa_star
+from algorithms.RandomLIFO import rand_lifo
 from algorithms.RandomWalk import rand_walk
 from algorithms.ThetaStar import theta_star
 
@@ -44,6 +45,7 @@ ALGORITHMS = [
     "lbfs",
     "lpa",
     "rand",
+    "rand_lifo",
     "theta",
 ]
 
@@ -69,6 +71,7 @@ run_algs = {
     "lbfs": "lbfs(grid)",
     "lpa": "lpa_star(grid)",
     "rand": "rand_walk(grid)",
+    "rand_lifo": "rand_lifo(grid)",
     "theta": "theta_star(grid)",
 }
 

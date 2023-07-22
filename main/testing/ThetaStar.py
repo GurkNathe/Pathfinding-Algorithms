@@ -85,7 +85,7 @@ def remove_add(
             neighbor,
         )
     )
-    open_set_hash[neighbor] = distance
+    open_set_hash[neighbor] = neighbor
 
 
 def update_vertex(
@@ -171,7 +171,6 @@ def connect_path(came_from: dict, current: object, grid: list):
             Length of the path found;
             Number of turn points found
     """
-
     # Temp variable to for connected path
     end = current
 
@@ -276,7 +275,7 @@ def theta_star(grid: object):
 
         # If the current vertex is the end vertex
         if current.is_end():
-            path_info = connect_path(parent, grid.end, grid.grid)
+            path_info = connect_path(parent, current, grid.grid)
             break
 
         if current.is_start():

@@ -22,6 +22,7 @@ from testing.IDDFS import iddfs
 from testing.JPS import jps
 from testing.LexicographicBFS import lbfs
 from testing.LPAStar import lpa_star
+from testing.RandomLIFO import rand_lifo
 from testing.RandomWalk import rand_walk
 from testing.ThetaStar import theta_star
 from testing.RP import get_unvisited_nodes

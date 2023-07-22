@@ -78,11 +78,9 @@ class Grid:
         Returns:
             List[List[Node]]: A 2D list of Node objects representing the cleared grid.
         """
-        grid = []
 
         # Iterate through the rows and columns of the grid
         for i in range(self.rows):
-            grid.append([])
             for j in range(self.rows):
                 # If the current node is not the start, end, or an obstacle, create a new Node
                 # object for the current position and add it to the grid
@@ -91,14 +89,7 @@ class Grid:
                     and not self.grid[i][j].is_end()
                     and not self.grid[i][j].is_obstacle()
                 ):
-                    node = Node(i, j, self.node_width, self.rows)
-                    grid[i].append(node)
-
-                # Otherwise, keep the original node in the grid
-                else:
-                    grid[i].append(self.grid[i][j])
-
-        self.grid = grid
+                    self.grid[i][j].reset()
 
     def draw_grid_lines(self):
         """
