@@ -272,7 +272,7 @@ def theta_star(grid: object):
         run = check(pygame.event.get(), run)
 
         # Get minimum distance node in the open set
-        current = open_set.get()[2]
+        _, _, current = open_set.get()
 
         # If the current vertex is the end vertex
         if current.is_end():

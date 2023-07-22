@@ -30,7 +30,7 @@ def gbfs(grid: object):
     # Perform the search
     while not Q.empty() and not found:
         # Get the current node from the queue
-        current = Q.get()[2]
+        _, _, current = Q.get()
 
         # Skip if the node has already been checked
         if current.is_checked():

@@ -36,7 +36,7 @@ def a_star(grid: object):
         run = check(pygame.event.get(), run)
 
         # Get the current node from the open set
-        current = open_set.get()[2]
+        _, _, current = open_set.get()
         open_set_hash.remove(current)
 
         # End the search if the current node is the end node

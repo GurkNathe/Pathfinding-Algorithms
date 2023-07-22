@@ -33,7 +33,7 @@ def gbls(grid: object):
         # Check for events that may stop the search
         run = check(pygame.event.get(), run)
 
-        current = Q.get()[2]
+        _, _, current = Q.get()
 
         if current.is_checked():
             continue

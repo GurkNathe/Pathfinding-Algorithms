@@ -25,6 +25,7 @@
 11. [Lexicographic BFS](#lexicographic-bfs-pathfinding-algorithm)
 11. [Lifelong Planning A*](#lifelong-planning-a-pathfinding-algorithm)
 12. [Random Walk Algorithm](#random-walk-pathfinding-algorithm)
+13. [Random Walk LIFO Algorithm](#random-walk-lifo-algorithm)
 13. [Theta*](#theta-pathfinding-algorithm)
 
 ## A\* pathfinding algorithm:
@@ -280,8 +281,14 @@ Despite the ability to handle dynamic environments, the algorithm implemented he
 
 The random walk algorithm is a type of pathfinding algorithm that uses a random exploration strategy to find a path between two points. It works by starting at the start point and randomly selecting one of the available neighbors to explore. This process is repeated until the end point is reached or all possible paths have been explored.
 
+## Random Walk LIFO algorithm:
+
+This version of the random walk algorithm implements a "Last In First Out" queue to store the nodes that have been searched. The randomly chosen node is added to the queue after all the other neighbors of the current node have been.
+
+It essentially works the same way as the other random walk, except, the algorithm can't recheck a node.
+
 ## Theta\* pathfinding algorithm:
 
-Like A*, Theta* uses a combination of a heuristic function and the cost of each path to determine the most efficient path to take. However, unlike A*, Theta* uses a more advanced search strategy that allows it to find the shortest path to the end point more efficiently.
+Like A*, Theta* uses a combination of a heuristic function and the cost of each path to determine the most efficient path to take. However, unlike A*, Theta* uses a search strategy that looks for points where the path will turn on.
 
 To implement Theta\*, we first initialize a priority queue and add the starting vertex to it. We then repeatedly take the next vertex from the priority queue, visit it, and add all of its unvisited neighbors to the priority queue. When adding a vertex to the priority queue, we update the estimated cost of the path to that vertex based on the actual cost of the path and the current estimated cost of the path. Additionally, we use a special search strategy that allows us to prune the search space and avoid exploring paths that are unlikely to lead to the end point. This process continues until the end vertex is reached or all vertices in the graph have been visited.

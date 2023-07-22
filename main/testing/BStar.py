@@ -32,7 +32,7 @@ def b_star(grid: object):
     # Perform the search
     while not open_set.empty():
         # Get the current node from the open set
-        current = open_set.get()[2]
+        _, _, current = open_set.get()
         open_set_hash.remove(current)
 
         visited_nodes += 1

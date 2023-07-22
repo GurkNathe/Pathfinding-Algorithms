@@ -32,7 +32,7 @@ def gbfs(grid: object):
         run = check(pygame.event.get(), run)
 
         # Get the current node from the queue
-        current = Q.get()[2]
+        _, _, current = Q.get()
 
         # Skip if the node has already been checked
         if current.is_checked():

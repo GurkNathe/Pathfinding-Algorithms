@@ -32,7 +32,7 @@ def gbls(grid: object):
     # Continue the search as long as there are nodes in the queue or the goal has
     # not been found
     while not Q.empty() and not found:
-        current = Q.get()[2]
+        _, _, current = Q.get()
 
         if current.is_checked():
             continue

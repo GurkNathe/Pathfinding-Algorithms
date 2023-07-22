@@ -269,7 +269,7 @@ def theta_star(grid: object):
     # While the open set is not empty and the run flag is True
     while open_set:
         # Get minimum distance node in the open set
-        current = open_set.get()[2]
+        _, _, current = open_set.get()
 
         visited_nodes += 1
 
