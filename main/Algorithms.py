@@ -11,6 +11,7 @@ from algorithms.Dijkstra import dijkstra
 from algorithms.FloodFill import flood_fill
 from algorithms.FloydWarshall import floyd_warshall
 from algorithms.FastMarching import fmm
+from algorithms.Fringe import fringe_search
 from algorithms.GBFS import gbfs
 from algorithms.GBLS import gbls
 from algorithms.IDAStar import ida_star
@@ -37,6 +38,7 @@ ALGORITHMS = [
     "flood",
     "floyd",
     "fmm",
+    "fringe",
     "gbfs",
     "gbls",
     "ida",
@@ -63,6 +65,7 @@ run_algs = {
     "flood": "flood_fill(grid)",
     "floyd": "floyd_warshall(grid)",
     "fmm": "fmm(grid)",
+    "fringe": "fringe_search(grid)",
     "gbfs": "gbfs(grid)",
     "gbls": "gbls(grid)",
     "ida": "ida_star(grid)",

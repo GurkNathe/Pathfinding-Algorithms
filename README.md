@@ -71,7 +71,7 @@ The testing will take longer as the visitable nodes increases. For my system, an
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (22/28):
+Currently implemented algorithms (24/29):
 
 - A*
 - Beam Search
@@ -86,6 +86,7 @@ Currently implemented algorithms (22/28):
 - Fast Marching Method (FMM)
 - Flood Fill Algorithm
 - Floyd-Warshall's algorithm
+- Fringe search
 - Greedy Best First Search (GBFS)
 - Greedy Best Line Search (GBLS)
 - Iterative Deepening (IDA*)
@@ -102,8 +103,6 @@ Currently looking at:
 - None
 
 Planned algorithms (Going to look at them):
-
-- Fringe search
 
 - Johnson's
 

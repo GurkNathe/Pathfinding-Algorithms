@@ -15,6 +15,7 @@ from testing.Dijkstra import dijkstra
 from testing.FloydWarshall import floyd_warshall
 from testing.FloodFill import flood_fill
 from testing.FastMarching import fmm
+from testing.Fringe import fringe_search
 from testing.GBFS import gbfs
 from testing.GBLS import gbls
 from testing.IDAStar import ida_star
