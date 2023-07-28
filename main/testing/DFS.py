@@ -44,7 +44,6 @@ def dfs(grid: object):
                 # End the search if the neighbor is the end node
                 if neighbor.is_end():
                     previous[neighbor] = current
-                    visited_nodes += 1
                     found = True
                     break
                 # Add the neighbor to the stack of nodes to visit if it is not the end node

@@ -1,6 +1,6 @@
 import pygame
 import random
-from .RP import check
+from .RP import check, get_unvisited_nodes
 
 
 def reconstruct_path(came_from: list, current: object, draw: object):
@@ -44,8 +44,12 @@ def rand_walk(grid: object):
     # Flag for making the path
     make_path = True
 
+    possible_nodes = get_unvisited_nodes(grid.start)
+
+    maxed = []
+
     # Continue the search until the search is stopped or the goal is reached
-    while run:
+    while run and len(possible_nodes) - 1 > len(maxed):
         # Check for events that may stop the search
         run = check(pygame.event.get(), run)
 
@@ -77,3 +81,6 @@ def rand_walk(grid: object):
             current.check()
         elif not current.is_start():
             current.mult_check(3)
+
+        if current.color[0] <= 3 and not current in maxed:
+            maxed.append(current)

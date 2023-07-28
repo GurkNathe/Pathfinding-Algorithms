@@ -36,7 +36,7 @@ def flood_fill(grid: object):
                     neighbor.uncheck()
     
     # Create path if the algorithm wasn't stopped
-    if run:
+    if run and distances[grid.start] != float("inf"):
         current = grid.start
         found = False
         while not found:

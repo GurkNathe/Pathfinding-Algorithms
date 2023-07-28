@@ -71,12 +71,14 @@ def remove_add(
     Returns:
         None
     """
-
+    
     # If the neighbor node is in the open set
-    if neighbor in open_set_hash and neighbor in open_set.queue:
+    if neighbor in open_set_hash:
         # Remove the neighbor from the open set
         open_set_hash.pop(neighbor)
-        open_set.queue.remove(neighbor)
+        for i, n in enumerate(open_set.queue):
+            if n[2] == neighbor:
+                del open_set.queue[i]
 
     # Add the neighbor node back to the open set with the updated distance value
     open_set.put(
@@ -201,6 +203,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
                 for y in range(yc, yp):
                     if not grid[xp][y].is_start() and not grid[xp][y].is_end():
                         grid[xp][y].make_path()
+                        draw()
 
             # Current is bellow previous
             else:
@@ -209,6 +212,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
                 for y in range(yp, yc):
                     if not grid[xp][y].is_start() and not grid[xp][y].is_end():
                         grid[xp][y].make_path()
+                        draw()
 
         # If the previous node is aligned with the current node on the y axis
         elif y_dir == 0:
@@ -219,6 +223,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
                 for x in range(xc, xp):
                     if not grid[x][yp].is_start() and not grid[x][yp].is_end():
                         grid[x][yp].make_path()
+                        draw()
 
             # Current is right of previous
             else:
@@ -227,6 +232,7 @@ def connect_path(came_from: dict, current: object, draw: object, grid: list):
                 for x in range(xp, xc):
                     if not grid[x][yp].is_start() and not grid[x][yp].is_end():
                         grid[x][yp].make_path()
+                        draw()
 
         current = previous
         draw()
@@ -267,12 +273,13 @@ def theta_star(grid: object):
     run = True
 
     # While the open set is not empty and the run flag is True
-    while open_set and run:
+    while not open_set.empty() and run:
         # Check for any events that may have occurred
         run = check(pygame.event.get(), run)
 
         # Get minimum distance node in the open set
         _, _, current = open_set.get()
+        del open_set_hash[current]
 
         # If the current vertex is the end vertex
         if current.is_end():

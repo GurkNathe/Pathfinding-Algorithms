@@ -26,7 +26,7 @@ def ida_star(grid: object):
 
         if result is True:
             break
-        if result is float("inf"):
+        if result == float("inf"):
             break
 
         bound = result

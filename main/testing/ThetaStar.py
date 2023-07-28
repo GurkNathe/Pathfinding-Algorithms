@@ -72,10 +72,12 @@ def remove_add(
     """
 
     # If the neighbor node is in the open set
-    if neighbor in open_set_hash and neighbor in open_set.queue:
+    if neighbor in open_set_hash:
         # Remove the neighbor from the open set
         open_set_hash.pop(neighbor)
-        open_set.queue.remove(neighbor)
+        for i, n in enumerate(open_set.queue):
+            if n[2] == neighbor:
+                del open_set.queue[i]
 
     # Add the neighbor node back to the open set with the updated distance value
     open_set.put(
@@ -270,6 +272,7 @@ def theta_star(grid: object):
     while open_set:
         # Get minimum distance node in the open set
         _, _, current = open_set.get()
+        del open_set_hash[current]
 
         visited_nodes += 1
 

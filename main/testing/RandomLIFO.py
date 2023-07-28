@@ -27,12 +27,13 @@ def rand_lifo(grid: object):
     while not queue.empty():
         current = queue.get()
 
-        visited_nodes += 1
 
         # End search if target is found
         if current.is_end():
             path_size = count_path(came_from, current)
             break
+
+        visited_nodes += 1
 
         if not current.is_start():
             current.check()

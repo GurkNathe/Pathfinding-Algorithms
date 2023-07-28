@@ -29,13 +29,14 @@ def flood_fill(grid: object):
         if current.is_checked():
             continue
 
-        visited_nodes += 1
 
         if current.is_start():
             break
 
         if not current.is_end():
             current.check()
+
+        visited_nodes += 1
 
         # Check every neighbor of the current cell and 
         # add it to the queue if it hasn't been checked before
@@ -45,18 +46,19 @@ def flood_fill(grid: object):
                 heapq.heappush(queue, (dist + 1, neighbor))
     
     # Count path
-    current = grid.start
-    found = False
-    while not found:
-        best = (float("inf"), None)
-        for neighbor in current.neighbors:
-            if neighbor.is_end():
-                found = True
-                break
-            if distances[neighbor] < best[0]: 
-                best = (distances[neighbor], neighbor)
-        if not found:
-            path_size += 1
-            current = best[1]
+    if distances[grid.start] != float("inf"):
+        current = grid.start
+        found = False
+        while not found:
+            best = (float("inf"), None)
+            for neighbor in current.neighbors:
+                if neighbor.is_end():
+                    found = True
+                    break
+                if distances[neighbor] < best[0]: 
+                    best = (distances[neighbor], neighbor)
+            if not found:
+                path_size += 1
+                current = best[1]
 
     return visited_nodes, path_size

@@ -47,7 +47,7 @@ def ida_star(grid: object):
             path.reverse()
             reconstruct_path(grid.draw, path)
             break
-        if result is float("inf"):
+        if result == float("inf"):
             break
 
         bound = result
