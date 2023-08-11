@@ -25,6 +25,7 @@ from testing.LexicographicBFS import lbfs
 from testing.LPAStar import lpa_star
 from testing.RandomLIFO import rand_lifo
 from testing.RandomWalk import rand_walk
+from testing.SPFA import spfa
 from testing.ThetaStar import theta_star
 from testing.RP import get_unvisited_nodes
 
@@ -144,7 +145,7 @@ def testing(grid: object):
                 end="",
             )
 
-        print(f"100% {animation[9]} \rTesting Finished!", flush=True, end="")
+        print(f"100% {animation[9]} \rTesting Finished!\n", flush=True, end="")
 
         wr.writerows(algo_data)
         grid.clear_grid()

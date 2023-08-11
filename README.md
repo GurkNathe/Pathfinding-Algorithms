@@ -71,7 +71,7 @@ The testing will take longer as the visitable nodes increases. For my system, an
 ## Algorithm Progress
 
 ```
-Currently implemented algorithms (24/29):
+Currently implemented algorithms (25/25):
 
 - A*
 - Beam Search
@@ -96,6 +96,7 @@ Currently implemented algorithms (24/29):
 - Lifelong Planning A* (LPA*)
 - Random Walk
 - Random Walk with LIFO Queue
+- Shortest Path Faster Algorithm (SPFA)
 - Theta*
 
 Currently looking at:
@@ -104,14 +105,7 @@ Currently looking at:
 
 Planned algorithms (Going to look at them):
 
-- Johnson's
-
-- Kruskal's
-
-- SMA*
-- SUB
-
-- Viterbi algorithm
+- None
 
 ```
 
