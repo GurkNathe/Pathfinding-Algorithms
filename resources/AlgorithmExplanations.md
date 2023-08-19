@@ -26,13 +26,14 @@
 11. [Lifelong Planning A*](#lifelong-planning-a-pathfinding-algorithm)
 12. [Random Walk Algorithm](#random-walk-pathfinding-algorithm)
 13. [Random Walk LIFO Algorithm](#random-walk-lifo-algorithm)
+13. [Shortest Path Faster Algorithm](#shortest-path-faster-algorithm-spfa)
 13. [Theta*](#theta-pathfinding-algorithm)
 
 ## Referrence:
 
-heuristic-value: estimated cost to from the specified node to the target node (h(x))
-g-score: cost of the path from the starting node to the node specified (g(x))
-f-score: the sum of g-score and the heuristic-value (g(x) + h(x))
+<strong>heuristic-value</strong>: estimated cost to from the specified node to the target node (h(x)) \
+<strong>g-score</strong>: cost of the path from the starting node to the node specified (g(x)) \
+<strong>f-score</strong>: the sum of g-score and the heuristic-value (f(x) = g(x) + h(x))
 
 ## A\* pathfinding algorithm:
 
@@ -249,8 +250,12 @@ This version of the random walk algorithm implements a "Last In First Out" queue
 
 It essentially works the same way as the other random walk, except, the algorithm can't recheck a node.
 
+## Shortest Path Faster Algorithm (SPFA):
+
+The SPFA is said to be an improvement of the Bellman-Ford algorithm, specifically for finding the shortest path in a weighted directed graph (which the graph implemented here is neither). The idea behind the SPFA is similar to the Bellman-Ford algorithm in that it relaxes each vertex, and uses each vertex to relax its neighboring/adjacent verticies. Unlike Bellman-Ford however, SPFA uses a FIFO queue of "candidate" verticies and and adds a vertex to the queue only if it has been relaxed. The process of getting a candidate from the queue, relaxing its neighboring vertices and adding those verticies to the queue is repeated until there are no more verticies to be relaxed.
+
 ## Theta\* pathfinding algorithm:
 
 Like A*, Theta* uses a combination of a heuristic function and the cost of each path to determine the most efficient path to take. However, unlike A*, Theta* uses a search strategy that looks for points where the path will turn on.
 
-To implement Theta\*, we first initialize a priority queue and add the starting vertex to it. We then repeatedly take the next vertex from the priority queue, visit it, and add all of its unvisited neighbors to the priority queue. When adding a vertex to the priority queue, we update the estimated cost of the path to that vertex based on the actual cost of the path and the current estimated cost of the path. Additionally, we use a special search strategy that allows us to prune the search space and avoid exploring paths that are unlikely to lead to the end point. This process continues until the end vertex is reached or all vertices in the graph have been visited.
+To implement Theta\*, we first initialize a priority queue and add the starting vertex to it. We then repeatedly take the next vertex from the priority queue, visit it, and add all of its unvisited neighbors to the priority queue. When adding a vertex to the priority queue, we update the estimated cost of the path to that vertex based on the actual cost of the path and the current estimated cost of the path. Additionally, we use a search strategy that relies on line-of-sight between a neighbor node and a parent node of the current node that allows us to prune the search space and avoid exploring paths that are unlikely to lead to the end point. This process continues until the end vertex is reached or all vertices in the graph have been visited.

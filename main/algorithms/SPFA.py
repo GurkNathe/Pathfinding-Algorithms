@@ -3,6 +3,15 @@ from queue import Queue
 from .RP import check, markup, reconstruct_path
 
 def spfa(grid: object):
+    """
+    Performs the Shortest Path Faster Algorithm for the given grid.
+
+    Args:
+        grid (Grid): An object representing the current grid.
+
+    Returns:
+        None: The function updates the screen with the search progress and path.
+    """
     d = {node: float("inf") for row in grid.grid for node in row}
     d[grid.start] = 0
 
