@@ -2,6 +2,7 @@ import pygame
 from queue import PriorityQueue
 from .RP import reconstruct_path, check, heuristic
 
+
 def b_star(grid: object):
     """
     Perform a B* search from start to end.
@@ -19,7 +20,7 @@ def b_star(grid: object):
     open_set.put((0, count, grid.start))
     came_from = {}
 
-    # Initialize dictionaries to store the g and f scores for each node
+    # Initialize dictionaries to store the g scores for each node
     g_score = {node: float("inf") for row in grid.grid for node in row}
     g_score[grid.start] = 0
 

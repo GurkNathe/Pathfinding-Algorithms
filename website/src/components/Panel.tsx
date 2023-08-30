@@ -7,9 +7,13 @@ import beamsearch from "../algorithms/beamsearch";
 import bellmanford from "../algorithms/bellford";
 import bestfirstsearch from "../algorithms/bestfirstsearch";
 import bfs from "../algorithms/bfs";
+import bstar from "../algorithms/b*";
 import dfs from "../algorithms/dfs";
 import dijkstra from "../algorithms/dijkstra";
+import flood_fill from "../algorithms/floodfill";
 import floydwarshall from "../algorithms/floydwarshall";
+import fmm from "../algorithms/fmm";
+import gbfs from "../algorithms/gbfs";
 import gbls from "../algorithms/gbls";
 
 type Rows = {
@@ -49,17 +53,19 @@ export default function Panel() {
         "Bellman-Ford",
         "Best First Search",
         "BFS", 
+        "B*",
         "DFS",
         "Dijkstra",
+        "Fast Marching Method",
         "Floyd-Warshall",
-        // "Greedy Best First Search",
+        "Flood Fill",
+        "Greedy Best First Search",
         "Greedy Best Line Search",
         // "Iterative Deepening A*",
         // "Iterative Deepening DFS",
         // "Jump Point Search",
         // "Lexicographic BFS",
         // "Lifelong Planning A*",
-        // "Random Search",
         // "Theta*",
     ]
 
@@ -356,14 +362,26 @@ export default function Panel() {
             case "BFS":
                 bfs(colorGrid, setColorGrid, interestPoints);
                 break;
+            case "B*":
+                bstar(colorGrid, setColorGrid, interestPoints);
+                break;
             case "DFS":
                 dfs(colorGrid, setColorGrid, interestPoints);
                 break;
             case "Dijkstra":
                 dijkstra(colorGrid, setColorGrid, interestPoints);
                 break;
+            case "Fast Marching Method":
+                fmm(colorGrid, setColorGrid, interestPoints);
+                break;
+            case "Flood Fill":
+                flood_fill(colorGrid, setColorGrid, interestPoints);
+                break;
             case "Floyd-Warshall":
                 floydwarshall(colorGrid, setColorGrid, interestPoints);
+                break;
+            case "Greedy Best First Search":
+                gbfs(colorGrid, setColorGrid, interestPoints);
                 break;
             case "Greedy Best Line Search":
                 gbls(colorGrid, setColorGrid, interestPoints);

@@ -34,6 +34,20 @@ export function reconstructPath(grid: States[][], path: any, current: [number, n
     }
 }
 
+function d_manhattan(grid: States[][], node1: [number, number], node2: [number, number]) {
+    let m = manhattan(node1, node2);
+
+    let neighbors: [number, number][] = getNeighbors(grid, node1);
+    let penalty = neighbors.length;
+    for (const node of neighbors) {
+        if (grid[node[0]][node[1]] !== "red" && grid[node[0]][node[1]] !== "green") {
+            penalty--;
+        }
+    }
+
+    return m - penalty;
+}
+
 function manhattan(node1: [number, number], node2: [number, number]) {
     let [y1, x1] = node1;
     let [y2, x2] = node2;
@@ -43,6 +57,8 @@ function manhattan(node1: [number, number], node2: [number, number]) {
 
 export function heuristic(type: string, grid: States[][], start: [number, number], end: [number, number]) {
     switch(type) {
+        case "d_manhattan":
+            return d_manhattan(grid, start, end);
         case "manhattan":
             return manhattan(start, end);
         default:
@@ -144,6 +160,16 @@ export class PriorityQueue {
         if (!contain) {
             this.items.push(qElement);
         }
+    }
+
+    p_dequeue() {
+        if (this.isEmpty()) {
+            return;
+        }
+
+        const element = this.items.shift();
+
+        return [element?.priority, element?.element];
     }
 
     dequeue() {
