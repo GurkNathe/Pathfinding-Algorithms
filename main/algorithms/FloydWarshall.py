@@ -61,7 +61,6 @@ def reconstruct_path(
                 path.append(nodes[k])
                 left.append(dist[u][k])
                 right.append(dist[k][v])
-            current = k
 
     # Set the current node to the end node
     curr = grid.end

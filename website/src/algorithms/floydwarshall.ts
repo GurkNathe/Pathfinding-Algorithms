@@ -12,7 +12,6 @@ export default function floydwarshall(colorGrid: States[][], setGrid: React.Disp
         let path: [number, number][] = [];
         let left: number[] = [];
         let right: number[] = [];
-        let current: number = v;
 
         for (let k = V - 1; k >= 0; k--) {
             if (distances[u][v] === distances[u][k] + distances[k][v]) {
@@ -24,7 +23,6 @@ export default function floydwarshall(colorGrid: States[][], setGrid: React.Disp
                     left.push(distances[u][k]);
                     right.push(distances[k][v]);
                 }
-                current = k;
             }
         }
 
