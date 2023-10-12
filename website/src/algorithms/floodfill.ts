@@ -1,5 +1,5 @@
 import { Interests, States } from "../components/Panel"
-import { PriorityQueue, getNeighbors } from "./helper";
+import { PriorityQueue, genKey, getNeighbors } from "./helper";
 
 export default function flood_fill(colorGrid: States[][], setGrid: React.Dispatch<React.SetStateAction<States[][]>>, endPoints: Interests) {
     let grid = [...colorGrid];
@@ -10,7 +10,7 @@ export default function flood_fill(colorGrid: States[][], setGrid: React.Dispatc
             distances[`${i}-${j}`] = Infinity;
         }
     }
-    distances[`${endPoints.end[0]}-${endPoints.end[1]}`] = 0;
+    distances[genKey(endPoints.end)] = 0;
 
     let openSet: PriorityQueue = new PriorityQueue();
     openSet.enqueue(endPoints.end, 0, 0);
@@ -46,7 +46,7 @@ export default function flood_fill(colorGrid: States[][], setGrid: React.Dispatc
         }
     }
 
-    if (distances[`${endPoints.start[0]}-${endPoints.start[1]}`] !== Infinity) {
+    if (distances[genKey(endPoints.start)] !== Infinity) {
         let current = endPoints.start;
         let found = false;
         let best : [number, [number, number] | undefined] = [Infinity, undefined];

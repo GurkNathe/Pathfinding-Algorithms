@@ -1,5 +1,5 @@
 import { Interests, States } from "../components/Panel"
-import { PriorityQueue, getNeighbors, heuristic, reconstructPath } from "./helper";
+import { PriorityQueue, genKey, getNeighbors, heuristic, reconstructPath } from "./helper";
 
 export default function beamsearch(colorGrid: States[][], setGrid: React.Dispatch<React.SetStateAction<States[][]>>, endPoints: Interests) {
     let grid: States[][] = [...colorGrid];
@@ -8,7 +8,7 @@ export default function beamsearch(colorGrid: States[][], setGrid: React.Dispatc
     beam.enqueue(endPoints.start, 0, 0);
 
     let previous: any = {};
-    previous[`${endPoints.start[0]}-${endPoints.start[1]}`] = endPoints.start;
+    previous[genKey(endPoints.start)] = endPoints.start;
 
     while (beam.size() > 0) {
         let [y, x] = beam.dequeue();

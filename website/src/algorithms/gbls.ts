@@ -25,8 +25,10 @@ export default function gbls(colorGrid: States[][], setGrid: React.Dispatch<Reac
 
         let neighbors: [number, number][] = getNeighbors(grid, [y,x]);
 
-        if (lastdir[0] !== -1) {
-            let tempNeighbors = neighbors.filter((n) => (n[0] - y === lastdir[0]) && (n[1] - x === lastdir[1]));
+        let templastdir = lastdir;
+
+        if (templastdir[0] !== -1) {
+            let tempNeighbors = neighbors.filter((n) => (n[0] - y === templastdir[0]) && (n[1] - x === templastdir[1]));
             for (const n of neighbors) {
                 let i = tempNeighbors.findIndex(item => item[0] === n[0] && item[1] === n[1]);
                 if (i === -1) {

@@ -13,6 +13,7 @@ import dijkstra from "../algorithms/dijkstra";
 import flood_fill from "../algorithms/floodfill";
 import floydwarshall from "../algorithms/floydwarshall";
 import fmm from "../algorithms/fmm";
+import fringe from "../algorithms/fringe";
 import gbfs from "../algorithms/gbfs";
 import gbls from "../algorithms/gbls";
 
@@ -59,6 +60,7 @@ export default function Panel() {
         "Fast Marching Method",
         "Floyd-Warshall",
         "Flood Fill",
+        "Fringe Search",
         "Greedy Best First Search",
         "Greedy Best Line Search",
         // "Iterative Deepening A*",
@@ -379,6 +381,9 @@ export default function Panel() {
                 break;
             case "Floyd-Warshall":
                 floydwarshall(colorGrid, setColorGrid, interestPoints);
+                break;
+            case "Fringe Search":
+                fringe(colorGrid, setColorGrid, interestPoints);
                 break;
             case "Greedy Best First Search":
                 gbfs(colorGrid, setColorGrid, interestPoints);

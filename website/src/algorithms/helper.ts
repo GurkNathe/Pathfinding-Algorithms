@@ -104,6 +104,10 @@ export function findPos(list: [number, number][], target: [number, number]) {
     return index;
 }
 
+export function genKey(node: [number, number]) {
+    return `${node[0]}-${node[1]}`;
+}
+
 class QElement {
     element: any;
     priority: number;

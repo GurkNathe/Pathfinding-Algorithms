@@ -1,5 +1,5 @@
 import { Interests, States } from "../components/Panel"
-import { getNeighbors, getUnvisitedNodes, reconstructPath } from "./helper";
+import { genKey, getNeighbors, getUnvisitedNodes, reconstructPath } from "./helper";
 
 export default function bellmanford(colorGrid: States[][], setGrid: React.Dispatch<React.SetStateAction<States[][]>>, endPoints: Interests){
     let grid: States[][] = [...colorGrid];
@@ -13,7 +13,7 @@ export default function bellmanford(colorGrid: States[][], setGrid: React.Dispat
         distance[`${node[0]}-${node[1]}`] = Infinity;
     }
 
-    distance[`${endPoints.start[0]}-${endPoints.start[1]}`] = 0;
+    distance[genKey(endPoints.start)] = 0;
 
     let counter: number = Math.floor((nodes.length - 1) * accuracy);
 

@@ -1,5 +1,5 @@
 import { Interests, States } from "../components/Panel"
-import { PriorityQueue, getNeighbors, reconstructPath } from "./helper";
+import { PriorityQueue, genKey, getNeighbors, reconstructPath } from "./helper";
 
 export default function dijkstra(colorGrid: States[][], setGrid: React.Dispatch<React.SetStateAction<States[][]>>, endPoints: Interests) {
     let grid: States[][] = [...colorGrid];
@@ -11,7 +11,7 @@ export default function dijkstra(colorGrid: States[][], setGrid: React.Dispatch<
             gscore[`${i}-${j}`] = Infinity;
         }
     }
-    gscore[`${endPoints.start[0]}-${endPoints.start[1]}`] = 0;
+    gscore[genKey(endPoints.start)] = 0;
 
     let previous: any = {};
 

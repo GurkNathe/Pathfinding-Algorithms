@@ -1,5 +1,5 @@
 import { Interests, States } from "../components/Panel";
-import { PriorityQueue, getNeighbors, reconstructPath } from "./helper";
+import { PriorityQueue, genKey, getNeighbors, reconstructPath } from "./helper";
 
 export default function fmm(colorGrid: States[][], setGrid: React.Dispatch<React.SetStateAction<States[][]>>, endPoints: Interests) {
     let grid = [...colorGrid];
@@ -10,7 +10,7 @@ export default function fmm(colorGrid: States[][], setGrid: React.Dispatch<React
             costs[`${i}-${j}`] = Infinity;
         }
     }
-    costs[`${endPoints.start[0]}-${endPoints.start[1]}`] = 0;
+    costs[genKey(endPoints.start)] = 0;
 
     let far : any = [];
     for (let i = 0; i < grid.length; i++) {

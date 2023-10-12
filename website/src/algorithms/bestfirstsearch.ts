@@ -1,5 +1,5 @@
 import { Interests, States } from "../components/Panel"
-import { PriorityQueue, getNeighbors, heuristic } from "./helper";
+import { PriorityQueue, genKey, getNeighbors, heuristic } from "./helper";
 
 export default function bestfirstsearch(colorGrid: States[][], setGrid: React.Dispatch<React.SetStateAction<States[][]>>, endPoints: Interests) {
     let grid: States[][] = [...colorGrid];
@@ -21,7 +21,7 @@ export default function bestfirstsearch(colorGrid: States[][], setGrid: React.Di
     const reconstructPath = (grid: States[][], costs: any, current: [number, number]) => {
         while (grid[current[0]][current[1]] !== "orange") {
             current = getChecked(grid, current).reduce((min, key) => {
-                if (costs[`${key[0]}-${key[1]}`] < costs[`${min[0]}-${min[1]}`]) {
+                if (costs[genKey(key)] < costs[genKey(min)]) {
                     return key;
                 }
                 return min;
@@ -35,7 +35,7 @@ export default function bestfirstsearch(colorGrid: States[][], setGrid: React.Di
         }
     }
 
-    costs[`${endPoints.start[0]}-${endPoints.start[1]}`] = 0;
+    costs[genKey(endPoints.start)] = 0;
     queue.enqueue(endPoints.start, 0, 0);
 
     while (!queue.isEmpty()) {
